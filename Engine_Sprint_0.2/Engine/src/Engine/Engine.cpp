@@ -11,6 +11,9 @@
 
 #include "StateDirectXMan.h"
 
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
 
 namespace Azul
 {
@@ -109,6 +112,7 @@ namespace Azul
 	{
 		AZUL_UNUSED_VAR(prevInstance);
 		AZUL_UNUSED_VAR(cmdLine);
+
 
 		WindowProps props("Azul Engine", this->mWindowWidth, this->mWindowHeight);
 		this->pWindow = new WindowsWindow(hInstance, props);
@@ -232,6 +236,14 @@ namespace Azul
 		static const float targetFramerate = 30.0f;
 		static const float maxTimeStep = 1.0f / targetFramerate;
 
+		//ImGUI
+		bool show_demo_window = false;
+		bool show_another_window = false;
+		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
+		bool quit = false;
+
+
 		AnimTimer EngineTime;
 
 		if (!LoadContent())
@@ -239,8 +251,48 @@ namespace Azul
 			MessageBox(nullptr, TEXT("Failed to load content."), TEXT("Error"), MB_OK);
 			return -1;
 		}
+#pragma region Setup GUI
+		//SetUp ImGUI
+		// Make process DPI aware and obtain main monitor scale
+		ImGui_ImplWin32_EnableDpiAwareness();
+		float main_scale = ImGui_ImplWin32_GetDpiScaleForMonitor(::MonitorFromPoint(POINT{ 0, 0 }, MONITOR_DEFAULTTOPRIMARY));
 
-		bool quit = false;
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
+
+		// Setup Dear ImGui style
+		ImGui::StyleColorsDark();
+
+		// Setup scaling
+		ImGuiStyle& style = ImGui::GetStyle();
+		style.ScaleAllSizes(main_scale);        // Bake a fixed style scale. (until we have a solution for dynamic style scaling, changing this requires resetting Style + calling this again)
+		style.FontScaleDpi = main_scale;        // Set initial font scale. (using io.ConfigDpiScaleFonts=true makes this unnecessary. We leave both here for documentation purpose)
+		io.ConfigDpiScaleFonts = true;          // [Experimental] Automatically overwrite style.FontScaleDpi in Begin() when Monitor DPI changes. This will scale fonts but _NOT_ scale sizes/padding for now.
+		io.ConfigDpiScaleViewports = true;      // [Experimental] Scale Dear ImGui and Platform Windows when Monitor DPI changes.
+
+		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
+
+		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
+
+		// Setup Platform/Renderer backends
+		ImGui_ImplWin32_Init(pWindow->GetNativeHandle());
+		ImGui_ImplDX11_Init(StateDirectXMan::GetDevice(), StateDirectXMan::GetContext());
+#pragma endregion
 
 		while (!quit)
 		{
@@ -258,12 +310,92 @@ namespace Azul
 			// debugging and you don't want the deltaTime value to explode.
 			deltaTime = std::min<float>(deltaTime, maxTimeStep);
 
-			//Logic
 			Update(deltaTime);
 
 			ClearDepthStencilBuffer();
 
 			Render();
+
+#pragma region ImGui Loop
+
+			static bool g_SwapChainOccluded = false;
+			static UINT g_ResizeWidth = 0, g_ResizeHeight = 0;
+
+			if (g_SwapChainOccluded && StateDirectXMan::GetSwapChain()->Present(0, DXGI_PRESENT_TEST) == DXGI_STATUS_OCCLUDED)
+			{
+				Sleep(10);
+				continue;
+			}
+
+			if (g_ResizeWidth != 0 && g_ResizeHeight != 0)
+			{
+				mStateRenderTargetView.ClearnupRenderTarget();
+
+				StateDirectXMan::GetSwapChain()->ResizeBuffers(0, g_ResizeWidth, g_ResizeHeight, DXGI_FORMAT_UNKNOWN, 0);
+				g_ResizeWidth = g_ResizeHeight = 0;
+
+				mStateRenderTargetView.Initialize();
+			}
+
+			// Start the Dear ImGui frame
+			ImGui_ImplDX11_NewFrame();
+			ImGui_ImplWin32_NewFrame();
+			ImGui::NewFrame();
+
+			//I dont have demo here
+			// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
+			//if (show_demo_window)
+				//ImGui::ShowDemoWindow(&show_demo_window);
+
+			// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
+			{
+				static float f = 0.0f;
+				static int counter = 0;
+
+				ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+
+				ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+				ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+				ImGui::Checkbox("Another Window", &show_another_window);
+
+				ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+				ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+
+				if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+					counter++;
+				ImGui::SameLine();
+				ImGui::Text("counter = %d", counter);
+
+				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+				ImGui::End();
+			}
+
+			// 3. Show another simple window.
+			if (show_another_window)
+			{
+				ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+				ImGui::Text("Hello from another window!");
+				if (ImGui::Button("Close Me"))
+					show_another_window = false;
+				ImGui::End();
+			}
+
+			// Rendering
+			ImGui::Render();
+
+			ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+			// Update and Render additional Platform Windows
+			if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+			{
+				ImGui::UpdatePlatformWindows();
+				ImGui::RenderPlatformWindowsDefault();
+			}
+
+			g_SwapChainOccluded = false;
+
+#pragma endregion
+
 
 			//--------------------------------
 			// Fast monitor sync
@@ -293,6 +425,11 @@ namespace Azul
 			Present(ENABLE_VSYNC);
 	
 		}
+
+		//GUI Cleanup
+		ImGui_ImplDX11_Shutdown();
+		ImGui_ImplWin32_Shutdown();
+		ImGui::DestroyContext();
 
 		UnloadContent();
 		Cleanup();

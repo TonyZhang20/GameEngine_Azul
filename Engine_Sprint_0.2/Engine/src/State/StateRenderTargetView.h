@@ -22,6 +22,7 @@ namespace Azul
 		void Initialize();
 		void Clear(const Vec4 &r);
 		void Activate(StateDepthStencilView &r);
+		void ClearnupRenderTarget();
 
 	private:
 		void privInitialize(ID3D11Texture2D* backBuffer);

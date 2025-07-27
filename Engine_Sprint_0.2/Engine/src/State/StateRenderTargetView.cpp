@@ -42,6 +42,11 @@ namespace Azul
 														   r.poD3DDepthStencilView);
 	}
 
+	void StateRenderTargetView::ClearnupRenderTarget()
+	{
+		SafeRelease(this->poD3DRenderTargetView);
+	}
+
 	void StateRenderTargetView::privInitialize(ID3D11Texture2D* backBuffer)
 	{
 		HRESULT hr = StateDirectXMan::GetDevice()->CreateRenderTargetView(backBuffer, nullptr, &this->poD3DRenderTargetView);
