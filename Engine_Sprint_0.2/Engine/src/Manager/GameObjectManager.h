@@ -26,6 +26,8 @@ namespace Azul
 
 		~GameObjectManager();
 
+		static PCSTree* GetActiveGameObjects();
+
 	private:
 		GameObjectManager(int _reserveNum = 3, int _reserveGrow = 1);
 

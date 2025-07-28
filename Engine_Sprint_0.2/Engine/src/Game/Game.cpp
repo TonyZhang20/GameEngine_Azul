@@ -554,15 +554,11 @@ namespace Azul
 	//------------------------------------------------------------------
 	void Game::ClearDepthStencilBuffer()
 	{
-#ifdef _DEBUG
-		const Vec4 ClearColor = Azul::Colors::LightBlue;
-#else
-		const Vec4 ClearColor = Azul::Colors::Wheat;
-#endif
+
 		float clearDepth = 1.0f;
 		uint8_t clearStencil = 0;
 
-		this->mStateRenderTargetView.Clear(ClearColor);
+		this->mStateRenderTargetView.Clear(GetWindowColor());
 		this->mDepthStencilView.Clear(clearDepth, clearStencil);
 	}
 

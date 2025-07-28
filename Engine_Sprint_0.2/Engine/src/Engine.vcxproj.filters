@@ -80,6 +80,9 @@
     <Filter Include="Source Files\src\ImGui\cpp">
       <UniqueIdentifier>{721f235a-606c-4372-8d82-90e20145bd84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\ImGizmos">
+      <UniqueIdentifier>{5c0f5f51-2bf0-439a-a2c2-c1fdcfeb356c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject_Null.h">
@@ -337,6 +340,9 @@
     <ClInclude Include="ImGui\imgui_internal.h">
       <Filter>Source Files\src\ImGui\Include</Filter>
     </ClInclude>
+    <ClInclude Include="ImGizmos\ImGuizmo.h">
+      <Filter>Source Files\src\ImGizmos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -552,11 +558,17 @@
     <ClCompile Include="ImGui\imgui_impl_dx11.cpp">
       <Filter>Source Files\src\ImGui\cpp</Filter>
     </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>Source Files\src\ImGui\cpp</Filter>
+    </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_win32.cpp">
       <Filter>Source Files\src\ImGui\cpp</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui_tables.cpp">
-      <Filter>Source Files\src\ImGui\cpp</Filter>
+    <ClCompile Include="Tool\Colors.cpp">
+      <Filter>Source Files\src\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGizmos\ImGuizmo.cpp">
+      <Filter>Source Files\src\ImGizmos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

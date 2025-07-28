@@ -22,6 +22,10 @@ namespace Azul
 		void Update(float deltaTime);
 		void Draw();
 
+		Vec3* GetPos();
+		Vec3* GetScale();
+		Mat4* GetWorld();
+
 		void Set(const char* name, GameObject* pShaderObject);
 		GameObject* GetGameObject();
 		bool Compare(PCSNode* pTargetNode) override;

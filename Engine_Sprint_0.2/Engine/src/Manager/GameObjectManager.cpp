@@ -150,10 +150,19 @@ namespace Azul
 		//delete this->poActive;
 	}
 
+	PCSTree* GameObjectManager::GetActiveGameObjects()
+	{
+		GameObjectManager* pGOM = GameObjectManager::privGetInstance();
+		
+		if (pGOM == nullptr) return nullptr;
+
+		return pGOM->poActive;
+	}
+
 	GameObjectManager* GameObjectManager::privGetInstance(void)
 	{
 		// This is where its actually stored (BSS section)
-		assert(instance != nullptr);
+		//assert(instance != nullptr);
 
 		return instance;
 	}

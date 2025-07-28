@@ -26,6 +26,24 @@ namespace Azul
 		this->pGameObject->Draw();
 	}
 
+	Vec3* GameObjectNode::GetPos()
+	{
+		assert(pGameObject);
+		return this->pGameObject->GetPos();
+	}
+
+	Vec3* GameObjectNode::GetScale()
+	{
+		assert(pGameObject);
+		return this->pGameObject->GetScale();
+	}
+
+	Mat4* GameObjectNode::GetWorld()
+	{
+		assert(pGameObject);
+		return this->pGameObject->GetWorld();
+	}
+
 	void GameObjectNode::Set(const char* name, GameObject* _obj)
 	{
 		assert(_obj);

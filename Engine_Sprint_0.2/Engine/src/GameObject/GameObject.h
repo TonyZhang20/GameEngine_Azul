@@ -33,14 +33,16 @@ namespace Azul
 
 		void SetPos(Vec3 v);
 		void SetScale(float v);
+		void SetScale(Vec3 scale);
+
 		void SetWorld(Mat4* mat);
 
 		Vec3* GetPos();
-		float GetScale();
+		Vec3* GetScale();
 
 
 	protected:
-		float scale;
+		Vec3* poScale;
 		Vec3* poPos;
 		Mat4* poWorld;
 		GraphicsObject* poGraphicsObject;

@@ -18,10 +18,16 @@ namespace Azul
 
 		void Show() override;
 		void Hide() override;
+		void GUIClearnUp();
+		void SetupImGUI();
 
 		virtual void SetTitle(const char* title) override;
 
 		void OnUpdate(bool &quit) override;
+		
+		void DrawUI();
+		void OnRenderUI(class StateRenderTargetView& renderTargetView);
+
 
 		inline void* GetNativeHandle() const override { return hwnd; }
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
@@ -32,7 +38,11 @@ namespace Azul
 		static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);		
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
+		Vec4 GetWindowColor();
+
 	private:
+		Vec4 WindowColor;
+
 		bool CreateWindowClass();
 		bool CreateWindowInstance();
 
@@ -53,6 +63,7 @@ namespace Azul
 
 		HWND hwnd = nullptr;
 		HINSTANCE instance = nullptr;
+
 
 		WindowData m_Data;
 	};

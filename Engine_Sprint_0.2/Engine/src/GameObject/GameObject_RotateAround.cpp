@@ -36,7 +36,7 @@ namespace Azul
 		angle += 0.02f; 
 
 		Vec3 center = *(target->GetPos());
-		float scale = target->GetScale();
+		Vec3* scale = target->GetScale();
 
 	
 		Rot rotY(Rot1::X, angle);
@@ -70,7 +70,7 @@ namespace Azul
 
 		Trans T(this->poPos->x(), this->poPos->y(), this->poPos->z());
 		Rot R(dir, angle);
-		Scale S(scale, scale, scale);
+		Scale S(scale->x(), scale->y(), scale->z());
 
 		*this->poWorld = S * R * T;
 		this->poGraphicsObject->SetWorld(*this->poWorld);

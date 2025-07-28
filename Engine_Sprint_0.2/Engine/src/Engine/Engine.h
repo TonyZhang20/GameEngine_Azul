@@ -30,6 +30,7 @@ namespace Azul
 		Engine& operator = (const Engine&) = delete;
 		virtual ~Engine();
 
+		virtual Vec4 GetWindowColor();
 
 		virtual bool LoadContent() = 0;
 		virtual void UnloadContent() = 0;

@@ -22,7 +22,6 @@ namespace Azul
 		unsigned int NumIndices = 0;
 
 #pragma region Load Pos
-		Trace::out("Full Path is : %s", fullPath);
 
 		sprintf_s(fullPath, sizeof(fullPath), "%s_POSITION_Center.cdm", fileName);
 		ReadFile(fullPath, data, fileSize);

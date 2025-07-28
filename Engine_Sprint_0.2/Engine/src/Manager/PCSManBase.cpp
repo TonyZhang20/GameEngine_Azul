@@ -139,7 +139,7 @@ namespace Azul
 			pTmp = pActiveForItr.Current();
 			pNode = pActiveForItr.Next();
 
-			pTmp->PrintNode();
+			//pTmp->PrintNode();
 			delete pTmp;
 		}
 
@@ -152,7 +152,7 @@ namespace Azul
 			pTmp = pReserveForItr.Current();
 			pNode = pReserveForItr.Next();
 
-			pTmp->PrintNode();
+			//pTmp->PrintNode();
 			delete pTmp;
 		}
 	}
