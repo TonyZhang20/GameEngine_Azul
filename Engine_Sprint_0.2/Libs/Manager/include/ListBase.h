@@ -25,6 +25,7 @@ namespace Azul
 		MANAGER_LIBRARY_API virtual DLink *RemoveFromFront() = 0;
 
 		MANAGER_LIBRARY_API virtual Iterator *GetIterator() = 0;
+		MANAGER_LIBRARY_API virtual Iterator* GetReverseIterator() { assert(false); return nullptr; };
 	};
 }
 

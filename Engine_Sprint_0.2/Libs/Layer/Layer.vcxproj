@@ -10,37 +10,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\DLink.cpp" />
-    <ClCompile Include="src\DLinkIterator.cpp" />
-    <ClCompile Include="src\DLinkMan.cpp" />
-    <ClCompile Include="src\DLinkReverseIterator.cpp" />
-    <ClCompile Include="src\Manager_DLLMain.cpp" />
-    <ClCompile Include="src\ManBase.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="include\--- Add include files here ---.txt" />
-    <Text Include="src\--- Add Source files here ---.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\DLink.h" />
-    <ClInclude Include="include\DLinkIterator.h" />
-    <ClInclude Include="include\DLinkMan.h" />
-    <ClInclude Include="include\DLinkReverseIterator.h" />
-    <ClInclude Include="include\Iterator.h" />
-    <ClInclude Include="include\ListBase.h" />
-    <ClInclude Include="include\Manager_DLLInterface.h" />
-    <ClInclude Include="include\ManBase.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\_ManagerDiagram.cd" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{FED97AD8-3DC2-4059-A969-9FCA3983468E}</ProjectGuid>
+    <ProjectGuid>{95D1C138-A1DC-4BF9-99FB-0678EF049A12}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Basics1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Layer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -60,7 +36,6 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
-    <Import Project="..\..\Shared\Framework_items\Framework_items.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -71,6 +46,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>CppCoreCheckConstRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
     <TargetName>$(ProjectName)DebugX64</TargetName>
   </PropertyGroup>
@@ -85,11 +62,11 @@
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";MANAGER_USE_DLL;MANAGER_LIBRARY_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";FILE_USE_DLL;FILELIBRARY_EXPORTS;LAYERLIBRARY_EXPORTS;LAYER_USE_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(ProjectDir)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Layer\include;$(SolutionDir)Libs\PCSTree\include</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -97,37 +74,36 @@
       </PrecompiledHeaderOutputFile>
       <ForcedIncludeFiles>Framework.h</ForcedIncludeFiles>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <EnablePREfast>false</EnablePREfast>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <EnableUAC>false</EnableUAC>
     </Link>
     <PreLinkEvent>
       <Command>if exist "$(SolutionDIr)Azul" rmdir /S /Q "$(SolutionDir)Azul"</Command>
     </PreLinkEvent>
-    <PreBuildEvent>
-      <Command>REM copy "$(ProjectDir)Keenan\*.*" "$(SolutionDir)$(Platform)\$(Configuration)"</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <Optimization>Full</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";MANAGER_USE_DLL;MANAGER_LIBRARY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";FILE_USE_DLL;FILELIBRARY_EXPORTS;%(PreprocessorDefinitions);LAYERLIBRARY_EXPORTS;LAYER_USE_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(ProjectDir)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Layer\include;$(SolutionDir)Libs\PCSTree\include</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <PrecompiledHeaderOutputFile>
@@ -136,27 +112,37 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>
       </DisableSpecificWarnings>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <EntryPointSymbol>
       </EntryPointSymbol>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <PreLinkEvent>
       <Command>if exist "$(SolutionDIr)Azul" rmdir /S /Q "$(SolutionDir)Azul"</Command>
     </PreLinkEvent>
-    <PreBuildEvent>
-      <Command>REM copy "$(ProjectDir)Keenan\*.*" "$(SolutionDir)$(Platform)\$(Configuration)"</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Layer.h" />
+    <ClInclude Include="include\LayerLabHeader.h" />
+    <ClInclude Include="include\LayerManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Layer_DLLMain.cpp" />
+    <ClCompile Include="src\Layer.cpp" />
+    <ClCompile Include="src\LayerManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PCSTree\PCSTree.vcxproj">
+      <Project>{22282e59-db02-4210-a594-df87acb44e8f}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

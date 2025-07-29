@@ -15,6 +15,10 @@
 #include <d3d11.h>
 #include <d3dcompiler.h>
 
+#include "ApplicationEvent.h"
+#include "KeyEvent.h"
+#include "MouseEvnet.h"
+
 
 namespace Azul
 {
@@ -22,7 +26,6 @@ namespace Azul
 
 	bool WindowsWindow::Create()
 	{
-
 		if (!CreateWindowClass() || !CreateWindowInstance())
 		{
 			assert(false && "Failed to create Win64 window.");
@@ -36,17 +39,17 @@ namespace Azul
 #endif
 
 		Show();
-		UpdateWindow(hwnd);
+		UpdateWindow(m_hwnd);
 
 		return true;
 	}
 
 	void WindowsWindow::Destroy()
 	{
-		if (hwnd)
+		if (m_hwnd)
 		{
-			DestroyWindow(hwnd);
-			hwnd = nullptr;
+			DestroyWindow(m_hwnd);
+			m_hwnd = nullptr;
 		}
 
 		if (m_Data.Title)
@@ -55,17 +58,17 @@ namespace Azul
 			m_Data.Title = nullptr;
 		}
 
-		UnregisterClass(TEXT("AzulWindowClass"), instance);
+		UnregisterClass(WindowName, instance);
 	}
 
 	void WindowsWindow::Show()
 	{
-		ShowWindow(hwnd, SW_SHOW);
+		ShowWindow(m_hwnd, SW_SHOW);
 	}
 
 	void WindowsWindow::Hide()
 	{
-		ShowWindow(hwnd, SW_HIDE);
+		ShowWindow(m_hwnd, SW_HIDE);
 	}
 
 	void WindowsWindow::GUIClearnUp()
@@ -122,11 +125,30 @@ namespace Azul
 		ImGui_ImplDX11_Init(StateDirectXMan::GetDevice(), StateDirectXMan::GetContext());
 	}
 
+	void WindowsWindow::SetVsync(bool b)
+	{
+		this->m_Data.VSync = b;
+	}
+
+	void WindowsWindow::Present()
+	{
+		IDXGISwapChain* swapChain = StateDirectXMan::GetSwapChain();
+
+		if (m_Data.VSync)
+		{
+			swapChain->Present(1, 0);
+		}
+		else
+		{
+			swapChain->Present(0, 0);
+		}
+	}
+
 	void WindowsWindow::SetTitle(const char* title)
 	{
-		if (hwnd)
+		if (m_hwnd)
 		{
-			SetWindowTextA(hwnd, title);
+			SetWindowTextA(m_hwnd, title);
 		}
 
 		if (m_Data.Title)
@@ -146,7 +168,7 @@ namespace Azul
 
 		while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
-			if (msg.message == WM_QUIT)
+			if (msg.message == WM_CHAR)
 			{
 				quit = true;
 			}
@@ -154,6 +176,12 @@ namespace Azul
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+	}
+
+	void WindowsWindow::QuitCallBack()
+	{
+		WindowCloseEvent e;
+		this->m_Data.EventCallback(e);
 	}
 
 	void WindowsWindow::DrawUI()
@@ -191,9 +219,7 @@ namespace Azul
 		{
 			static GameObjectNode* selectedObj = nullptr;
 
-			PCSTree* activeTree = GameObjectManager::GetActiveGameObjects();
-
-			PCSTreeForwardIterator itr(activeTree->GetRoot());
+			PCSTreeForwardIterator itr(GameObjectManager::GetActiveGameObjects()->GetRoot());
 
 			ImGui::Begin("GameObject List");
 
@@ -282,8 +308,6 @@ namespace Azul
 			}
 		}
 
-
-
 		// 3. Show another simple window.
 		if (show_another_window)
 		{
@@ -357,6 +381,58 @@ namespace Azul
 	// Forward declare message handler from imgui_impl_win32.cpp
 	LRESULT WindowsWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
+		WindowsWindow* pThis = nullptr;
+
+		if (uMsg == WM_NCCREATE)
+		{
+			// 从创建参数获取this指针
+			CREATESTRUCT* pCreate = reinterpret_cast<CREATESTRUCT*>(lParam);
+			pThis = static_cast<WindowsWindow*>(pCreate->lpCreateParams);
+
+			// 将this指针存储在窗口的额外数据中
+			SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pThis));
+		}
+		else 
+		{
+			// 从窗口额外数据获取this指针
+			pThis = reinterpret_cast<WindowsWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+		}
+
+		switch (uMsg)
+		{
+		case WM_CHAR:
+		{
+			if (wParam == VK_ESCAPE)
+			{
+				//QuitCallBack();
+				PostQuitMessage(0);
+			}
+			break;
+		}
+		break;
+
+		case WM_DESTROY:
+		{
+			//QuitCallBack();
+			PostQuitMessage(0);
+			break;
+		}
+		default:
+			break;
+		}
+
+
+		if (pThis) 
+		{
+			//Debug 暂时不调用 调用非静态消息处理
+			//return pThis->HandleMessage(hwnd, uMsg, wParam, lParam);
+		}
+
+		return DefWindowProc(hwnd, uMsg, wParam, lParam);
+	}
+
+	LRESULT WindowsWindow::HandleMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+	{
 		PAINTSTRUCT paintStruct;
 		HDC hDC;
 
@@ -372,24 +448,12 @@ namespace Azul
 		}
 		break;
 
-		case WM_SIZE:
-		{
-			if (wParam == SIZE_MINIMIZED)
-				return 0;
-
-			UINT width = LOWORD(lParam);
-			UINT height = HIWORD(lParam);
-			
-			//Event Send - Size Change
-			break;
-		}
-
 		case WM_CHAR:
 		{
 			if (wParam == VK_ESCAPE)
 			{
+				QuitCallBack();
 				PostQuitMessage(0);
-				return 0;
 			}
 			break;
 		}
@@ -397,10 +461,106 @@ namespace Azul
 
 		case WM_DESTROY:
 		{
+			QuitCallBack();
 			PostQuitMessage(0);
-			return 0;
 		}
 		break;
+
+		case WM_MOUSEMOVE:
+		{
+			POINT pt;
+			GetCursorPos(&pt);
+			ScreenToClient(hwnd, &pt);
+
+			MouseMovedEvent e(pt.x, pt.y);
+			m_Data.EventCallback(e);
+
+			break;
+		}
+		case WM_LBUTTONDOWN:
+		{
+			MouseButtonPressedEvent e(0);
+			m_Data.EventCallback(e);
+			break;
+		}
+		case WM_LBUTTONUP:
+		{
+			MouseButtonReleasedEvent e(0);
+			m_Data.EventCallback(e);
+			break;
+		}
+		case WM_RBUTTONDOWN:
+		{
+			MouseButtonPressedEvent e(2);
+			m_Data.EventCallback(e);
+			break;
+		}
+		case WM_RBUTTONUP:
+		{
+			MouseButtonReleasedEvent e(2);
+			m_Data.EventCallback(e);
+			break;
+		}
+		case WM_MBUTTONDOWN:
+		{
+			MouseButtonPressedEvent e(1);
+			m_Data.EventCallback(e);
+			break;
+		}
+		case WM_MBUTTONUP:
+		{
+			MouseButtonReleasedEvent e(1);
+			m_Data.EventCallback(e);
+			break;
+		}
+		case WM_MOUSEWHEEL:
+		{
+			int delta = GET_WHEEL_DELTA_WPARAM(wParam); // 120 * n
+
+			POINT pt;
+			GetCursorPos(&pt);
+			ScreenToClient(hwnd, &pt);
+
+			MouseScrolledEvent e(pt.x, pt.y, delta);
+			m_Data.EventCallback(e);
+			break;
+		}
+
+		case WM_SIZE:
+		{
+			if (wParam == SIZE_MINIMIZED)
+				return 0;
+
+			UINT width = LOWORD(lParam);
+			UINT height = HIWORD(lParam);
+
+			//Event Send - Size Change
+			WindowResizeEvent resizeEvent(width, height);
+			m_Data.EventCallback(resizeEvent);
+
+			break;
+		}
+		case WM_KEYDOWN:
+		{
+			int keyCode = (int)wParam;
+
+			KeyPressedEvent event(keyCode, 0);
+			m_Data.EventCallback(event);
+
+			if (keyCode == VK_ESCAPE)
+			{
+				QuitCallBack();
+				PostQuitMessage(0);
+			}
+			break;
+		}
+		case WM_KEYUP:
+		{
+			int keyCode = (int)wParam;
+			KeyReleasedEvent event(keyCode);
+			m_Data.EventCallback(event);
+			break;
+		}
 
 		default:
 			break;
@@ -420,7 +580,7 @@ namespace Azul
 		WNDCLASSEX wndClass = { 0 };
 		wndClass.cbSize = sizeof(WNDCLASSEX);
 		wndClass.style = CS_HREDRAW | CS_VREDRAW;
-		wndClass.lpfnWndProc = this->WindowProc;
+		wndClass.lpfnWndProc = &this->WindowProc;
 		wndClass.hInstance = this->instance;
 		wndClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
 		wndClass.hIcon = nullptr;
@@ -449,13 +609,22 @@ namespace Azul
 		RECT windowRect = { 0, 0, (LONG)m_Data.Width, (LONG)m_Data.Height };
 		AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, FALSE);
 
-		hwnd = CreateWindowA(WindowName, this->m_Data.Title,
+		m_hwnd = CreateWindowA(
+			WindowName, 
+			this->m_Data.Title,
 			WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
 			windowRect.right - windowRect.left,
 			windowRect.bottom - windowRect.top,
-			nullptr, nullptr, instance, nullptr);
+			nullptr, nullptr, instance, this);
 
-		return hwnd != nullptr;
+		if (!m_hwnd)
+		{
+			DWORD err = GetLastError();
+			std::wstring msg = L"CreateWindowEx failed. Error code: " + std::to_wstring(err);
+			MessageBoxW(nullptr, msg.c_str(), L"Window Creation Error", MB_OK | MB_ICONERROR);
+		}
+
+		return m_hwnd != nullptr;
 	}
 
 	void WindowsWindow::Init(const WindowProps& props)

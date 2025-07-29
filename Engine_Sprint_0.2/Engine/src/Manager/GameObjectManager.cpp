@@ -61,11 +61,8 @@ namespace Azul
 		// Get singleton
 		Trace::out("\n");
 		Trace::out("--- GameObjectMan::Destroy() ----\n");
-		GameObjectManager* pGOM = GameObjectManager::privGetInstance();
-		assert(pGOM);
-		AZUL_UNUSED_VAR(pGOM);
 
-		pGOM->baseDestroy();
+		//pGOM->baseDestroy();
 
 		if (GameObjectManager::instance != nullptr)
 		{
@@ -141,7 +138,6 @@ namespace Azul
 			{
 				return pGameObj->GetGameObject();
 			}
-
 		}
 	}
 

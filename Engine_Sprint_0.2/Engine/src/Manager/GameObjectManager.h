@@ -30,7 +30,6 @@ namespace Azul
 
 	private:
 		GameObjectManager(int _reserveNum = 3, int _reserveGrow = 1);
-
 		static GameObjectManager* privGetInstance();
 
 		// data

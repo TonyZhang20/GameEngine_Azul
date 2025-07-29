@@ -35,6 +35,7 @@ namespace Azul
 
 	GameObject::~GameObject()
 	{
+		delete this->poScale;
 		delete this->poPos;
 		delete this->poWorld;
 		delete this->poGraphicsObject;

@@ -27,6 +27,9 @@
     <ClCompile Include="src\Manager_DLLMain.cpp">
       <Filter>dll</Filter>
     </ClCompile>
+    <ClCompile Include="src\DLinkReverseIterator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="include\--- Add include files here ---.txt">
@@ -56,6 +59,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\ManBase.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DLinkReverseIterator.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

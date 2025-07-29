@@ -37,14 +37,16 @@
 //Event
 #include "ApplicationEvent.h"
 
+#include "Application.h"
+
 namespace Azul
 {
 	Game* poGame;
 	static bool present = false;
 	// Demo parameters
 
-	Game::Game(const char* const pName, int width, int height)
-		: Engine(pName, width, height)
+	Game::Game()
+		: Engine()
 	{
 		poGame = this;
 	}
@@ -62,10 +64,12 @@ namespace Azul
 	bool Game::LoadContent()
 	{
 		CameraNodeManager::Create();
+		TextureManager::Create();
+		
 		ShaderObjectNodeManager::Create();
 		MeshNodeManager::Create();
+		
 		GameObjectManager::Create();
-		TextureManager::Create();
 
 #pragma region Demo1
 
@@ -535,12 +539,16 @@ namespace Azul
 	//-----------------------------------------------------------------------------
 	void Game::UnloadContent()
 	{
+		//auto instance = GameObjectManager::instance;
+		//AZUL_UNUSED_VAR(instance);
 		TextureManager::Destroy();
-		
+
 		CameraUtility::Destroy();
+
 		CameraNodeManager::Destroy();
-		
+
 		MeshNodeManager::Destroy();
+
 		ShaderObjectNodeManager::Destroy();
 
 		GameObjectManager::Destroy();
@@ -558,7 +566,7 @@ namespace Azul
 		float clearDepth = 1.0f;
 		uint8_t clearStencil = 0;
 
-		this->mStateRenderTargetView.Clear(GetWindowColor());
+		this->mStateRenderTargetView.Clear(Application::GetWindow()->GetWindowColor());
 		this->mDepthStencilView.Clear(clearDepth, clearStencil);
 	}
 

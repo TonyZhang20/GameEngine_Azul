@@ -5,6 +5,8 @@
 #include <string>
 #include <functional>
 
+#define BIND_EVENT_FN_ONE(x) std::bind(&Engine::x, this, std::placeholders::_1)
+
 namespace Azul
 {
 	//Blocking Events
@@ -50,8 +52,7 @@ namespace Azul
 			return GetCategoryFlags() & category;
 		}
 
-	protected:
-		bool mHandled = false;
+		bool Handled = false;
 	};
 
 	/// <summary>
@@ -74,7 +75,7 @@ namespace Azul
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.mHandled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;
 			}
 

@@ -27,7 +27,7 @@ namespace Azul
 
 		MANAGER_LIBRARY_API void Clear();
 		MANAGER_LIBRARY_API virtual void Dump();
-
+		MANAGER_LIBRARY_API virtual unsigned long GetHashCode() { return 0;  }
 
 		// Data: -----------------------------
 		DLink *pNext;

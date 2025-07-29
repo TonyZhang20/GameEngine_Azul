@@ -53,6 +53,7 @@ namespace Azul
 
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
+		virtual float GetAspectRatio() const = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 
@@ -60,6 +61,10 @@ namespace Azul
 		virtual void Destroy() = 0;
 
 		virtual bool IsOpen() const = 0;
+		virtual bool GetVsync() = 0;
+		virtual void Present() = 0;
+		virtual class Vec4 GetWindowColor() = 0;
+
 
 	protected:
 	};

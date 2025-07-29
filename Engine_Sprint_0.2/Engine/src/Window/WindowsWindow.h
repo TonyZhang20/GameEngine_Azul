@@ -20,26 +20,32 @@ namespace Azul
 		void Hide() override;
 		void GUIClearnUp();
 		void SetupImGUI();
+		void SetVsync(bool b);
+		void Present() override;
 
 		virtual void SetTitle(const char* title) override;
+		virtual bool GetVsync() override { return m_Data.VSync; }
 
 		void OnUpdate(bool &quit) override;
 		
+		void QuitCallBack();
 		void DrawUI();
 		void OnRenderUI(class StateRenderTargetView& renderTargetView);
 
 
-		inline void* GetNativeHandle() const override { return hwnd; }
+		inline void* GetNativeHandle() const override { return m_hwnd; }
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
 		inline unsigned int GetHeight() const override { return m_Data.Height; }
-
-		bool IsOpen() const override { return hwnd != nullptr; }
-
-		static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);		
+		inline float GetAspectRatio() const override { return (float)m_Data.Width / (float)m_Data.Height; }
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
 
-		Vec4 GetWindowColor();
+		bool IsOpen() const override { return m_hwnd != nullptr; }
 
+		static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);		
+		LRESULT HandleMessage(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+		Vec4 GetWindowColor() override;
+		inline void SetWindowColor(Vec4 color) { this->WindowColor = color; }
 	private:
 		Vec4 WindowColor;
 
@@ -48,24 +54,20 @@ namespace Azul
 
 		virtual void Init(const WindowProps& props);
 
-		Window* m_Window;
-
 		struct WindowData
 		{
 			char* Title;
-			bool VSync;
+			bool VSync = true;
 
 			unsigned int Width;
 			unsigned int Height;
-
 			EventCallbackFn EventCallback;
 		};
 
-		HWND hwnd = nullptr;
+		HWND m_hwnd = nullptr;
 		HINSTANCE instance = nullptr;
-
-
 		WindowData m_Data;
+
 	};
 }
 

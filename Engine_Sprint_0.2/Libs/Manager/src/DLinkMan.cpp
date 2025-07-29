@@ -9,13 +9,18 @@ namespace Azul
 	DLinkMan::DLinkMan()
 	{
 		this->poIterator = new DLinkIterator();
+		this->poReverseIterator = new DLinkReverseIterator();
 		this->poHead = nullptr;
+		this->poEnd = nullptr;
 	}
 
 	DLinkMan::~DLinkMan()
 	{
 		delete this->poIterator;
 		this->poIterator = nullptr;
+
+		delete this->poReverseIterator;
+		this->poReverseIterator = nullptr;
 	}
 
 	void DLinkMan::AddToFront(DLink *pNode)
@@ -28,8 +33,11 @@ namespace Azul
 		{
 			// push to the front
 			poHead = pNode;
+
 			pNode->pNext = nullptr;
 			pNode->pPrev = nullptr;
+		
+			poEnd = pNode;
 		}
 		else
 		{
@@ -56,25 +64,20 @@ namespace Azul
 		{
 			// none on list... so add it
 			poHead = pNode;
+
 			pNode->pNext = nullptr;
 			pNode->pPrev = nullptr;
+
+			poEnd = pNode;
 		}
 		else
 		{
-			// spin until end
-			DLink *pTmp = poHead;
-			DLink *pLast = pTmp;
-			while (pTmp != nullptr)
-			{
-				pLast = pTmp;
-				pTmp = pTmp->pNext;
-			}
-
-			// push to front
-			pLast->pNext = pNode;
-			pNode->pPrev = pLast;
+			poEnd->pNext = pNode;
+			
 			pNode->pNext = nullptr;
+			pNode->pPrev = poEnd;
 
+			poEnd = pNode;
 		}
 
 		// worst case, pHead was null initially, now we added a node so... this is true
@@ -91,6 +94,7 @@ namespace Azul
 		if (pNode->pPrev == nullptr && pNode->pNext == nullptr)
 		{   // Only node
 			poHead = nullptr;
+			poEnd = nullptr;
 		}
 		else if (pNode->pPrev == nullptr && pNode->pNext != nullptr)
 		{   // First node
@@ -99,6 +103,7 @@ namespace Azul
 		}
 		else if (pNode->pPrev != nullptr && pNode->pNext == nullptr)
 		{   // Last node
+			poEnd = pNode->pPrev;
 			pNode->pPrev->pNext = pNode->pNext;
 		}
 		else
@@ -131,6 +136,7 @@ namespace Azul
 		{
 			// only one on the list
 			// pHead == null
+			poEnd = nullptr;
 		}
 
 		// remove any lingering links
@@ -144,6 +150,12 @@ namespace Azul
 	{
 		poIterator->Reset(this->poHead);
 		return poIterator;
+	}
+
+	Iterator* DLinkMan::GetReverseIterator()
+	{
+		poReverseIterator->Reset(this->poEnd);
+		return poReverseIterator;
 	}
 
 }
