@@ -1,6 +1,6 @@
 #include "PCSManBase.h"
 #include "PCSNode.h"
-#include "GameObject_Null.h"
+#include "PCSTree.h"
 
 namespace Azul
 {
@@ -25,8 +25,22 @@ namespace Azul
 
 	PCSManBase::~PCSManBase()
 	{
-		delete this->poActive;
-		delete this->poReserve;
+
+		baseDestroy();
+
+		PCSNode* ActiveRoot = poActive->GetRoot();
+		PCSNode* ReverseRoot = poReserve->GetRoot();
+
+		if(this->poActive) delete this->poActive;
+		if(this->poReserve) delete this->poReserve;
+
+		if (ActiveRoot)
+		{
+			ActiveRoot->PrintNode();
+			delete ActiveRoot;
+		}
+
+		if (ReverseRoot) delete ReverseRoot;
 
 		this->poActive = nullptr;
 		this->poReserve = nullptr;
@@ -69,6 +83,28 @@ namespace Azul
 		this->mNumReserved--;
 
 		poActive->Insert(pNodeBase, parent);
+
+		return pNodeBase;
+	}
+
+	PCSNode* PCSManBase::GetEmptyNodeFromPool()
+	{
+		PCSTreeForwardIterator pForIter(poReserve->GetRoot());
+
+		if (pForIter.First() == nullptr)
+		{
+			// refill the reserve list by the DeltaGrow
+			this->proFillReservedPool(this->mDeltaGrow);
+		}
+
+		// Always take from the reserve list
+		PCSNode* pNodeBase = poReserve->RemoveFromLast();
+		assert(pNodeBase != nullptr);
+
+		pNodeBase->Wash();
+
+		this->mNumActive++;
+		this->mNumReserved--;
 
 		return pNodeBase;
 	}
@@ -128,7 +164,8 @@ namespace Azul
 
 	void PCSManBase::baseDestroy()
 	{
-		PCSTreeForwardIterator pActiveForItr(poActive->GetRoot());
+		PCSTreeReverseIterator pActiveForItr(poActive->GetRoot());
+
 		PCSNode* pTmp = nullptr;
 		PCSNode* pNode = nullptr;
 
@@ -137,24 +174,32 @@ namespace Azul
 		while (!pActiveForItr.IsDone())
 		{
 			pTmp = pActiveForItr.Current();
+
 			pNode = pActiveForItr.Next();
 
 			pTmp->PrintNode();
+
 			delete pTmp;
+			
+			if (pNode == poActive->GetRoot()) break;
 		}
 
-		PCSTreeForwardIterator pReserveForItr(poReserve->GetRoot());
+		PCSTreeReverseIterator pReserveForItr(poReserve->GetRoot());
 
 		pNode = pReserveForItr.First();
 
 		while (!pReserveForItr.IsDone())
 		{
 			pTmp = pReserveForItr.Current();
+
 			pNode = pReserveForItr.Next();
 
-			pTmp->PrintNode();
+			//pTmp->PrintNode();
 			delete pTmp;
+
+			if (pNode == poReserve->GetRoot()) break;
 		}
+
 	}
 
 	void PCSManBase::proFillReservedPool(int count)

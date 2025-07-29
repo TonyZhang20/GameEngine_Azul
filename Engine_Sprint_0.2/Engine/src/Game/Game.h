@@ -13,16 +13,11 @@ namespace Azul
 	class Game : public Engine
 	{
 	public:
-		Game(const char* const pName, int width, int height);
-
-		Game() = delete;
+		Game();
 		Game(const Game&) = delete;
 		Game& operator = (const Game&) = delete;
 		virtual ~Game();
 		
-
-		void CameraMove();
-
 		virtual bool LoadContent() override;
 		virtual void UnloadContent() override;
 		virtual void Update(float deltaTime) override;
@@ -31,9 +26,6 @@ namespace Azul
 
 		float GetAspectRatio() const;
 		void SetDefaultTargetMode();
-
-		//void AttachShader();
-		//void RenderIndexBuffer();
 
 	};
 }

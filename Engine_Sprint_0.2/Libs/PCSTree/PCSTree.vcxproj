@@ -12,12 +12,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PCSTree_DLLMain.cpp" />
+    <ClCompile Include="src\PCSManBase.cpp" />
     <ClCompile Include="src\PCSNode.cpp" />
     <ClCompile Include="src\PCSTree.cpp" />
     <ClCompile Include="src\PCSTreeForwardIterator.cpp" />
     <ClCompile Include="src\PCSTreeReverseIterator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\PCSManBase.h" />
     <ClInclude Include="include\PCSNode.h" />
     <ClInclude Include="include\PCSTree.h" />
     <ClInclude Include="include\PCSTreeForwardIterator.h" />

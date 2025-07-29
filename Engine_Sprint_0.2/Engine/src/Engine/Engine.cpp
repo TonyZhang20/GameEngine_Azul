@@ -5,29 +5,20 @@
 // DirectX includes
 #include <d3d11.h>
 #include <d3dcompiler.h>
-
+#include "Event.h"
 #include "Engine.h"
 #include "AnimTimer.h"
+
+#include "LayerManager.h"
 #include "StateDirectXMan.h"
-#include "BufferTexture2D.h"
+
 
 
 
 namespace Azul
 {
-
-	LPCSTR g_WindowClassName = "EngineWindowClass";
-
-
-//#if _DEBUG
-//#define createDeviceFlags_define  D3D11_CREATE_DEVICE_DEBUG
-//
-//#else
-//#define createDeviceFlags_define  0
-//#endif
-
-	Engine::Engine(const char* _pName, int _width, int _height)
-		: 
+	Engine::Engine()
+		: Layer("Engine Layer"),
 		mStateRenderTargetView(),
 		mDepthStencilView(),
 		mDepthStencilBuffer(),
@@ -36,77 +27,45 @@ namespace Azul
 		mBlendStateAlpha(),
 		mStateRasterizerSolid(),
 		mStateRasterizerWireframe(),
-		mViewport(),
-		pName(_pName),
-		mWindowWidth(_width),
-		mWindowHeight(_height)
+		mViewport()
 	{
-		g_WindowHandle = 0;
+			
 	}
+
 
 	Engine::~Engine()
 	{
 		StateDirectXMan::Destroy();
 	}
 
-	// --------------------------------------------------------------
-	//  Standard windows magic to setup the application window
-	// --------------------------------------------------------------
-	int Engine::InitApplication(HINSTANCE hInstance, int cmdShow)
-	{
-		WNDCLASSEX wndClass = { 0 };
-		wndClass.cbSize = sizeof(WNDCLASSEX);
-		wndClass.style = CS_HREDRAW | CS_VREDRAW;
-		wndClass.lpfnWndProc = this->WndProc;
-		wndClass.hInstance = hInstance;
-		wndClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
-		wndClass.hIcon = nullptr;
-		wndClass.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-		wndClass.lpszMenuName = nullptr;
-		wndClass.lpszClassName = g_WindowClassName;
-		wndClass.hIconSm = nullptr;
-
-		if (!RegisterClassEx(&wndClass))
-		{
-			return -1;
-		}
-
-		RECT windowRect = { 0, 0, this->mWindowWidth, this->mWindowHeight };
-		AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, FALSE);
-
-		g_WindowHandle = CreateWindowA(g_WindowClassName, this->pName,
-			WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
-			windowRect.right - windowRect.left,
-			windowRect.bottom - windowRect.top,
-			nullptr, nullptr, hInstance, nullptr);
-
-		assert(g_WindowHandle);
-
-		ShowWindow(g_WindowHandle, cmdShow);
-		UpdateWindow(g_WindowHandle);
-
-		return 0;
-	}
 
 	// ------------------------------------------------------------
 	//  Initialize the Direct Device with Swap Chain
 	// ------------------------------------------------------------
 
-	int Engine::InitDirectX(HINSTANCE hInstance, BOOL vSync)
+	int Engine::InitDirectX(HINSTANCE hInstance,HWND hwnd, BOOL vSync)
 	{
-		AZUL_UNUSED_VAR(hInstance);
+		// AZUL_UNUSED_VAR(hInstance);
 		// A window handle must have been created already.
-		assert(g_WindowHandle != nullptr);
+
+		//assert(g_WindowHandle != nullptr);
+		//RECT clientRect;
+		//GetClientRect(g_WindowHandle, &clientRect);
+		assert(IsWindow(hwnd));
 
 		RECT clientRect;
-		GetClientRect(g_WindowHandle, &clientRect);
+		//HWND hwnd = (HWND)this->pWindow->GetNativeHandle();
+
+		GetClientRect(hwnd, &clientRect);
 
 		// Compute the exact client dimensions. This will be used
 		// to initialize the render targets for our swap chain.
 		unsigned int clientWidth = clientRect.right - clientRect.left;
 		unsigned int clientHeight = clientRect.bottom - clientRect.top;
 
-		StateDirectXMan::Create(g_WindowHandle, vSync);
+		Trace::out("%d %d\n", clientWidth, clientHeight);
+		
+		StateDirectXMan::Create(hwnd, vSync);
 
 		// The Direct3D device and swap chain were successfully created.
 		// Now we need to initialize the buffers of the swap chain.
@@ -142,70 +101,6 @@ namespace Azul
 
 		// Initialize the viewport to occupy the entire client area.
 		this->mViewport.Initialize(clientWidth, clientHeight);
-
-		return 0;
-	}
-
-	// ------------------------------------
-	// win main()
-	// ------------------------------------
-	int WINAPI Engine::wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
-	{
-		AZUL_UNUSED_VAR(prevInstance);
-		AZUL_UNUSED_VAR(cmdLine);
-
-		if (InitApplication(hInstance, cmdShow) != 0)
-		{
-			MessageBox(nullptr, TEXT("Failed to create applicaiton window."), TEXT("Error"), MB_OK);
-			return -1;
-		}
-
-		if (InitDirectX(hInstance, ENABLE_VSYNC) != 0)
-		{
-			MessageBox(nullptr, TEXT("Failed to create DirectX device and swap chain."), TEXT("Error"), MB_OK);
-			return -1;
-		}
-
-		int returnCode = Run();
-
-		return returnCode;
-	}
-
-	// ------------------------------------
-	// windows process - messages
-	// ------------------------------------
-	LRESULT CALLBACK Engine::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
-	{
-		PAINTSTRUCT paintStruct;
-		HDC hDC;
-
-		switch (message)
-		{
-		case WM_PAINT:
-		{
-			hDC = BeginPaint(hwnd, &paintStruct);
-			EndPaint(hwnd, &paintStruct);
-		}
-		break;
-
-		case WM_CHAR:
-		{
-			if (wParam == VK_ESCAPE)
-			{
-				PostQuitMessage(0);
-			}
-		}
-		break;
-
-		case WM_DESTROY:
-		{
-			PostQuitMessage(0);
-		}
-		break;
-
-		default:
-			return DefWindowProc(hwnd, message, wParam, lParam);
-		}
 
 		return 0;
 	}
@@ -303,98 +198,13 @@ namespace Azul
 		return refreshRate;
 	}
 
-	// ------------------------------------
-	// Run - main loop
-	// ------------------------------------
-	int Engine::Run()
+
+	bool Engine::OnWindowClose(WindowCloseEvent& e)
 	{
-		MSG msg = { 0 };
-
-		static DWORD previousTime = timeGetTime();
-		static const float targetFramerate = 30.0f;
-		static const float maxTimeStep = 1.0f / targetFramerate;
-
-		AnimTimer EngineTime;
-
-		if (!LoadContent())
-		{
-			MessageBox(nullptr, TEXT("Failed to load content."), TEXT("Error"), MB_OK);
-			return -1;
-		}
-
-		while (msg.message != WM_QUIT)
-		{
-			EngineTime.Tic();
-
-			if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
-			{
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-			}
-			else
-			{
-				DWORD currentTime = timeGetTime();
-				float deltaTime = (currentTime - previousTime) / 1000.0f;
-				previousTime = currentTime;
-
-				// Cap the delta time to the max time step (useful if your 
-				// debugging and you don't want the deltaTime value to explode.
-				deltaTime = std::min<float>(deltaTime, maxTimeStep);
-
-				Update(deltaTime);
-				ClearDepthStencilBuffer();
-				Render();
-
-				//--------------------------------
-				// Fast monitor sync
-				//--------------------------------
-				{
-					AnimTime EngineLoopTime = EngineTime.Toc();
-
-					// Current number of Frames... snap to the next 60Hz frame as target
-					int NumFrames_60Hz = AnimTime::Quotient(EngineLoopTime, AnimTime(AnimTime::Duration::NTSC_FRAME));
-					int TargetNumFrames_60Hz = NumFrames_60Hz + 1;
-					AnimTime Target_60Hz = TargetNumFrames_60Hz * AnimTime(AnimTime::Duration::NTSC_FRAME);
-
-					// we are before the flip... give a little cushion 
-					AnimTime Overhead_Time = 500 * AnimTime(AnimTime::Duration::ONE_MICROSECOND);
-					AnimTime EndTime = Target_60Hz - Overhead_Time;
-
-					// Sit and spin.
-					while (EngineLoopTime < EndTime)
-					{
-						EngineLoopTime = EngineTime.Toc();
-					}
-				}
-
-				//--------------------------------------------------------
-				// Wait for Vsync - flip front/back buffers
-				//--------------------------------------------------------
-				Present(ENABLE_VSYNC);
-			}
-		}
-
-		UnloadContent();
-		Cleanup();
-
-		return static_cast<int>(msg.wParam);
+		this->quit = true;
+		return true;
 	}
 
-	// ------------------------------------
-	// present - flip
-	// ------------------------------------
-	void Engine::Present(bool vSync)
-	{
-		IDXGISwapChain* swapChain = StateDirectXMan::GetSwapChain();
-		if (vSync)
-		{
-			swapChain->Present(1, 0);
-		}
-		else
-		{
-			swapChain->Present(0, 0);
-		}
-	}
 
 	// ------------------------------------
 	// Cleanup()
@@ -414,10 +224,66 @@ namespace Azul
 		//debugDev->ReportLiveDeviceObjects(D3D11_RLDO_IGNORE_INTERNAL);
 		//debugDev->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
 		//debugDev->ReportLiveDeviceObjects(D3D11_RLDO_SUMMARY | D3D11_RLDO_DETAIL);
+
 		SafeRelease(debugDev);
 #endif
+		//ShutDown
 
 		//SafeRelease(g_d3dDevice);
+
+	}
+
+	void Engine::OnUpdate(float UpdateTime)
+	{
+		EngineTime.Tic();
+
+		Update(UpdateTime);
+		
+		ClearDepthStencilBuffer();
+		
+		Render();
+
+		//--------------------------------
+		// Fast monitor sync
+		//--------------------------------
+		{
+			AnimTime EngineLoopTime = EngineTime.Toc();
+
+			// Current number of Frames... snap to the next 60Hz frame as target
+			int NumFrames_60Hz = AnimTime::Quotient(EngineLoopTime, AnimTime(AnimTime::Duration::NTSC_FRAME));
+			int TargetNumFrames_60Hz = NumFrames_60Hz + 1;
+			AnimTime Target_60Hz = TargetNumFrames_60Hz * AnimTime(AnimTime::Duration::NTSC_FRAME);
+
+			// we are before the flip... give a little cushion 
+			AnimTime Overhead_Time = 500 * AnimTime(AnimTime::Duration::ONE_MICROSECOND);
+			AnimTime EndTime = Target_60Hz - Overhead_Time;
+
+			// Sit and spin.
+			while (EngineLoopTime < EndTime)
+			{
+				EngineLoopTime = EngineTime.Toc();
+			}
+		}
+	}
+
+	void Engine::OnEvent(Event& e)
+	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN_ONE(OnWindowClose));
+
+		PCSTreeReverseIterator itr(LayerManager::GetActiveLayers()->GetRoot());
+
+		for (itr.First(); !itr.IsDone(); itr.Next())
+		{
+			Layer* layer = (Layer*)itr.Current();
+			
+			layer->OnEvent(e);
+
+			if (e.Handled)
+			{
+				break;
+			}
+		}
 	}
 }
 

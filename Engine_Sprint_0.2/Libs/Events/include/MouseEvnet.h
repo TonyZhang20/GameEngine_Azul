@@ -31,8 +31,8 @@ namespace Azul
 	class EVENTSLIBRARY_API MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrolledEvent(float x, float y)
-			: m_xOffset(x), m_yOffset(y) {}
+		MouseScrolledEvent(float x, float y, float delta)
+			: m_xOffset(x), m_yOffset(y), m_delta(delta) {}
 
 		inline float GetXOffset() const { return m_xOffset; }
 		inline float GetYOffset() const { return m_yOffset; }
@@ -47,7 +47,7 @@ namespace Azul
 		EVENT_CLASS_TYPE(MouseScrolled);
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	private:
-		float m_xOffset, m_yOffset;
+		float m_xOffset, m_yOffset, m_delta;
 
 	};
 
@@ -82,6 +82,7 @@ namespace Azul
 
 	class EVENTSLIBRARY_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{
+	public:
 		MouseButtonReleasedEvent(int button)
 			: MouseButtonEvent(button) {}
 

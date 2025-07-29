@@ -7,27 +7,37 @@
 
 #include "Game.h"
 #include "Engine.h"
+
+//Camera
 #include "Camera.h"
 #include "MovingCamera.h"
 #include "RotatingCamera.h"
 #include "CameraUtility.h"
+#include "RotateAroundCamera.h"
 
-#include "Colors.h"
-#include "GameObject.h"
+//Tool
 #include "MathEngine.h"
+#include "Colors.h"
 
+//Shader
 #include "MeshHeaders.h"
+#include "TextureObject.h"
 #include "ShaderObjectHeaders.h"
 #include "GraphicsObjectHeaders.h"
 
+//GameObject
 #include "GameObject_RotateAround.h"
+#include "GameObject.h"
 
-#include "TextureObject.h"
+//Manager
 #include "GameObjectManager.h"
-#include "CameraNodeManager.h"
-#include "RotateAroundCamera.h"
 #include "TextureManager.h"
-#include "Colors.h"
+#include "CameraNodeManager.h"
+
+//Event
+#include "ApplicationEvent.h"
+
+#include "Application.h"
 
 namespace Azul
 {
@@ -35,8 +45,8 @@ namespace Azul
 	static bool present = false;
 	// Demo parameters
 
-	Game::Game(const char* const pName, int width, int height)
-		: Engine(pName, width, height)
+	Game::Game()
+		: Engine()
 	{
 		poGame = this;
 	}
@@ -54,10 +64,12 @@ namespace Azul
 	bool Game::LoadContent()
 	{
 		CameraNodeManager::Create();
+		TextureManager::Create();
+		
 		ShaderObjectNodeManager::Create();
 		MeshNodeManager::Create();
+		
 		GameObjectManager::Create();
-		TextureManager::Create();
 
 #pragma region Demo1
 
@@ -401,8 +413,6 @@ namespace Azul
 #pragma endregion
 
 #pragma endregion Demo 1
-
-
 #pragma region Demo2
 
 		pGraphicsObject =
@@ -463,8 +473,6 @@ namespace Azul
 	//      Use this function to control process order
 	//      Input, AI, Physics, Animation, and Graphics
 	//-----------------------------------------------------------------------------
-
-	Vec3 obj(0.0f, 0.0f, 0.0f);
 
 	void Game::Update(float deltaTime)
 	{
@@ -531,12 +539,16 @@ namespace Azul
 	//-----------------------------------------------------------------------------
 	void Game::UnloadContent()
 	{
+		//auto instance = GameObjectManager::instance;
+		//AZUL_UNUSED_VAR(instance);
 		TextureManager::Destroy();
-		
+
 		CameraUtility::Destroy();
+
 		CameraNodeManager::Destroy();
-		
+
 		MeshNodeManager::Destroy();
+
 		ShaderObjectNodeManager::Destroy();
 
 		GameObjectManager::Destroy();
@@ -550,15 +562,11 @@ namespace Azul
 	//------------------------------------------------------------------
 	void Game::ClearDepthStencilBuffer()
 	{
-#ifdef _DEBUG
-		const Vec4 ClearColor = Azul::Colors::LightBlue;
-#else
-		const Vec4 ClearColor = Azul::Colors::Wheat;
-#endif
+
 		float clearDepth = 1.0f;
 		uint8_t clearStencil = 0;
 
-		this->mStateRenderTargetView.Clear(ClearColor);
+		this->mStateRenderTargetView.Clear(Application::GetWindow()->GetWindowColor());
 		this->mDepthStencilView.Clear(clearDepth, clearStencil);
 	}
 

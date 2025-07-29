@@ -58,8 +58,6 @@ namespace Azul
 
 		PCSTREE_LIBRARY_API void SetForwardAuto(PCSNode* const pIn);
 		PCSTREE_LIBRARY_API void SetReverseAuto(PCSNode* const pIn);
-		PCSTREE_LIBRARY_API void SetForward(PCSNode *const pIn);
-		PCSTREE_LIBRARY_API void SetReverse(PCSNode *const pIn);
 
 		PCSTREE_LIBRARY_API PCSNode *GetParent(void) const;
 		PCSTREE_LIBRARY_API PCSNode *GetChild(void) const;
@@ -84,8 +82,17 @@ namespace Azul
 		PCSTREE_LIBRARY_API int GetMaxChildLevel() const;
 
 		PCSTREE_LIBRARY_API void Wash();
-		PCSTREE_LIBRARY_API bool CompareName(PCSNode* p1, PCSNode* p2) const;
+
 		PCSTREE_LIBRARY_API virtual bool Compare(PCSNode* pTargetNode) = 0;
+		PCSTREE_LIBRARY_API virtual unsigned long GetHashCode();
+		PCSTREE_LIBRARY_API virtual int GetOrder() { return 0; }
+
+	protected:
+		PCSTREE_LIBRARY_API void SetForward(PCSNode* const pIn);
+		PCSTREE_LIBRARY_API void SetReverse(PCSNode* const pIn);
+
+	protected:
+		char    pName[PCSNode::NAME_SIZE];
 
 	private:
 		PCSNode *pParent;
@@ -95,7 +102,7 @@ namespace Azul
 		PCSNode *pForward;
 		PCSNode *pReverse;
 
-		char     pName[PCSNode::NAME_SIZE];
+		friend class PCSTree;
 	};
 
 }

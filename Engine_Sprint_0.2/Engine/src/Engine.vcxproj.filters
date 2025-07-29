@@ -68,6 +68,36 @@
     <Filter Include="DirectXTex\libs">
       <UniqueIdentifier>{5fc1047e-df9a-42b9-975e-5ea4fae1b063}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\Window">
+      <UniqueIdentifier>{7ac95998-9241-439e-8229-6c71a150eff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\ImGui">
+      <UniqueIdentifier>{dff19a6f-e198-4f54-a993-c5920c8403a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\ImGizmos">
+      <UniqueIdentifier>{5c0f5f51-2bf0-439a-a2c2-c1fdcfeb356c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\Layers">
+      <UniqueIdentifier>{0de0d731-c1d9-4070-b4de-a83e9854bd06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\ImGui\SourceCode">
+      <UniqueIdentifier>{7c1d4d16-47fa-48bc-934d-98a5c2b2a130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\ImGui\SourceCode\Include">
+      <UniqueIdentifier>{a699f0da-c3f0-4066-b581-7f8ede98334c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\ImGui\SourceCode\cpp">
+      <UniqueIdentifier>{721f235a-606c-4372-8d82-90e20145bd84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\ImGui\include">
+      <UniqueIdentifier>{6aceacc4-a169-44a4-adb8-759bb9ac11ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\ImGui\src">
+      <UniqueIdentifier>{67f28da0-4c32-44a8-9301-f992d2bedbc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\Application">
+      <UniqueIdentifier>{fd50ee34-1bd8-47d0-8fd6-b3c8776dcfab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject_Null.h">
@@ -140,9 +170,6 @@
       <Filter>Source Files\src\Manager\include</Filter>
     </ClInclude>
     <ClInclude Include="Manager\MeshNodeManager.h">
-      <Filter>Source Files\src\Manager\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\PCSManBase.h">
       <Filter>Source Files\src\Manager\include</Filter>
     </ClInclude>
     <ClInclude Include="ShaderObject\ShaderObjectNode.h">
@@ -295,6 +322,45 @@
     <ClInclude Include="Camera\RotateAroundCamera.h">
       <Filter>Source Files\src\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Window\Window.h">
+      <Filter>Source Files\src\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\WindowsWindow.h">
+      <Filter>Source Files\src\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>Source Files\src\ImGui\SourceCode\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>Source Files\src\ImGui\SourceCode\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>Source Files\src\ImGui\SourceCode\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_win32.h">
+      <Filter>Source Files\src\ImGui\SourceCode\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dx11.h">
+      <Filter>Source Files\src\ImGui\SourceCode\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>Source Files\src\ImGui\SourceCode\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>Source Files\src\ImGui\SourceCode\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>Source Files\src\ImGui\SourceCode\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGizmos\ImGuizmo.h">
+      <Filter>Source Files\src\ImGizmos</Filter>
+    </ClInclude>
+    <ClInclude Include="Layers\ImGuiLayer.h">
+      <Filter>Source Files\src\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Application.h">
+      <Filter>Source Files\src\Application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -368,9 +434,6 @@
     </ClCompile>
     <ClCompile Include="ShaderObject\ShaderObjectNode.cpp">
       <Filter>Source Files\src\ShaderObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\PCSManBase.cpp">
-      <Filter>Source Files\src\Manager\src</Filter>
     </ClCompile>
     <ClCompile Include="Manager\ShaderObjectNodeManager.cpp">
       <Filter>Source Files\src\Manager\src</Filter>
@@ -494,6 +557,39 @@
     </ClCompile>
     <ClCompile Include="Camera\RotateAroundCamera.cpp">
       <Filter>Source Files\src\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\WindowsWindow.cpp">
+      <Filter>Source Files\src\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>Source Files\src\ImGui\SourceCode\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>Source Files\src\ImGui\SourceCode\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>Source Files\src\ImGui\SourceCode\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp">
+      <Filter>Source Files\src\ImGui\SourceCode\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>Source Files\src\ImGui\SourceCode\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp">
+      <Filter>Source Files\src\ImGui\SourceCode\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool\Colors.cpp">
+      <Filter>Source Files\src\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGizmos\ImGuizmo.cpp">
+      <Filter>Source Files\src\ImGizmos</Filter>
+    </ClCompile>
+    <ClCompile Include="Layers\ImGuiLayer.cpp">
+      <Filter>Source Files\src\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Application.cpp">
+      <Filter>Source Files\src\Application</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -61,11 +61,11 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";MATH_USE_DLL;EVENTS_USE_DLL;ANIM_TIME_USE_DLL;FILE_USE_DLL;PCSTREE_USE_DLL;MANAGER_USE_DLL;DIRECTX_TEX_IMPORT</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";MATH_USE_DLL;ANIM_TIME_USE_DLL;FILE_USE_DLL;EVENTS_USE_DLL;PCSTREE_USE_DLL;MANAGER_USE_DLL;DIRECTX_TEX_IMPORT;USE_IMGUI_API;LAYER_USE_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Math\include;$(SolutionDir)Libs\AnimTime\include;$(SolutionDir)Libs\File\include;$(SolutionDir)Libs\PCSTree\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Events\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\shaders\compiled;$(SolutionDir)Engine\src;$(SolutionDir)Engine\src\Camera;$(SolutionDir)Engine\src\Engine;$(SolutionDir)Engine\src\Game;$(SolutionDir)Engine\src\GameObject;$(SolutionDir)Engine\src\Tool;$(SolutionDir)Engine\src\ShaderObject;$(SolutionDir)Engine\src\Mesh;$(SolutionDir)Engine\src\GraphicsObject;$(SolutionDir)Engine\src\Manager;$(SolutionDir)Engine\src\Buffers;$(SolutionDir)Engine\src\State;$(SolutionDir)Engine\src\Texture;$(SolutionDir)Engine\src\Events</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Math\include;$(SolutionDir)Libs\AnimTime\include;$(SolutionDir)Libs\File\include;$(SolutionDir)Libs\PCSTree\include;$(SolutionDir)Libs\Layer\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Events\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\shaders\compiled;$(SolutionDir)Engine\src;$(SolutionDir)Engine\src\Camera;$(SolutionDir)Engine\src\Engine;$(SolutionDir)Engine\src\Game;$(SolutionDir)Engine\src\GameObject;$(SolutionDir)Engine\src\Tool;$(SolutionDir)Engine\src\ShaderObject;$(SolutionDir)Engine\src\Mesh;$(SolutionDir)Engine\src\GraphicsObject;$(SolutionDir)Engine\src\Manager;$(SolutionDir)Engine\src\Buffers;$(SolutionDir)Engine\src\State;$(SolutionDir)Engine\src\Texture;$(SolutionDir)Engine\src\Events;$(SolutionDir)Engine\src\Window;$(SolutionDir)Engine\src\Renderer;$(SolutionDir)Engine\src\ImGui;$(SolutionDir)Engine\src\ImGizmos;$(SolutionDir)Engine\src\Layers;$(SolutionDir)Engine\src\Application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -102,11 +102,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";MATH_USE_DLL;EVENTS_USE_DLL;ANIM_TIME_USE_DLL;FILE_USE_DLL;PCSTREE_USE_DLL;%(PreprocessorDefinitions);MANAGER_USE_DLL;DIRECTX_TEX_IMPORT</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";MATH_USE_DLL;EVENTS_USE_DLL;ANIM_TIME_USE_DLL;FILE_USE_DLL;PCSTREE_USE_DLL;%(PreprocessorDefinitions);MANAGER_USE_DLL;DIRECTX_TEX_IMPORT;USE_IMGUI_API;LAYER_USE_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Math\include;$(SolutionDir)Libs\AnimTime\include;$(SolutionDir)Libs\File\include;$(SolutionDir)Libs\PCSTree\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Events\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\shaders\compiled;$(SolutionDir)Engine\src;$(SolutionDir)Engine\src\Camera;$(SolutionDir)Engine\src\Engine;$(SolutionDir)Engine\src\Game;$(SolutionDir)Engine\src\GameObject;$(SolutionDir)Engine\src\Tool;$(SolutionDir)Engine\src\ShaderObject;$(SolutionDir)Engine\src\Mesh;$(SolutionDir)Engine\src\GraphicsObject;$(SolutionDir)Engine\src\Manager;$(SolutionDir)Engine\src\Buffers;$(SolutionDir)Engine\src\State;$(SolutionDir)Engine\src\Texture;$(SolutionDir)Engine\src\Events</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Math\include;$(SolutionDir)Libs\AnimTime\include;$(SolutionDir)Libs\File\include;$(SolutionDir)Libs\PCSTree\include;$(SolutionDir)Libs\Layer\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Events\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\shaders\compiled;$(SolutionDir)Engine\src;$(SolutionDir)Engine\src\Camera;$(SolutionDir)Engine\src\Engine;$(SolutionDir)Engine\src\Game;$(SolutionDir)Engine\src\GameObject;$(SolutionDir)Engine\src\Tool;$(SolutionDir)Engine\src\ShaderObject;$(SolutionDir)Engine\src\Mesh;$(SolutionDir)Engine\src\GraphicsObject;$(SolutionDir)Engine\src\Manager;$(SolutionDir)Engine\src\Buffers;$(SolutionDir)Engine\src\State;$(SolutionDir)Engine\src\Texture;$(SolutionDir)Engine\src\Events;$(SolutionDir)Engine\src\Window;$(SolutionDir)Engine\src\Renderer;$(SolutionDir)Engine\src\ImGui;$(SolutionDir)Engine\src\ImGizmos;$(SolutionDir)Engine\src\Layers;$(SolutionDir)Engine\src\Application;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <PrecompiledHeaderOutputFile>
@@ -143,6 +143,7 @@
     <ClInclude Include="..\shaders\compiled\FlatTexture.Vx.h" />
     <ClInclude Include="..\shaders\compiled\Null.Px.h" />
     <ClInclude Include="..\shaders\compiled\Null.Vx.h" />
+    <ClInclude Include="Application\Application.h" />
     <ClInclude Include="Buffers\BufferCBV_vs.h" />
     <ClInclude Include="Buffers\BufferIBV.h" />
     <ClInclude Include="Buffers\BufferInputLayout.h" />
@@ -171,11 +172,20 @@
     <ClInclude Include="GraphicsObject\GraphicsObject_LightTexture.h" />
     <ClInclude Include="GraphicsObject\GraphicsObject_Null.h" />
     <ClInclude Include="GraphicsObject\GraphicsObject_Wireframe.h" />
+    <ClInclude Include="ImGizmos\ImGuizmo.h" />
+    <ClInclude Include="ImGui\imconfig.h" />
+    <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="ImGui\imgui_internal.h" />
+    <ClInclude Include="ImGui\imstb_rectpack.h" />
+    <ClInclude Include="ImGui\imstb_textedit.h" />
+    <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="Layers\ImGuiLayer.h" />
     <ClInclude Include="Manager\CameraNodeManager.h" />
     <ClInclude Include="Manager\StateDirectXMan.h" />
     <ClInclude Include="Manager\GameObjectManager.h" />
     <ClInclude Include="Manager\MeshNodeManager.h" />
-    <ClInclude Include="Manager\PCSManBase.h" />
     <ClInclude Include="Manager\ShaderObjectNodeManager.h" />
     <ClInclude Include="Manager\TextureManager.h" />
     <ClInclude Include="Mesh\Mesh.h" />
@@ -211,8 +221,11 @@
     <ClInclude Include="Texture\TextureObject.h" />
     <ClInclude Include="Tool\Colors.h" />
     <ClInclude Include="Tool\StringThis.h" />
+    <ClInclude Include="Window\Window.h" />
+    <ClInclude Include="Window\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application\Application.cpp" />
     <ClCompile Include="Buffers\BufferCBV_vs.cpp" />
     <ClCompile Include="Buffers\BufferIBV.cpp" />
     <ClCompile Include="Buffers\BufferInputLayout.cpp" />
@@ -241,12 +254,19 @@
     <ClCompile Include="GraphicsObject\GraphicsObject_LightTexture.cpp" />
     <ClCompile Include="GraphicsObject\GraphicsObject_Null.cpp" />
     <ClCompile Include="GraphicsObject\GraphicsObject_Wireframe.cpp" />
+    <ClCompile Include="ImGizmos\ImGuizmo.cpp" />
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="ImGui\imgui_tables.cpp" />
+    <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Layers\ImGuiLayer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager\CameraNodeManager.cpp" />
     <ClCompile Include="Manager\StateDirectXMan.cpp" />
     <ClCompile Include="Manager\GameObjectManager.cpp" />
     <ClCompile Include="Manager\MeshNodeManager.cpp" />
-    <ClCompile Include="Manager\PCSManBase.cpp" />
     <ClCompile Include="Manager\ShaderObjectNodeManager.cpp" />
     <ClCompile Include="Manager\TextureManager.cpp" />
     <ClCompile Include="Mesh\Mesh.cpp" />
@@ -277,8 +297,10 @@
     <ClCompile Include="State\StateSwapChain.cpp" />
     <ClCompile Include="State\StateViewport.cpp" />
     <ClCompile Include="Texture\TextureObject.cpp" />
+    <ClCompile Include="Tool\Colors.cpp" />
     <ClCompile Include="Tool\Render.h" />
     <ClCompile Include="Tool\StringThis.cpp" />
+    <ClCompile Include="Window\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\shaders\original\ColorByVertex.Px.hlsl">
@@ -403,6 +425,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\Libs\File\File.vcxproj">
       <Project>{4186103c-e7aa-4376-830e-cd42a28d6c12}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libs\Layer\Layer.vcxproj">
+      <Project>{95d1c138-a1dc-4bf9-99fb-0678ef049a12}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Libs\Manager\Manager.vcxproj">
       <Project>{fed97ad8-3dc2-4059-a969-9fca3983468e}</Project>

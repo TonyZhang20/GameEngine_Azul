@@ -4,6 +4,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include "WindowsWindow.h"
 #include <d3d11.h>
 #include "StateDepthStencil.h"
 #include "StateRasterizer.h"
@@ -12,22 +13,27 @@
 #include "StateDepthStencilBuffer.h"
 #include "StateDepthStencilView.h"
 #include "StateRenderTargetView.h"
+#include "ApplicationEvent.h"
+#include "Layer.h"
+#include "AnimTimer.h"
 
 namespace Azul
 {
-	class Engine
+	class Engine : public Layer
 	{
 	public:
 		static const BOOL ENABLE_VSYNC = true;
 
 	public:
-		Engine(const char* pName, int width, int height);
-
-		Engine() = delete;
+		Engine();
 		Engine(const Engine&) = delete;
 		Engine& operator = (const Engine&) = delete;
 		virtual ~Engine();
 
+		virtual void OnAttach() override {};
+		virtual void OnDetach() override {};
+		virtual void OnUpdate(float UpdateTime) override;
+		virtual void OnEvent(Event& e) override;
 
 		virtual bool LoadContent() = 0;
 		virtual void UnloadContent() = 0;
@@ -37,24 +43,18 @@ namespace Azul
 
 		void Cleanup();
 
-
-
-		int InitApplication(HINSTANCE hInstance, int cmdShow);
-		int InitDirectX(HINSTANCE hInstance, BOOL vSync);
-		static LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-		int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow);
-
-		void Present(bool vSync);
+		int InitDirectX(HINSTANCE hInstance, HWND hwnd, BOOL vSync);
 		static DXGI_RATIONAL QueryRefreshRate(UINT screenWidth, UINT screenHeight, BOOL vsync);
-		int Run();
 
-		HWND g_WindowHandle;
 
-		// Direct3D device and swap chain.
-		//ID3D11Device* g_d3dDevice;
-		//ID3D11DeviceContext* g_d3dDeviceContext;
-		//IDXGISwapChain* g_d3dSwapChain;
+	private:
+		bool OnWindowClose(WindowCloseEvent& e);
 
+	private:
+		bool quit = false;
+		AnimTimer EngineTime;
+
+	public:
 		StateRenderTargetView mStateRenderTargetView;
 		StateDepthStencilView mDepthStencilView;
 		StateDepthStencilBuffer mDepthStencilBuffer;
@@ -66,11 +66,6 @@ namespace Azul
 		StateViewport mViewport;
 
 		D3D11_VIEWPORT g_Viewport;
-
-		const char* pName;
-		const int mWindowWidth;
-		const int mWindowHeight;
-
 	};
 
 

@@ -42,6 +42,11 @@ namespace Azul
 
 		// insert
 		PCSTREE_LIBRARY_API void Insert(PCSNode *const pInNode, PCSNode *const pParent);
+		/// <summary>
+		/// Only will set the parent as root
+		/// </summary>
+		/// <returns></returns>
+		PCSTREE_LIBRARY_API void InsertByOrder(PCSNode* const pInNode, PCSNode *const pPrevSib);
 
 		// remove
 		PCSTREE_LIBRARY_API void Remove(PCSNode *const pInNode);
@@ -57,7 +62,7 @@ namespace Azul
 
 		PCSTREE_LIBRARY_API void LateNodeCheck(PCSNode* pInNode);
 		PCSTREE_LIBRARY_API void ClearDLink(PCSNode* pInNode);
-
+		PCSTREE_LIBRARY_API void SetRoot(PCSNode* pRoot);
 		PCSTREE_LIBRARY_API PCSNode* RemoveFromLast();
 
 

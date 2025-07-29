@@ -334,15 +334,18 @@ namespace Azul
 		this->SetName("");
 	}
 
-	bool PCSNode::CompareName(PCSNode* p1, PCSNode* p2) const
+	unsigned long PCSNode::GetHashCode()
 	{
-		char buff[PCSNode::NAME_SIZE];
-		char buff2[PCSNode::NAME_SIZE];
+		unsigned long hash = 5381;
+		size_t i = 0;
 
-		p1->GetName(buff, PCSNode::NAME_SIZE);
-		p2->GetName(buff2, PCSNode::NAME_SIZE);
+		while (i < NAME_SIZE && pName[i] != '\0')
+		{
+			hash = ((hash << 5) + hash) + pName[i]; // hash * 33 + str[i]
+			++i;
+		}
 
-		return memcmp(buff, buff2, NAME_SIZE) == 0;
+		return hash;
 	}
 }
 

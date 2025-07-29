@@ -30,9 +30,9 @@ namespace Azul
 		GraphicsObject();
 
 	protected:
-		Mesh* pMesh;
+		Mesh* pMesh; //will delete by manager
 		Mat4* poWorld;
-		ShaderObject* pShaderObj;
+		ShaderObject* pShaderObj; //will delete by manager
 	};
 
 }

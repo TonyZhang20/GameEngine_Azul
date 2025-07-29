@@ -1,6 +1,8 @@
 #ifndef PCSMAN_BASE_H
 #define PCSMAN_BASE_H
 
+#include "PCSTree_DLLInterface.h"
+
 #include "PCSNode.h"
 #include "PCSTree.h"
 #include "PCSTreeIterator.h"
@@ -9,8 +11,10 @@
 
 namespace Azul
 {
-	class PCSManBase
+	class PCSTREE_LIBRARY_API PCSManBase
 	{
+	public:
+
 	protected:
 		//----------------------------------------------------------------------
 		// Constructor
@@ -21,9 +25,11 @@ namespace Azul
 		//----------------------------------------------------------------------
 		// Base methods - called in Derived class but lives in Base
 		//----------------------------------------------------------------------
+		virtual PCSNode* GetEmptyNodeFromPool();
+		
 		void baseSetReserve(int reserveNum, int reserveGrow);
 
-		PCSNode* baseAdd(PCSNode* parent);
+		virtual PCSNode* baseAdd(PCSNode* parent);
 
 		PCSNode* baseFind(PCSNode* pNodeTarget);
 

@@ -15,6 +15,7 @@ namespace Azul
 
 	GameObject::GameObject() : poGraphicsObject(nullptr),
 		poPos(new Vec3(0, 0, 0)),
+		poScale(new Vec3(1 ,1 ,1)),
 		poWorld(new Mat4(Identity))
 	{
 		assert(poPos);
@@ -24,6 +25,7 @@ namespace Azul
 	GameObject::GameObject(GraphicsObject* pGraphicsObject)
 		: poGraphicsObject(pGraphicsObject),
 		poPos(new Vec3(0, 0, 0)),
+		poScale(new Vec3(1, 1, 1)),
 		poWorld(new Mat4(Identity))
 	{
 		assert(pGraphicsObject);
@@ -33,6 +35,7 @@ namespace Azul
 
 	GameObject::~GameObject()
 	{
+		delete this->poScale;
 		delete this->poPos;
 		delete this->poWorld;
 		delete this->poGraphicsObject;
@@ -60,7 +63,12 @@ namespace Azul
 
 	void GameObject::SetScale(float v)
 	{
-		this->scale = v;
+		this->poScale->set(*this->poScale * v);
+	}
+
+	void GameObject::SetScale(Vec3 scale)
+	{
+		this->poScale->set(*this->poScale);
 	}
 
 	void GameObject::SetWorld(Mat4* mat)
@@ -73,9 +81,9 @@ namespace Azul
 		return this->poPos;
 	}
 
-	float GameObject::GetScale()
+	Vec3* GameObject::GetScale()
 	{
-		return this->scale;
+		return this->poScale;
 	}
 
 	void GameObject::Update(float)
@@ -84,10 +92,10 @@ namespace Azul
 		//angle += 0.01f;
 
 		Trans TransA(poPos->x(), poPos->y(), poPos->z());
-		Scale ScaleA(scale, scale, scale);
 		//Rot RotA(Rot1::Z, angle);
+		Scale scale(poScale->x(), poScale->y(), poScale->z());
 
-		*this->poWorld = ScaleA  * TransA;
+		*this->poWorld = scale * TransA;
 
 		// PUSH to Graphics object
 		this->poGraphicsObject->SetWorld(*this->poWorld);

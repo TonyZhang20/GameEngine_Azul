@@ -59,3 +59,7 @@ cd ..
 cd Events
 call "CleanMe.Bat"
 cd ..
+
+cd Layer
+call "CleanMe.Bat"
+cd ..

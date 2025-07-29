@@ -8,7 +8,7 @@
 #include "Manager_DLLInterface.h"
 #include "ListBase.h"
 #include "DLinkIterator.h"
-
+#include "DLinkReverseIterator.h"
 namespace Azul
 {
 	class DLinkMan : public ListBase
@@ -28,10 +28,13 @@ namespace Azul
 		MANAGER_LIBRARY_API virtual DLink *RemoveFromFront() override;
 
 		MANAGER_LIBRARY_API virtual Iterator *GetIterator() override;
-
+		MANAGER_LIBRARY_API virtual Iterator *GetReverseIterator() override;
 
 		DLinkIterator *poIterator;
+		DLinkReverseIterator* poReverseIterator;
+
 		DLink *poHead;
+		DLink* poEnd;
 
 	};
 }

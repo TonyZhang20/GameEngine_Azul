@@ -27,6 +27,9 @@
     <ClCompile Include="PCSTree_DLLMain.cpp">
       <Filter>dll</Filter>
     </ClCompile>
+    <ClCompile Include="src\PCSManBase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\PCSTree.h">
@@ -45,6 +48,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\PCSTreeIterator.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PCSManBase.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

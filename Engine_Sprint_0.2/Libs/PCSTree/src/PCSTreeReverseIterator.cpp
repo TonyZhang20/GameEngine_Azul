@@ -15,6 +15,14 @@ namespace Azul
 	{
 		visited = false;
 
+		if (!root)
+		{
+			visited = true;
+			current = nullptr;
+
+			return nullptr;
+		}
+
 		current = root->GetReverse();
 
 		return current;
@@ -22,7 +30,6 @@ namespace Azul
 
 	PCSNode *PCSTreeReverseIterator::Next()
 	{
-
 		current = current->GetReverse();
 
 		if (current == root->GetReverse())

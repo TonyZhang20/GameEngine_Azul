@@ -84,6 +84,33 @@ namespace Azul
 		}
 	}
 
+	PCSTREE_LIBRARY_API void PCSTree::InsertByOrder(PCSNode* const pInNode, PCSNode* const pPrevSib)
+	{
+		assert(pInNode);
+		assert(pRoot);
+
+		PCSNode* pParent = GetRoot();
+
+		if (pPrevSib == nullptr)
+		{
+			this->Insert(pInNode, pParent);
+			return;
+		}
+
+		pParent->SetChild(pInNode);
+		pInNode->SetParent(pParent);
+
+		pPrevSib->SetNextSibling(pInNode);
+		pInNode->SetPrevSibling(pPrevSib);
+
+		//manage itr forward & Revserse
+		pInNode->SetReverseAuto(pPrevSib);
+		pPrevSib->SetForwardAuto(pInNode);
+
+		this->mInfo.currNumNodes++;
+		DataCheck(pInNode);
+	}
+
 	// Remove
 	void PCSTree::Remove(PCSNode * const pInNode)
 	{
@@ -296,6 +323,11 @@ namespace Azul
 			forward->SetReverse(reverse);
 		}
 
+	}
+
+	PCSTREE_LIBRARY_API void PCSTree::SetRoot(PCSNode* pRoot)
+	{
+		this->pRoot = pRoot;
 	}
 
 	PCSNode* PCSTree::RemoveFromLast()

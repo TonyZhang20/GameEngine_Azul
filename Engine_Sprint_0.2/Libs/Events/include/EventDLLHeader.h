@@ -5,7 +5,8 @@
 #ifdef EVENTSLIBRARY_EXPORTS
 #define EVENTSLIBRARY_API __declspec(dllexport)
 #else
-#define EVENTSLIBRARY_API __declspec(dllimport)
+#define EVENTSLIBRARY_API 
+//__declspec(dllimport)
 #endif
 #else
 #define EVENTS_LIBRARY_API

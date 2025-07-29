@@ -4,6 +4,7 @@
 
 #include "Game.h"
 #include "File.h"
+#include "Application.h"
 
 namespace Azul
 {
@@ -45,9 +46,10 @@ namespace Azul
 		//--------------------------------------------------------
 		this->mStateDepthStencil.Activate();
 	}
+
 	float Game::GetAspectRatio() const
 	{
-		float ratio = (float)mWindowWidth / (float)mWindowHeight;
+		float ratio = Application::GetWindow()->GetAspectRatio();
 
 		return ratio;
 	}

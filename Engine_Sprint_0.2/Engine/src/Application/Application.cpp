@@ -1,0 +1,183 @@
+#include "Application.h"
+#include "AnimTimer.h"
+#include "ImGuiLayer.h"
+#include "WindowsWindow.h"
+#include "LayerManager.h"
+#include "Game.h"
+namespace Azul
+{
+
+	Application* Application::instance = nullptr;
+
+	Application* Application::Create(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
+	{
+
+		AZUL_UNUSED_VAR(prevInstance);
+		AZUL_UNUSED_VAR(cmdLine);
+		AZUL_UNUSED_VAR(cmdShow);
+
+		if (instance == nullptr)
+		{
+			Application::instance = new Application();
+			Application::instance->windowInstance = hInstance;
+
+			return Application::instance;
+		}
+		else
+		{
+			assert(false);
+			return nullptr;
+		}
+	}
+
+	Application::Application()
+	{
+		LayerManager::Create();
+	}
+
+	Application::~Application()
+	{
+		delete this->pWindow;
+		LayerManager::Destroy();
+	}
+
+	void Application::SetWindow(Window* window)
+	{
+		Application* application = Application::privGetInstance();
+		
+		//Set Event Rework
+		//window->SetEventCallback();
+		
+		application->pWindow = window;
+
+		if (!application->pWindow->Create())
+		{
+			MessageBox(nullptr, TEXT("Failed to create applicaiton window."), TEXT("Error"), MB_OK);
+			assert(false);
+			return;
+		}
+	}
+
+	//Add Layer
+	void Application::CreateLayers()
+	{
+		ImGuiLayer* guiLayer = new ImGuiLayer();
+		guiLayer->SetOrder(100);
+
+		LayerManager::Add(guiLayer);
+
+		Game* gameLayer = new Game();
+		gameLayer->SetOrder(0);
+
+		LayerManager::Add(gameLayer, nullptr);
+
+		CreateDirectx();
+		guiLayer->OnAttach();
+	}
+
+	//Init DirectX
+	void Application::CreateDirectx()
+	{
+		Application* instance = Application::privGetInstance();
+
+		Game* gameLayer = (Game*)LayerManager::Find("Engine Layer");
+		assert(gameLayer);
+
+		//will create statedirectXman
+		if (gameLayer->InitDirectX(
+			instance->windowInstance, 
+			(HWND)instance->pWindow->GetNativeHandle(), 
+			instance->pWindow->GetVsync()) != 0)
+		{
+			MessageBox(nullptr, TEXT("Failed to create DirectX device and swap chain."), TEXT("Error"), MB_OK);
+			assert(false);
+		}
+	}
+
+
+	float Application::GetDeltaTime()
+	{
+		static DWORD previousTime = timeGetTime();
+		static const float targetFramerate = 30.0f;
+		static const float maxTimeStep = 1.0f / targetFramerate;
+
+		DWORD currentTime = timeGetTime();
+
+		float deltaTime = (currentTime - previousTime) / 1000.0f;
+		previousTime = currentTime;
+
+		deltaTime = std::min<float>(deltaTime, maxTimeStep);
+
+		Application::privGetInstance()->deltaTime = deltaTime;
+
+		return deltaTime;
+	}
+
+	void Application::Run()
+	{
+		Application* app = Application::privGetInstance();
+		Game* gameLayer = (Game*)LayerManager::Find("Engine Layer");
+
+		bool quit = false;
+
+		if (!gameLayer->LoadContent())
+		{
+			MessageBox(nullptr, TEXT("Failed to load content."), TEXT("Error"), MB_OK);
+			return;
+		}
+		
+		while (!quit)
+		{
+			//Window Application Event
+			app->GetWindow()->OnUpdate(quit);
+			
+			LayerManager::Update(deltaTime);
+		
+			app->GetWindow()->Present();
+		}
+
+		gameLayer->UnloadContent();
+		gameLayer->Cleanup();
+	}
+
+	void Application::OnEvent(Event& e)
+	{
+
+	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		//push
+		LayerManager::AddByOrder(layer);
+		layer->OnAttach();
+	}
+
+	Window* Application::GetWindow()
+	{
+		// TODO: insert return statement here
+		Application* ins = Application::privGetInstance();
+
+		assert(ins);
+		assert(ins->pWindow);
+
+		return ins->pWindow;
+	}
+
+	HINSTANCE Application::GetWindowInstance()
+	{
+		Application* ins = Application::privGetInstance();
+		assert(ins);
+		return ins->windowInstance;
+	}
+
+	bool Application::OnWindowClose(WindowCloseEvent& e)
+	{
+		return false;
+	}
+
+	Application* Application::privGetInstance()
+	{
+		return instance;
+	}
+}
+

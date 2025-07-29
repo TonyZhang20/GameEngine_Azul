@@ -12,6 +12,7 @@ namespace Azul
 	StateRenderTargetView::StateRenderTargetView()
 		: poD3DRenderTargetView{nullptr}
 	{
+
 	}
 
 	void StateRenderTargetView::Initialize()
@@ -32,7 +33,6 @@ namespace Azul
 	{
 		StateDirectXMan::GetContext()->ClearRenderTargetView(this->poD3DRenderTargetView, 
 															  (const float *)&r);
-
 	}
 
 	void StateRenderTargetView::Activate(StateDepthStencilView &r)
@@ -42,10 +42,20 @@ namespace Azul
 														   r.poD3DDepthStencilView);
 	}
 
+	void StateRenderTargetView::ClearnupRenderTarget()
+	{
+		SafeRelease(this->poD3DRenderTargetView);
+	}
+
 	void StateRenderTargetView::privInitialize(ID3D11Texture2D* backBuffer)
 	{
-		HRESULT hr = StateDirectXMan::GetDevice()->CreateRenderTargetView(backBuffer, nullptr, &this->poD3DRenderTargetView);
-		(SUCCEEDED(hr));
+		ID3D11Device* device = StateDirectXMan::GetDevice();
+		
+		assert(device);
+		assert(backBuffer);
+
+		HRESULT hr = device->CreateRenderTargetView(backBuffer, nullptr, &this->poD3DRenderTargetView);
+		assert(SUCCEEDED(hr));
 	}
 
 	StateRenderTargetView::~StateRenderTargetView()
