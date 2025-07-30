@@ -45,20 +45,19 @@ namespace Azul
 
 	void Scale::set(const enum Identity_enum)
 	{
-		this->_v0 = Vec4(1, 0, 0, 0);
-		this->_v1 = Vec4(0, 1, 0, 0);
-		this->_v2 = Vec4(0, 0, 1, 0);
-		this->_v3 = Vec4(0, 0, 0, 1);
+		this->_v0.set(1, 0, 0, 0);
+		this->_v1.set(0, 1, 0, 0);
+		this->_v2.set(0, 0, 1, 0);
+		this->_v3.set(0, 0, 0, 1);
 	}
 
 	Scale::Scale(const enum Identity_enum)
 	{
-		this->_v0 = Vec4(1, 0, 0, 0);
-		this->_v1 = Vec4(0, 1, 0, 0);
-		this->_v2 = Vec4(0, 0, 1, 0);
-		this->_v3 = Vec4(0, 0, 0, 1);
+		this->_v0.set(1, 0, 0, 0);
+		this->_v1.set(0, 1, 0, 0);
+		this->_v2.set(0, 0, 1, 0);
+		this->_v3.set(0, 0, 0, 1);
 	}
-
 }
 
 // ---  End of File ---

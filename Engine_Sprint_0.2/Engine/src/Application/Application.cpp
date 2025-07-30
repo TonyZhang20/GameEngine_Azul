@@ -34,6 +34,7 @@ namespace Azul
 	Application::Application()
 	{
 		LayerManager::Create();
+		imGuiLayer = new ImGuiLayer();
 	}
 
 	Application::~Application()
@@ -63,10 +64,9 @@ namespace Azul
 	//Add Layer
 	void Application::CreateLayers()
 	{
-		ImGuiLayer* guiLayer = new ImGuiLayer();
-		guiLayer->SetOrder(100);
+		imGuiLayer->SetOrder(100);
 
-		LayerManager::Add(guiLayer);
+		LayerManager::Add(imGuiLayer);
 
 		Game* gameLayer = new Game();
 		gameLayer->SetOrder(0);
@@ -74,7 +74,7 @@ namespace Azul
 		LayerManager::Add(gameLayer, nullptr);
 
 		CreateDirectx();
-		guiLayer->OnAttach();
+		imGuiLayer->OnAttach();
 	}
 
 	//Init DirectX
@@ -139,6 +139,10 @@ namespace Azul
 			app->GetDeltaTime();
 
 			LayerManager::Update(deltaTime);
+
+			app->imGuiLayer->Begin();
+			LayerManager::RenderImGui();
+			app->imGuiLayer->End();
 		
 			app->GetWindow()->Present();
 

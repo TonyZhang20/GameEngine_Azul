@@ -175,18 +175,18 @@ namespace Azul
 
 	void Mat4::set(const enum Identity_enum)
 	{
-		this->_v0 = Vec4(1, 0, 0, 0);
-		this->_v1 = Vec4(0, 1, 0, 0);
-		this->_v2 = Vec4(0, 0, 1, 0);
-		this->_v3 = Vec4(0, 0, 0, 1);
+		this->_v0.set(1, 0, 0, 0);
+		this->_v1.set(0, 1, 0, 0);
+		this->_v2.set(0, 0, 1, 0);
+		this->_v3.set(0, 0, 0, 1);
 	}
 
 	Mat4::Mat4(const enum Identity_enum)
 	{
-		this->_v0 = Vec4(1, 0, 0, 0);
-		this->_v1 = Vec4(0, 1, 0, 0);
-		this->_v2 = Vec4(0, 0, 1, 0);
-		this->_v3 = Vec4(0, 0, 0, 1);
+		this->_v0.set(1, 0, 0, 0);
+		this->_v1.set(0, 1, 0, 0);
+		this->_v2.set(0, 0, 1, 0);
+		this->_v3.set(0, 0, 0, 1);
 	}
 
 	float Mat4::operator[](const m0_enum) const
@@ -447,10 +447,10 @@ namespace Azul
 	Mat4 Mat4::getT(void) const
 	{
 		Mat4 result;
-		result._v0 = Vec4(_m0, _m4, _m8, _m12);
-		result._v1 = Vec4(_m1, _m5, _m9, _m13);
-		result._v2 = Vec4(_m2, _m6, _m10, _m14);
-		result._v3 = Vec4(_m3, _m7, _m11, _m15);
+		result._v0.set(_m0, _m4, _m8, _m12);
+		result._v1.set(_m1, _m5, _m9, _m13);
+		result._v2.set(_m2, _m6, _m10, _m14);
+		result._v3.set(_m3, _m7, _m11, _m15);
 
 		return result;
 	}

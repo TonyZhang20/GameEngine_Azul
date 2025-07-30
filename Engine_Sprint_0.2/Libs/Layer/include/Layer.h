@@ -17,6 +17,7 @@ namespace Azul
 		virtual void OnDetach(){}
 		virtual void OnUpdate(float UpdateTime){}
 		virtual void OnEvent(class Event& event) {}
+		virtual void OnImGuiRender() {}
 
 		inline const char* GetName() const { return pName; };
 

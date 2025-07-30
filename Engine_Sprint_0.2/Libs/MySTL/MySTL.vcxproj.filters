@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{be3729ca-4d59-4b47-b171-7e3f0c9881b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\include">
+      <UniqueIdentifier>{2be8453f-2ebb-4713-9bee-caa9c8dc8399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\src">
+      <UniqueIdentifier>{29410e48-1822-4cb3-9f6e-7934b7c68216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dll">
+      <UniqueIdentifier>{ccf7508b-fb09-4afe-ba54-cde89cd78f00}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\MySTLDLLInterface.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vector.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ForExport.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Queue.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Vector.cpp">
+      <Filter>src\src</Filter>
+    </ClCompile>
+    <ClCompile Include="MySTL_DLLMain.cpp">
+      <Filter>dll</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ForExport.cpp">
+      <Filter>src\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

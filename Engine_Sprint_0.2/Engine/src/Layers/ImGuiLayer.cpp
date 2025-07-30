@@ -68,24 +68,34 @@ namespace Azul
 
 	void ImGuiLayer::OnDetach()
 	{
+
 	}
 
 	void ImGuiLayer::OnUpdate(float UpdateTime)
+	{
+
+	}
+
+	void ImGuiLayer::OnEvent(Event& e)
+	{
+		EventDispatcher dispatcher(e);
+	}
+
+	void ImGuiLayer::Begin()
+	{
+		ImGui_ImplDX11_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+	}
+
+	void ImGuiLayer::End()
 	{
 		ImGuiIO& io = ImGui::GetIO();
 
 		static bool g_SwapChainOccluded = false;
 		static UINT g_ResizeWidth = 0, g_ResizeHeight = 0;
 
-		ImGui_ImplDX11_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
-
 		io.DisplaySize = ImVec2(Application::GetWindow()->GetWidth(), Application::GetWindow()->GetHeight());
-		io.DeltaTime = UpdateTime;
-		
-		static bool showWindow = true;
-		ImGui::ShowDemoWindow(&showWindow);
 
 		ImGui::Render();
 
@@ -98,20 +108,10 @@ namespace Azul
 		}
 	}
 
-
-
-	void ImGuiLayer::OnEvent(Event& e)
+	void ImGuiLayer::OnImGuiRender()
 	{
-		EventDispatcher dispatcher(e);
-
-		dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_FN_ONE(ImGuiLayer::OnMouseButtonPressedEvent));
-		dispatcher.Dispatch<MouseButtonReleasedEvent>(BIND_EVENT_FN_ONE(ImGuiLayer::OnMouseButtonReleasedEvent));
-		dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_FN_ONE(ImGuiLayer::OnMouseMoveEvent));
-		dispatcher.Dispatch<MouseScrolledEvent>(BIND_EVENT_FN_ONE(ImGuiLayer::OnMouseScrolledEvent));
-		dispatcher.Dispatch<KeyPressedEvent>(BIND_EVENT_FN_ONE(ImGuiLayer::OnKeyPressedEvent));
-		dispatcher.Dispatch<KeyReleasedEvent>(BIND_EVENT_FN_ONE(ImGuiLayer::OnKeyReleasedEvent));
-		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN_ONE(ImGuiLayer::OnWindowResizedEvent));
-
+		static bool showWindow = true;
+		ImGui::ShowDemoWindow(&showWindow);
 	}
 
 	static ImGuiKey MapVirtualKeyToImGuiKey(int key)
@@ -195,39 +195,5 @@ namespace Azul
 		}
 	}
 
-	bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e)
-	{
-		return false;
-	}
-
-	bool ImGuiLayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e)
-	{
-		return false;
-	}
-
-	bool ImGuiLayer::OnMouseMoveEvent(MouseMovedEvent& e)
-	{
-		return false;
-	}
-
-	bool ImGuiLayer::OnMouseScrolledEvent(MouseScrolledEvent& e)
-	{
-		return false;
-	}
-
-	bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent& e)
-	{
-		return false;
-	}
-
-	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
-	{
-		return false;
-	}
-
-	bool ImGuiLayer::OnWindowResizedEvent(WindowResizeEvent& e)
-	{
-		return false;
-	}
 
 }

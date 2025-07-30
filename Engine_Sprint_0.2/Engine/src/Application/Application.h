@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Event.h"
 #include "Layer.h"
+#include "ImGuiLayer.h"
 #include "ApplicationEvent.h"
 #include "WindowsWindow.h"
 
@@ -40,7 +41,10 @@ namespace Azul
 		static Application* privGetInstance();	
 
 		static Application* instance;
+
+		ImGuiLayer* imGuiLayer = nullptr;
 		Window* pWindow = nullptr;
+
 		HINSTANCE windowInstance;
 
 		float deltaTime;

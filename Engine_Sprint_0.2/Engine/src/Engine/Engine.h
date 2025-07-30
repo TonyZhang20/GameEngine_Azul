@@ -34,12 +34,14 @@ namespace Azul
 		virtual void OnDetach() override {};
 		virtual void OnUpdate(float UpdateTime) override;
 		virtual void OnEvent(Event& e) override;
+		virtual void OnImGuiRender() override;
 
 		virtual bool LoadContent() = 0;
 		virtual void UnloadContent() = 0;
 		virtual void Update(float deltaTime) = 0;
 		virtual void Render() = 0;
 		virtual	void ClearDepthStencilBuffer() = 0;
+
 
 		void Cleanup();
 

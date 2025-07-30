@@ -181,6 +181,25 @@ namespace Azul
 		}
 	}
 
+	void LayerManager::RenderImGui()
+	{
+		LayerManager* pGOM = LayerManager::privGetInstance();
+		assert(pGOM);
+
+		PCSNode* pRootNode = pGOM->poActive->GetRoot();
+		assert(pRootNode);
+
+		PCSTreeForwardIterator pIt(pRootNode);
+
+		Layer* pLayer = nullptr;
+
+		for (pIt.First(); !pIt.IsDone(); pIt.Next())
+		{
+			pLayer = (Layer*)pIt.Current();
+			pLayer->OnImGuiRender();
+		}
+	}
+
 	PCSNode* LayerManager::derivedCreateNode()
 	{
 		return new Layer("Layer");

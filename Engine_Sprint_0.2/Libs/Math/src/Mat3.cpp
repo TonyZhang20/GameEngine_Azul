@@ -43,9 +43,9 @@ namespace Azul
 
 	Mat3::Mat3(const Vec3& tV0, const Vec3& tV1, const Vec3& tV2)
 	{
-		this->_v0 = Vec4(tV0, 0);
-		this->_v1 = Vec4(tV1, 0);
-		this->_v2 = Vec4(tV2, 0);
+		this->_v0.set(tV0, 0);
+		this->_v1.set(tV1, 0);
+		this->_v2.set(tV2, 0);
 	}
 
 	Vec3 Mat3::get(const Row3 type) const
@@ -95,9 +95,9 @@ namespace Azul
 
 	void Mat3::set(const Vec3& V0, const Vec3& V1, const Vec3& V2)
 	{
-		this->_v0 = Vec4(V0, 0);
-		this->_v1 = Vec4(V1, 0);
-		this->_v2 = Vec4(V2, 0);
+		this->_v0.set(V0, 0);
+		this->_v1.set(V1, 0);
+		this->_v2.set(V2, 0);
 	}
 
 	float& Mat3::operator[] (const enum m0_enum)
@@ -147,26 +147,26 @@ namespace Azul
 
 	Mat3::Mat3(const Mat4& m)
 	{
-		this->_v0 = Vec4(m._m0, m._m1, m._m2, 0);
-		this->_v1 = Vec4(m._m4, m._m5, m._m6, 0);
-		this->_v2 = Vec4(m._m8, m._m9, m._m10, 0);
-		this->_v3 = Vec4(0, 0, 0, 1);
+		this->_v0.set(m._m0, m._m1, m._m2, 0);
+		this->_v1.set(m._m4, m._m5, m._m6, 0);
+		this->_v2.set(m._m8, m._m9, m._m10, 0);
+		this->_v3.set(0, 0, 0, 1);
 	}
 
 	Mat3::Mat3(const Identity_enum)
 	{
-		this->_v0 = Vec4(1, 0, 0, 0);
-		this->_v1 = Vec4(0, 1, 0, 0);
-		this->_v2 = Vec4(0, 0, 1, 0);
-		this->_v3 = Vec4(0, 0, 0, 1);
+		this->_v0.set(1, 0, 0, 0);
+		this->_v1.set(0, 1, 0, 0);
+		this->_v2.set(0, 0, 1, 0);
+		this->_v3.set(0, 0, 0, 1);
 	}
 
 	void Mat3::set(const enum Identity_enum)
 	{
-		this->_v0 = Vec4(1, 0, 0, 0);
-		this->_v1 = Vec4(0, 1, 0, 0);
-		this->_v2 = Vec4(0, 0, 1, 0);
-		this->_v3 = Vec4(0, 0, 0, 1);
+		this->_v0.set(1, 0, 0, 0);
+		this->_v1.set(0, 1, 0, 0);
+		this->_v2.set(0, 0, 1, 0);
+		this->_v3.set(0, 0, 0, 1);
 	}
 
 

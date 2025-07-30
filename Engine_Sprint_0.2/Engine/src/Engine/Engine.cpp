@@ -206,6 +206,11 @@ namespace Azul
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN_ONE(Engine::OnWindowResizeEvent));
 	}
 
+	void Engine::OnImGuiRender()
+	{
+
+	}
+
 	bool Engine::OnWindowClose(WindowCloseEvent& e)
 	{
 		this->quit = true;
