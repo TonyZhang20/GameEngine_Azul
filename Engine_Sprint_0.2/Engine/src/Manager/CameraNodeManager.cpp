@@ -165,7 +165,7 @@ namespace Azul
 		{
 			CameraNode* A = pMan->Find(Camera::Name::Default);
 
-			Trace::out("CurrentCam is %s\n", A->GetName());
+			//Trace::out("CurrentCam is %s\n", A->GetName());
 
 			pMan->SetMainCam(A->GetCamera());
 
@@ -176,7 +176,7 @@ namespace Azul
 		{
 			CameraNode* A = pMan->Find(Camera::Name::CAMERA_A);
 
-			Trace::out("CurrentCam is %s\n", A->GetName());
+			//Trace::out("CurrentCam is %s\n", A->GetName());
 
 			pMan->SetMainCam(A->GetCamera());
 
@@ -187,7 +187,7 @@ namespace Azul
 		{
 			CameraNode* A = pMan->Find(Camera::Name::CAMERA_B);
 
-			Trace::out("CurrentCam is %s\n", A->GetName());
+			//Trace::out("CurrentCam is %s\n", A->GetName());
 
 			pMan->SetMainCam(A->GetCamera());
 
@@ -198,7 +198,7 @@ namespace Azul
 		{
 			CameraNode* A = pMan->Find(Camera::Name::CAMERA_C);
 
-			Trace::out("CurrentCam is %s\n", A->GetName());
+			//Trace::out("CurrentCam is %s\n", A->GetName());
 
 			pMan->SetMainCam(A->GetCamera());
 
@@ -209,7 +209,7 @@ namespace Azul
 		{
 			CameraNode* A = pMan->Find(Camera::Name::CAMERA_D);
 
-			Trace::out("CurrentCam is %s\n", A->GetName());
+			//Trace::out("CurrentCam is %s\n", A->GetName());
 
 			pMan->SetMainCam(A->GetCamera());
 
@@ -220,7 +220,7 @@ namespace Azul
 		{
 			CameraNode* A = pMan->Find(Camera::Name::CAMERA_E);
 
-			Trace::out("CurrentCam is %s\n", A->GetName());
+			//Trace::out("CurrentCam is %s\n", A->GetName());
 
 			pMan->SetMainCam(A->GetCamera());
 
@@ -232,7 +232,7 @@ namespace Azul
 		{
 			CameraNode* A = pMan->Find(Camera::Name::CAMERA_F);
 
-			Trace::out("CurrentCam is %s\n", A->GetName());
+			//Trace::out("CurrentCam is %s\n", A->GetName());
 
 			pMan->SetMainCam(A->GetCamera());
 
@@ -243,7 +243,7 @@ namespace Azul
 		{
 			CameraNode* A = pMan->Find(Camera::Name::CAMERA_G);
 
-			Trace::out("CurrentCam is %s\n", A->GetName());
+			//Trace::out("CurrentCam is %s\n", A->GetName());
 
 			pMan->SetMainCam(A->GetCamera());
 
@@ -254,7 +254,7 @@ namespace Azul
 		{
 			CameraNode* A = pMan->Find(Camera::Name::CAMERA_L);
 
-			Trace::out("CurrentCam is %s\n", A->GetName());
+			//Trace::out("CurrentCam is %s\n", A->GetName());
 
 			pMan->SetMainCam(A->GetCamera());
 

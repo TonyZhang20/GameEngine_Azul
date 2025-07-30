@@ -38,6 +38,39 @@ namespace Azul
 		this->aspectRatio = ratio;
 	}
 
+	void Camera::setOrthographic(const float width, const float height, const float nearZ, const float farZ)
+	{
+		this->aspectRatio = width / height;
+		this->nearDist = nearZ;
+		this->farDist = farZ;
+
+		// Orthographi（left hand）
+		this->projMatrix[m0] = 2.0f / width;
+		this->projMatrix[m1] = 0.0f;
+		this->projMatrix[m2] = 0.0f;
+		this->projMatrix[m3] = 0.0f;
+
+		this->projMatrix[m4] = 0.0f;
+		this->projMatrix[m5] = 2.0f / height;
+		this->projMatrix[m6] = 0.0f;
+		this->projMatrix[m7] = 0.0f;
+
+		this->projMatrix[m8] = 0.0f;
+		this->projMatrix[m9] = 0.0f;
+		this->projMatrix[m10] = 1.0f / (farZ - nearZ);  // or 2.0 / (farZ - nearZ)
+		this->projMatrix[m11] = 0.0f;
+
+		this->projMatrix[m12] = 0.0f;
+		this->projMatrix[m13] = 0.0f;
+		this->projMatrix[m14] = -nearZ / (farZ - nearZ);  //  -nearZ - farZ 偏移
+		this->projMatrix[m15] = 1.0f;
+
+		// DX -> NDC from [-1,1] -> [0,1]
+		Trans B(0.0f, 0.0f, 1.0f);
+		Scale S(1.0f, 1.0f, 0.5f);
+		projMatrix = projMatrix * B * S;
+	}
+
 	void Camera::setPerspective(const float Fovy, const float Aspect, const float NearDist, const float FarDist)
 	{
 		this->aspectRatio = Aspect;

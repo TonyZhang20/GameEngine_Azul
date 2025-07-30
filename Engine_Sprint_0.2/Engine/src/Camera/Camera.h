@@ -39,6 +39,7 @@ namespace Azul
 		void SetAspectRatio(float ratio);
 
 		// Setup on single camera
+		void setOrthographic(const float width, const float height, const float nearDist, const float farDist);
 		void setPerspective(const float FieldOfView_Degs, const float AspectRatio, const float NearDist, const float FarDist);
 		void setOrientAndPosition(const Vec3& Up_vect, const Vec3& inLookAt_pt, const Vec3& pos_pt);
 

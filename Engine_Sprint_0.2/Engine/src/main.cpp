@@ -20,7 +20,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	//ValueReturn = poGame->wWinMain(hInstance, prevInstance, cmdLine, cmdShow);
 
 	//delete poGame;
-
 	Azul::Application* app = Azul::Application::Create(hInstance, prevInstance, cmdLine, cmdShow);
 	
 	WindowProps props("Azul Engine", 1920, 1080);

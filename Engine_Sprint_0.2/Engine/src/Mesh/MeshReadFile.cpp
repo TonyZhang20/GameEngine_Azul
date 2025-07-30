@@ -115,9 +115,9 @@ namespace Azul
 	void MeshReadFile::RenderIndexBuffer()
 	{
 		// ---------------------------------------------
-//    Set (point to ) Index buffer 
-//    Render configuration: Triangles
-// ---------------------------------------------
+		//    Set (point to ) Index buffer 
+		//    Render configuration: Triangles
+		// ---------------------------------------------
 		this->IBVBuffer.SetActive();
 		StateDirectXMan::GetContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 

@@ -4,6 +4,7 @@
 
 #include "CameraUtility.h"
 #include "Camera.h"
+#include "Input.h"
 
 namespace Azul
 {
@@ -77,91 +78,15 @@ namespace Azul
 		//     tar = obj;
 		pUtil->privUpdateHelper(pCam);
 
-		if ((GetKeyState('S') & 0x8000))
+		if (Input::GetKeyDown(KeyCode::R))
 		{
 			// Reset	
 			obj.set(0, 0, 0);
 			pCam->SetHelper(pUtil->Orig_up, pUtil->Orig_tar, pUtil->Orig_pos);
 		}
 
-		if ((GetKeyState('W') & 0x8000))
-		{
-			Vec3 newObj(2, 0, 0);
-			Vec3 pos;
-			Vec3 tar;
-			Vec3 up;
-			Vec3 upNorm;
-			Vec3 forwardNorm;
-			Vec3 rightNorm;
 
-			pCam->GetHelper(up, tar, pos, upNorm, forwardNorm, rightNorm);
-
-			// OK, now 3 points... pos, tar, up
-			//     now 3 normals... upNorm, forwardNorm, rightNorm
-
-			Vec3 delta = newObj - obj;
-
-			up += delta;
-			tar += delta;
-			pos += delta;
-
-			obj = newObj;
-
-			pCam->SetHelper(up, tar, pos);
-		}
-
-		if ((GetKeyState('E') & 0x8000))
-		{
-			Vec3 newObj(-2, 0, 0);
-			Vec3 pos;
-			Vec3 tar;
-			Vec3 up;
-			Vec3 upNorm;
-			Vec3 forwardNorm;
-			Vec3 rightNorm;
-
-			pCam->GetHelper(up, tar, pos, upNorm, forwardNorm, rightNorm);
-
-			// OK, now 3 points... pos, tar, up
-			//     now 3 normals... upNorm, forwardNorm, rightNorm
-
-			Vec3 delta = newObj - obj;
-
-			up += delta;
-			tar += delta;
-			pos += delta;
-
-			obj = newObj;
-
-			pCam->SetHelper(up, tar, pos);
-		}
-
-		if ((GetKeyState('D') & 0x8000))
-		{
-			Vec3 newObj(0, 0, 0);
-			Vec3 pos;
-			Vec3 tar;
-			Vec3 up;
-			Vec3 upNorm;
-			Vec3 forwardNorm;
-			Vec3 rightNorm;
-
-			pCam->GetHelper(up, tar, pos, upNorm, forwardNorm, rightNorm);
-
-			// OK, now 3 points... pos, tar, up
-			//     now 3 normals... upNorm, forwardNorm, rightNorm
-			Vec3 delta = newObj - obj;
-
-			up += delta;
-			tar += delta;
-			pos += delta;
-
-			obj = newObj;
-
-			pCam->SetHelper(up, tar, pos);
-		}
-
-		if ((GetKeyState('I') & 0x8000))
+		if (Input::GetKey(KeyCode::W))
 		{
 			pUtil->pos = pUtil->pos + 0.03f * pUtil->forwardNorm;
 			//tar = tar + 0.03f * forwardNorm;
@@ -172,7 +97,7 @@ namespace Azul
 			pCam->SetHelper(pUtil->up, pUtil->tar, pUtil->pos);
 		}
 
-		if ((GetKeyState('K') & 0x8000))
+		if (Input::GetKey(KeyCode::S))
 		{
 			pUtil->pos = pUtil->pos - 0.03f * pUtil->forwardNorm;
 
@@ -183,7 +108,7 @@ namespace Azul
 			pCam->SetHelper(pUtil->up, pUtil->tar, pUtil->pos);
 		}
 
-		if ((GetKeyState('J') & 0x8000))
+		if (Input::GetKey(KeyCode::A))
 		{
 			pUtil->pos = pUtil->pos - 0.03f * pUtil->rightNorm;
 			pUtil->tar = pUtil->tar - 0.03f * pUtil->rightNorm;
@@ -192,7 +117,7 @@ namespace Azul
 			pCam->SetHelper(pUtil->up, pUtil->tar, pUtil->pos);
 		}
 
-		if ((GetKeyState('L') & 0x8000))
+		if (Input::GetKey(KeyCode::D))
 		{
 			pUtil->pos = pUtil->pos + 0.03f * pUtil->rightNorm;
 			pUtil->tar = pUtil->tar + 0.03f * pUtil->rightNorm;

@@ -100,7 +100,7 @@ namespace Azul
 	float Application::GetDeltaTime()
 	{
 		static DWORD previousTime = timeGetTime();
-		static const float targetFramerate = 30.0f;
+		static const float targetFramerate = 60.0f;
 		static const float maxTimeStep = 1.0f / targetFramerate;
 
 		DWORD currentTime = timeGetTime();
@@ -145,6 +145,8 @@ namespace Azul
 			app->imGuiLayer->End();
 		
 			app->GetWindow()->Present();
+
+			Trace::out("%f\n", deltaTime);
 
 		}
 

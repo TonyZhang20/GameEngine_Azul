@@ -95,6 +95,9 @@
     <Filter Include="Source Files\src\ImGui\ProjectCode">
       <UniqueIdentifier>{bb237a40-edf4-4b51-b29c-191145342ce2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\Material">
+      <UniqueIdentifier>{bacf5e95-72ed-44bf-ab95-2bc1eb4e8902}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject_Null.h">
@@ -364,6 +367,9 @@
     <ClInclude Include="ImGui\ImGuiBuild.h">
       <Filter>Source Files\src\ImGui\ProjectCode</Filter>
     </ClInclude>
+    <ClInclude Include="Material\Material.h">
+      <Filter>Source Files\src\Material</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -602,6 +608,9 @@
     </ClCompile>
     <ClCompile Include="ImGui\ImGuiBuild.cpp">
       <Filter>Source Files\src\ImGui\ProjectCode</Filter>
+    </ClCompile>
+    <ClCompile Include="Material\Material.cpp">
+      <Filter>Source Files\src\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
