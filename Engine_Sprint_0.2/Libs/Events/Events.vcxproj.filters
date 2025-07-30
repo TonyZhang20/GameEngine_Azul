@@ -32,7 +32,7 @@
     <ClInclude Include="include\ApplicationEvent.h">
       <Filter>src\include</Filter>
     </ClInclude>
-    <ClInclude Include="include\MouseEvnet.h">
+    <ClInclude Include="include\MouseEvent.h">
       <Filter>src\include</Filter>
     </ClInclude>
     <ClInclude Include="include\KeyEvent.h">

@@ -19,7 +19,7 @@
     <ClInclude Include="include\Event.h" />
     <ClInclude Include="include\EventDLLHeader.h" />
     <ClInclude Include="include\KeyEvent.h" />
-    <ClInclude Include="include\MouseEvnet.h" />
+    <ClInclude Include="include\MouseEvent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

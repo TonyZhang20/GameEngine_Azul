@@ -20,6 +20,7 @@ namespace Azul
 
 		void Initialize(StateDepthStencilBuffer &r);
 		void Clear(float clearDepth,uint8_t clearStencil);
+		void ClearDepthStencilView();
 
 		ID3D11DepthStencilView *poD3DDepthStencilView;
 	};

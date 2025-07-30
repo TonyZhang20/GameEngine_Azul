@@ -20,6 +20,8 @@ namespace Azul
 		void Initialize(int _width, int _height);
 		void Activate();
 
+		void ResizeViewPort(int _width, int _height);
+
 		D3D11_VIEWPORT *poD3DViewport;
 	};
 

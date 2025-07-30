@@ -25,7 +25,8 @@ namespace Azul
 		//--------------------------------------------------------
 		// Set (point to ) the Viewport to be used
 		//--------------------------------------------------------
-		//g_d3dDeviceContext->RSSetViewports(1, &g_Viewport);
+		//g_d3dDeviceContext->
+		// (1, &g_Viewport);
 		this->mViewport.Activate();
 
 		//--------------------------------------------------------

@@ -29,6 +29,12 @@ namespace Azul
 
 	}
 
+	void StateDepthStencilView::ClearDepthStencilView()
+	{
+		SafeRelease(this->poD3DDepthStencilView);
+		this->poD3DDepthStencilView = nullptr;
+	}
+
 	StateDepthStencilView::~StateDepthStencilView()
 	{
 		SafeRelease(this->poD3DDepthStencilView);

@@ -36,6 +36,8 @@ namespace Azul
 		Camera& operator = (const Camera&) = delete;
 		virtual ~Camera() = default;
 
+		void SetAspectRatio(float ratio);
+
 		// Setup on single camera
 		void setPerspective(const float FieldOfView_Degs, const float AspectRatio, const float NearDist, const float FarDist);
 		void setOrientAndPosition(const Vec3& Up_vect, const Vec3& inLookAt_pt, const Vec3& pos_pt);

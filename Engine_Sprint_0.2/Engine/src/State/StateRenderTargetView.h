@@ -18,11 +18,13 @@ namespace Azul
 		StateRenderTargetView(const StateRenderTargetView &) = delete;
 		StateRenderTargetView &operator = (const StateRenderTargetView &) = delete;
 		virtual ~StateRenderTargetView();
+		
+		void UnBindAllRenderTarget();
 
 		void Initialize();
 		void Clear(const Vec4 &r);
 		void Activate(StateDepthStencilView &r);
-		void ClearnupRenderTarget();
+		void CleanupRenderTarget();
 
 	private:
 		void privInitialize(ID3D11Texture2D* backBuffer);

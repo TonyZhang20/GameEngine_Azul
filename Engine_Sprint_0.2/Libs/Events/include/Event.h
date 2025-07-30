@@ -5,7 +5,7 @@
 #include <string>
 #include <functional>
 
-#define BIND_EVENT_FN_ONE(x) std::bind(&Engine::x, this, std::placeholders::_1)
+#define BIND_EVENT_FN_ONE(x) std::bind(&x, this, std::placeholders::_1)
 
 namespace Azul
 {

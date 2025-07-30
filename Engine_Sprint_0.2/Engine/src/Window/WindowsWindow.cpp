@@ -17,7 +17,10 @@
 
 #include "ApplicationEvent.h"
 #include "KeyEvent.h"
-#include "MouseEvnet.h"
+#include "MouseEvent.h"
+
+#include "LayerManager.h"
+#include "Layer.h"
 
 
 namespace Azul
@@ -39,7 +42,6 @@ namespace Azul
 #endif
 
 		Show();
-		UpdateWindow(m_hwnd);
 
 		return true;
 	}
@@ -59,6 +61,8 @@ namespace Azul
 		}
 
 		UnregisterClass(WindowName, instance);
+
+		delete this;
 	}
 
 	void WindowsWindow::Show()
@@ -69,60 +73,6 @@ namespace Azul
 	void WindowsWindow::Hide()
 	{
 		ShowWindow(m_hwnd, SW_HIDE);
-	}
-
-	void WindowsWindow::GUIClearnUp()
-	{
-		//GUI Cleanup
-		ImGui_ImplDX11_Shutdown();
-		ImGui_ImplWin32_Shutdown();
-		ImGui::DestroyContext();
-	}
-
-	void WindowsWindow::SetupImGUI()
-	{
-		//SetUp ImGUI
-		// Make process DPI aware and obtain main monitor scale
-		ImGui_ImplWin32_EnableDpiAwareness();
-		float main_scale = ImGui_ImplWin32_GetDpiScaleForMonitor(::MonitorFromPoint(POINT{ 0, 0 }, MONITOR_DEFAULTTOPRIMARY));
-
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO(); 
-		(void)io;
-
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
-		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
-
-		// Setup Dear ImGui style
-		ImGui::StyleColorsDark();
-
-		// Setup scaling
-		ImGuiStyle& style = ImGui::GetStyle();
-		style.ScaleAllSizes(main_scale);        // Bake a fixed style scale. (until we have a solution for dynamic style scaling, changing this requires resetting Style + calling this again)
-		style.FontScaleDpi = main_scale;        // Set initial font scale. (using io.ConfigDpiScaleFonts=true makes this unnecessary. We leave both here for documentation purpose)
-		io.ConfigDpiScaleFonts = true;          // [Experimental] Automatically overwrite style.FontScaleDpi in Begin() when Monitor DPI changes. This will scale fonts but _NOT_ scale sizes/padding for now.
-		io.ConfigDpiScaleViewports = true;      // [Experimental] Scale Dear ImGui and Platform Windows when Monitor DPI changes.
-
-		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			style.WindowRounding = 0.0f;
-			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-		}
-
-		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			style.WindowRounding = 0.0f;
-			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-		}
-
-		// Setup Platform/Renderer backends
-		ImGui_ImplWin32_Init(GetNativeHandle());
-		ImGui_ImplDX11_Init(StateDirectXMan::GetDevice(), StateDirectXMan::GetContext());
 	}
 
 	void WindowsWindow::SetVsync(bool b)
@@ -168,7 +118,12 @@ namespace Azul
 
 		while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
-			if (msg.message == WM_CHAR)
+			if (msg.wParam == VK_ESCAPE)
+			{
+				quit = true;
+			}
+
+			if (msg.message == WM_QUIT)
 			{
 				quit = true;
 			}
@@ -176,6 +131,16 @@ namespace Azul
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+	}
+
+	void WindowsWindow::OnEvent(Event& e)
+	{
+
+	}
+
+	void WindowsWindow::OnWindowClose(Event& e)
+	{
+
 	}
 
 	void WindowsWindow::QuitCallBack()
@@ -319,54 +284,6 @@ namespace Azul
 		}
 	}
 
-	void WindowsWindow::OnRenderUI(StateRenderTargetView& renderTargetView)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-
-		static bool g_SwapChainOccluded = false;
-		static UINT g_ResizeWidth = 0, g_ResizeHeight = 0;
-
-		if (g_SwapChainOccluded && StateDirectXMan::GetSwapChain()->Present(0, DXGI_PRESENT_TEST) == DXGI_STATUS_OCCLUDED)
-		{
-			Sleep(10);
-			return;
-		}
-
-		if (g_ResizeWidth != 0 && g_ResizeHeight != 0)
-		{
-			renderTargetView.ClearnupRenderTarget();
-
-			StateDirectXMan::GetSwapChain()->ResizeBuffers(0, g_ResizeWidth, g_ResizeHeight, DXGI_FORMAT_UNKNOWN, 0);
-			g_ResizeWidth = g_ResizeHeight = 0;
-
-			renderTargetView.Initialize();
-		}
-
-		// Start the Dear ImGui frame
-		ImGui_ImplDX11_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
-		
-		//Gizmo
-		ImGuizmo::BeginFrame();
-
-		DrawUI();
-
-		// Rendering
-		ImGui::Render();
-
-		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
-		// Update and Render additional Platform Windows
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			ImGui::UpdatePlatformWindows();
-			ImGui::RenderPlatformWindowsDefault();
-		}
-
-		g_SwapChainOccluded = false;
-	}
-
 	WindowsWindow::WindowsWindow(HINSTANCE hInstance, const WindowProps& props)
 		: instance( hInstance)
 	{
@@ -375,13 +292,14 @@ namespace Azul
 
 	WindowsWindow::~WindowsWindow()
 	{
-		this->Destroy();
+
 	}
 
 	// Forward declare message handler from imgui_impl_win32.cpp
 	LRESULT WindowsWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		WindowsWindow* pThis = nullptr;
+
 
 		if (uMsg == WM_NCCREATE)
 		{
@@ -406,8 +324,8 @@ namespace Azul
 			{
 				//QuitCallBack();
 				PostQuitMessage(0);
+				break;
 			}
-			break;
 		}
 		break;
 
@@ -424,8 +342,7 @@ namespace Azul
 
 		if (pThis) 
 		{
-			//Debug 暂时不调用 调用非静态消息处理
-			//return pThis->HandleMessage(hwnd, uMsg, wParam, lParam);
+			return pThis->HandleMessage(hwnd, uMsg, wParam, lParam);
 		}
 
 		return DefWindowProc(hwnd, uMsg, wParam, lParam);
@@ -438,6 +355,12 @@ namespace Azul
 
 		if (ImGui_ImplWin32_WndProcHandler(hwnd, uMsg, wParam, lParam))
 			return true;
+
+
+		if (!m_Data.EventCallback)
+		{
+			return DefWindowProc(hwnd, uMsg, wParam, lParam);
+		}
 
 		switch (uMsg)
 		{
@@ -491,25 +414,25 @@ namespace Azul
 		}
 		case WM_RBUTTONDOWN:
 		{
-			MouseButtonPressedEvent e(2);
+			MouseButtonPressedEvent e(1);
 			m_Data.EventCallback(e);
 			break;
 		}
 		case WM_RBUTTONUP:
 		{
-			MouseButtonReleasedEvent e(2);
+			MouseButtonReleasedEvent e(1);
 			m_Data.EventCallback(e);
 			break;
 		}
 		case WM_MBUTTONDOWN:
 		{
-			MouseButtonPressedEvent e(1);
+			MouseButtonPressedEvent e(2);
 			m_Data.EventCallback(e);
 			break;
 		}
 		case WM_MBUTTONUP:
 		{
-			MouseButtonReleasedEvent e(1);
+			MouseButtonReleasedEvent e(2);
 			m_Data.EventCallback(e);
 			break;
 		}
@@ -534,10 +457,12 @@ namespace Azul
 			UINT width = LOWORD(lParam);
 			UINT height = HIWORD(lParam);
 
-			//Event Send - Size Change
+			m_Data.Width = width;
+			m_Data.Height = height;
+
 			WindowResizeEvent resizeEvent(width, height);
 			m_Data.EventCallback(resizeEvent);
-
+		
 			break;
 		}
 		case WM_KEYDOWN:

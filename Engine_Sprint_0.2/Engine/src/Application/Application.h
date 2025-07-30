@@ -27,7 +27,9 @@ namespace Azul
 	
 		static Window* GetWindow();
 		static HINSTANCE GetWindowInstance();
-		static void SetWindow(Window* window);
+		inline static UINT GetWidth() { return Application::privGetInstance()->GetWindow()->GetWidth(); };
+		inline static UINT GetHeight() { return Application::privGetInstance()->GetWindow()->GetHeight(); } ;
+		void SetWindow(Window* window);
 
 		void CreateLayers();
 		void CreateDirectx();

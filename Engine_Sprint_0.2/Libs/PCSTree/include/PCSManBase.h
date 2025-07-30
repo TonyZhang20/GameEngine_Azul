@@ -14,6 +14,7 @@ namespace Azul
 	class PCSTREE_LIBRARY_API PCSManBase
 	{
 	public:
+		PCSTreeForwardIterator GetForwardActiveIterator();
 
 	protected:
 		//----------------------------------------------------------------------
@@ -36,6 +37,8 @@ namespace Azul
 		void baseRemove(PCSNode* pNodeBase);
 
 		void baseDump();
+
+
 
 		void baseDestroy();
 

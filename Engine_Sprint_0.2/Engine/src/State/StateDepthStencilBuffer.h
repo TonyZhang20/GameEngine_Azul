@@ -18,7 +18,8 @@ namespace Azul
 		virtual ~StateDepthStencilBuffer();
 
 		void Initialize(uint32_t clientWidth, uint32_t clientHeight);
-	
+		void ClearDepthStencilBuffer();
+
 		ID3D11Texture2D *poD3DDepthStencilBuffer;
 	};
 

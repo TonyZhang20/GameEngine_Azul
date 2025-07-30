@@ -47,15 +47,16 @@ namespace Azul
 		static DXGI_RATIONAL QueryRefreshRate(UINT screenWidth, UINT screenHeight, BOOL vsync);
 
 
-	private:
-		bool OnWindowClose(WindowCloseEvent& e);
+	protected:
+		virtual bool OnWindowClose(WindowCloseEvent& e);
+		virtual bool OnWindowResizeEvent(WindowResizeEvent& e);
 
 	private:
 		bool quit = false;
 		AnimTimer EngineTime;
 
 	public:
-		StateRenderTargetView mStateRenderTargetView;
+		StateRenderTargetView mStateRenderTargetView; //Omset
 		StateDepthStencilView mDepthStencilView;
 		StateDepthStencilBuffer mDepthStencilBuffer;
 		StateBlend mBlendStateOff;
@@ -64,8 +65,6 @@ namespace Azul
 		StateRasterizer mStateRasterizerSolid;
 		StateRasterizer mStateRasterizerWireframe;
 		StateViewport mViewport;
-
-		D3D11_VIEWPORT g_Viewport;
 	};
 
 

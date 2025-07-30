@@ -68,9 +68,6 @@
     <Filter Include="DirectXTex\libs">
       <UniqueIdentifier>{5fc1047e-df9a-42b9-975e-5ea4fae1b063}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\Window">
-      <UniqueIdentifier>{7ac95998-9241-439e-8229-6c71a150eff7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\src\ImGui">
       <UniqueIdentifier>{dff19a6f-e198-4f54-a993-c5920c8403a0}</UniqueIdentifier>
     </Filter>
@@ -97,6 +94,9 @@
     </Filter>
     <Filter Include="Source Files\src\Application">
       <UniqueIdentifier>{fd50ee34-1bd8-47d0-8fd6-b3c8776dcfab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\Windows">
+      <UniqueIdentifier>{7ac95998-9241-439e-8229-6c71a150eff7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -323,10 +323,10 @@
       <Filter>Source Files\src\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Window\Window.h">
-      <Filter>Source Files\src\Window</Filter>
+      <Filter>Source Files\src\Windows</Filter>
     </ClInclude>
     <ClInclude Include="Window\WindowsWindow.h">
-      <Filter>Source Files\src\Window</Filter>
+      <Filter>Source Files\src\Windows</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>Source Files\src\ImGui\SourceCode\Include</Filter>
@@ -360,6 +360,9 @@
     </ClInclude>
     <ClInclude Include="Application\Application.h">
       <Filter>Source Files\src\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool\Input.h">
+      <Filter>Source Files\src\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -559,7 +562,7 @@
       <Filter>Source Files\src\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Window\WindowsWindow.cpp">
-      <Filter>Source Files\src\Window</Filter>
+      <Filter>Source Files\src\Windows</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_widgets.cpp">
       <Filter>Source Files\src\ImGui\SourceCode\cpp</Filter>
@@ -590,6 +593,12 @@
     </ClCompile>
     <ClCompile Include="Application\Application.cpp">
       <Filter>Source Files\src\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>Source Files\src\ImGui\SourceCode\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool\Input.cpp">
+      <Filter>Source Files\src\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,7 @@ namespace Azul
 
 		void Initialize();
 		void Activate();
+		void CleanupRendeDepthStencil();
 
 		ID3D11DepthStencilState *poD3dDepthStencilState;
 	};

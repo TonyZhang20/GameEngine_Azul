@@ -265,6 +265,19 @@ namespace Azul
 		pMan->poMainCam->Update();
 	}
 
+	void CameraNodeManager::UpdateAspectRatio(float ratio)
+	{
+		CameraNodeManager* instance = CameraNodeManager::privGetInstance();
+		
+		Iterator* itr = instance->poActive->GetIterator();
+		for (itr->First(); !itr->IsDone(); itr->Next())
+		{
+			CameraNode* cameraNode = (CameraNode*)itr->Curr();
+			cameraNode->GetCamera()->SetAspectRatio(ratio);
+		}
+	}
+
+
 	//----------------------------------------------------------------------
 	// Private methods
 	//----------------------------------------------------------------------

@@ -16,7 +16,7 @@ namespace Azul
 		PCSTREE_LIBRARY_API PCSTreeForwardIterator(PCSNode *rootNode);
 
 		PCSTREE_LIBRARY_API PCSTreeForwardIterator() = delete;
-		PCSTREE_LIBRARY_API PCSTreeForwardIterator(const PCSTreeForwardIterator &) = delete;
+		PCSTREE_LIBRARY_API PCSTreeForwardIterator(const PCSTreeForwardIterator &);
 		PCSTREE_LIBRARY_API PCSTreeForwardIterator &operator = (const PCSTreeForwardIterator &) = delete;
 		PCSTREE_LIBRARY_API virtual ~PCSTreeForwardIterator() = default;
 

@@ -36,7 +36,7 @@ namespace Azul
 
 		if (ActiveRoot)
 		{
-			ActiveRoot->PrintNode();
+			//ActiveRoot->PrintNode();
 			delete ActiveRoot;
 		}
 
@@ -177,7 +177,7 @@ namespace Azul
 
 			pNode = pActiveForItr.Next();
 
-			pTmp->PrintNode();
+			//pTmp->PrintNode();
 
 			delete pTmp;
 			

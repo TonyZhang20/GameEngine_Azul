@@ -11,6 +11,7 @@
 
 #include "LayerManager.h"
 #include "StateDirectXMan.h"
+#include "Application.h"
 
 
 
@@ -199,10 +200,44 @@ namespace Azul
 	}
 
 
+	void Engine::OnEvent(Event& e)
+	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN_ONE(Engine::OnWindowResizeEvent));
+	}
+
 	bool Engine::OnWindowClose(WindowCloseEvent& e)
 	{
 		this->quit = true;
 		return true;
+	}
+
+	bool Engine::OnWindowResizeEvent(WindowResizeEvent& e)
+	{
+		UINT width, height;
+		width = e.GetWidth();
+		height = e.GetHeight();
+
+		//UnBind all target
+		this->mStateRenderTargetView.CleanupRenderTarget();
+		this->mDepthStencilView.ClearDepthStencilView();
+		this->mDepthStencilBuffer.ClearDepthStencilBuffer();
+
+		this->mStateRenderTargetView.UnBindAllRenderTarget();
+
+		StateDirectXMan::ResizeSwapChain(width, height);
+
+		//ReBind
+		this->mStateRenderTargetView.Initialize();
+		this->mDepthStencilBuffer.Initialize(width, height);
+		this->mDepthStencilView.Initialize(this->mDepthStencilBuffer);
+		
+		//OmSet
+		this->mStateRenderTargetView.Activate(this->mDepthStencilView);
+
+		this->mViewport.ResizeViewPort(width, height);
+
+		return false;
 	}
 
 
@@ -240,7 +275,6 @@ namespace Azul
 		Update(UpdateTime);
 		
 		ClearDepthStencilBuffer();
-		
 		Render();
 
 		//--------------------------------
@@ -266,25 +300,6 @@ namespace Azul
 		}
 	}
 
-	void Engine::OnEvent(Event& e)
-	{
-		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN_ONE(OnWindowClose));
-
-		PCSTreeReverseIterator itr(LayerManager::GetActiveLayers()->GetRoot());
-
-		for (itr.First(); !itr.IsDone(); itr.Next())
-		{
-			Layer* layer = (Layer*)itr.Current();
-			
-			layer->OnEvent(e);
-
-			if (e.Handled)
-			{
-				break;
-			}
-		}
-	}
 }
 
 

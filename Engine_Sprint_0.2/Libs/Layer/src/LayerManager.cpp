@@ -125,6 +125,24 @@ namespace Azul
 		}
 	}
 
+	PCSTreeForwardIterator LayerManager::GetForwardActiveIterator()
+	{
+		LayerManager* instance = LayerManager::privGetInstance();
+		assert(instance);
+		
+		PCSTreeForwardIterator itr(instance->poActive->GetRoot());
+		return itr;
+	}
+
+	PCSTreeReverseIterator LayerManager::GetReverseActiveIterator()
+	{
+		LayerManager* instance = LayerManager::privGetInstance();
+		assert(instance);
+
+		PCSTreeReverseIterator itr(instance->poActive->GetRoot());
+		return itr;
+	}
+
 	void LayerManager::Attach()
 	{
 		LayerManager* pGOM = LayerManager::privGetInstance();

@@ -33,6 +33,11 @@ namespace Azul
 	}
 
 
+	void Camera::SetAspectRatio(float ratio)
+	{
+		this->aspectRatio = ratio;
+	}
+
 	void Camera::setPerspective(const float Fovy, const float Aspect, const float NearDist, const float FarDist)
 	{
 		this->aspectRatio = Aspect;

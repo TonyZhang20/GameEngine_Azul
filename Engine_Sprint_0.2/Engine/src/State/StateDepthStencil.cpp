@@ -36,6 +36,12 @@ namespace Azul
 		StateDirectXMan::GetContext()->OMSetDepthStencilState(this->poD3dDepthStencilState, 1);
 	}
 
+	void StateDepthStencil::CleanupRendeDepthStencil()
+	{
+		SafeRelease(this->poD3dDepthStencilState);
+		this->poD3dDepthStencilState = nullptr;
+	}
+
 	StateDepthStencil::~StateDepthStencil()
 	{
 		SafeRelease(this->poD3dDepthStencilState);

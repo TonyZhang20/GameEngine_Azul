@@ -27,6 +27,10 @@ namespace Azul
 		float GetAspectRatio() const;
 		void SetDefaultTargetMode();
 
+		//Event
+	protected:
+		bool OnWindowResizeEvent(WindowResizeEvent& e) override;
+
 	};
 }
 

@@ -42,7 +42,7 @@ namespace Azul
 														   r.poD3DDepthStencilView);
 	}
 
-	void StateRenderTargetView::ClearnupRenderTarget()
+	void StateRenderTargetView::CleanupRenderTarget()
 	{
 		SafeRelease(this->poD3DRenderTargetView);
 	}
@@ -62,6 +62,14 @@ namespace Azul
 	{
 		SafeRelease(this->poD3DRenderTargetView);
 		this->poD3DRenderTargetView = nullptr;
+	}
+
+	void StateRenderTargetView::UnBindAllRenderTarget()
+	{
+		ID3D11RenderTargetView* nullViews[] = { nullptr };
+		StateDirectXMan::GetContext()->OMSetRenderTargets(1,
+			nullViews,
+			nullptr);
 	}
 
 }

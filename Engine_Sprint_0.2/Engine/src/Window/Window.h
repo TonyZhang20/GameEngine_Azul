@@ -43,6 +43,7 @@ namespace Azul
 		virtual ~Window() {}
 
 		virtual void OnUpdate(bool &quit) = 0;
+		virtual void OnEvent(class Event& e) = 0;
 
 		virtual void Show() = 0;
 		virtual void Hide() = 0;

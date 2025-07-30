@@ -35,6 +35,12 @@ namespace Azul
 		assert(SUCCEEDED(hr));
 	}
 
+	void StateDepthStencilBuffer::ClearDepthStencilBuffer()
+	{
+		SafeRelease(this->poD3DDepthStencilBuffer);
+		this->poD3DDepthStencilBuffer = nullptr;
+	}
+
 	StateDepthStencilBuffer::~StateDepthStencilBuffer()
 	{
 		SafeRelease(this->poD3DDepthStencilBuffer);

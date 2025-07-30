@@ -26,6 +26,7 @@ namespace Azul
 		static void Dump();
 
 		static void UpdateCamera();
+		static void UpdateAspectRatio(float ratio);
 
 		//----------------------------------------------------------------------
 		// Private methods

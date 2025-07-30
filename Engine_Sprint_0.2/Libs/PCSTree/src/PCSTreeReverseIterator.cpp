@@ -28,6 +28,13 @@ namespace Azul
 		return current;
 	}
 
+	PCSTreeReverseIterator::PCSTreeReverseIterator(const PCSTreeReverseIterator& inPtr)
+	{
+		this->root = inPtr.root;
+		this->current = inPtr.current;
+	}
+
+
 	PCSNode *PCSTreeReverseIterator::Next()
 	{
 		current = current->GetReverse();

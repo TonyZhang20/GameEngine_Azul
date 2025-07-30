@@ -20,6 +20,9 @@ namespace Azul
 
 		static void AddByOrder(Layer* pInNode);
 
+		static PCSTreeForwardIterator GetForwardActiveIterator();
+		static PCSTreeReverseIterator GetReverseActiveIterator();
+
 		static void Attach();
 		static void Detach() {};
 		static void Update(float deltaTime);

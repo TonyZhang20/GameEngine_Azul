@@ -28,6 +28,8 @@ namespace Azul
 		static ID3D11Device *GetDevice();
 		static ID3D11DeviceContext *GetContext();
 		static IDXGISwapChain* GetSwapChain();
+		static void ResizeSwapChain(UINT width, UINT height);
+		static void UpdateViewPort();
 
 		~StateDirectXMan();
 

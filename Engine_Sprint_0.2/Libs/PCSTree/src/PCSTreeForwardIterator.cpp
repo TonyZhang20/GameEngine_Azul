@@ -11,6 +11,12 @@ namespace Azul
 		this->root = rootNode;
 	}
 
+	PCSTreeForwardIterator::PCSTreeForwardIterator(const PCSTreeForwardIterator& inPtr)
+	{
+		this->root = inPtr.root;
+		this->current = inPtr.current;
+	}
+
 	PCSNode *PCSTreeForwardIterator::First()
 	{
 		current = this->root;

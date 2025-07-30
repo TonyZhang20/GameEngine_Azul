@@ -4,6 +4,7 @@
 #include "WindowsWindow.h"
 #include "LayerManager.h"
 #include "Game.h"
+#include "Input.h"
 namespace Azul
 {
 
@@ -37,7 +38,6 @@ namespace Azul
 
 	Application::~Application()
 	{
-		delete this->pWindow;
 		LayerManager::Destroy();
 	}
 
@@ -56,6 +56,8 @@ namespace Azul
 			assert(false);
 			return;
 		}
+
+		application->pWindow->SetEventCallback(BIND_EVENT_FN_ONE(Application::OnEvent));
 	}
 
 	//Add Layer
@@ -113,6 +115,7 @@ namespace Azul
 		return deltaTime;
 	}
 
+
 	void Application::Run()
 	{
 		Application* app = Application::privGetInstance();
@@ -128,22 +131,53 @@ namespace Azul
 		
 		while (!quit)
 		{
+			Input::Update();
+
 			//Window Application Event
 			app->GetWindow()->OnUpdate(quit);
-			
+
+			app->GetDeltaTime();
+
 			LayerManager::Update(deltaTime);
 		
 			app->GetWindow()->Present();
+
 		}
 
 		gameLayer->UnloadContent();
 		gameLayer->Cleanup();
+
+		pWindow->Destroy();
 	}
 
 	void Application::OnEvent(Event& e)
 	{
 
+		if (e.Handled) return;
+
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN_ONE(Application::OnWindowClose));
+
+		//e.Print();
+
+		PCSTreeForwardIterator itr = LayerManager::GetForwardActiveIterator();
+		for (itr.First(); !itr.IsDone(); itr.Next())
+		{
+			Layer* layer = (Layer*)itr.Current();
+			layer->OnEvent(e);
+
+			if (e.Handled)
+			{
+				break;
+			}
+		}
 	}
+
+	bool Application::OnWindowClose(WindowCloseEvent& e)
+	{
+		return false;
+	}
+
 
 	void Application::PushLayer(Layer* layer)
 	{
@@ -170,10 +204,6 @@ namespace Azul
 		return ins->windowInstance;
 	}
 
-	bool Application::OnWindowClose(WindowCloseEvent& e)
-	{
-		return false;
-	}
 
 	Application* Application::privGetInstance()
 	{

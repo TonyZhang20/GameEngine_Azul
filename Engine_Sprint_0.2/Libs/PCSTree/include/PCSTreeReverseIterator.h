@@ -17,7 +17,7 @@ namespace Azul
 		PCSTREE_LIBRARY_API PCSTreeReverseIterator(PCSNode *rootNode);
 
 		PCSTREE_LIBRARY_API PCSTreeReverseIterator() = delete;
-		PCSTREE_LIBRARY_API PCSTreeReverseIterator(const PCSTreeReverseIterator &) = delete;
+		PCSTREE_LIBRARY_API PCSTreeReverseIterator(const PCSTreeReverseIterator &);
 		PCSTREE_LIBRARY_API PCSTreeReverseIterator &operator = (const PCSTreeReverseIterator &) = delete;
 		PCSTREE_LIBRARY_API virtual ~PCSTreeReverseIterator() = default;
 

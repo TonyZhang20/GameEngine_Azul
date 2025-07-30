@@ -413,6 +413,7 @@ namespace Azul
 #pragma endregion
 
 #pragma endregion Demo 1
+
 #pragma region Demo2
 
 		pGraphicsObject =
@@ -461,6 +462,7 @@ namespace Azul
 
 		RotateAroundCamera* cameraL = (RotateAroundCamera * )CameraNodeManager::Find(Camera::Name::CAMERA_L)->GetCamera();
 		cameraL->target = d2_objA_1;
+
 #pragma endregion Demo2
 
 
@@ -568,6 +570,14 @@ namespace Azul
 
 		this->mStateRenderTargetView.Clear(Application::GetWindow()->GetWindowColor());
 		this->mDepthStencilView.Clear(clearDepth, clearStencil);
+	}
+
+	bool Game::OnWindowResizeEvent(WindowResizeEvent& e)
+	{
+		Engine::OnWindowResizeEvent(e);
+		CameraNodeManager::UpdateAspectRatio(GetAspectRatio());
+
+		return false;
 	}
 
 }
