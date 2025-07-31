@@ -64,7 +64,7 @@ namespace Azul
 		unsigned int clientWidth = clientRect.right - clientRect.left;
 		unsigned int clientHeight = clientRect.bottom - clientRect.top;
 
-		Trace::out("%d %d\n", clientWidth, clientHeight);
+		//Trace::out("%d %d\n", clientWidth, clientHeight);
 		
 		StateDirectXMan::Create(hwnd, vSync);
 

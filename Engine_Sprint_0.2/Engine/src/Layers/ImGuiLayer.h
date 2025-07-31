@@ -7,8 +7,10 @@
 #include "KeyEvent.h"
 #include "ApplicationEvent.h"
 
+
 namespace Azul
 {
+
 	class ImGuiLayer : public Layer
 	{
 	public:
@@ -27,12 +29,9 @@ namespace Azul
 		ImGuiLayer& operator = (ImGuiLayer&) = delete;
 		ImGuiLayer(ImGuiLayer&) = delete;
 
-		static ImGuiKey MapVirtualKeyToImGuiKey(int key);
-
 	private:
+		class ImGuiBuild* buildWindow;
 
-
-	private:
 	};
 }
 

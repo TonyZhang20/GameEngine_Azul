@@ -65,6 +65,9 @@ namespace Azul
 		case TextureObject::Name::E:
 			pNode->Init(TextureObject::Name::E, L"E.tga");
 			break;
+		case TextureObject::Name::CHECKBOARD:
+			pNode->Init(TextureObject::Name::E, L"CheckBoard.tga");
+			break;
 		default:
 			assert(false);
 			break;

@@ -39,8 +39,7 @@ namespace Azul
 		poTextureRV(nullptr),
 		poSampler(nullptr)
 	{
-		DirectX::ScratchImage testTexture;
-		HRESULT hr = LoadFromTGAFile(filepath, nullptr, testTexture);
+		HRESULT hr = LoadFromTGAFile(filepath, nullptr, imageInfor);
 
 		if (FAILED(hr)) 
 		{
@@ -50,9 +49,9 @@ namespace Azul
 		assert(SUCCEEDED(hr));
 
 		CreateShaderResourceView(StateDirectXMan::GetDevice(),
-								 testTexture.GetImage(0, 0, 0),
-								 testTexture.GetImageCount(),
-								 testTexture.GetMetadata(),
+								imageInfor.GetImage(0, 0, 0),
+								imageInfor.GetImageCount(),
+								imageInfor.GetMetadata(),
 								 &poTextureRV);
 		assert(this->poTextureRV);
 
@@ -142,6 +141,11 @@ namespace Azul
 	void TextureObject::Wash()
 	{
 		this->name = TextureObject::Name::Uninitialized;
+	}
+
+	ID3D11ShaderResourceView* TextureObject::GetTextureID()
+	{
+		return this->poTextureRV;
 	}
 
 	char *TextureObject::GetName()

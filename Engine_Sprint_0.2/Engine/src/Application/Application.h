@@ -20,7 +20,6 @@ namespace Azul
 		static Application* Create(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow);
 		virtual ~Application();
 
-
 		void Run();
 		void OnEvent(Event& e);
 
@@ -35,12 +34,16 @@ namespace Azul
 		void CreateLayers();
 		void CreateDirectx();
 		static float GetDeltaTime();
+		static bool& GetQuit();
+	public:
+		bool quit = false;
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		static Application* privGetInstance();	
 
 		static Application* instance;
+		bool showLoopTime = false;
 
 		ImGuiLayer* imGuiLayer = nullptr;
 		Window* pWindow = nullptr;

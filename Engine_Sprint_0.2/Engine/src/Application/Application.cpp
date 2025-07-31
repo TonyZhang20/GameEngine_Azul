@@ -114,20 +114,24 @@ namespace Azul
 		return deltaTime;
 	}
 
+	bool& Application::GetQuit()
+	{
+		// TODO: insert return statement here
+		return Application::privGetInstance()->quit;
+	}
+
 
 	void Application::Run()
 	{
 		Application* app = Application::privGetInstance();
 		Game* gameLayer = (Game*)LayerManager::Find("Engine Layer");
 
-		bool quit = false;
-
 		if (!gameLayer->LoadContent())
 		{
 			MessageBox(nullptr, TEXT("Failed to load content."), TEXT("Error"), MB_OK);
 			return;
 		}
-		
+		AnimTimer t;
 		while (!quit)
 		{
 			Input::Update();

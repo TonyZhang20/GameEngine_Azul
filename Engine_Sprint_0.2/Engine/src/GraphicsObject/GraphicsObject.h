@@ -51,7 +51,7 @@ namespace Azul
 
 		inline ShaderObject* GetShader() { assert(pMat); return pMat->GetShader(); };
 		inline TextureObject* GetTexture() { assert(pMat); return pMat->GetTexture(); }
-	
+
 	protected:
 		GraphicsObject();
 

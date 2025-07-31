@@ -36,7 +36,6 @@ namespace Azul
 		//g_d3dDeviceContext->OMSetRenderTargets(1, &g_d3dRenderTargetView, g_d3dDepthStencilView);
 		this->mStateRenderTargetView.Activate(this->mDepthStencilView);
 
-
 		//--------------------------------------------------------
 		// Set blend target
 		//--------------------------------------------------------

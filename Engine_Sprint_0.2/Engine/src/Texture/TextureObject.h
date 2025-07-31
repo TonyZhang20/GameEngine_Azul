@@ -5,6 +5,7 @@
 #ifndef TEXTURE_OBJECT_H
 #define TEXTURE_OBJECT_H
 
+#include "DirectXTex.h"
 #include <d3d11.h>
 #include "DLink.h"
 
@@ -25,6 +26,7 @@ namespace Azul
 			C,
 			D,
 			E,
+			CHECKBOARD,
 			Uninitialized
 		};
 
@@ -51,7 +53,7 @@ namespace Azul
 
 		virtual bool Compare(DLink* pTargetNode) override;
 		virtual void Wash() override;
-
+		ID3D11ShaderResourceView* GetTextureID();
 		// ---------------------------------------------
 		// 	   Data:
 		// ---------------------------------------------
@@ -59,6 +61,8 @@ namespace Azul
 
 		ID3D11ShaderResourceView *poTextureRV;
 		ID3D11SamplerState *poSampler;
+
+		DirectX::ScratchImage imageInfor;
 
 		unsigned int count = 0;
 
