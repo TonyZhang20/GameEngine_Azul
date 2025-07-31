@@ -7,7 +7,6 @@
 #include "Input.h"
 namespace Azul
 {
-
 	Application* Application::instance = nullptr;
 
 	Application* Application::Create(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
@@ -146,8 +145,7 @@ namespace Azul
 		
 			app->GetWindow()->Present();
 
-			Trace::out("%f\n", deltaTime);
-
+			//Trace::out("%f\n", deltaTime);
 		}
 
 		gameLayer->UnloadContent();

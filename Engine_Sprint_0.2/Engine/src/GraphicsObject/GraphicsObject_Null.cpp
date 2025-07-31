@@ -14,25 +14,12 @@
 namespace Azul
 {
 	GraphicsObject_Null::GraphicsObject_Null()
+		: GraphicsObject()
 	{
-		this->pMesh = new MeshNull();
-		this->pShaderObj = new ShaderObject_Null();
 
-		ShaderObjectNodeManager::Add(this->pShaderObj);
-		MeshNodeManager::Add(Mesh::Name::NULL_MESH, this->pMesh);
 	}
 
 	GraphicsObject_Null::~GraphicsObject_Null()
-	{
-
-	}
-
-	void GraphicsObject_Null::SetState()
-	{
-
-	}
-
-	void GraphicsObject_Null::SetDataGPU()
 	{
 
 	}

@@ -3,32 +3,49 @@
 
 #include "ShaderObject.h"
 #include "TextureObject.h"
-#include "MathEngine.h"
 
 namespace Azul
 {
-	class Material
+	class Material : public DLink
 	{
 	public:
+
+		enum Name
+		{
+			None,
+			DefaultMaterial,
+			LightTextureA,
+			FlatTextureA,
+			WireFramNoTextureA,
+
+		};
+
 		Material();
+		Material(ShaderObject* shdaer, TextureObject* texture);
 		Material(const Material&) = delete;
-		Material& operator = (const Material&) = delete;
+		Material& operator = (const Material&);
 		~Material();
 
+		void Init(ShaderObject* shader, TextureObject* tex, Name _name);
+
 		void SetShader(ShaderObject* pShaderObj);
-		void SetTexture(TextureObject* pTexObj); // 可为空（如 ColorByVertex）
-		void SetWorldMatrix(Mat4* pWorld);
+		void SetTexture(TextureObject* pTexObj);
+		void SetName(Name _name);
 
-		// Render时绑定资源（仅激活Shader、CBV、贴图）
-		void Bind();
+		void BindShdaer();
+		void BindTexture();
+		void TransferWorldViewProj(Camera* pCam, Mat4* pWorld);
 
-		// 让外部显式调用传入ViewProj矩阵
-		void TransferWorldViewProj(Mat4* pView, Mat4* pProj);
+		inline ShaderObject* GetShader() { return pShader; }
+		inline TextureObject* GetTexture() { return pTexture; }
+
+		virtual void Wash() override;
+		virtual bool Compare(DLink* targetNode) override;
 
 	private:
 		ShaderObject* pShader;
 		TextureObject* pTexture;
-		Mat4* pWorldMatrix;
+		Name name;
 	};
 }
 

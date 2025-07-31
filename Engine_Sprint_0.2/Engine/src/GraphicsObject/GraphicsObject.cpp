@@ -5,22 +5,19 @@
 #include "GraphicsObject.h"
 #include "MathEngine.h"
 #include "Mesh.h"
-
+#include "CameraNodeManager.h"
 namespace Azul
 {
 	GraphicsObject::GraphicsObject()
 	{
 		this->poWorld = new Mat4(Identity);
+		this->pMat = nullptr;
+		this->pMesh = nullptr;
 	}
 
-	GraphicsObject::GraphicsObject(Mesh* model, ShaderObject* _pShaderObj)
-		: pMesh(model),
-		pShaderObj(_pShaderObj)
+	GraphicsObject::GraphicsObject(Material* mat, Mesh* mesh)
+		: pMat(mat), pMesh(mesh), poWorld(new Mat4(Identity))
 	{
-		this->poWorld = new Mat4(Identity);
-
-		assert(model);
-		assert(_pShaderObj);
 	}
 
 	GraphicsObject::~GraphicsObject()
@@ -28,12 +25,22 @@ namespace Azul
 		delete this->poWorld;
 	}
 
-	void GraphicsObject::Render()
+	void GraphicsObject::Render(Camera* pCam)
 	{
 		this->SetState();
-		this->SetDataGPU();
+		this->SetGpu(pCam); //Passing Data to Gpu
+		this->BindTexture();//Passing Texture
 		this->Draw();
 		this->RestoreState();
+	}
+
+	void GraphicsObject::Draw()
+	{
+		assert(pMesh);
+		assert(pMat);
+		
+		pMesh->ActivateMesh();
+		pMesh->RenderIndexBuffer();
 	}
 
 	Mesh* GraphicsObject::GetModel() const
@@ -50,6 +57,7 @@ namespace Azul
 	{
 		*this->poWorld = _world;
 	}
+
 }
 
 

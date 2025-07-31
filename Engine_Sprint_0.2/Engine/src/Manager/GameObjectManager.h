@@ -3,6 +3,7 @@
 
 #include "GameObjectNode.h"
 #include "PCSManBase.h"
+#include "RenderQueue.h"
 
 namespace Azul
 {
@@ -22,7 +23,10 @@ namespace Azul
 		GameObjectManager& operator = (const GameObjectManager&) = delete;
 
 		virtual PCSNode* derivedCreateNode();
+
+		static GameObjectNode* FindNode(const char* name);
 		static GameObject* Find(const char* name);
+		static GameObject* Remove(const char* name);
 
 		~GameObjectManager();
 
@@ -35,6 +39,7 @@ namespace Azul
 		// data
 		//PCSTree* poRootTree;
 		static GameObjectManager* instance;
+		RenderQueue renderQueue;
 	};
 
 }

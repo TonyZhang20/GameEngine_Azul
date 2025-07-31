@@ -98,6 +98,9 @@
     <Filter Include="Source Files\src\Material">
       <UniqueIdentifier>{bacf5e95-72ed-44bf-ab95-2bc1eb4e8902}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\Render">
+      <UniqueIdentifier>{7c9ffb61-4f1c-4a92-aa17-ed28b299ad70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject_Null.h">
@@ -125,9 +128,6 @@
       <Filter>Source Files\src\ShaderObject</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsObject\GraphicsObject.h">
-      <Filter>Source Files\src\GraphicsObject</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsObject\GraphicsObject_ColorByVertex.h">
       <Filter>Source Files\src\GraphicsObject</Filter>
     </ClInclude>
     <ClInclude Include="..\shaders\compiled\ColorByVertex.Vx.h">
@@ -277,9 +277,6 @@
     <ClInclude Include="ShaderObject\ShaderObject_FlatTexture.h">
       <Filter>Source Files\src\ShaderObject</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsObject\GraphicsObject_FlatTexture.h">
-      <Filter>Source Files\src\GraphicsObject</Filter>
-    </ClInclude>
     <ClInclude Include="Texture\TextureObject.h">
       <Filter>Source Files\src\Texture</Filter>
     </ClInclude>
@@ -370,6 +367,12 @@
     <ClInclude Include="Material\Material.h">
       <Filter>Source Files\src\Material</Filter>
     </ClInclude>
+    <ClInclude Include="Manager\MaterialMan.h">
+      <Filter>Source Files\src\Manager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Render\RenderQueue.h">
+      <Filter>Source Files\src\Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -404,9 +407,6 @@
     </ClCompile>
     <ClCompile Include="Tool\Render.h">
       <Filter>Source Files\src\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsObject\GraphicsObject_ColorByVertex.cpp">
-      <Filter>Source Files\src\GraphicsObject</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsObject\GraphicsObject_Wireframe.cpp">
       <Filter>Source Files\src\GraphicsObject</Filter>
@@ -528,9 +528,6 @@
     <ClCompile Include="ShaderObject\ShaderObject_FlatTexture.cpp">
       <Filter>Source Files\src\ShaderObject</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsObject\GraphicsObject_FlatTexture.cpp">
-      <Filter>Source Files\src\GraphicsObject</Filter>
-    </ClCompile>
     <ClCompile Include="Texture\TextureObject.cpp">
       <Filter>Source Files\src\Texture</Filter>
     </ClCompile>
@@ -611,6 +608,12 @@
     </ClCompile>
     <ClCompile Include="Material\Material.cpp">
       <Filter>Source Files\src\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\MaterialMan.cpp">
+      <Filter>Source Files\src\Manager\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\RenderQueue.cpp">
+      <Filter>Source Files\src\Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

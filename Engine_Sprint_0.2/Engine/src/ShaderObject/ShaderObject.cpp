@@ -85,6 +85,7 @@ namespace Azul
 		return "";
 	}
 
+
 	void ShaderObject::TransferLightPos(Vec3* pLightPos)
 	{
 		// if you need it it should be overrided in derived object

@@ -14,26 +14,19 @@ namespace Azul
 	class GraphicsObject_LightTexture :public GraphicsObject
 	{
 	public:
-		GraphicsObject_LightTexture(Mesh *mesh,
-									ShaderObject *pShaderObj,
-									TextureObject::Name texName,
-									Vec3 &_pLightColor,
-									Vec3 &_pLightPos);
+		GraphicsObject_LightTexture(Material* mat, Mesh* mesh, Vec3& lightColor, Vec3& lightPos);
 
 		GraphicsObject_LightTexture() = delete;
 		GraphicsObject_LightTexture(const GraphicsObject_LightTexture &) = delete;
 		GraphicsObject_LightTexture &operator = (const GraphicsObject_LightTexture &) = delete;
 		virtual ~GraphicsObject_LightTexture();
 
-		// Rendermaterial contract
-		virtual void SetState() override;
-		virtual void SetDataGPU() override;
+		virtual void SetGpu(Camera* pCam);
 		virtual void Draw() override;
 		virtual void RestoreState() override;
 
 		// data:  place uniform instancing here
 
-		TextureObject *pTex;
 		Vec3 *poLightColor;
 		Vec3 *poLightPos;
 	};

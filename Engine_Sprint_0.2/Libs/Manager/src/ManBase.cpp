@@ -125,6 +125,8 @@ namespace Azul
 		// search the active list
 		Iterator *pIt = poActive->GetIterator();
 
+		bool find = false;
+
 		for (pIt->First(); !pIt->IsDone(); pIt->Next())
 		{
 			pNode = pIt->Curr();
@@ -133,6 +135,7 @@ namespace Azul
 				// found it
 				break;
 			}
+			pNode = nullptr;
 		}
 
 		return pNode;

@@ -29,6 +29,9 @@
 #include "GameObject_RotateAround.h"
 #include "GameObject.h"
 
+#include "Material.h"
+#include "MaterialMan.h"
+
 //Manager
 #include "GameObjectManager.h"
 #include "TextureManager.h"
@@ -68,7 +71,8 @@ namespace Azul
 		
 		ShaderObjectNodeManager::Create();
 		MeshNodeManager::Create();
-		
+		MaterialMan::Create();
+
 		GameObjectManager::Create();
 
 #pragma region Demo1
@@ -148,7 +152,6 @@ namespace Azul
 			//(9.466304, 0.000000, -3.843830）look at
 			//(10.466292 , 0.000000, 4.156088）camera
 			CameraNodeManager::Add(Camera::Name::CAMERA_E, cameraE);
-
 
 			camPos.set(10.5, 0, 4);
 			tarVect.set(9.5, 0, -4);
@@ -235,14 +238,14 @@ namespace Azul
 #pragma endregion
 		//ShaderObjectNodeManager::Dump();
 
-#pragma region OBJA
+		Material* mat = MaterialMan::Add(Material::LightTextureA, poShaderC, TextureManager::RequireTexture(TextureObject::Name::A));
 
 		Vec3 LightColor(1, 1, 1);
 		Vec3 LightPos(0, 50, 0);
 
 		LightColor *= 1.5f;
 		GraphicsObject* pGraphicsObject =
-			new GraphicsObject_LightTexture(meshA, poShaderC, TextureObject::Name::A, LightColor, LightPos);
+			new GraphicsObject_LightTexture(mat, meshA, LightColor, LightPos);
 
 		GameObject* objA_1 = new GameObject(pGraphicsObject);
 
@@ -251,8 +254,8 @@ namespace Azul
 
 		GameObjectManager::Add("OBJA_1", objA_1);
 
-		pGraphicsObject =
-			new GraphicsObject_FlatTexture(meshA, poShaderB, TextureObject::Name::A);
+		mat = MaterialMan::Add(Material::FlatTextureA, poShaderB, TextureManager::RequireTexture(TextureObject::Name::A));
+		pGraphicsObject =new GraphicsObject(mat, meshA);
 
 		GameObject* objA_2 = new GameObject(pGraphicsObject);
 
@@ -260,9 +263,10 @@ namespace Azul
 		objA_2->SetScale(10.0f);
 
 		GameObjectManager::Add("OBJA_2", objA_2);
-
+		
+		mat = MaterialMan::Add(Material::WireFramNoTextureA, poShaderA);
 		pGraphicsObject =
-			new GraphicsObject_Wireframe(meshA, poShaderA);
+			new GraphicsObject_Wireframe(mat, meshA);
 
 		GameObject* objA_3 = new GameObject(pGraphicsObject);
 
@@ -270,201 +274,6 @@ namespace Azul
 		objA_3->SetScale(10.0f);
 
 		GameObjectManager::Add("OBJA_3", objA_3);
-
-#pragma endregion
-
-#pragma region OBJB
-
-		pGraphicsObject =
-			new GraphicsObject_LightTexture(meshB, poShaderC, TextureObject::Name::B, LightColor, LightPos);
-
-		GameObject* objB_1 = new GameObject(pGraphicsObject);
-
-		objB_1->SetPos(Vec3(2, 0, 0));
-		objB_1->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJB_1", objB_1);
-
-		pGraphicsObject =
-			new GraphicsObject_FlatTexture(meshB, poShaderB, TextureObject::Name::B);
-
-		GameObject* objB_2 = new GameObject(pGraphicsObject);
-
-		objB_2->SetPos(Vec3(2, 0, -4));
-		objB_2->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJB_2", objB_2);
-
-		pGraphicsObject =
-			new GraphicsObject_Wireframe(meshB, poShaderA);
-
-		GameObject* objB_3 = new GameObject(pGraphicsObject);
-
-		objB_3->SetPos(Vec3(2, 0, 4));
-		objB_3->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJB_3", objB_3);
-
-#pragma endregion
-
-#pragma region OBJC
-
-		pGraphicsObject =
-			new GraphicsObject_LightTexture(meshC, poShaderC, TextureObject::Name::C, LightColor, LightPos);
-
-		GameObject* objC_1 = new GameObject(pGraphicsObject);
-
-		objC_1->SetPos(Vec3(-2, 0, 0));
-		objC_1->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJC_1", objC_1);
-
-		pGraphicsObject =
-			new GraphicsObject_FlatTexture(meshC, poShaderB, TextureObject::Name::C);
-
-		GameObject* objC_2 = new GameObject(pGraphicsObject);
-
-		objC_2->SetPos(Vec3(-2, 0, -4));
-		objC_2->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJC_2", objC_2);
-
-		pGraphicsObject =
-			new GraphicsObject_Wireframe(meshC, poShaderA);
-
-		GameObject* objC_3 = new GameObject(pGraphicsObject);
-
-		objC_3->SetPos(Vec3(-2, 0, 4));
-		objC_3->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJC_3", objC_3);
-
-#pragma endregion
-
-#pragma region OBJD
-
-		pGraphicsObject =
-			new GraphicsObject_LightTexture(meshD, poShaderC, TextureObject::Name::D, LightColor, LightPos);
-
-		GameObject* objD_1 = new GameObject(pGraphicsObject);
-
-		objD_1->SetPos(Vec3(-4, 0, 0));
-		objD_1->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJD_1", objD_1);
-
-		pGraphicsObject =
-			new GraphicsObject_FlatTexture(meshD, poShaderB, TextureObject::Name::D);
-
-		GameObject* objD_2 = new GameObject(pGraphicsObject);
-
-		objD_2->SetPos(Vec3(-4, 0, -4));
-		objD_2->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJD_2", objD_2);
-
-		pGraphicsObject =
-			new GraphicsObject_Wireframe(meshD, poShaderA);
-
-		GameObject* objD_3 = new GameObject(pGraphicsObject);
-
-		objD_3->SetPos(Vec3(-4, 0, 4));
-		objD_3->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJD_3", objD_3);
-
-#pragma endregion
-
-#pragma region OBJE
-
-		pGraphicsObject =
-			new GraphicsObject_LightTexture(meshE, poShaderC, TextureObject::Name::E, LightColor, LightPos);
-
-		GameObject* objE_1 = new GameObject(pGraphicsObject);
-
-		objE_1->SetPos(Vec3(4, 0, 0));
-		objE_1->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJE_1", objE_1);
-
-		pGraphicsObject =
-			new GraphicsObject_FlatTexture(meshE, poShaderB, TextureObject::Name::E);
-
-		GameObject* objE_2 = new GameObject(pGraphicsObject);
-
-		objE_2->SetPos(Vec3(4, 0, -4));
-		objE_2->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJE_2", objE_2);
-
-		pGraphicsObject =
-			new GraphicsObject_Wireframe(meshE, poShaderA);
-
-		GameObject* objE_3 = new GameObject(pGraphicsObject);
-
-		objE_3->SetPos(Vec3(4, 0, 4));
-		objE_3->SetScale(10.0f);
-
-		GameObjectManager::Add("OBJE_3", objE_3);
-
-#pragma endregion
-
-
-#pragma endregion
-
-#pragma endregion Demo 1
-
-#pragma region Demo2
-
-		pGraphicsObject =
-			new GraphicsObject_LightTexture(meshA, poShaderC, TextureObject::Name::A, LightColor, LightPos);
-
-		GameObject* d2_objA_1 = new GameObject(pGraphicsObject);
-		//(9.466304, 0.000000, -3.843830）look at
-		//(10.466292 , 0.000000, 4.156088）camera
-		d2_objA_1->SetPos(Vec3(10, 0, 0));
-		d2_objA_1->SetScale(10.0f);
-
-		GameObjectManager::Add("D2_OBJA_1", d2_objA_1);
-
-		pGraphicsObject =
-			new GraphicsObject_LightTexture(meshA, poShaderC, TextureObject::Name::A, LightColor, LightPos);
-
-		GameObject_RotateAround* d2_objA_2 = new GameObject_RotateAround(pGraphicsObject);
-		d2_objA_2->SetTarget(d2_objA_1);
-		d2_objA_2->SetScale(10);
-
-		GameObjectManager::Add("D2_OBJA_2", d2_objA_2);
-
-		pGraphicsObject =
-			new GraphicsObject_LightTexture(meshB, poShaderC, TextureObject::Name::B, LightColor, LightPos);
-
-		GameObject_RotateAround* d2_objB_1 = new GameObject_RotateAround(pGraphicsObject);
-
-		d2_objB_1->SetTarget(d2_objA_2);
-		d2_objB_1->SetDir(Rot1::X);
-		d2_objB_1->SetScale(10);
-		d2_objB_1->SetLightColor(Colors::Brown, Colors::White);
-
-		GameObjectManager::Add("D2_OBJB_1", d2_objB_1);
-
-		pGraphicsObject =
-			new GraphicsObject_LightTexture(meshC, poShaderC, TextureObject::Name::C, LightColor, LightPos);
-
-		GameObject_RotateAround* d2_objC_1 = new GameObject_RotateAround(pGraphicsObject);
-
-		d2_objC_1->SetTarget(d2_objB_1);
-		d2_objC_1->SetDir(Rot1::Y);
-		d2_objC_1->SetScale(10);
-		d2_objC_1->SetLightColor(Colors::Green, Colors::Blue);
-
-		GameObjectManager::Add("D2_OBJC_1", d2_objC_1);
-
-		RotateAroundCamera* cameraL = (RotateAroundCamera * )CameraNodeManager::Find(Camera::Name::CAMERA_L)->GetCamera();
-		cameraL->target = d2_objA_1;
-
-#pragma endregion Demo2
-
 
 		return true;
 	}
@@ -486,7 +295,7 @@ namespace Azul
 
 		CameraNodeManager::UpdateCamera();
 		GameObjectManager::Update(deltaTime);
-
+		/*
 		if ((GetKeyState('B') & 0x8000) && !present)
 		{
 			Trace::out("Present!\n");
@@ -498,9 +307,9 @@ namespace Azul
 
 			if (objE_2)
 			{
-				GraphicsObject_FlatTexture* pg1 = (GraphicsObject_FlatTexture*)objE_2->GetGraphicsObject();
-				TextureManager::Remove(pg1->pTex);
-				pg1->pTex = newTex;
+				GraphicsObject* pg1 = (GraphicsObject*)objE_2->GetGraphicsObject();
+				TextureManager::Remove(pg1->GetTexture());
+				pg1->SetTexture(newTex);
 			}
 
 
@@ -512,12 +321,12 @@ namespace Azul
 			{
 
 				GraphicsObject_LightTexture* pg2 = (GraphicsObject_LightTexture*)objE_1->GetGraphicsObject();
-				TextureManager::Remove(pg2->pTex);
-				pg2->pTex = newTex;
+				TextureManager::Remove(pg2->GetTexture());
+				pg2->SetTexture(newTex);
 			}
-
+		
 		}
-
+			*/
 		//GameObject* d2_objB_1 = GameObjectManager::Find("D2_OBJB_1");
 		//d2_objB_1->GetPos()->Print("Missing target");
 	}
@@ -544,7 +353,7 @@ namespace Azul
 		//auto instance = GameObjectManager::instance;
 		//AZUL_UNUSED_VAR(instance);
 		TextureManager::Destroy();
-
+		MaterialMan::Destroy();
 		CameraUtility::Destroy();
 
 		CameraNodeManager::Destroy();

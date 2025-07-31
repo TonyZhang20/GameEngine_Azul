@@ -50,7 +50,7 @@ namespace Azul
 
 		// remove
 		PCSTREE_LIBRARY_API void Remove(PCSNode *const pInNode);
-		PCSTREE_LIBRARY_API void ClearNodeData(PCSNode* pInNode);
+		PCSTREE_LIBRARY_API virtual void ClearNodeData(PCSNode* pInNode);
 
 		// get info
 		PCSTREE_LIBRARY_API void GetInfo(Info &info);

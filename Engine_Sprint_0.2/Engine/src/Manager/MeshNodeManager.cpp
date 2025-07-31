@@ -41,7 +41,7 @@ namespace Azul
 		// Walk through the nodes
 		while (!pIt->IsDone())
 		{
-			MeshNode* pDeleteMe = (MeshNode*)pIt->Curr();
+			DLink* pDeleteMe = pIt->Curr();
 			pNode = pIt->Next();
 			delete pDeleteMe;
 		}
@@ -53,7 +53,7 @@ namespace Azul
 		// Walk through the nodes
 		while (!pIt->IsDone())
 		{
-			MeshNode* pDeleteMe = (MeshNode*)pIt->Curr();
+			DLink* pDeleteMe = pIt->Curr();
 			pNode = pIt->Next();
 			delete pDeleteMe;
 		}

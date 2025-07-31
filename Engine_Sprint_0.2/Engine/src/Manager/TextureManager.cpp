@@ -118,6 +118,7 @@ namespace Azul
 				return pData;
 			}
 
+			pData = nullptr;
 			pNode = pIt->Next();
 		}
 

@@ -133,7 +133,6 @@ namespace Azul
 			this->mInfo.currNumLevels = 0;
 		}
 		
-
 		this->mInfo.currNumNodes -= reduceCount;
 
 		CheckMax();

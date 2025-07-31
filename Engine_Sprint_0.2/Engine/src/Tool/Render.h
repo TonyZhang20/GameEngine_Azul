@@ -6,18 +6,21 @@
 #define RENDER_H
 namespace Azul
 {
+	class Camera;
 	class Render
 	{
+	public:
+		virtual void SetGpu(Camera* pCam) = 0;
+		virtual void Draw() = 0;
+		virtual void RestoreState() = 0;
+		virtual void SetState() {};
+
 	protected:
 		Render() = default;
 		Render(const Render&) = delete;
 		Render& operator = (const Render&) = delete;
 		virtual ~Render() = default;
 
-		virtual void SetState() = 0;
-		virtual void SetDataGPU() = 0;
-		virtual void Draw() = 0;
-		virtual void RestoreState() = 0;
 	};
 }
 

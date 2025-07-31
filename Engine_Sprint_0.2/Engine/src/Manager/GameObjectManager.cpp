@@ -53,6 +53,8 @@ namespace Azul
 		assert(objNode);
 		objNode->Set(name, node);
 
+		pGOM->renderQueue.Submit(node);
+
 		return objNode;
 	}
 
@@ -97,19 +99,8 @@ namespace Azul
 	{
 		GameObjectManager* pGOM = GameObjectManager::privGetInstance();
 		assert(pGOM);
-
-		PCSNode* pRootNode = pGOM->poActive->GetRoot();
-		assert(pRootNode);
-
-		PCSTreeForwardIterator pIt(pRootNode);
-
-		GameObjectNode* pGameObj = nullptr;
-
-		for (pIt.First(); !pIt.IsDone(); pIt.Next())
-		{
-			pGameObj = (GameObjectNode*)pIt.Current();
-			pGameObj->Draw();
-		}
+		
+		pGOM->renderQueue.RenderAll();
 	}
 
 	PCSNode* GameObjectManager::derivedCreateNode()
@@ -117,7 +108,7 @@ namespace Azul
 		return new GameObjectNode();
 	}
 
-	GameObject* GameObjectManager::Find(const char* name)
+	GameObjectNode* GameObjectManager::FindNode(const char* name)
 	{
 		GameObjectManager* pGOM = GameObjectManager::privGetInstance();
 		assert(pGOM);
@@ -129,16 +120,46 @@ namespace Azul
 
 		GameObjectNode* pGameObj = nullptr;
 
-
 		for (pIt.First(); !pIt.IsDone(); pIt.Next())
 		{
 			pGameObj = (GameObjectNode*)pIt.Current();
-			
-			if(pGameObj->CampareName(name) == PCSNode::Code::SUCCESS)
+
+			if (pGameObj->CampareName(name) == PCSNode::Code::SUCCESS)
 			{
-				return pGameObj->GetGameObject();
+				return pGameObj;
 			}
 		}
+
+		return pGameObj;
+	}
+
+	GameObject* GameObjectManager::Find(const char* name)
+	{
+		GameObjectManager* pGOM = GameObjectManager::privGetInstance();
+		assert(pGOM);
+		
+		GameObjectNode* result = pGOM->FindNode(name);
+
+		if (result)
+		{
+			result->GetGameObject();
+		}
+
+		return nullptr;
+		
+	}
+
+	GameObject* GameObjectManager::Remove(const char* name)
+	{
+		GameObjectManager* pGOM = GameObjectManager::privGetInstance();
+		assert(pGOM);
+
+		GameObjectNode* target = FindNode(name);
+
+		pGOM->poActive->Remove(target);
+		pGOM->renderQueue.Remove(target->GetGameObject());
+		
+		return target->GetGameObject();
 	}
 
 	GameObjectManager::~GameObjectManager()

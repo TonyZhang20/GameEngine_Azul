@@ -33,4 +33,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	return 0;
 }
 
+//TODO LIST :
+// Graphic Object rework //alomst
+// Material //done
+// Material Manager : Do nothing just delete Material after application finished ---- Done
+// RenderQueue Manager : For better performence //done
+// Transform
+
 // --- End of File ---

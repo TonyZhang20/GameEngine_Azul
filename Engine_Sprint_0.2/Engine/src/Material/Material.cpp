@@ -1,16 +1,41 @@
 #include "Material.h"
-#include "CameraNodeManager.h"
+#include "Camera.h"
+#include "MaterialMan.h"
 
 namespace Azul
 {
 	Material::Material()
-		: pShader(nullptr), pTexture(nullptr), pWorldMatrix(nullptr)
+		: pShader(nullptr), pTexture(nullptr)
 	{
+		this->name = None;
+	}
+
+	Material::Material(ShaderObject* shdaer, TextureObject* texture)
+		: pShader(shdaer), pTexture(texture)
+	{
+
+	}
+
+	Material& Material::operator=(const Material& inMat)
+	{
+		// TODO: insert return statement here
+		this->pShader = inMat.pShader;
+		this->pTexture = inMat.pTexture;
+		this->name = inMat.name;
+
+		return *this;
 	}
 
 	Material::~Material()
 	{
-		// 不负责释放 Shader/Texture，这些由资源管理器控制
+
+	}
+
+	void Material::Init(ShaderObject* shader, TextureObject* tex, Name _name)
+	{
+		SetShader(shader);
+		SetTexture(tex);
+		SetName(_name);
 	}
 
 	void Material::SetShader(ShaderObject* pShaderObj)
@@ -23,31 +48,43 @@ namespace Azul
 		this->pTexture = pTexObj;
 	}
 
-	void Material::SetWorldMatrix(Mat4* pWorld)
+	void Material::SetName(Name _name)
 	{
-		this->pWorldMatrix = pWorld;
+		this->name = _name;
 	}
 
-
-	void Material::Bind()
+	void Material::BindShdaer()
 	{
-		assert(pShader);
-		assert(pWorldMatrix);
+		assert(pShader, "Shader is Required");
 
 		pShader->ActivateShader();
-		pShader->TransferWorldViewProj(CameraNodeManager::GetMainCam(), pWorldMatrix);
 		pShader->ActivateCBV();
+	}
 
+	void Material::BindTexture()
+	{
 		if (pTexture)
 		{
-			pTexture->ActivateTexture(); // 激活 SRV 和 Sampler
+			pTexture->ActivateTexture();
 		}
 	}
 
-	void Material::TransferWorldViewProj(Mat4* pView, Mat4* pProj)
+	void Material::TransferWorldViewProj(Camera* pCam, Mat4* pWorld)
 	{
-		this->pViewMatrix = pView;
-		this->pProjMatrix = pProj;
+		assert(pShader);
+		pShader->TransferWorldViewProj(pCam, pWorld);
 	}
 
+	void Material::Wash()
+	{
+		this->pShader = nullptr;
+		this->pTexture = nullptr;
+		this->name = None;
+	}
+	bool Material::Compare(DLink* targetNode)
+	{
+		Material* target = (Material*)targetNode;
+
+		return this->name == target->name;
+	}
 }

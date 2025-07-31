@@ -18,8 +18,6 @@ namespace Azul
 		virtual ~GraphicsObject_Null();
 
 		// Rendermaterial contract
-		virtual void SetState() override;
-		virtual void SetDataGPU() override;
 		virtual void Draw() override;
 		virtual void RestoreState() override;
 

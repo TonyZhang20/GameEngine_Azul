@@ -97,7 +97,7 @@ namespace Azul
 
 		*this->poWorld = scale * TransA;
 
-		// PUSH to Graphics object
+		//Pass Transform
 		this->poGraphicsObject->SetWorld(*this->poWorld);
 	}
 
@@ -108,7 +108,8 @@ namespace Azul
 		//    CPU ---> GPU
 		//    World, View, Projection Matrix
 		// ---------------------------------------------
-		this->poGraphicsObject->Render();
+
+		this->poGraphicsObject->Draw();
 	}
 }
 

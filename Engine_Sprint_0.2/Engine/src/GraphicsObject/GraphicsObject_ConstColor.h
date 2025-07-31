@@ -14,9 +14,7 @@ namespace Azul
 	class GraphicsObject_ConstColor :public GraphicsObject
 	{
 	public:
-		GraphicsObject_ConstColor(Mesh *mesh,
-								  ShaderObject *pShaderObj,
-								  Vec3 &_pLightColor);
+		GraphicsObject_ConstColor(Mesh* mesh, Material* mat, Vec3& LightColor);
 
 		GraphicsObject_ConstColor() = delete;
 		GraphicsObject_ConstColor(const GraphicsObject_ConstColor &) = delete;
@@ -24,8 +22,6 @@ namespace Azul
 		virtual ~GraphicsObject_ConstColor();
 
 		// Rendermaterial contract
-		virtual void SetState() override;
-		virtual void SetDataGPU() override;
 		virtual void Draw() override;
 		virtual void RestoreState() override;
 

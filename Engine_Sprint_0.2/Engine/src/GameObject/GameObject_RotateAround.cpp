@@ -98,7 +98,7 @@ namespace Azul
 
 	void GameObject_RotateAround::Draw()
 	{
-		this->poGraphicsObject->Render();
+		//this->poGraphicsObject->Render();
 	}
 
 	void GameObject_RotateAround::SetDir(Rot1 rot)

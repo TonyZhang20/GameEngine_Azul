@@ -21,12 +21,16 @@ namespace Azul
 	//    CPU ---> GPU
 	//    World, View, Projection Matrix
 	// ---------------------------------------------
-	GraphicsObject_Wireframe::GraphicsObject_Wireframe(Mesh* _pModel, ShaderObject* _pShaderObj)
-		: GraphicsObject(_pModel, _pShaderObj)
+	GraphicsObject_Wireframe::GraphicsObject_Wireframe( Material* mat, Mesh* model)
+		: GraphicsObject(mat, model)
 	{
-		assert(pMesh);
-		assert(pShaderObj);
-		assert(poWorld);
+
+	}
+
+
+	void GraphicsObject_Wireframe::Draw()
+	{
+		pMesh->RenderIndexBuffer();
 	}
 
 	void GraphicsObject_Wireframe::SetState()
@@ -34,27 +38,11 @@ namespace Azul
 		poGame->mStateRasterizerWireframe.Activate();
 	}
 
-	void GraphicsObject_Wireframe::SetDataGPU()
-	{
-		Camera* cam = CameraNodeManager::GetMainCam();
-		assert(cam);
-
-		pShaderObj->ActivateShader();
-		pShaderObj->ActivateCBV();
-		pShaderObj->TransferWorldViewProj(cam, this->poWorld);
-		
-		pMesh->ActivateMesh();
-	}
-
-	void GraphicsObject_Wireframe::Draw()
-	{
-		pMesh->RenderIndexBuffer();
-	}
-
 	void GraphicsObject_Wireframe::RestoreState()
 	{
 		poGame->mStateRasterizerSolid.Activate();
 	}
+
 }
 
 

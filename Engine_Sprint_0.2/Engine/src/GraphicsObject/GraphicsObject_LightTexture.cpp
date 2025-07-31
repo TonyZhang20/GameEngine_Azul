@@ -16,23 +16,13 @@ namespace Azul
 	//    CPU ---> GPU
 	//    World, View, Projection Matrix
 	// ---------------------------------------------
-	GraphicsObject_LightTexture::GraphicsObject_LightTexture(Mesh *mesh,
-															 ShaderObject *pShaderObj,
-															 TextureObject::Name texName,
-															 Vec3 &LightColor,
-															 Vec3 &LightPos)
-		: GraphicsObject(mesh, pShaderObj),
-		pTex(TextureManager::RequireTexture(texName)),
-		poLightColor(nullptr),
-		poLightPos(nullptr)
+
+	GraphicsObject_LightTexture::GraphicsObject_LightTexture(Material* mat, Mesh* mesh, Vec3& lightColor, Vec3& lightPos)
+		: GraphicsObject(mat, mesh),
+		poLightColor(new Vec3(lightColor)),
+		poLightPos(new Vec3(lightPos))
 	{
-		assert(pTex);
 
-		poLightColor = new Vec3(LightColor);
-		poLightPos = new Vec3(LightPos);
-
-		assert(poLightColor);
-		assert(poLightPos);
 	}
 
 	GraphicsObject_LightTexture::~GraphicsObject_LightTexture()
@@ -41,27 +31,12 @@ namespace Azul
 		delete poLightPos;
 	}
 
-	void GraphicsObject_LightTexture::SetState()
+	void GraphicsObject_LightTexture::SetGpu(Camera* pCam)
 	{
-		// Future - settings to directX
-		// say make it wireframe or change culling mode
-		this->pTex->ActivateTexture();
-	}
+		GraphicsObject::SetGpu(pCam);
 
-	void GraphicsObject_LightTexture::SetDataGPU()
-	{
-		Camera* pCam = CameraNodeManager::GetMainCam();
-		assert(pCam);
-
-		pShaderObj->ActivateShader();
-		pShaderObj->ActivateCBV();
-
-		pShaderObj->TransferWorldViewProj(pCam, this->poWorld);
-		pShaderObj->TransferLightPos(this->poLightPos);
-		pShaderObj->TransferColor(this->poLightColor);
-
-		pMesh->ActivateMesh();
-
+		GetShader()->TransferLightPos(poLightPos);
+		GetShader()->TransferColor(poLightColor);
 	}
 
 	void GraphicsObject_LightTexture::Draw()
@@ -72,6 +47,8 @@ namespace Azul
 	void GraphicsObject_LightTexture::RestoreState()
 	{
 		// Future - Undo settings to directX
+		Vec3 zeroColor = Vec3(0, 0, 0);
+		GetShader()->TransferColor(&zeroColor);
 	}
 
 }
