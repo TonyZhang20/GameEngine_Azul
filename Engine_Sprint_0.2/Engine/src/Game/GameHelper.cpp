@@ -49,7 +49,12 @@ namespace Azul
 
 	float Game::GetAspectRatio() const
 	{
-		float ratio = Application::GetWindow()->GetAspectRatio();
+		float ratio = (float)this->poBufferFrame->mWidth / (float)this->poBufferFrame->mHeight;
+
+		if (ratio == 0)
+		{
+			ratio = Application::GetWindow()->GetAspectRatio();
+		}
 
 		return ratio;
 	}

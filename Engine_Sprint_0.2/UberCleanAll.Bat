@@ -63,3 +63,7 @@ cd ..
 cd Layer
 call "CleanMe.Bat"
 cd ..
+
+cd MySTL
+call "CleanMe.Bat"
+cd ..

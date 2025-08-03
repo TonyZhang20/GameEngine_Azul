@@ -2,9 +2,43 @@
 #include "Application.h"
 #include "TextureManager.h"
 #include "TextureObject.h"
+#include "LayerManager.h"
+#include "Game.h"
+#include "BufferFrame.h"
+
 namespace Azul
 {
-	void ImGuiBuild::DrawWindow(bool& open)
+    void ImGuiBuild::DrawViewPort(bool& viewPortOpen)
+    {
+        ImGui::Begin("Viewport");
+
+        ImVec2 viewPortSize = ImGui::GetContentRegionAvail();
+        
+        if (mViewPortSize.isEqual(*(Vec2*)&viewPortSize))
+        {
+            mViewPortSize = { viewPortSize.x, viewPortSize.y };
+
+            Game* layer = (Game*)LayerManager::Find("Engine Layer");
+
+            if (layer)
+            {
+                layer->poBufferFrame->OnResize(viewPortSize.x, viewPortSize.y);
+                layer->poBufferFrame->Create();
+            }
+        }
+
+        TextureObject* renderTraget = TextureManager::RequireTexture(TextureObject::Name::SCENE_WINDOW);
+        if (renderTraget) ImGui::Image((void*)renderTraget->GetTextureID(), ImVec2{ viewPortSize.x, viewPortSize.y });
+
+        ImGui::End();
+    }
+
+    void ImGuiBuild::DrawSettingPort(bool& Setting)
+    {
+
+    }
+
+    void ImGuiBuild::DrawWindow(bool& open)
 	{
         if (!open) return;
         static bool dockOpen = true;
@@ -29,10 +63,11 @@ namespace Azul
         ImGui::Text("Scale:    (%.2f, %.2f, %.2f)", scale[0], scale[1], scale[2]);
         ImGui::Text("Rotation: (%.1f°, %.1f°, %.1f°)", rotation[0], rotation[1], rotation[2]);
 
-        ImGui::Image((void*)TextureManager::RequireTexture(TextureObject::Name::CHECKBOARD)->GetTextureID(), ImVec2{256.f, 256.f});
-
         ImGui::End();
-	}
+
+        DrawSettingPort(open);
+        DrawViewPort(open);
+    }
 
     void ImGuiBuild::ShowExampleAppDockSpace(bool* p_open)
     {

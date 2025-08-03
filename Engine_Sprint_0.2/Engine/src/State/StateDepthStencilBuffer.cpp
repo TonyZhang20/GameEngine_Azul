@@ -41,6 +41,11 @@ namespace Azul
 		this->poD3DDepthStencilBuffer = nullptr;
 	}
 
+	void __stdcall StateDepthStencilBuffer::GetDesc(_Out_  D3D11_TEXTURE2D_DESC* pDes)
+	{
+		this->poD3DDepthStencilBuffer->GetDesc(pDes);
+	}
+
 	StateDepthStencilBuffer::~StateDepthStencilBuffer()
 	{
 		SafeRelease(this->poD3DDepthStencilBuffer);

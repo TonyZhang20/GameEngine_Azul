@@ -34,6 +34,8 @@ namespace Azul
 			Trace::out("      prev: %s (%p)\n", pTmp->GetName(), pTmp);
 		}
 
+		Trace::out("      curr: %s (%p)\n", this->GetName(), this);
+
 		if (this->pNext == nullptr)
 		{
 			Trace::out("      next: null\n");

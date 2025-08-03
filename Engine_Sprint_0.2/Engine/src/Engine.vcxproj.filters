@@ -92,14 +92,14 @@
     <Filter Include="Source Files\src\Windows">
       <UniqueIdentifier>{7ac95998-9241-439e-8229-6c71a150eff7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\src\ImGui\ProjectCode">
-      <UniqueIdentifier>{bb237a40-edf4-4b51-b29c-191145342ce2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\src\Material">
       <UniqueIdentifier>{bacf5e95-72ed-44bf-ab95-2bc1eb4e8902}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\src\Render">
       <UniqueIdentifier>{7c9ffb61-4f1c-4a92-aa17-ed28b299ad70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\ImGui\EditorCode">
+      <UniqueIdentifier>{bb237a40-edf4-4b51-b29c-191145342ce2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -362,7 +362,7 @@
       <Filter>Source Files\src\Tool</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\ImGuiBuild.h">
-      <Filter>Source Files\src\ImGui\ProjectCode</Filter>
+      <Filter>Source Files\src\ImGui\EditorCode</Filter>
     </ClInclude>
     <ClInclude Include="Material\Material.h">
       <Filter>Source Files\src\Material</Filter>
@@ -372,6 +372,9 @@
     </ClInclude>
     <ClInclude Include="Render\RenderQueue.h">
       <Filter>Source Files\src\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffers\BufferFrame.h">
+      <Filter>Source Files\src\Buffers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -604,7 +607,7 @@
       <Filter>Source Files\src\Tool</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\ImGuiBuild.cpp">
-      <Filter>Source Files\src\ImGui\ProjectCode</Filter>
+      <Filter>Source Files\src\ImGui\EditorCode</Filter>
     </ClCompile>
     <ClCompile Include="Material\Material.cpp">
       <Filter>Source Files\src\Material</Filter>
@@ -614,6 +617,9 @@
     </ClCompile>
     <ClCompile Include="Render\RenderQueue.cpp">
       <Filter>Source Files\src\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffers\BufferFrame.cpp">
+      <Filter>Source Files\src\Buffers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

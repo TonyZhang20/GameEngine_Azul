@@ -20,15 +20,20 @@ namespace Azul
 		virtual ~StateRenderTargetView();
 		
 		void UnBindAllRenderTarget();
+		ID3D11RenderTargetView& const GetD3DRenderTargetView() const;
 
 		void Initialize();
 		void Clear(const Vec4 &r);
 		void Activate(StateDepthStencilView &r);
 		void CleanupRenderTarget();
 
+		void BindTargetView(ID3D11RenderTargetView* targetView);
+
+	public:
+		ID3D11RenderTargetView *poD3DRenderTargetView;
+
 	private:
 		void privInitialize(ID3D11Texture2D* backBuffer);
-		ID3D11RenderTargetView *poD3DRenderTargetView;
 	};
 
 }

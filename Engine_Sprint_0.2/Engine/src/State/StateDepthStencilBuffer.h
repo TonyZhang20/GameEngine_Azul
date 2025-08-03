@@ -19,6 +19,7 @@ namespace Azul
 
 		void Initialize(uint32_t clientWidth, uint32_t clientHeight);
 		void ClearDepthStencilBuffer();
+		void STDMETHODCALLTYPE GetDesc(_Out_  D3D11_TEXTURE2D_DESC* pDes);
 
 		ID3D11Texture2D *poD3DDepthStencilBuffer;
 	};

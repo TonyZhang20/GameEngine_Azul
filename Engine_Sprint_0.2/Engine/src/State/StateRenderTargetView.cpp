@@ -20,7 +20,6 @@ namespace Azul
 		IDXGISwapChain* pSwapChain = StateDirectXMan::GetSwapChain();
 		assert(pSwapChain);
 
-
 		ID3D11Texture2D* pTexBackBuffer = nullptr;
 		HRESULT hr = pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pTexBackBuffer);
 		assert(SUCCEEDED(hr));
@@ -47,6 +46,16 @@ namespace Azul
 		SafeRelease(this->poD3DRenderTargetView);
 	}
 
+	void StateRenderTargetView::BindTargetView(ID3D11RenderTargetView* targetView)
+	{
+		if (poD3DRenderTargetView)
+		{
+			CleanupRenderTarget();
+		}
+
+		this->poD3DRenderTargetView = targetView;
+	}
+
 	void StateRenderTargetView::privInitialize(ID3D11Texture2D* backBuffer)
 	{
 		ID3D11Device* device = StateDirectXMan::GetDevice();
@@ -70,6 +79,11 @@ namespace Azul
 		StateDirectXMan::GetContext()->OMSetRenderTargets(1,
 			nullViews,
 			nullptr);
+	}
+
+	ID3D11RenderTargetView& const StateRenderTargetView::GetD3DRenderTargetView() const
+	{
+		return *poD3DRenderTargetView;
 	}
 
 }

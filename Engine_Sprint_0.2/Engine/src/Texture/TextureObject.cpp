@@ -79,6 +79,11 @@ namespace Azul
 		StateDirectXMan::GetContext()->PSSetSamplers((uint32_t) ShaderSamplerSlot::SampleA, 1, &poSampler);
 	}
 
+	void TextureObject::ActivateResourceViewOnly()
+	{
+		StateDirectXMan::GetContext()->PSSetShaderResources((uint32_t)ShaderResourceBufferSlot::TexA, 1, &poTextureRV);
+	}
+
 	void TextureObject::Init(TextureObject::Name _name, LPCWSTR filepath, D3D11_FILTER filter)
 	{
 		this->name = _name;
@@ -100,6 +105,19 @@ namespace Azul
 		assert(this->poTextureRV);
 
 		CreateSampDesc(filter);
+	}
+
+	void TextureObject::Init(ID3D11ShaderResourceView* pSRV, TextureObject::Name _name)
+	{
+		this->name = _name;
+		this->poTextureRV = pSRV;
+	}
+
+	//在外面开好了直接传进来
+	void TextureObject::SetResourceView(ID3D11ShaderResourceView* pSRV)
+	{
+		this->poTextureRV = pSRV;
+		this->CreateSampDesc();
 	}
 
 	void TextureObject::CreateSampDesc(D3D11_FILTER filter, D3D11_TEXTURE_ADDRESS_MODE address)
@@ -143,9 +161,14 @@ namespace Azul
 		this->name = TextureObject::Name::Uninitialized;
 	}
 
-	ID3D11ShaderResourceView* TextureObject::GetTextureID()
+	ID3D11ShaderResourceView* TextureObject::GetTextureID() const
 	{
 		return this->poTextureRV;
+	}
+
+	void TextureObject::ReleaseShdaerResource()
+	{
+		SafeRelease(this->poTextureRV);
 	}
 
 	char *TextureObject::GetName()

@@ -18,6 +18,7 @@
 //Tool
 #include "MathEngine.h"
 #include "Colors.h"
+#include "Input.h"
 
 //Shader
 #include "MeshHeaders.h"
@@ -36,11 +37,13 @@
 #include "GameObjectManager.h"
 #include "TextureManager.h"
 #include "CameraNodeManager.h"
+#include "StateDirectXMan.h"
 
 //Event
 #include "ApplicationEvent.h"
-
 #include "Application.h"
+
+
 
 namespace Azul
 {
@@ -74,6 +77,8 @@ namespace Azul
 		MaterialMan::Create();
 
 		GameObjectManager::Create();
+
+		this->poBufferFrame = new BufferFrame(Application::GetWidth(), Application::GetHeight());
 
 #pragma region Demo1
 
@@ -275,6 +280,9 @@ namespace Azul
 
 		GameObjectManager::Add("OBJA_3", objA_3);
 
+#pragma endregion
+
+#pragma endregion
 		return true;
 	}
 
@@ -295,6 +303,7 @@ namespace Azul
 
 		CameraNodeManager::UpdateCamera();
 		GameObjectManager::Update(deltaTime);
+
 		/*
 		if ((GetKeyState('B') & 0x8000) && !present)
 		{
@@ -339,8 +348,12 @@ namespace Azul
 	//-----------------------------------------------------------------------------
 	void Game::Render()
 	{
-		this->SetDefaultTargetMode();
+		this->poBufferFrame->SetActive(this->mDepthStencilView);
+		this->poBufferFrame->Clear(Application::GetWindow()->GetWindowColor(), this->mDepthStencilView);
+
 		GameObjectManager::Draw();
+
+		this->SetDefaultTargetMode();
 	}
 
 	//-----------------------------------------------------------------------------
@@ -352,6 +365,8 @@ namespace Azul
 	{
 		//auto instance = GameObjectManager::instance;
 		//AZUL_UNUSED_VAR(instance);
+		delete poBufferFrame;
+
 		TextureManager::Destroy();
 		MaterialMan::Destroy();
 		CameraUtility::Destroy();
@@ -383,7 +398,33 @@ namespace Azul
 
 	bool Game::OnWindowResizeEvent(WindowResizeEvent& e)
 	{
-		Engine::OnWindowResizeEvent(e);
+		//Engine::OnWindowResizeEvent(e);
+
+		UINT width, height;
+		width = e.GetWidth();
+		height = e.GetHeight();
+
+		//UnBind all target
+		this->mStateRenderTargetView.CleanupRenderTarget();
+		this->mDepthStencilView.ClearDepthStencilView();
+		this->mDepthStencilBuffer.ClearDepthStencilBuffer();
+		this->mStateRenderTargetView.UnBindAllRenderTarget();
+
+		this->poBufferFrame->OnResize(e.GetWidth(), e.GetHeight());
+
+		StateDirectXMan::ResizeSwapChain(width, height);
+
+		//ReBind
+		this->mStateRenderTargetView.Initialize();
+		this->mDepthStencilBuffer.Initialize(width, height);
+		this->mDepthStencilView.Initialize(this->mDepthStencilBuffer);
+
+		//OmSet
+		this->mStateRenderTargetView.Activate(this->mDepthStencilView);
+		this->mViewport.ResizeViewPort(width, height);
+
+		this->poBufferFrame->Create();
+
 		CameraNodeManager::UpdateAspectRatio(GetAspectRatio());
 
 		return false;

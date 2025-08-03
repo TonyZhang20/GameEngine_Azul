@@ -36,6 +36,7 @@ namespace Azul
 
 	Engine::~Engine()
 	{
+		SafeDelete(poBufferFrame);
 		StateDirectXMan::Destroy();
 	}
 
@@ -73,6 +74,7 @@ namespace Azul
 		// Next initialize the back buffer of the swap chain and associate it to a 
 		// render target view.
 		this->mStateRenderTargetView.Initialize();
+		//this->mTextureRenderTarget.Initialize();
 
 		// Create the depth buffer for use with the depth/stencil view.
 		this->mDepthStencilBuffer.Initialize(clientWidth, clientHeight);
@@ -230,16 +232,19 @@ namespace Azul
 
 		this->mStateRenderTargetView.UnBindAllRenderTarget();
 
+		//ImGui_ImplDX11_InvalidateDeviceObjects();
+
 		StateDirectXMan::ResizeSwapChain(width, height);
 
+		//ImGui_ImplDX11_CreateDeviceObjects();
 		//ReBind
+
 		this->mStateRenderTargetView.Initialize();
 		this->mDepthStencilBuffer.Initialize(width, height);
 		this->mDepthStencilView.Initialize(this->mDepthStencilBuffer);
 		
 		//OmSet
 		this->mStateRenderTargetView.Activate(this->mDepthStencilView);
-
 		this->mViewport.ResizeViewPort(width, height);
 
 		return false;
@@ -280,6 +285,7 @@ namespace Azul
 		Update(UpdateTime);
 		
 		ClearDepthStencilBuffer();
+
 		Render();
 
 		//--------------------------------

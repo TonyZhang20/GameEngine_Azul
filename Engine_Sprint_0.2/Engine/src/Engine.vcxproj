@@ -145,6 +145,7 @@
     <ClInclude Include="..\shaders\compiled\Null.Vx.h" />
     <ClInclude Include="Application\Application.h" />
     <ClInclude Include="Buffers\BufferCBV_vs.h" />
+    <ClInclude Include="Buffers\BufferFrame.h" />
     <ClInclude Include="Buffers\BufferIBV.h" />
     <ClInclude Include="Buffers\BufferInputLayout.h" />
     <ClInclude Include="Buffers\BufferPixelShader.h" />
@@ -230,6 +231,7 @@
   <ItemGroup>
     <ClCompile Include="Application\Application.cpp" />
     <ClCompile Include="Buffers\BufferCBV_vs.cpp" />
+    <ClCompile Include="Buffers\BufferFrame.cpp" />
     <ClCompile Include="Buffers\BufferIBV.cpp" />
     <ClCompile Include="Buffers\BufferInputLayout.cpp" />
     <ClCompile Include="Buffers\BufferPixelShader.cpp" />

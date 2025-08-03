@@ -11,7 +11,7 @@
 #include "StateSwapChain.h"
 
 #define SafeRelease(x) { if(x){ x->Release(); x = 0; } }
-
+#define SafeDelete(x)  { if(x){ delete x;     x = 0; } }
 namespace Azul
 {
 	class StateDirectXMan

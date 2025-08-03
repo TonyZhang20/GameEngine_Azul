@@ -31,6 +31,8 @@ namespace Azul
 	protected:
 		bool OnWindowResizeEvent(WindowResizeEvent& e) override;
 
+	public:
+		BufferFrame* poBufferFrame;
 	};
 }
 

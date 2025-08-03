@@ -27,6 +27,8 @@ namespace Azul
 			D,
 			E,
 			CHECKBOARD,
+			EMPTY,
+			SCENE_WINDOW,
 			Uninitialized
 		};
 
@@ -41,19 +43,26 @@ namespace Azul
 					  D3D11_FILTER filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR);
 
 		void ActivateTexture();
+		void ActivateResourceViewOnly();
+
 		void Init(TextureObject::Name _name,
 				  LPCWSTR filepath,
 				  D3D11_FILTER filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR);
+
+		void Init(ID3D11ShaderResourceView* pSRV,TextureObject::Name _name);
 
 		void CreateSampDesc(D3D11_FILTER filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR,
 			D3D11_TEXTURE_ADDRESS_MODE address = D3D11_TEXTURE_ADDRESS_WRAP);
 
 		char *GetName();
 		void SetName(TextureObject::Name _name);
-
+		void SetResourceView(ID3D11ShaderResourceView* pSRV);
 		virtual bool Compare(DLink* pTargetNode) override;
 		virtual void Wash() override;
-		ID3D11ShaderResourceView* GetTextureID();
+
+		ID3D11ShaderResourceView* GetTextureID() const;
+		void ReleaseShdaerResource();
+
 		// ---------------------------------------------
 		// 	   Data:
 		// ---------------------------------------------

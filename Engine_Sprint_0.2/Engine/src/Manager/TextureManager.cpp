@@ -66,7 +66,11 @@ namespace Azul
 			pNode->Init(TextureObject::Name::E, L"E.tga");
 			break;
 		case TextureObject::Name::CHECKBOARD:
-			pNode->Init(TextureObject::Name::E, L"CheckBoard.tga");
+			pNode->Init(TextureObject::Name::CHECKBOARD, L"CheckBoard.tga");
+			break;
+		case TextureObject::Name::SCENE_WINDOW:
+			pNode->Init(nullptr, TextureObject::Name::SCENE_WINDOW);
+			//Trace::out("INIT\n");
 			break;
 		default:
 			assert(false);
@@ -75,6 +79,7 @@ namespace Azul
 
 		return pNode;
 	}
+
 	TextureObject* TextureManager::RequireTexture(TextureObject::Name name)
 	{
 		TextureManager* pMan = TextureManager::privGetInstance();
@@ -86,8 +91,15 @@ namespace Azul
 		{
 			target = Load(name);
 		}
+		else
+		{
+			return target;
+		}
+
+		//Trace::out("Current Add %s \n", StringMe(name));
 
 		target->count++;
+
 		return target;
 	}
 
@@ -95,15 +107,6 @@ namespace Azul
 	{
 		TextureManager* pMan = TextureManager::privGetInstance();
 		assert(pMan != nullptr);
-
-		// Compare functions only compares two Nodes
-
-		// So:  Use the Compare Node - as a reference
-		//      use in the Compare() function
-		//TextureObject* pShaderObject = pMan->poNodeCompare;
-		//assert(pShaderObject);
-
-		//pShaderObject->name = name;
 
 		TextureObject* pData = nullptr;
 

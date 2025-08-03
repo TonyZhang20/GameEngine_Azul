@@ -129,30 +129,12 @@ namespace Azul
 		StateDirectXMan* pMan = StateDirectXMan::privGetInstance();
 		assert(pMan);
 
-		//void CleanupRenderTargets()
-		//{
-		//done	if (g_RenderTargetView) { g_RenderTargetView->Release(); g_RenderTargetView = nullptr; } done
-		//done	if (g_DepthStencilView) { g_DepthStencilView->Release(); g_DepthStencilView = nullptr; } done
-		//done	if (g_DepthStencilBuffer) { g_DepthStencilBuffer->Release(); g_DepthStencilBuffer = nullptr; }
-		//}
-
-		// 解除绑定所有渲染目标（重要）
-		//ID3D11RenderTargetView* nullViews[] = { nullptr };
-		//g_Context->OMSetRenderTargets(1, nullViews, nullptr);
-
 		HRESULT hr = pMan->mD3DSwapChain.poD3DSwapChain->ResizeBuffers(0, width, height, DXGI_FORMAT_UNKNOWN, 0);
 		if (FAILED(hr))
 		{
 			assert(false);
 		}
 
-		//	Device Recreate
-		//	if (g_RenderTargetView)
-		//	CreateTexture2D 	if (g_DepthStencilView) 
-		//	if (g_DepthStencilBuffer)
-		//	OMSetRenderTargets
-
-		//  g_Context->RSSetViewports(1, &g_Viewport); done
 	}
 
 	void StateDirectXMan::UpdateViewPort()

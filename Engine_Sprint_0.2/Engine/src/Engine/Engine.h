@@ -16,6 +16,7 @@
 #include "ApplicationEvent.h"
 #include "Layer.h"
 #include "AnimTimer.h"
+#include "BufferFrame.h"
 
 namespace Azul
 {
@@ -59,6 +60,8 @@ namespace Azul
 
 	public:
 		StateRenderTargetView mStateRenderTargetView; //Omset
+		//StateRenderTargetView mTextureRenderTarget;
+
 		StateDepthStencilView mDepthStencilView;
 		StateDepthStencilBuffer mDepthStencilBuffer;
 		StateBlend mBlendStateOff;
@@ -67,6 +70,8 @@ namespace Azul
 		StateRasterizer mStateRasterizerSolid;
 		StateRasterizer mStateRasterizerWireframe;
 		StateViewport mViewport;
+
+		BufferFrame* poBufferFrame = nullptr;
 	};
 
 

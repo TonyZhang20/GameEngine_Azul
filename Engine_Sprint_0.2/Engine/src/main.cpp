@@ -33,11 +33,15 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	return 0;
 }
 
-//TODO LIST :
-// Graphic Object rework //alomst
-// Material //done
-// Material Manager : Do nothing just delete Material after application finished ---- Done
-// RenderQueue Manager : For better performence //done
-// Transform
+// TODOLIST
+// TODO: GameWindow/EditorWindow
+// TODO: EditorLayer
+// TODO: Gizmos
+// TODO: ECS 重构
+// TODO: 重构 FrameBuffer -> 类似于, Buffer.Active(), DrawCall, Buffer.Clear() -> 析构与创建
+// TODO: 工具栏/菜单窗口
+// TODO: 工具栏拓展功能 -> Create GameObject so on
+// TODO: lua生成脚本
+
 
 // --- End of File ---

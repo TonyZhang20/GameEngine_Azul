@@ -129,6 +129,14 @@ namespace Azul
 		case TextureObject::Name::E:
 			strcpy_s(this->buffer, BUFFER_SIZE, STRING_ME(TextureObject::E));
 			break;
+
+		case TextureObject::Name::CHECKBOARD:
+			strcpy_s(this->buffer, BUFFER_SIZE, STRING_ME(TextureObject::CHECKBOARD));
+			break;
+		case TextureObject::Name::SCENE_WINDOW:
+			strcpy_s(this->buffer, BUFFER_SIZE, STRING_ME(TextureObject::SCENE_WINDOW));
+			break;
+
 		default:
 			assert(false);
 		}
