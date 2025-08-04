@@ -18,18 +18,18 @@
     <ClInclude Include="include\MySTLDLLInterface.h">
       <Filter>src\include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Vector.h">
+    <ClInclude Include="include\ZVector.h">
       <Filter>src\include</Filter>
     </ClInclude>
     <ClInclude Include="include\ForExport.h">
       <Filter>src\include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Queue.h">
+    <ClInclude Include="include\ZHashMap.h">
       <Filter>src\include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Vector.cpp">
+    <ClCompile Include="src\ZVector.cpp">
       <Filter>src\src</Filter>
     </ClCompile>
     <ClCompile Include="MySTL_DLLMain.cpp">

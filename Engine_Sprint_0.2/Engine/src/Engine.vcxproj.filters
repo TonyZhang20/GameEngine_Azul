@@ -101,6 +101,9 @@
     <Filter Include="Source Files\src\ImGui\EditorCode">
       <UniqueIdentifier>{bb237a40-edf4-4b51-b29c-191145342ce2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\Memory">
+      <UniqueIdentifier>{c6943c79-4da0-48a8-930e-f631b956fe84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject_Null.h">
@@ -376,6 +379,33 @@
     <ClInclude Include="Buffers\BufferFrame.h">
       <Filter>Source Files\src\Buffers</Filter>
     </ClInclude>
+    <ClInclude Include="Memory\HeapNormal.h">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\Mem.h">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\MEM_DLL_INTERFACE.h">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\MemEngine.h">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\Registration.h">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\Block.h">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\Heap.h">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\HeapFixed.h">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory\GlobalNew.h">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -620,6 +650,27 @@
     </ClCompile>
     <ClCompile Include="Buffers\BufferFrame.cpp">
       <Filter>Source Files\src\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\HeapNormal.cpp">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\Mem.cpp">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\Registration.cpp">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\Block.cpp">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\Heap.cpp">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\HeapFixed.cpp">
+      <Filter>Source Files\src\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory\GlobalNew.cpp">
+      <Filter>Source Files\src\Memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

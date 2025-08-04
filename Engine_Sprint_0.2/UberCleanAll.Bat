@@ -64,6 +64,6 @@ cd Layer
 call "CleanMe.Bat"
 cd ..
 
-cd MySTL
+cd Memory
 call "CleanMe.Bat"
 cd ..

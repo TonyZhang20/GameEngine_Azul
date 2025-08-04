@@ -61,11 +61,11 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;INPUT_USE_DLL;MATH_USE_DLL;ANIM_TIME_USE_DLL;FILE_USE_DLL;EVENTS_USE_DLL;PCSTREE_USE_DLL;MANAGER_USE_DLL;DIRECTX_TEX_IMPORT;USE_IMGUI_API;LAYER_USE_DLL;MYSTL_USE_DLL;_DEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;INPUT_USE_DLL;MATH_USE_DLL;ANIM_TIME_USE_DLL;FILE_USE_DLL;MEMORY_USE_DLL;EVENTS_USE_DLL;PCSTREE_USE_DLL;MANAGER_USE_DLL;DIRECTX_TEX_IMPORT;USE_IMGUI_API;LAYER_USE_DLL;MYSTL_USE_DLL;_DEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))"</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Math\include;$(SolutionDir)Libs\AnimTime\include;$(SolutionDir)Libs\Input\include;$(SolutionDir)Libs\File\include;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\PCSTree\include;$(SolutionDir)Libs\Layer\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Events\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\shaders\compiled;$(SolutionDir)Engine\src;$(SolutionDir)Engine\src\Camera;$(SolutionDir)Engine\src\Engine;$(SolutionDir)Engine\src\Game;$(SolutionDir)Engine\src\GameObject;$(SolutionDir)Engine\src\Tool;$(SolutionDir)Engine\src\ShaderObject;$(SolutionDir)Engine\src\Mesh;$(SolutionDir)Engine\src\GraphicsObject;$(SolutionDir)Engine\src\Manager;$(SolutionDir)Engine\src\Buffers;$(SolutionDir)Engine\src\State;$(SolutionDir)Engine\src\Texture;$(SolutionDir)Engine\src\Events;$(SolutionDir)Engine\src\Window;$(SolutionDir)Engine\src\Renderer;$(SolutionDir)Engine\src\ImGui;$(SolutionDir)Engine\src\ImGizmos;$(SolutionDir)Engine\src\Layers;$(SolutionDir)Engine\src\Application;$(SolutionDir)Engine\src\Material;$(SolutionDir)Engine\src\Render;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Math\include;$(SolutionDir)Libs\AnimTime\include;$(SolutionDir)Libs\Input\include;$(SolutionDir)Libs\File\include;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\PCSTree\include;$(SolutionDir)Libs\Memory\include;$(SolutionDir)Libs\Layer\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Events\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\shaders\compiled;$(SolutionDir)Engine\src;$(SolutionDir)Engine\src\Camera;$(SolutionDir)Engine\src\Engine;$(SolutionDir)Engine\src\Game;$(SolutionDir)Engine\src\GameObject;$(SolutionDir)Engine\src\Tool;$(SolutionDir)Engine\src\ShaderObject;$(SolutionDir)Engine\src\Mesh;$(SolutionDir)Engine\src\GraphicsObject;$(SolutionDir)Engine\src\Manager;$(SolutionDir)Engine\src\Buffers;$(SolutionDir)Engine\src\State;$(SolutionDir)Engine\src\Texture;$(SolutionDir)Engine\src\Events;$(SolutionDir)Engine\src\Window;$(SolutionDir)Engine\src\Renderer;$(SolutionDir)Engine\src\ImGui;$(SolutionDir)Engine\src\ImGizmos;$(SolutionDir)Engine\src\Layers;$(SolutionDir)Engine\src\Application;$(SolutionDir)Engine\src\Material;$(SolutionDir)Engine\src\Render;$(SolutionDir)Engine\src\GlobalNew;$(SolutionDir)Engine\src\Memory;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -85,7 +85,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;winmm.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;winmm.lib;$(CoreLibraryDependencies);MySTLDebugX64.lib;MySTLReleaseX64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)x64\Release\;$(SolutionDir)\x64\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreLinkEvent>
       <Command>if exist "$(SolutionDIr)Azul" rmdir /S /Q "$(SolutionDir)Azul"</Command>
@@ -102,11 +103,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;INPUT_USE_DLL;MATH_USE_DLL;ANIM_TIME_USE_DLL;FILE_USE_DLL;EVENTS_USE_DLL;PCSTREE_USE_DLL;MANAGER_USE_DLL;DIRECTX_TEX_IMPORT;USE_IMGUI_API;LAYER_USE_DLL;MYSTL_USE_DLL;NDEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;INPUT_USE_DLL;MATH_USE_DLL;ANIM_TIME_USE_DLL;FILE_USE_DLL;MEMORY_USE_DLL;EVENTS_USE_DLL;PCSTREE_USE_DLL;MANAGER_USE_DLL;DIRECTX_TEX_IMPORT;USE_IMGUI_API;LAYER_USE_DLL;MYSTL_USE_DLL;NDEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Math\include;$(SolutionDir)Libs\AnimTime\include;$(SolutionDir)Libs\Input\include;$(SolutionDir)Libs\File\include;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\PCSTree\include;$(SolutionDir)Libs\Layer\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Events\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\shaders\compiled;$(SolutionDir)Engine\src;$(SolutionDir)Engine\src\Camera;$(SolutionDir)Engine\src\Engine;$(SolutionDir)Engine\src\Game;$(SolutionDir)Engine\src\GameObject;$(SolutionDir)Engine\src\Tool;$(SolutionDir)Engine\src\ShaderObject;$(SolutionDir)Engine\src\Mesh;$(SolutionDir)Engine\src\GraphicsObject;$(SolutionDir)Engine\src\Manager;$(SolutionDir)Engine\src\Buffers;$(SolutionDir)Engine\src\State;$(SolutionDir)Engine\src\Texture;$(SolutionDir)Engine\src\Events;$(SolutionDir)Engine\src\Window;$(SolutionDir)Engine\src\Renderer;$(SolutionDir)Engine\src\ImGui;$(SolutionDir)Engine\src\ImGizmos;$(SolutionDir)Engine\src\Layers;$(SolutionDir)Engine\src\Application;$(SolutionDir)Engine\src\Material;$(SolutionDir)Engine\src\Render;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Math\include;$(SolutionDir)Libs\AnimTime\include;$(SolutionDir)Libs\Input\include;$(SolutionDir)Libs\File\include;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\PCSTree\include;$(SolutionDir)Libs\Memory\include;$(SolutionDir)Libs\Layer\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Events\include;$(SolutionDir)Engine\DXTex\include;$(SolutionDir)Engine\shaders\compiled;$(SolutionDir)Engine\src;$(SolutionDir)Engine\src\Camera;$(SolutionDir)Engine\src\Engine;$(SolutionDir)Engine\src\Game;$(SolutionDir)Engine\src\GameObject;$(SolutionDir)Engine\src\Tool;$(SolutionDir)Engine\src\ShaderObject;$(SolutionDir)Engine\src\Mesh;$(SolutionDir)Engine\src\GraphicsObject;$(SolutionDir)Engine\src\Manager;$(SolutionDir)Engine\src\Buffers;$(SolutionDir)Engine\src\State;$(SolutionDir)Engine\src\Texture;$(SolutionDir)Engine\src\Events;$(SolutionDir)Engine\src\Window;$(SolutionDir)Engine\src\Renderer;$(SolutionDir)Engine\src\ImGui;$(SolutionDir)Engine\src\ImGizmos;$(SolutionDir)Engine\src\Layers;$(SolutionDir)Engine\src\Application;$(SolutionDir)Engine\src\Material;$(SolutionDir)Engine\src\Render;$(SolutionDir)Engine\src\GlobalNew;$(SolutionDir)Engine\src\Memory;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <PrecompiledHeaderOutputFile>
@@ -125,8 +126,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;winmm.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;dxgi.lib;d3dcompiler.lib;winmm.lib;$(CoreLibraryDependencies);MySTLDebugX64.lib;MySTLReleaseX64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <AdditionalLibraryDirectories>$(SolutionDir)x64\Release\;$(SolutionDir)\x64\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreLinkEvent>
       <Command>if exist "$(SolutionDIr)Azul" rmdir /S /Q "$(SolutionDir)Azul"</Command>
@@ -190,6 +192,15 @@
     <ClInclude Include="Manager\ShaderObjectNodeManager.h" />
     <ClInclude Include="Manager\TextureManager.h" />
     <ClInclude Include="Material\Material.h" />
+    <ClInclude Include="Memory\Block.h" />
+    <ClInclude Include="Memory\GlobalNew.h" />
+    <ClInclude Include="Memory\Heap.h" />
+    <ClInclude Include="Memory\HeapFixed.h" />
+    <ClInclude Include="Memory\HeapNormal.h" />
+    <ClInclude Include="Memory\Mem.h" />
+    <ClInclude Include="Memory\MemEngine.h" />
+    <ClInclude Include="Memory\MEM_DLL_INTERFACE.h" />
+    <ClInclude Include="Memory\Registration.h" />
     <ClInclude Include="Mesh\Mesh.h" />
     <ClInclude Include="Mesh\MeshCube.h" />
     <ClInclude Include="Mesh\MeshHeaders.h" />
@@ -276,6 +287,13 @@
     <ClCompile Include="Manager\ShaderObjectNodeManager.cpp" />
     <ClCompile Include="Manager\TextureManager.cpp" />
     <ClCompile Include="Material\Material.cpp" />
+    <ClCompile Include="Memory\Block.cpp" />
+    <ClCompile Include="Memory\GlobalNew.cpp" />
+    <ClCompile Include="Memory\Heap.cpp" />
+    <ClCompile Include="Memory\HeapFixed.cpp" />
+    <ClCompile Include="Memory\HeapNormal.cpp" />
+    <ClCompile Include="Memory\Mem.cpp" />
+    <ClCompile Include="Memory\Registration.cpp" />
     <ClCompile Include="Mesh\Mesh.cpp" />
     <ClCompile Include="Mesh\MeshCube.cpp" />
     <ClCompile Include="Mesh\MeshNode.cpp" />

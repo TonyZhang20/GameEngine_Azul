@@ -18,12 +18,12 @@ namespace Azul
 		MANAGER_LIBRARY_API DLink &operator = (const DLink &) = default;
 		MANAGER_LIBRARY_API virtual ~DLink() = default;
 
-		MANAGER_LIBRARY_API virtual void Wash() = 0;
+		MANAGER_LIBRARY_API virtual void Wash() {};
 
 		// Becomes optional with a virtual with default implementation
 		MANAGER_LIBRARY_API virtual char *GetName();
 
-		MANAGER_LIBRARY_API virtual bool Compare(DLink *pTargetNode) = 0;
+		MANAGER_LIBRARY_API virtual bool Compare(DLink* pTargetNode) { assert(false); return false; };
 
 		MANAGER_LIBRARY_API void Clear();
 		MANAGER_LIBRARY_API virtual void Dump();

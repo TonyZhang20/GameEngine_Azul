@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{be3729ca-4d59-4b47-b171-7e3f0c9881b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\include">
+      <UniqueIdentifier>{2be8453f-2ebb-4713-9bee-caa9c8dc8399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\src">
+      <UniqueIdentifier>{29410e48-1822-4cb3-9f6e-7934b7c68216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dll">
+      <UniqueIdentifier>{ccf7508b-fb09-4afe-ba54-cde89cd78f00}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Mem.cpp">
+      <Filter>src\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Registration.cpp">
+      <Filter>src\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Heap.cpp">
+      <Filter>src\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HeapFixed.cpp">
+      <Filter>src\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HeapNormal.cpp">
+      <Filter>src\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Block.cpp">
+      <Filter>src\src</Filter>
+    </ClCompile>
+    <ClCompile Include="MEM_DLLMain.cpp">
+      <Filter>dll</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\MemEngine.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Registration.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Block.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Heap.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HeapFixed.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HeapNormal.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Mem.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MEM_DLL_INTERFACE.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

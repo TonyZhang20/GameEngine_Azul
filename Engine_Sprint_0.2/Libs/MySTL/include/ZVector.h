@@ -1,0 +1,328 @@
+#ifndef ZVECTOR_H
+#define ZVECTOR_H
+
+#include "MySTLDLLInterface.h"
+#include "GlobalNew.h"
+
+template<typename T>
+
+
+class ZVector
+{
+public:
+
+    typedef T* iterator;
+    typedef const T* const_iteraotr;
+
+    inline ZVector();
+    inline ZVector(size_t count, const char* const Name = "Vector Heap");
+    inline ~ZVector();
+
+    inline ZVector(const ZVector<T>& other);
+
+    inline ZVector<T>& operator = (ZVector<T>& v) = delete;
+
+    ZVector(ZVector&& other) = delete;
+    inline void push_back(const T& value);
+
+    inline void pop_back();
+    inline void clear();
+
+    //Create new vector, and copy data
+    inline void reserve(size_t newcapacity)
+    {
+        ensure_capacity(newcapacity);
+    }
+
+    inline iterator insert(iterator pos, const T& value)
+    {
+        //if (index > m_size)
+        //    throw std::out_of_range("insert index out of range");
+        //ensure_capacity(m_size + 1);
+        //for (size_t i = m_size; i > index; --i)
+        //{
+        //    m_data[i] = std::move(m_data[i - 1]);
+        //}
+        //m_data[index] = value;
+        //++m_size;
+
+        assert(pos <= _finish);
+
+        if (_finish == _end_of_storage) //Full
+        {
+            size_t n = pos - _start;
+            size_t  newCapcity = capacity() == 0 ? 2 : capacity() * 2;
+
+            reserve(newCapcity);
+
+            pos = _start + n;
+        }
+
+        iterator end = _finish - 1;
+        while (end >= pos)
+        {
+            *(end + 1) = *(end);
+            --end;
+        }
+
+        *pos = value;
+        ++_finish;
+
+        return pos;
+    }
+    inline void erase(iterator pos);
+
+    inline size_t size() const;
+    inline size_t capacity() const
+    {
+        return _end_of_storage - _start;
+    };
+    inline bool empty() const;
+
+    inline T& operator[](size_t index);
+    inline const T& operator[](size_t index) const;
+
+    inline iterator begin() { return _start; };
+    inline iterator end() { return _finish; };
+    inline const_iteraotr begin() const { return _start; };
+    inline const_iteraotr end() const { return _finish; };
+
+    inline void resize(size_t count, const T& val = T());
+    inline void ensure_capacity(size_t new_size);
+
+    inline void swap(ZVector<T>& v)
+    {
+        T* tmp = nullptr;
+
+        tmp = this->_start;
+        this->_start = v._start;
+        v._start = tmp;
+
+        tmp = this->_finish;
+        this->_finish = v._finish;
+        v._finish = tmp;
+
+        tmp = this->_end_of_storage;
+        this->_end_of_storage = v._end_of_storage;
+        v._end_of_storage = tmp;
+
+        Azul::Heap* tmp = this->mHeap;
+        this->mHeap = v.mHeap;
+        v.mHeap = tmp;
+    }
+
+private:
+
+    Azul::HeapNormal* mHeap;
+
+    T* _start;
+    T* _finish;
+    T* _end_of_storage;
+};
+
+//Implementation
+//Start with Size of 20
+template<typename T>
+inline ZVector<T>::ZVector()
+{
+    Azul::Mem::Code memResult;
+    memResult = Azul::Mem::NormalHeap(mHeap, sizeof(T) * 20 + 1024, "Vector Heap");
+
+    _start = new(mHeap, Azul::Mem::Align::Byte_4, __FILE__, __LINE__) T[20];
+    _finish = _start;
+    _end_of_storage = _start + 20;
+}
+
+template<typename T>
+inline ZVector<T>::ZVector(const ZVector<T>& v)
+{
+    Azul::Mem::Code memResult;
+    memResult = Azul::Mem::NormalHeap(mHeap, v.capacity() * sizeof(T), "Vector Heap");
+    assert(memResult == Azul::Mem::Code::OK);
+
+    _start = new(mHeap, Azul::Mem::Align::Byte_4, __FILE__, __LINE__) T[v.capacity()];
+    _finish = _start;
+    _end_of_storage = _start + v.capacity();
+
+    for (size_t i = 0; i < v.size(); ++i)
+    {
+        *_finish = v[i];
+        ++_finish;
+    }
+}
+
+template<typename T>
+inline ZVector<T>::ZVector(size_t count, const char* const Name)
+{
+    Azul::Mem::Code memResult;
+    memResult = Azul::Mem::NormalHeap(mHeap, count * sizeof(T) + 1024, Name);
+    assert(memResult == Azul::Mem::Code::OK);
+
+    _start = new(mHeap, Azul::Mem::Align::Byte_4, __FILE__, __LINE__) T[count];
+    _finish = _start;
+    _end_of_storage = _start + count;
+}
+
+template<typename T>
+inline ZVector<T>::~ZVector()
+{
+    if (!this->mHeap) return;
+
+    for (size_t i = 0; i < size(); i++)
+    {
+        _start[i].~T();
+    }
+    
+    Azul::Mem::Code result;
+    result = Azul::Mem::RemoveHeap(mHeap);
+
+    if (result != Azul::Mem::Code::OK)
+    {
+        mHeap->CallDestructForAllBlock();
+    }
+
+    _start = nullptr;
+    _finish = nullptr;
+    _end_of_storage = nullptr;
+
+    mHeap = nullptr;
+}
+
+template<typename T>
+inline void ZVector<T>::push_back(const T& value)
+{
+    if (_finish == _end_of_storage)
+    {
+        size_t newcapacity = capacity() == 0 ? 2 : capacity() * 2;
+        reserve(newcapacity);
+    }
+
+    *_finish = value;
+    ++_finish;
+}
+
+template<typename T>
+inline void ZVector<T>::pop_back()
+{
+    erase(end() - 1);
+}
+
+template<typename T>
+inline void ZVector<T>::clear()
+{
+    if (this->mHeap == nullptr) return;
+    _finish = _start;
+}
+
+template<typename T>
+inline void ZVector<T>::erase(iterator pos)
+{
+    assert(pos < _finish);
+    iterator ps = pos;
+    iterator end = _finish - 1;
+    while (end > ps)
+    {
+        *ps = *(ps + 1);
+        ++ps;
+    }
+
+    --_finish;
+    return pos;
+}
+
+
+template<typename T>
+inline size_t ZVector<T>::size() const { return _finish - _start; }
+
+
+template<typename T>
+inline bool ZVector<T>::empty() const { return size() == 0; }
+
+template<typename T>
+inline T& ZVector<T>::operator[](size_t index)
+{
+    assert(index < size() && "ZVector::operator[] - index out of bounds");
+    return _start[index];
+}
+
+template<typename T>
+inline const T& ZVector<T>::operator[](size_t index) const
+{
+    assert(index < size() && "ZVector::operator[] const - index out of bounds");
+    return _start[index];
+}
+
+
+template<typename T>
+inline void ZVector<T>::resize(size_t newSize, const T& val)
+{
+    size_t oldSize = size();
+
+    if (newSize < oldSize)
+    {
+        for (size_t i = newSize; i < oldSize; ++i)
+        {
+            _start[i].~T();
+        }
+
+        _finish = _start + newSize;
+    }
+    else if (newSize > oldSize)
+    {
+        ensure_capacity(newSize);
+
+        for (size_t i = size(); i < newSize; ++i)
+        {
+            //*(_start + i) = val;
+            new(_start + i) T(std::move(val));
+            //new(new_data + i) T(std::move(_start[i]));
+        }
+
+        _finish = _start + newSize;
+    }
+}
+
+template<typename T>
+inline void ZVector<T>::ensure_capacity(size_t new_cap)
+{
+    if (new_cap <= capacity()) return;
+
+    size_t new_size = new_cap;
+    size_t curSize = size();
+
+    while (new_size < capacity())
+        new_size *= 2;
+
+    Azul::Heap* reallocHeap = Azul::Mem::ReAlloc(this->mHeap, new_size * sizeof(T) + 1024);
+
+    if (reallocHeap == nullptr) //Realloc failed
+    {
+        Azul::Mem::Code memResult;
+        Azul::HeapNormal* newHeap;
+
+        memResult = Azul::Mem::NormalHeap(newHeap, new_size * sizeof(T) + 1024, mHeap->GetName());
+        assert(memResult == Azul::Mem::Code::OK);
+
+        T* new_data = new(newHeap, Azul::Mem::Align::Byte_4, __FILE__, __LINE__) T[new_size];
+
+        for (size_t i = 0; i < curSize; ++i)
+        {
+            //*(new_data + i) = _start[i];
+            new(new_data + i) T(std::move(_start[i]));
+        }
+        
+        Azul::Mem::RemoveHeap(mHeap);
+
+        mHeap = newHeap;
+
+        _start = new_data;
+        _finish = new_data + curSize;
+
+        //m_data = new_data;
+    }
+
+    _finish = _start + curSize;
+    this->_end_of_storage = _start + new_size;
+}
+
+#endif // !ZVECTOR_H

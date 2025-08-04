@@ -10,33 +10,22 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\ForExport.h" />
-    <ClInclude Include="include\MySTLDLLInterface.h" />
-    <ClInclude Include="include\ZHashMap.h" />
-    <ClInclude Include="include\ZVector.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="MySTL_DLLMain.cpp" />
-    <ClCompile Include="src\ForExport.cpp" />
-    <ClCompile Include="src\ZVector.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{989C647B-5858-4D64-B2F3-72F993651FB7}</ProjectGuid>
+    <ProjectGuid>{DBA2E8CF-C426-45BF-AE6C-DCAE6BB70B5F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Basics1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -72,11 +61,11 @@
       <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;MEMORY_USE_DLL;MANAGER_USE_DLL;_DEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";MYSTL_USE_DLL;MYSTL_LIBRARY_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;MEMORY_USE_DLL;MEMORY_LIBRARY_EXPORTS;MANAGER_USE_DLL;_DEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";FILE_USE_DLL;FILELIBRARY_EXPORTS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\Memory\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Memory\src;$(SolutionDir)Engine\src\GlobalNew;$(SolutionDir)Engine\src\Memory</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Memory\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Engine\src\GlobalNew</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -109,11 +98,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;MEMORY_USE_DLL;MANAGER_USE_DLL;NDEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";MYSTL_USE_DLL;MYSTL_LIBRARY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;MEMORY_USE_DLL;MEMORY_LIBRARY_EXPORTS;MANAGER_USE_DLL;NDEBUG;_CONSOLE;PESSAC;WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";SOLUTION_DIR=R"($(SolutionDir))";TOOLS_VERSION=R"($(VCToolsVersion))";LOCAL_WORKING_DIR=R"($(LocalDebuggerWorkingDirectory))";FILE_USE_DLL;FILELIBRARY_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\Memory\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Memory\src;$(SolutionDir)Engine\src\GlobalNew;$(SolutionDir)Engine\src\Memory</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\Memory\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Engine\src\GlobalNew</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <PrecompiledHeaderOutputFile>
@@ -138,6 +127,30 @@
       <Command>if exist "$(SolutionDIr)Azul" rmdir /S /Q "$(SolutionDir)Azul"</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="MEM_DLLMain.cpp" />
+    <ClCompile Include="src\Block.cpp" />
+    <ClCompile Include="src\Heap.cpp" />
+    <ClCompile Include="src\HeapFixed.cpp" />
+    <ClCompile Include="src\HeapNormal.cpp" />
+    <ClCompile Include="src\Mem.cpp" />
+    <ClCompile Include="src\Registration.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Block.h" />
+    <ClInclude Include="include\Heap.h" />
+    <ClInclude Include="include\HeapFixed.h" />
+    <ClInclude Include="include\HeapNormal.h" />
+    <ClInclude Include="include\Mem.h" />
+    <ClInclude Include="include\MemEngine.h" />
+    <ClInclude Include="include\MEM_DLL_INTERFACE.h" />
+    <ClInclude Include="include\Registration.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Manager\Manager.vcxproj">
+      <Project>{fed97ad8-3dc2-4059-a969-9fca3983468e}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

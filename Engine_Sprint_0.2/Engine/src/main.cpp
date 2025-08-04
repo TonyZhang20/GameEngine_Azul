@@ -10,34 +10,116 @@
 #include "Game.h"
 #include "File.h"
 
+#include "MemEngine.h"
+#include "ZHashMap.h"
+#include "ZVector.h"
+#include <vector>
+#include <unordered_map>
 using namespace Azul;
+
+struct TestClass
+{
+	TestClass() = default;
+	TestClass(int i) { e = i; };
+
+	~TestClass() 
+	{ 
+		//Trace::out("Decontruct\n"); 
+	};
+
+	void Print()
+	{
+		Trace::out("%d\n", e);
+	}
+
+	bool operator==(const TestClass& other) const
+	{
+		return false;
+	}
+
+	int e;
+	double a;
+	float b;
+	char c[32];
+	TestClass* p = nullptr;
+};
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
 {
-	File::SetBaseDir("");
+	Mem::Create();
 
-	//Azul::Game* poGame = new Azul::Game("Engine Prototype 0.2", 1920, 1080);
-	//ValueReturn = poGame->wWinMain(hInstance, prevInstance, cmdLine, cmdShow);
+	//File::SetBaseDir("");
 
-	//delete poGame;
-	Azul::Application* app = Azul::Application::Create(hInstance, prevInstance, cmdLine, cmdShow);
+	//Azul::Application* app = Azul::Application::Create(hInstance, prevInstance, cmdLine, cmdShow);
+	//
+	//WindowProps props("Azul Engine", 1920, 1080);
+
+	//app->SetWindow(new WindowsWindow(hInstance, props));
+	//app->CreateLayers();
+	//app->Run();
+
+	//delete app;
+	AnimTimer timer;
+
+
+	AnimTime micro(AnimTime::Duration::ONE_MICROSECOND);
+	AnimTime time;
+
+	ZVector<TestClass> myMap;
 	
-	WindowProps props("Azul Engine", 1920, 1080);
+	int size = 8000;
 
-	app->SetWindow(new WindowsWindow(hInstance, props));
-	app->CreateLayers();
-	app->Run();
+	timer.Tic();
 
-	delete app;
+	for (int i = 0; i < size; i++)
+	{
+		myMap.push_back(TestClass(i));
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		//myMap[i].Print();
+		myMap[i] = size - 1;
+	}
+
+	time = timer.Toc();
+
+
+	int t = AnimTime::Quotient(time, micro);
+	float actualTime = (float)t / 1000.f;
+	Trace::out("Mine Vec is %f\n", actualTime);
+
+	timer.Tic();
+
+	std::vector<TestClass> stlMap;
+
+	for (int i = 0; i < size; i++)
+	{
+		stlMap.push_back(TestClass(i));
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		//stlMap[i].Print();
+		stlMap[i] = size - i;
+	}
+
+	time = timer.Toc();
+
+	t = AnimTime::Quotient(time, micro);
+	actualTime = (float)t / 1000.f;
+	Trace::out("STL Vec is %f\n", actualTime);
+
+	Mem::Destroy();
 
 	return 0;
 }
 
 // TODOLIST
+// TODO: ECS 重构
 // TODO: GameWindow/EditorWindow
 // TODO: EditorLayer
 // TODO: Gizmos
-// TODO: ECS 重构
 // TODO: 重构 FrameBuffer -> 类似于, Buffer.Active(), DrawCall, Buffer.Clear() -> 析构与创建
 // TODO: 工具栏/菜单窗口
 // TODO: 工具栏拓展功能 -> Create GameObject so on
