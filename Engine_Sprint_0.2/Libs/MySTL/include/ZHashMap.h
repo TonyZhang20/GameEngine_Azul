@@ -1,7 +1,7 @@
 #ifndef ZHASHMAP_H
 #define ZHASHMAP_H
 
-#include "ZVector.h"
+#include "ZVector.hpp"
 #include "GlobalNew.h"
 #include <stdexcept>
 
@@ -19,10 +19,10 @@ private:
     template<typename Key, typename Val>
     struct Pair
     {
-        Key key; 
+        Key key;
         Val value;
         Pair* next;
-        Pair(const Key&k, const Val&v)
+        Pair(const Key& k, const Val& v)
             : key(k), value(v), next(nullptr)
         {
 
@@ -41,8 +41,8 @@ private:
     template <>
     size_t HashFunc(const std::string& key) {
         size_t hash = 0;
-        
-        for (char c : key) 
+
+        for (char c : key)
         {
             hash = hash * 31 + c; // 31 是质数，减少冲突
         }
@@ -56,7 +56,7 @@ private:
 
     size_t element_count; //current Size;
     size_t bucket_count; //bucketsCount;
-    const float load_factor_threshold = 0.8f;
+    const float load_factor_threshold = 1.f;
     float padding;//just for padding
 
 private:
@@ -97,7 +97,7 @@ private:
 public:
 
     explicit ZHashMap(uint32_t initBuckets = 16)
-        : 
+        :
         element_count(0),
         bucket_count(next_prime(initBuckets))
     {
@@ -114,7 +114,7 @@ public:
             Bucket* cur = bucket;
             while (cur)
             {
-                Bucket* next = cur->next; 
+                Bucket* next = cur->next;
 
                 delete cur;
 
@@ -129,7 +129,7 @@ public:
         if (element_count >= load_factor_threshold * bucket_count)
         {
             //Also Need to ReAllocHeap
-            rehash(next_prime( bucket_count * 2));
+            rehash(next_prime(bucket_count * 2));
         }
 
         size_t index = HashFunc(key) % bucket_count;
@@ -138,7 +138,7 @@ public:
 
         while (cur) //find next slot
         {
-            if (cur->key == key) 
+            if (cur->key == key)
             {
                 return false;
             }
@@ -152,7 +152,7 @@ public:
         //Set Links -> intert from head
         newNode->next = buckets[index];
         buckets[index] = newNode;
-        
+
         ++element_count;
         return true;
     }
@@ -206,7 +206,7 @@ public:
     {
         Bucket* curr = nullptr;
         Bucket* next = nullptr;
-        
+
         for (size_t i = 0; i < element_count; ++i)
         {
             curr = buckets[i];
@@ -234,7 +234,7 @@ public:
 
         while (cur != nullptr)
         {
-            if (cur->key == key) 
+            if (cur->key == key)
             {
                 return &(cur->value);
             }
@@ -244,7 +244,7 @@ public:
 
         return nullptr;
     }
-    
+
     const Val* find(const Key& key) const
     {
         size_t index = HashFunc(key) % bucket_count;
@@ -308,9 +308,9 @@ public:
     }
 
     inline bool empty() const { return element_count == 0; }
-    
-    inline size_t size() const { return element_count;  }
 
+    inline size_t size() const { return element_count; }
+    inline size_t bucketcount() const {return bucket_count;}
     inline bool is_prime(size_t num) const {
         if (num <= 1) return false;
         if (num == 2) return true;

@@ -5,8 +5,6 @@
 #include "GlobalNew.h"
 
 template<typename T>
-
-
 class ZVector
 {
 public:
@@ -15,7 +13,7 @@ public:
     typedef const T* const_iteraotr;
 
     inline ZVector();
-    explicit inline ZVector(size_t count, const char* const Name = "Vector Heap");
+    explicit inline ZVector(size_t count, const T& val = T(), const char* const Name = "Vector Heap");
     inline ~ZVector();
 
     inline ZVector(const ZVector<T>& other);
@@ -82,14 +80,34 @@ public:
     inline T& operator[](size_t index);
     inline const T& operator[](size_t index) const;
 
+    inline T& at(size_t index)
+    {
+        assert(index < size() && "ZVector::operator[] - index out of bounds");
+        return _start[index];
+    }
+
     inline iterator begin() { return _start; };
     inline iterator end() { return _finish; };
+
+    inline T& back() noexcept
+    { 
+        assert(size() > 0);
+
+        T& data = _start[size() - 1]; 
+        return data; 
+    };
+    inline const T& back() const noexcept
+    {
+        assert(size() > 0);
+
+        T& data = _start[size() - 1];
+        return data;
+    }
+
     inline const_iteraotr begin() const { return _start; };
     inline const_iteraotr end() const { return _finish; };
-
     inline void resize(size_t count, const T& val = T());
     inline void ensure_capacity(size_t new_size);
-
     inline void swap(ZVector<T>& v) noexcept
     {
         std::swap(this->_start, v._start);
@@ -140,15 +158,20 @@ inline ZVector<T>::ZVector(const ZVector<T>& v)
 }
 
 template<typename T>
-inline ZVector<T>::ZVector(size_t count, const char* const Name)
+inline ZVector<T>::ZVector(size_t count, const T& val, const char* const Name)
 {
     Azul::Mem::Code memResult;
     memResult = Azul::Mem::NormalHeap(mHeap, count * sizeof(T) + 1024, Name);
     assert(memResult == Azul::Mem::Code::OK);
 
     _start = new(mHeap, Azul::Mem::Align::Byte_4, __FILE__, __LINE__) T[count];
-    _finish = _start;
+    _finish = _start + count;
     _end_of_storage = _start + count;
+
+    for (size_t i = 0; i < size(); ++i)
+    {
+        _start[i] = val;
+    }
 }
 
 template<typename T>
@@ -218,7 +241,6 @@ inline void ZVector<T>::erase(iterator pos)
     return pos;
 }
 
-
 template<typename T>
 inline size_t ZVector<T>::size() const { return _finish - _start; }
 
@@ -239,7 +261,6 @@ inline const T& ZVector<T>::operator[](size_t index) const
     assert(index < size() && "ZVector::operator[] const - index out of bounds");
     return _start[index];
 }
-
 
 template<typename T>
 inline void ZVector<T>::resize(size_t newSize, const T& val)

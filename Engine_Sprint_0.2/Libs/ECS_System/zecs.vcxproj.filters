@@ -4,27 +4,16 @@
     <Filter Include="src">
       <UniqueIdentifier>{be3729ca-4d59-4b47-b171-7e3f0c9881b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="dll">
-      <UniqueIdentifier>{ccf7508b-fb09-4afe-ba54-cde89cd78f00}</UniqueIdentifier>
-    </Filter>
     <Filter Include="include">
       <UniqueIdentifier>{2be8453f-2ebb-4713-9bee-caa9c8dc8399}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\ZVector.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ZHashMap.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ZSparseSet.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\Forexport.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Entity.hpp">
+      <Filter>include</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

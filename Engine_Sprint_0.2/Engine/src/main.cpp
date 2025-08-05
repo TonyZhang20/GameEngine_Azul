@@ -11,12 +11,10 @@
 #include "File.h"
 
 #include "MemEngine.h"
-#include "ZHashMap.h"
-#include "ZVector.h"
-#include <vector>
-#include <unordered_map>
-using namespace Azul;
 
+
+using namespace Azul;
+/*
 struct TestClass
 {
 	TestClass() = default;
@@ -42,7 +40,7 @@ struct TestClass
 	float b;
 	char c[32];
 	TestClass* p = nullptr;
-};
+};*/
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
 {
@@ -110,7 +108,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	actualTime = (float)t / 1000.f;
 	Trace::out("STL Map is %f\n", actualTime);
 	*/
+
+
 	Mem::Destroy();
+
+
 
 	return 0;
 }
