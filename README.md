@@ -18,3 +18,11 @@ working on 重构 windows 部分， 我想对引擎的UI下手，发现当前的
 2025/07/31
 
 按照优先度 Shader Material 排序 渲染，减少GPU层面Shdaer的切换来进行优化
+
+2025/08/05
+
+重新定向 back buffer 复制渲染 到 离屏texture （偷懒）
+
+目前ZVector 与 ZHashMap 在大量数据的情况下表现优与 stl::vector stl::unorderedMap, 应该更适用于ECS的情况
+
+完成自己的STL vector 和 unorder_map, 准备开始 ECS 的 实现与重构
