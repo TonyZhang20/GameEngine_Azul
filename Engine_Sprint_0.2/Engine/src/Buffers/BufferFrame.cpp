@@ -5,9 +5,8 @@
 
 namespace Azul
 {
-	BufferFrame::BufferFrame(int width, int height)
-		: mWidth(width), mHeight(height), mTexture2D(nullptr), mTextureObject(nullptr),
-		mRenderTargetView()
+	BufferFrame::BufferFrame()
+		: mTexture2D(nullptr), mTextureObject(nullptr)
 	{
 		Create();
 	}
@@ -19,6 +18,7 @@ namespace Azul
 
 	void BufferFrame::Create()
 	{
+		/*
 		ID3D11Device* device = StateDirectXMan::GetDevice();
 		assert(device);
 
@@ -57,31 +57,71 @@ namespace Azul
 		//TextureManager::Dump();
 		mTextureObject = TextureManager::RequireTexture(TextureObject::Name::SCENE_WINDOW);
 		mTextureObject->SetResourceView(pSRV);
+		*/
+
+		if (mTexture2D != nullptr)
+		{
+			SafeRelease(mTexture2D);
+		}
+
+		IDXGISwapChain* pSwapChain = StateDirectXMan::GetSwapChain();
+		assert(pSwapChain);
+
+		ID3D11Texture2D* pTexBackBuffer = nullptr;
+		HRESULT hr = pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pTexBackBuffer);
+		assert(SUCCEEDED(hr));
+
+		BufferTexture2D backBuffer(pTexBackBuffer);
+
+		ID3D11Texture2D* pBackBuffer = backBuffer.GetID3D11Texture2D();
+
+		D3D11_TEXTURE2D_DESC backDesc = {};
+		pBackBuffer->GetDesc(&backDesc);
+
+		D3D11_TEXTURE2D_DESC srvDesc = backDesc;
+		srvDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
+		srvDesc.CPUAccessFlags = 0;
+		srvDesc.MiscFlags = 0;
+		srvDesc.Usage = D3D11_USAGE_DEFAULT;
+
+		hr = StateDirectXMan::GetDevice()->CreateTexture2D(&srvDesc, nullptr, &mTexture2D);
+		assert(SUCCEEDED(hr));
+
+		StateDirectXMan::GetContext()->CopyResource(this->mTexture2D, pBackBuffer);
+
+		ID3D11ShaderResourceView* pSRV = nullptr;
+		hr = StateDirectXMan::GetDevice()->CreateShaderResourceView(mTexture2D, nullptr, &pSRV);
+		assert(SUCCEEDED(hr));
+
+		mTextureObject = TextureManager::RequireTexture(TextureObject::Name::SCENE_WINDOW);
+		mTextureObject->SetResourceView(pSRV);
 	}
 
-	void BufferFrame::SetActive(StateDepthStencilView& DepthStencil)
+	//void BufferFrame::SetActive(StateDepthStencilView& DepthStencil)
+	//{
+	//	mRenderTargetView.Activate(DepthStencil);
+	//}
+
+	void BufferFrame::SetActive()
 	{
-		mRenderTargetView.Activate(DepthStencil);
+
+		//Copy Resources
+
+		IDXGISwapChain* pSwapChain = StateDirectXMan::GetSwapChain();
+		assert(pSwapChain);
+
+		ID3D11Texture2D* pTexBackBuffer = nullptr;
+		HRESULT hr = pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pTexBackBuffer);
+		assert(SUCCEEDED(hr));
+
+		BufferTexture2D backBuffer(pTexBackBuffer);
+
+		StateDirectXMan::GetContext()->CopyResource(this->mTexture2D, backBuffer.GetID3D11Texture2D());
 	}
 
-	void BufferFrame::Clear(const Vec4& clearColor, StateDepthStencilView& DepthStencil)
+	void BufferFrame::OnResize()
 	{
-		float clearDepth = 1.0f;
-		uint8_t clearStencil = 0;
-		
-		DepthStencil.Clear(clearDepth, clearStencil);
-		mRenderTargetView.Clear(clearColor);
-	}
-
-	void BufferFrame::OnResize(int width, int height)
-	{
-		this->mTextureObject->ReleaseShdaerResource();
-		this->mRenderTargetView.UnBindAllRenderTarget();
-
-		SafeRelease(mTexture2D);
-
-		this->mWidth = width;
-		this->mHeight = height;
+		Create();
 	}
 
 

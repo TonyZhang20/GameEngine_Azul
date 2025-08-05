@@ -37,7 +37,7 @@ struct TestClass
 		return false;
 	}
 
-	int e;
+	int e = 1;
 	double a;
 	float b;
 	char c[32];
@@ -48,38 +48,38 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 {
 	Mem::Create();
 
-	//File::SetBaseDir("");
+	File::SetBaseDir("");
 
-	//Azul::Application* app = Azul::Application::Create(hInstance, prevInstance, cmdLine, cmdShow);
-	//
-	//WindowProps props("Azul Engine", 1920, 1080);
+	Azul::Application* app = Azul::Application::Create(hInstance, prevInstance, cmdLine, cmdShow);
+	
+	WindowProps props("Azul Engine", 1920, 1080);
 
-	//app->SetWindow(new WindowsWindow(hInstance, props));
-	//app->CreateLayers();
-	//app->Run();
+	app->SetWindow(new WindowsWindow(hInstance, props));
+	app->CreateLayers();
+	app->Run();
 
-	//delete app;
+	delete app;
+	/*
 	AnimTimer timer;
-
 
 	AnimTime micro(AnimTime::Duration::ONE_MICROSECOND);
 	AnimTime time;
 
-	ZVector<TestClass> myMap;
 	
-	int size = 8000;
+	int size = 30000;
+
 
 	timer.Tic();
-
+	ZHashMap<int, TestClass> myMap;
+	 
 	for (int i = 0; i < size; i++)
 	{
-		myMap.push_back(TestClass(i));
+		myMap[i] = TestClass();
 	}
 
 	for (int i = 0; i < size; i++)
 	{
-		//myMap[i].Print();
-		myMap[i] = size - 1;
+		assert(myMap[i].e == 1);
 	}
 
 	time = timer.Toc();
@@ -87,29 +87,29 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 
 	int t = AnimTime::Quotient(time, micro);
 	float actualTime = (float)t / 1000.f;
-	Trace::out("Mine Vec is %f\n", actualTime);
+	Trace::out("Mine Map is %f\n", actualTime);
 
 	timer.Tic();
 
-	std::vector<TestClass> stlMap;
+	std::unordered_map<int, TestClass> stlMap;
+
 
 	for (int i = 0; i < size; i++)
 	{
-		stlMap.push_back(TestClass(i));
+		stlMap[i] = TestClass();
 	}
 
 	for (int i = 0; i < size; i++)
 	{
-		//stlMap[i].Print();
-		stlMap[i] = size - i;
+		assert(stlMap[i].e == 1);
 	}
 
 	time = timer.Toc();
 
 	t = AnimTime::Quotient(time, micro);
 	actualTime = (float)t / 1000.f;
-	Trace::out("STL Vec is %f\n", actualTime);
-
+	Trace::out("STL Map is %f\n", actualTime);
+	*/
 	Mem::Destroy();
 
 	return 0;

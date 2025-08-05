@@ -78,7 +78,7 @@ namespace Azul
 
 		GameObjectManager::Create();
 
-		this->poBufferFrame = new BufferFrame(Application::GetWidth(), Application::GetHeight());
+		this->poBufferFrame = new BufferFrame();
 
 #pragma region Demo1
 
@@ -336,6 +336,7 @@ namespace Azul
 		
 		}
 			*/
+
 		//GameObject* d2_objB_1 = GameObjectManager::Find("D2_OBJB_1");
 		//d2_objB_1->GetPos()->Print("Missing target");
 	}
@@ -348,12 +349,13 @@ namespace Azul
 	//-----------------------------------------------------------------------------
 	void Game::Render()
 	{
-		this->poBufferFrame->SetActive(this->mDepthStencilView);
-		this->poBufferFrame->Clear(Application::GetWindow()->GetWindowColor(), this->mDepthStencilView);
+		
+		
+		this->SetDefaultTargetMode();
 
 		GameObjectManager::Draw();
-
-		this->SetDefaultTargetMode();
+		
+		this->poBufferFrame->SetActive();
 	}
 
 	//-----------------------------------------------------------------------------
@@ -410,8 +412,6 @@ namespace Azul
 		this->mDepthStencilBuffer.ClearDepthStencilBuffer();
 		this->mStateRenderTargetView.UnBindAllRenderTarget();
 
-		this->poBufferFrame->OnResize(e.GetWidth(), e.GetHeight());
-
 		StateDirectXMan::ResizeSwapChain(width, height);
 
 		//ReBind
@@ -423,7 +423,7 @@ namespace Azul
 		this->mStateRenderTargetView.Activate(this->mDepthStencilView);
 		this->mViewport.ResizeViewPort(width, height);
 
-		this->poBufferFrame->Create();
+		this->poBufferFrame->OnResize();
 
 		CameraNodeManager::UpdateAspectRatio(GetAspectRatio());
 

@@ -15,13 +15,13 @@ public:
     typedef const T* const_iteraotr;
 
     inline ZVector();
-    inline ZVector(size_t count, const char* const Name = "Vector Heap");
+    explicit inline ZVector(size_t count, const char* const Name = "Vector Heap");
     inline ~ZVector();
 
     inline ZVector(const ZVector<T>& other);
 
     inline ZVector<T>& operator = (ZVector<T>& v) = delete;
-
+    //std move
     ZVector(ZVector&& other) = delete;
     inline void push_back(const T& value);
 
@@ -90,25 +90,13 @@ public:
     inline void resize(size_t count, const T& val = T());
     inline void ensure_capacity(size_t new_size);
 
-    inline void swap(ZVector<T>& v)
+    inline void swap(ZVector<T>& v) noexcept
     {
-        T* tmp = nullptr;
+        std::swap(this->_start, v._start);
+        std::swap(this->_finish, v._finish);
+        std::swap(this->_end_of_storage, v._end_of_storage);
 
-        tmp = this->_start;
-        this->_start = v._start;
-        v._start = tmp;
-
-        tmp = this->_finish;
-        this->_finish = v._finish;
-        v._finish = tmp;
-
-        tmp = this->_end_of_storage;
-        this->_end_of_storage = v._end_of_storage;
-        v._end_of_storage = tmp;
-
-        Azul::Heap* tmp = this->mHeap;
-        this->mHeap = v.mHeap;
-        v.mHeap = tmp;
+        std::swap(this->mHeap, v.mHeap);
     }
 
 private:

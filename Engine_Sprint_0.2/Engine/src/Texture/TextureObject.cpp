@@ -116,6 +116,11 @@ namespace Azul
 	//在外面开好了直接传进来
 	void TextureObject::SetResourceView(ID3D11ShaderResourceView* pSRV)
 	{
+		if (poTextureRV)
+		{
+			SafeRelease(poTextureRV);
+		}
+
 		this->poTextureRV = pSRV;
 		this->CreateSampDesc();
 	}
@@ -124,6 +129,7 @@ namespace Azul
 	{
 		if (this->poSampler)
 			SafeRelease(poSampler);
+
 		this->poSampler = nullptr;
 
 		assert(this->poTextureRV);

@@ -14,8 +14,7 @@ namespace Azul
 	class BufferFrame
 	{
 	public:
-		BufferFrame() = delete;
-		BufferFrame(int width, int height);
+		BufferFrame();
 		~BufferFrame();
 
 		BufferFrame(const BufferFrame&) = delete;
@@ -25,26 +24,22 @@ namespace Azul
 		void Create();
 
 		// 设置为当前渲染目标
-		void SetActive(StateDepthStencilView& DepthStencil);
+		void SetActive();
 
 		// 恢复默认渲染目标（回到swap chain）
 		void Restore();
 
-		void Clear(const Vec4& clearColor, StateDepthStencilView& DepthStencil);
-
-		void OnResize(int width, int height);
+		void OnResize();
 
 		// 获取TextureObject指针，用于ImGui::Image
 		TextureObject* GetTextureObject() const;
 
-		int mWidth;
-		int mHeight;
 	private:
 
 		ID3D11Texture2D* mTexture2D;             // 离屏纹理
 		TextureObject* mTextureObject;           // 包含SRV和采样器
 
-		StateRenderTargetView mRenderTargetView; // RTV包装类
+		//StateRenderTargetView mRenderTargetView; // RTV包装类
 	};
 }
 

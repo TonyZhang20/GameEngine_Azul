@@ -353,6 +353,8 @@ namespace Azul
 			}
 		}
 
+		psMem->UnRegisterPointer(b);
+
 		b->ClearGlobalLink();
 	}
 

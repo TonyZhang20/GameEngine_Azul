@@ -14,19 +14,6 @@ namespace Azul
 
         ImVec2 viewPortSize = ImGui::GetContentRegionAvail();
         
-        if (mViewPortSize.isEqual(*(Vec2*)&viewPortSize))
-        {
-            mViewPortSize = { viewPortSize.x, viewPortSize.y };
-
-            Game* layer = (Game*)LayerManager::Find("Engine Layer");
-
-            if (layer)
-            {
-                layer->poBufferFrame->OnResize(viewPortSize.x, viewPortSize.y);
-                layer->poBufferFrame->Create();
-            }
-        }
-
         TextureObject* renderTraget = TextureManager::RequireTexture(TextureObject::Name::SCENE_WINDOW);
         if (renderTraget) ImGui::Image((void*)renderTraget->GetTextureID(), ImVec2{ viewPortSize.x, viewPortSize.y });
 

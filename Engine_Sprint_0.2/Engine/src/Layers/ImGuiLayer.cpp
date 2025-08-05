@@ -113,6 +113,8 @@ namespace Azul
 
 	void ImGuiLayer::OnImGuiRender()
 	{
+		return;
+
 		static bool showWindow = true;
 		//ImGui::ShowDemoWindow(&showWindow);
 	

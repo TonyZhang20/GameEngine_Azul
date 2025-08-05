@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "File.h"
 #include "Application.h"
-
+#include "StateDirectXMan.h"
 namespace Azul
 {
 	//Hack
@@ -33,8 +33,8 @@ namespace Azul
 		// Set (point to ) render target
 		//      Only one Target, this maps to Pixel shader
 		// --------------------------------------------------------
-		//g_d3dDeviceContext->OMSetRenderTargets(1, &g_d3dRenderTargetView, g_d3dDepthStencilView);
 		this->mStateRenderTargetView.Activate(this->mDepthStencilView);
+		//StateDirectXMan::GetContext()->OMSetRenderTargets(1, &this->mStateRenderTargetView.poD3DRenderTargetView, nullptr);
 
 		//--------------------------------------------------------
 		// Set blend target
@@ -49,12 +49,7 @@ namespace Azul
 
 	float Game::GetAspectRatio() const
 	{
-		float ratio = (float)this->poBufferFrame->mWidth / (float)this->poBufferFrame->mHeight;
-
-		if (ratio == 0)
-		{
-			ratio = Application::GetWindow()->GetAspectRatio();
-		}
+		float ratio = Application::GetWindow()->GetAspectRatio();
 
 		return ratio;
 	}
