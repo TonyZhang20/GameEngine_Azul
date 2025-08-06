@@ -10,15 +10,16 @@ template <typename T, size_t PageSize = 4, typename = std::enable_if<std::is_int
 class ZSparseSet final
 {
 public:
-	inline void Add(T t)
+	inline void insert(T t)
 	{
 		density_.push_back(t);
 		assure(t);
 		index(t) = density_.size() - 1;
 	}
-	inline void Remove(T t)
+
+	inline void remove(T t)
 	{
-		if (!Contain(t)) return;
+		if (!contain(t)) return;
 		T& idx = index(t);
 
 		if (idx == density_.size() - 1)
@@ -35,7 +36,7 @@ public:
 			density_.pop_back();
 		}
 	}
-	inline bool Contain(T& t) const
+	inline bool contain(T& t) const
 	{
 		assert(t != null);
 		size_t p = page(t);
@@ -45,14 +46,14 @@ public:
 	}
 	inline T find(T& t) const
 	{
-		if (Contain(t));
+		if (contain(t));
 
 		size_t p = page(t);
 		size_t o = offset(t);
 
 		return density_[sparse_[p]->at(o)];
 	}
-	inline void Clear()
+	inline void clear()
 	{
 		density_.clear();
 
@@ -73,7 +74,7 @@ private:
 	ZVector<ZVector<T>*> sparse_;
 	~ZSparseSet() 
 	{
-		Clear();
+		clear();
 	}
 
 private:

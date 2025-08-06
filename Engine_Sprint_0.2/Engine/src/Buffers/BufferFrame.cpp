@@ -104,7 +104,6 @@ namespace Azul
 
 	void BufferFrame::SetActive()
 	{
-
 		//Copy Resources
 
 		IDXGISwapChain* pSwapChain = StateDirectXMan::GetSwapChain();
