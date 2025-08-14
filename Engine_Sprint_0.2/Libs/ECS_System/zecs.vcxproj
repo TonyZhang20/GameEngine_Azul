@@ -145,6 +145,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Archetype.h" />
+    <ClInclude Include="include\Chunk.h" />
     <ClInclude Include="include\EntityManager.h" />
     <ClInclude Include="include\SparseSet.hpp" />
     <ClInclude Include="include\Utility.h" />
