@@ -27,6 +27,8 @@ void *operator new( size_t inSize, Azul::HeapNormal *const pHeap, Azul::Mem::Ali
 
 	assert(pHeap != nullptr);
 
+	Azul::Mem::Create();
+
 	size_t alignment = 4 <<  static_cast<int>(align);
 	//void* p = malloc(inSize);
 	//pHeap->AddInfo(inSize);
@@ -53,6 +55,9 @@ void operator delete( void *p, Azul::HeapNormal *const pHeap, Azul::Mem::Align a
 
 void *operator new[](size_t inSize, Azul::HeapNormal *const pHeap, Azul::Mem::Align align, const char *inName, size_t lineNum)
 {
+
+	Azul::Mem::Create();
+
 	assert(pHeap != nullptr);
 
 	size_t alignment = 4 << static_cast<int>(align);
@@ -83,6 +88,8 @@ void operator delete[](void *p, Azul::HeapNormal *const pHeap, Azul::Mem::Align 
 
 void *operator new( size_t inSize, Azul::HeapFixed *const pHeap, const char *inName, size_t lineNum )
 {
+	Azul::Mem::Create();
+
 	assert(pHeap != nullptr);
 
 	size_t alignment = 4 << static_cast<int>(Azul::Mem::Align::Default);

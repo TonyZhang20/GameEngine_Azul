@@ -11,8 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\ZHashMap.h" />
-    <ClInclude Include="include\ZSparseSet.hpp" />
+    <ClInclude Include="include\ZHashMap.hpp" />
     <ClInclude Include="include\ZVector.hpp" />
   </ItemGroup>
   <ItemGroup>

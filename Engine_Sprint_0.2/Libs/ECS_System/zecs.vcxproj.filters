@@ -12,8 +12,31 @@
     <ClCompile Include="src\Forexport.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="include\Entity.hpp">
+    <ClCompile Include="include\Entity.h">
       <Filter>include</Filter>
     </ClCompile>
+    <ClCompile Include="src\Utility.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EntityManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\World.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\SparseSet.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\World.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

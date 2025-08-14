@@ -67,7 +67,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\ECS_System\include;$(SolutionDir)Libs\MySTL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\ECS_System\include;$(SolutionDir)Engine\src\Memory;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\Manager\include</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -104,7 +104,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\ECS_System\include;$(SolutionDir)Libs\MySTL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\ECS_System\include;$(SolutionDir)Engine\src\Memory;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\Manager\include</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <PrecompiledHeaderOutputFile>
@@ -130,13 +130,25 @@
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\Entity.hpp" />
+    <ClCompile Include="include\Entity.h" />
+    <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\Forexport.cpp" />
+    <ClCompile Include="src\Utility.cpp" />
+    <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Manager\Manager.vcxproj">
+      <Project>{fed97ad8-3dc2-4059-a969-9fca3983468e}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\MySTL\MySTL.vcxproj">
       <Project>{989c647b-5858-4d64-b2f3-72f993651fb7}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\EntityManager.h" />
+    <ClInclude Include="include\SparseSet.hpp" />
+    <ClInclude Include="include\Utility.h" />
+    <ClInclude Include="include\World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

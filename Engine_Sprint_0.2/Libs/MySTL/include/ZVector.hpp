@@ -1,8 +1,8 @@
 #ifndef ZVECTOR_H
 #define ZVECTOR_H
 
-#include "MySTLDLLInterface.h"
 #include "GlobalNew.h"
+
 
 template<typename T>
 class ZVector
@@ -18,11 +18,49 @@ public:
 
     inline ZVector(const ZVector<T>& other);
 
-    inline ZVector<T>& operator = (ZVector<T>& v) = delete;
-    //std move
-    ZVector(ZVector&& other) = delete;
-    inline void push_back(const T& value);
+    inline ZVector<T>& operator = (const ZVector<T>& v)
+    {
+        if (this != &v)
+        {
+            ZVector tmp(v);
+            swap(tmp);
+        }
 
+        return *this;
+    }
+
+    ZVector& operator=(ZVector&& other) noexcept
+    {
+        if (this != &other)
+        {
+            clear(); // 释放当前元素
+
+            Azul::Mem::RemoveHeap(mHeap);
+
+            _start = other._start;
+            _finish = other._finish;
+            _end_of_storage = other._end_of_storage;
+            mHeap = other.mHeap;
+
+            other._start = other._finish = other._end_of_storage = nullptr;
+            other.mHeap = nullptr;
+        }
+        return *this;
+    }
+
+    //std move
+    inline ZVector(ZVector&& other) noexcept
+        : _start(other._start),
+        _finish(other._finish),
+        _end_of_storage(other._end_of_storage),
+        mHeap(other.mHeap)
+    {
+        // 转移所有权后置空源对象
+        other._start = other._finish = other._end_of_storage = nullptr;
+        other.mHeap = nullptr;
+    }
+
+    inline void push_back(const T& value);
     inline void pop_back();
     inline void clear();
 
@@ -79,6 +117,14 @@ public:
 
     inline T& operator[](size_t index);
     inline const T& operator[](size_t index) const;
+    inline size_t operator()(const ZVector<T>& vec) const noexcept {} //不抛出异常 //Apply to hashmap
+
+    template <typename T>
+    bool operator==(const ZVector& other) const
+    {
+        return size() == other.size() &&
+            std::equal(begin(), end(), other.begin());
+    }
 
     inline T& at(size_t index)
     {
@@ -117,6 +163,19 @@ public:
         std::swap(this->mHeap, v.mHeap);
     }
 
+    template<typename... Args>
+    inline void emplace_back(Args&&... args)
+    {
+        if (_finish == _end_of_storage)
+        {
+            size_t newcapacity = capacity() == 0 ? 2 : capacity() * 2;
+            reserve(newcapacity);
+        }
+
+        new (_finish) T(std::forward<Args>(args)...);
+        ++_finish;
+    }
+
 private:
 
     Azul::HeapNormal* mHeap;
@@ -131,6 +190,8 @@ private:
 template<typename T>
 inline ZVector<T>::ZVector()
 {
+    Azul::Mem::Create();
+
     Azul::Mem::Code memResult;
     memResult = Azul::Mem::NormalHeap(mHeap, sizeof(T) * 20 + 1024, "Vector Heap");
 
@@ -212,6 +273,7 @@ inline void ZVector<T>::push_back(const T& value)
     ++_finish;
 }
 
+
 template<typename T>
 inline void ZVector<T>::pop_back()
 {
@@ -222,23 +284,24 @@ template<typename T>
 inline void ZVector<T>::clear()
 {
     if (this->mHeap == nullptr) return;
+    for (auto it = begin(); it != end(); ++it)
+    {
+        it->~T();
+    }
     _finish = _start;
 }
 
 template<typename T>
 inline void ZVector<T>::erase(iterator pos)
 {
-    assert(pos < _finish);
-    iterator ps = pos;
-    iterator end = _finish - 1;
-    while (end > ps)
+    assert(pos >= _start && pos < _finish);
+
+    if (pos + 1 != _finish)
     {
-        *ps = *(ps + 1);
-        ++ps;
+        std::move(pos + 1, _finish, pos);
     }
 
-    --_finish;
-    return pos;
+    (--_finish)->~T();
 }
 
 template<typename T>
@@ -280,11 +343,16 @@ inline void ZVector<T>::resize(size_t newSize, const T& val)
     {
         ensure_capacity(newSize);
 
-        for (size_t i = size(); i < newSize; ++i)
+        for (size_t i = oldSize; i < newSize; ++i)
         {
-            //*(_start + i) = val;
-            new(_start + i) T(std::move(val));
-            //new(new_data + i) T(std::move(_start[i]));
+            if constexpr (std::is_pointer_v<T>) 
+            {
+                new(_start + i) T(nullptr);  // 指针初始化为nullptr
+            }
+            else 
+            {
+                new(_start + i) T(val);      // 非指针类型使用拷贝/移动
+            }
         }
 
         _finish = _start + newSize;

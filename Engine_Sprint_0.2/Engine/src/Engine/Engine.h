@@ -62,11 +62,11 @@ namespace Azul
 		StateRenderTargetView mStateRenderTargetView; //Omset
 		//StateRenderTargetView mTextureRenderTarget;
 
-		StateDepthStencilView mDepthStencilView;
-		StateDepthStencilBuffer mDepthStencilBuffer;
+		StateDepthStencilView mDepthStencilView;	//深度模板窗口
+		StateDepthStencilBuffer mDepthStencilBuffer; //深度模板
+		StateDepthStencil mStateDepthStencil;		//深度模板状态
 		StateBlend mBlendStateOff;
 		StateBlend mBlendStateAlpha;
-		StateDepthStencil mStateDepthStencil;
 		StateRasterizer mStateRasterizerSolid;
 		StateRasterizer mStateRasterizerWireframe;
 		StateViewport mViewport;

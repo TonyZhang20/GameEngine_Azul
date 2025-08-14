@@ -15,10 +15,7 @@
     <ClInclude Include="include\ZVector.hpp">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\ZHashMap.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ZSparseSet.hpp">
+    <ClInclude Include="include\ZHashMap.hpp">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
