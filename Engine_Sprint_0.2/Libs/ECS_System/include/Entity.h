@@ -29,6 +29,7 @@ namespace std
 	{
 		size_t operator()(const zecs::EntityID& e) const noexcept
 		{
+			//easy hash
 			size_t h1 = std::hash<uint32_t>{}(e.index);
 			size_t h2 = std::hash<uint32_t>{}(e.version);
 			return h1 ^ (h2 << 1);

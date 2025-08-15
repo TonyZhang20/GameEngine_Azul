@@ -8,26 +8,18 @@
 #include "SparseSet.hpp"
 #include "EntityManager.h"
 
-#define ZECSASSERT(msg, expr) assert(((void)msg, expr))
-#define WORLD_PAGE_SIZE 4096
 
 namespace zecs
 {
 	using ComponentID = uint32_t;
 
-	struct IComponentData
-	{
-		IComponentData() = default;
-		virtual ~IComponentData() = default;
-		virtual void Remove(EntityID entity) = 0;
-	};
-
 	template<typename T>
 	struct ComponentData final : IComponentData //final 去虚拟化 优化内存
 	{
 
-		virtual void Remove(EntityID entity) final override {
-			
+		virtual void Remove(EntityID entity) final override
+		{
+			sparseSet.Remove(entity);
 		}
 
 		ZSparseSet<T, WORLD_PAGE_SIZE> sparseSet;

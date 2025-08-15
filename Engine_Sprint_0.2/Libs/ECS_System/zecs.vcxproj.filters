@@ -15,15 +15,6 @@
     <ClCompile Include="include\Entity.h">
       <Filter>include</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utility.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EntityManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\World.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SparseSet.hpp">
@@ -44,5 +35,16 @@
     <ClInclude Include="include\Archetype.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\ArchetypeWorld.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\Chunk.inl">
+      <Filter>include</Filter>
+    </None>
+    <None Include="include\Archetype.inl">
+      <Filter>include</Filter>
+    </None>
   </ItemGroup>
 </Project>

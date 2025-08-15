@@ -134,10 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\Entity.h" />
-    <ClCompile Include="src\EntityManager.cpp" />
     <ClCompile Include="src\Forexport.cpp" />
-    <ClCompile Include="src\Utility.cpp" />
-    <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Manager\Manager.vcxproj">
@@ -149,11 +146,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Archetype.h" />
+    <ClInclude Include="include\ArchetypeWorld.h" />
     <ClInclude Include="include\Chunk.h" />
     <ClInclude Include="include\EntityManager.h" />
     <ClInclude Include="include\SparseSet.hpp" />
     <ClInclude Include="include\Utility.h" />
     <ClInclude Include="include\World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\Archetype.inl" />
+    <None Include="include\Chunk.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

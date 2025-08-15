@@ -12,19 +12,26 @@
 
 #include "ZVector.hpp"
 #include "MemEngine.h"
-#include "World.h"
+
+#include "Entity.h"
+#include "ArchetypeWorld.h"
 
 using namespace Azul;
 
-struct RenderComponent
+struct Physics
 {
-	int someData;
-	float someOtherData;
+	float force;
+	float x, y, z;
 };
 
-struct PhysicsComponent
+struct Shader
 {
-	int someData;
+	int vs, fs;
+};
+
+struct Transform
+{
+	float x, y, z;
 };
 
 using namespace zecs;
@@ -93,24 +100,29 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	Trace::out("STL Map is %f\n", actualTime);
 	*/
 
-	World world;
+	ArchetypeWorld world;
 
-	EntityID entity = world.SpawnEntity(RenderComponent{ 123, 1 });
-	world.AddComponent(entity, PhysicsComponent{ 456 });
-
-	EntityID entity2 = world.SpawnEntity(RenderComponent{ 1234, 1 });
-	world.AddComponent(entity2, PhysicsComponent{ 5678 });
-
-	// 查询特定组件的Entity
-	ZVector<EntityID> entityIDs = world.Query<RenderComponent, PhysicsComponent>();
-
-	for (EntityID id : entityIDs)
+	for (int i = 0; i < 100; i++)
 	{
-		RenderComponent& renderComp = world.GetComponent<RenderComponent>(id);
-		PhysicsComponent& phy = world.GetComponent<PhysicsComponent>(id);
+		auto entity = world.SpawnEntity<Transform>(Transform{ 1.0f * i, 2.0f * i, 3.0f * i });
+		if (i % 2)
+		{
+			world.AddComponent<Shader>(entity, Shader{ i, 2 * i });
+		}
+		if (i % 3)
+		{
+			world.AddComponent<Physics>(entity, Physics{ 0.5f * i, 1.0f * i, 2.0f * i, 3.0f * i });
+		}
+		if (i % 6)
+		{
+			world.DestroyEntity(entity);
+		}
+	}
 
-		Trace::out("Render Comp is %d, %f\n", renderComp.someData, renderComp.someOtherData);
-		Trace::out("Phy Comp is %d\n", phy.someData);
+	for (auto e : world.Query<Shader, Physics>())
+	{
+		world.GetComponent<Shader>(e).vs++;
+		world.GetComponent<Physics>(e).force++;
 	}
 
 	Mem::Destroy();

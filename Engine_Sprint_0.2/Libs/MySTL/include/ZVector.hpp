@@ -108,6 +108,18 @@ public:
     }
     inline void erase(iterator pos);
 
+    inline void erase(const T& value)
+    {
+        for (auto it = begin(); it != end(); ++it)
+        {
+            if (*it == value)
+            {
+                erase(it);
+                break;
+            }
+        }
+    }
+
     inline size_t size() const;
     inline size_t capacity() const
     {
