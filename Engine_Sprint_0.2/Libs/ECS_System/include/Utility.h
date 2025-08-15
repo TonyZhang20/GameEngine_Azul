@@ -16,7 +16,7 @@ namespace zecs
 		}
 
 	private:
-		static uint32_t curIdx;
+		inline static uint32_t curIdx = 0;
 	};
 }
 

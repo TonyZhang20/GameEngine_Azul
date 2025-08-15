@@ -6,6 +6,9 @@
 
 namespace zecs
 {
+	/// <summary>
+	/// 主要用于创建与回收Entity ID
+	/// </summary>
 	class EntityManager final
 	{
 	public:
@@ -28,8 +31,8 @@ namespace zecs
 		}
 
 	private:
-		static ZVector<EntityID> freeList;
-		static uint32_t curIdx;
+		inline static ZVector<EntityID> freeList;
+		inline static uint32_t curIdx = 0;
 	};
 }
 
