@@ -59,7 +59,7 @@ namespace Azul
 
 	Game::~Game()
 	{
-
+		OnDetach();
 	}
 
 	//-----------------------------------------------------------------------------
@@ -394,6 +394,12 @@ namespace Azul
 
 		this->mStateRenderTargetView.Clear(Application::GetWindow()->GetWindowColor());
 		this->mDepthStencilView.Clear(clearDepth, clearStencil);
+	}
+
+	void Game::OnDetach()
+	{
+		this->UnloadContent();
+		this->Cleanup();
 	}
 
 	bool Game::OnWindowResizeEvent(WindowResizeEvent& e)

@@ -23,6 +23,7 @@ namespace Azul
 		virtual void Update(float deltaTime) override;
 		virtual void Render() override;
 		virtual	void ClearDepthStencilBuffer() override;
+		virtual void OnDetach() override;
 
 		float GetAspectRatio() const;
 		void SetDefaultTargetMode();

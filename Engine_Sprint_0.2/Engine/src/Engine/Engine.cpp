@@ -251,6 +251,12 @@ namespace Azul
 	}
 
 
+	void Engine::OnDestory()
+	{
+		UnloadContent();
+		Cleanup();
+	}
+
 	// ------------------------------------
 	// Cleanup()
 	// ------------------------------------

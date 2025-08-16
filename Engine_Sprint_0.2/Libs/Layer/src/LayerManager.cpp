@@ -239,6 +239,7 @@ namespace Azul
 
 	LayerManager::~LayerManager()
 	{
+
 	}
 
 	//Should not call baseAdd

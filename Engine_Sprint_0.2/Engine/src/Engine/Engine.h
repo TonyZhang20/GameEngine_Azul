@@ -42,9 +42,9 @@ namespace Azul
 		virtual void Update(float deltaTime) = 0;
 		virtual void Render() = 0;
 		virtual	void ClearDepthStencilBuffer() = 0;
-
-
-		void Cleanup();
+		virtual void OnDestory();
+		
+		virtual void Cleanup();
 
 		int InitDirectX(HINSTANCE hInstance, HWND hwnd, BOOL vSync);
 		static DXGI_RATIONAL QueryRefreshRate(UINT screenWidth, UINT screenHeight, BOOL vsync);

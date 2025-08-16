@@ -38,7 +38,7 @@ namespace Azul
 
 	Application::~Application()
 	{
-		LayerManager::Destroy();
+
 	}
 
 	void Application::SetWindow(Window* window)
@@ -131,7 +131,9 @@ namespace Azul
 			MessageBox(nullptr, TEXT("Failed to load content."), TEXT("Error"), MB_OK);
 			return;
 		}
+
 		AnimTimer t;
+
 		while (!quit)
 		{
 			Input::Update();
@@ -154,10 +156,10 @@ namespace Azul
 			//Trace::out("%f\n", deltaTime);
 		}
 
-		gameLayer->UnloadContent();
-		gameLayer->Cleanup();
-
 		pWindow->Destroy();
+
+
+		LayerManager::Destroy();
 	}
 
 	void Application::OnEvent(Event& e)
