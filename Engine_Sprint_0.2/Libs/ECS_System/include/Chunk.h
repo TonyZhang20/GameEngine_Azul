@@ -43,8 +43,8 @@ namespace zecs
 		// 已知类型，逐个拷贝组件的数据
 		template <typename T, typename... Remains>
 		void CopyComponentDataRecursive(size_t index, T&& component, Remains &&...remains);
-		void CopyComponentDataRecursive(size_t);
 
+		inline void CopyComponentDataRecursive(size_t index) {}
 
 	private:
 		uint8_t* buffer = nullptr;      // 内存块指针

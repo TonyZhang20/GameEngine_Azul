@@ -120,7 +120,7 @@ namespace zecs
     }
 
     template <typename T, typename... Remains>
-    void Chunk::CopyComponentDataRecursive(size_t index, T&& component, Remains&&... remains)
+    inline void Chunk::CopyComponentDataRecursive(size_t index, T&& component, Remains&&... remains)
     {
         auto cid = IndexGetter::Get<T>();
         uint8_t* compArray = buffer + archetype->componentLayouts[cid].offset;
@@ -128,9 +128,7 @@ namespace zecs
 
         T* dest = reinterpret_cast<T*>(compArray + index * compSize);
         *dest = std::forward<T>(component);
-        if constexpr (sizeof...(Remains) > 0)
-            this->CopyComponentDataRecursive(index, std::forward<Remains>(remains)...);
+  
+        this->CopyComponentDataRecursive(index, std::forward<Remains>(remains)...);
     }
-
-    void Chunk::CopyComponentDataRecursive(size_t) {}
 }

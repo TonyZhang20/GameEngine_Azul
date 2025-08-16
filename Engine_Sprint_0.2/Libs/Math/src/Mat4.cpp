@@ -657,10 +657,12 @@ namespace Azul
 		*this = *this - A;
 		return *this;
 	}
+
 	Mat4 Mat4::operator*(const float s) const
 	{
 		return Mat4(this->_v0 * s, this->_v1 * s,this->_v2 * s, this->_v3 * s);
 	}
+
 	Mat4& Mat4::operator*=(const float scale)
 	{
 		this->_v0 *= scale;
@@ -670,6 +672,7 @@ namespace Azul
 
 		return *this;
 	}
+
 	Mat4 Mat4::operator*(const Mat4& A) const
 	{
 		Mat4 result;
@@ -696,6 +699,7 @@ namespace Azul
 
 		return result;
 	}
+
 	Mat4& Mat4::operator*=(const Mat4& A)
 	{
 		*this = *this * A;

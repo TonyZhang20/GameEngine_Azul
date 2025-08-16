@@ -104,6 +104,15 @@
     <Filter Include="Source Files\src\Memory">
       <UniqueIdentifier>{c6943c79-4da0-48a8-930e-f631b956fe84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\Scene">
+      <UniqueIdentifier>{ed9a22b9-c1c5-435c-b27c-42d6fb36b8f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\Scene\Components">
+      <UniqueIdentifier>{355dd78f-4cb3-43ef-a590-27ee36bbaba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\Scene\Ecs">
+      <UniqueIdentifier>{aab497a1-2385-4c09-8fc6-ec9788ec230c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject_Null.h">
@@ -355,7 +364,7 @@
     <ClInclude Include="ImGizmos\ImGuizmo.h">
       <Filter>Source Files\src\ImGizmos</Filter>
     </ClInclude>
-    <ClInclude Include="Layers\ImGuiLayer.h">
+    <ClInclude Include="Layers\EditorLayer.h">
       <Filter>Source Files\src\Layers</Filter>
     </ClInclude>
     <ClInclude Include="Application\Application.h">
@@ -405,6 +414,15 @@
     </ClInclude>
     <ClInclude Include="Memory\GlobalNew.h">
       <Filter>Source Files\src\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Components\Components.h">
+      <Filter>Source Files\src\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Source Files\src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Ecs\ZEntity.h">
+      <Filter>Source Files\src\Scene\Ecs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -624,7 +642,7 @@
     <ClCompile Include="ImGizmos\ImGuizmo.cpp">
       <Filter>Source Files\src\ImGizmos</Filter>
     </ClCompile>
-    <ClCompile Include="Layers\ImGuiLayer.cpp">
+    <ClCompile Include="Layers\EditorLayer.cpp">
       <Filter>Source Files\src\Layers</Filter>
     </ClCompile>
     <ClCompile Include="Application\Application.cpp">
@@ -671,6 +689,12 @@
     </ClCompile>
     <ClCompile Include="Memory\GlobalNew.cpp">
       <Filter>Source Files\src\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>Source Files\src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Ecs\ZEntity.cpp">
+      <Filter>Source Files\src\Scene\Ecs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

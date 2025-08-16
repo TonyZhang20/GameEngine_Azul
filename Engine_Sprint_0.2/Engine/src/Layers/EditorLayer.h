@@ -1,21 +1,23 @@
 #ifndef IMGUI_LAYER_H
 #define IMGUI_LAYER_H
 
+#include "Scene.h"
 #include "imgui.h"
 #include "Layer.h"
 #include "MouseEvent.h"
 #include "KeyEvent.h"
+#include "Entity.h"
 #include "ApplicationEvent.h"
 
 
 namespace Azul
 {
 
-	class ImGuiLayer : public Layer
+	class EditorLayer : public Layer
 	{
 	public:
-		ImGuiLayer();
-		~ImGuiLayer();
+		EditorLayer();
+		~EditorLayer();
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
@@ -26,11 +28,19 @@ namespace Azul
 		void End();
 		virtual void OnImGuiRender() override;
 
-		ImGuiLayer& operator = (ImGuiLayer&) = delete;
-		ImGuiLayer(ImGuiLayer&) = delete;
+		EditorLayer& operator = (EditorLayer&) = delete;
+		EditorLayer(EditorLayer&) = delete;
+
+		template<typename T>
+		inline ZVector<T> FindAllComponentsBy()
+		{
+			return this->activeScene->FindObjectsBy<T>();
+		}
+
 
 	private:
 		class ImGuiBuild* buildWindow;
+		Scene* activeScene;
 
 	};
 }

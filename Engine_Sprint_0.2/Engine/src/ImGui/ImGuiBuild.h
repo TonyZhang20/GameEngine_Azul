@@ -20,7 +20,6 @@ namespace Azul
 		void ShowExampleAppDockSpace(bool* p_open);
 
 		Vec2 mViewPortSize;
-
 	};
 }
 

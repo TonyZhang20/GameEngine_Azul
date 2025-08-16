@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "AnimTimer.h"
-#include "ImGuiLayer.h"
+#include "EditorLayer.h"
 #include "WindowsWindow.h"
 #include "LayerManager.h"
 #include "Game.h"
@@ -33,7 +33,7 @@ namespace Azul
 	Application::Application()
 	{
 		LayerManager::Create();
-		imGuiLayer = new ImGuiLayer();
+		editorLayer = new EditorLayer();
 	}
 
 	Application::~Application()
@@ -63,9 +63,9 @@ namespace Azul
 	//Add Layer
 	void Application::CreateLayers()
 	{
-		imGuiLayer->SetOrder(100);
+		editorLayer->SetOrder(100);
 
-		LayerManager::Add(imGuiLayer);
+		LayerManager::Add(editorLayer);
 
 		Game* gameLayer = new Game();
 		gameLayer->SetOrder(0);
@@ -73,7 +73,7 @@ namespace Azul
 		LayerManager::Add(gameLayer, nullptr);
 
 		CreateDirectx();
-		imGuiLayer->OnAttach();
+		editorLayer->OnAttach();
 	}
 
 	//Init DirectX
@@ -145,11 +145,11 @@ namespace Azul
 
 			LayerManager::Update(deltaTime);
 
-			app->imGuiLayer->Begin();
+			app->editorLayer->Begin();
 			
 			LayerManager::RenderImGui();
 
-			app->imGuiLayer->End();
+			app->editorLayer->End();
 		
 			app->GetWindow()->Present();
 
@@ -157,8 +157,6 @@ namespace Azul
 		}
 
 		pWindow->Destroy();
-
-
 		LayerManager::Destroy();
 	}
 

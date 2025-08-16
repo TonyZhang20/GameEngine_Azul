@@ -6,7 +6,7 @@
 #include "Window.h"
 #include "Event.h"
 #include "Layer.h"
-#include "ImGuiLayer.h"
+#include "EditorLayer.h"
 #include "ApplicationEvent.h"
 #include "WindowsWindow.h"
 
@@ -45,7 +45,7 @@ namespace Azul
 		static Application* instance;
 		bool showLoopTime = false;
 
-		ImGuiLayer* imGuiLayer = nullptr;
+		EditorLayer* editorLayer = nullptr;
 		Window* pWindow = nullptr;
 
 		HINSTANCE windowInstance;

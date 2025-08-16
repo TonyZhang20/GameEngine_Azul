@@ -44,7 +44,7 @@ namespace zecs
 		}
 
 	private:
-		static constexpr size_t CHUNK_SIZE = 16 * 1024; // 16KB
+		static constexpr size_t CHUNK_SIZE = 8 * 1024; // 16KB
 		ZVector<Chunk*> chunks;
 		ArchetypeID hash;
 

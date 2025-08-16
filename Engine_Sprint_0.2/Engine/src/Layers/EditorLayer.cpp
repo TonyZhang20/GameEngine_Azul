@@ -1,4 +1,4 @@
-#include "ImGuiLayer.h"
+#include "EditorLayer.h"
 
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
@@ -6,18 +6,21 @@
 #include "StateDirectXMan.h"
 #include "Application.h"
 #include "ImGuiBuild.h"
+#include "Components.h"
+#include "ZEntity.h"
 
 namespace Azul
 {
-	ImGuiLayer::ImGuiLayer() 
-		: Layer("ImGuiLayer")
+	EditorLayer::EditorLayer() 
+		: Layer("EditorLayer")
 	{
 		buildWindow = new ImGuiBuild();
 	}
 
-	ImGuiLayer::~ImGuiLayer()
+	EditorLayer::~EditorLayer()
 	{
 		delete buildWindow;
+		delete activeScene;
 
 		ImGui_ImplDX11_Shutdown();
 		ImGui_ImplWin32_Shutdown();
@@ -25,7 +28,7 @@ namespace Azul
 		ImGui::DestroyContext();
 	}
 
-	void ImGuiLayer::OnAttach()
+	void EditorLayer::OnAttach()
 	{
 		//SetUp ImGUI
 		// Make process DPI aware and obtain main monitor scale
@@ -68,31 +71,33 @@ namespace Azul
 
 		ImGui_ImplWin32_Init(Application::GetWindow()->GetNativeHandle());
 		ImGui_ImplDX11_Init(StateDirectXMan::GetDevice(), StateDirectXMan::GetContext());
+
+		activeScene = new Scene();
 	}
 
-	void ImGuiLayer::OnDetach()
+	void EditorLayer::OnDetach()
 	{
 
 	}
 
-	void ImGuiLayer::OnUpdate(float UpdateTime)
+	void EditorLayer::OnUpdate(float UpdateTime)
 	{
-
+		activeScene->Update(UpdateTime);
 	}
 
-	void ImGuiLayer::OnEvent(Event& e)
+	void EditorLayer::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
 	}
 
-	void ImGuiLayer::Begin()
+	void EditorLayer::Begin()
 	{
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
 	}
 
-	void ImGuiLayer::End()
+	void EditorLayer::End()
 	{
 		ImGuiIO& io = ImGui::GetIO();
 
@@ -112,7 +117,7 @@ namespace Azul
 		}
 	}
 
-	void ImGuiLayer::OnImGuiRender()
+	void EditorLayer::OnImGuiRender()
 	{
 		static bool showWindow = true;
 		//ImGui::ShowDemoWindow(&showWindow);

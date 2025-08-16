@@ -95,54 +95,59 @@ namespace zecs
 
     inline void Archetype::CalculateLayout()
     {
-        constexpr size_t kChunkSize = Chunk::kSize; // 16KB
+        constexpr size_t kChunkSize = Chunk::kSize; // 8KB
 
-        // 估算单个实体所需空间
-        size_t perEntitySize = sizeof(EntityID);
+        // 先求单个最小开销（以对齐到最大 alignment 来估算下界）
+        size_t minEntitySize = sizeof(EntityID);
+        size_t maxAlign = alignof(EntityID);
+
         for (const auto& [_, layout] : componentLayouts)
         {
-            perEntitySize += layout.size;
+            minEntitySize += layout.size;
+            maxAlign = std::max(maxAlign, layout.alignment);
         }
-        // 估算初始容量
-        size_t estimatedCapacity = std::max((size_t)1, kChunkSize / perEntitySize);
-        size_t finalCapacity = 0;
 
-        // 迭代计算实际容量
-        for (int i = 0; i < 5; i++)
+        minEntitySize = AlignUp(minEntitySize, maxAlign);
+
+        // 容量搜索边界
+        size_t low = 1;
+        size_t high = kChunkSize / minEntitySize;
+        size_t best = 1;
+
+        auto CalcRequiredSpace = [&](size_t capacity) -> size_t 
         {
-            size_t currentOffset = 0;
-            size_t requiredSpace = 0;
-
-            // 实体数组所需容量
-            size_t entityArraySize = sizeof(EntityID) * estimatedCapacity;
-            requiredSpace = currentOffset + entityArraySize;
-            currentOffset = requiredSpace;
-
-            // 组件数组所需容量
+            size_t offset = 0;
+            // 实体数组
+            offset += sizeof(EntityID) * capacity;
+            // 组件数组
             for (const auto& [_, layout] : componentLayouts)
             {
-                currentOffset = AlignUp(currentOffset, layout.alignment);
-                size_t compArraySize = layout.size * estimatedCapacity;
-                requiredSpace = currentOffset + compArraySize;
-                currentOffset = requiredSpace;
+                offset = AlignUp(offset, layout.alignment);
+                offset += layout.size * capacity;
             }
+            return offset;
+        };
 
-            // 检查是否满足空间
-            if (requiredSpace <= kChunkSize)
+        // 二分查找最大容量
+        while (low <= high)
+        {
+            size_t mid = (low + high) / 2;
+            size_t required = CalcRequiredSpace(mid);
+
+            if (required <= kChunkSize)
             {
-                finalCapacity = estimatedCapacity;
-                estimatedCapacity++; // 满足则尝试更大的容量
+                best = mid;       // 这个容量可行，尝试更大
+                low = mid + 1;
             }
             else
             {
-                break; // 超过空间，使用上次成功的容量
+                high = mid - 1;   // 太大，缩小
             }
         }
 
-        // 确保至少容纳1个实体
-        chunkCapacity = std::max((size_t)1, finalCapacity);
+        chunkCapacity = best;
 
-        // 确定好总容量后，开始计算各数组的偏移量
+        // ---- 最终确定偏移 ----
         size_t currentOffset = 0;
 
         // 实体数组偏移为0
@@ -156,4 +161,5 @@ namespace zecs
             currentOffset += layout.size * chunkCapacity;
         }
     }
+
 }

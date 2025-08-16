@@ -139,7 +139,6 @@ namespace Azul
 				float _vx;
 				float _vy;
 				float _vz;
-
 			};
 		};
 	};

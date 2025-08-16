@@ -31,7 +31,7 @@ namespace zecs
 			if (auto it = entities.find(entity); it == entities.end()) return false;
 			auto [archetype, chunk, index] = entities[entity];
 			auto cid = IndexGetter::Get<T>();
-			return archetype->componentLayouts.contains(cid);
+			return archetype->componentLayouts.find(cid) != archetype->componentLayouts.end();
 		}
 
 		template<typename... Components>
@@ -95,14 +95,9 @@ namespace zecs
 			}
 
 			auto [chunk, index] = archetypes[hash].AddEntity(entity, std::forward<Components>(components)...);
+
 			entities[entity] = { &archetypes[hash], chunk, index };
 
-			return entity;
-		}
-
-		EntityID SpawnEntity()
-		{
-			EntityID entity = EntityManager::Create();
 			return entity;
 		}
 
@@ -111,6 +106,7 @@ namespace zecs
 			if (auto it = entities.find(entity); it != entities.end() && it->first.version == entity.version)
 			{
 				auto [archetype, chunk, index] = entities[entity];
+
 				EntityID changedEntity = chunk->RemoveEntity(index);
 
 				if (changedEntity.index != 0xffffff)
@@ -129,7 +125,7 @@ namespace zecs
 		}
 
 		template<typename T>
-		inline void AddComponent(EntityID entity, T&& component)
+		inline T& AddComponent(EntityID entity, T&& component)
 		{
 			using DecayedT = std::decay_t<T>;
 
@@ -172,6 +168,8 @@ namespace zecs
 
 			// 更新映射关系
 			entities[entity] = { destArchetype, destChunk, destIndex };
+
+			return destChunk->GetComponentArray<T>()[index];
 		}
 
 		template <typename T>
@@ -185,7 +183,7 @@ namespace zecs
 
 			std::sort(newComponentTypes.begin(), newComponentTypes.end());
 
-			size_t hash = HashComponentTypes(newComponentTypes);
+			size_t hash = Archetype::HashComponentTypes(newComponentTypes);
 
 			if (auto it = archetypes.find(hash); it == archetypes.end())
 			{
@@ -226,7 +224,9 @@ namespace zecs
 		ZVector<EntityID> Query()
 		{
 			ZVector<EntityID> outEntities;
-			auto componentTypes = GetComponentTypes<Components...>();
+			ZVector<ComponentID> componentTypes = GetComponentTypes<Components...>();
+
+			std::sort(componentTypes.begin(), componentTypes.end());
 
 			for (auto& [_, archetype] : archetypes)
 			{
