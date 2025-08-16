@@ -21,6 +21,7 @@ namespace Azul
 
 		ImGui_ImplDX11_Shutdown();
 		ImGui_ImplWin32_Shutdown();
+
 		ImGui::DestroyContext();
 	}
 
@@ -113,8 +114,6 @@ namespace Azul
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		return;
-
 		static bool showWindow = true;
 		//ImGui::ShowDemoWindow(&showWindow);
 	

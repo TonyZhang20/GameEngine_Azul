@@ -27,7 +27,6 @@ namespace Azul
 
     void ImGuiBuild::DrawWindow(bool& open)
 	{
-        if (!open) return;
         static bool dockOpen = true;
         ShowExampleAppDockSpace(&Application::GetQuit());
 

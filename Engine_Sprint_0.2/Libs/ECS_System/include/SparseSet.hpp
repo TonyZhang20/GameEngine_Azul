@@ -122,7 +122,7 @@ namespace zecs
 			this->sparsePages.clear();
 		}
 
-		//dense
+		//dense -> 用来检查重复
 		ZVector<EntityID> entities;
 		//dense either
 		ZVector<Component> components;

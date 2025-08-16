@@ -12,7 +12,7 @@ namespace zecs
 	class Chunk
 	{
 	public:
-		static constexpr size_t kSize = 16384; // 1024 * 16 == 16 kb
+		static constexpr size_t kSize = 8192; // 1024 * 8 == 8 kb
 
 		explicit Chunk(Archetype* archetype);
 		~Chunk();

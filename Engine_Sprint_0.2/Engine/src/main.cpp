@@ -9,44 +9,21 @@
 
 #include "Game.h"
 #include "File.h"
-
-#include "ZVector.hpp"
 #include "MemEngine.h"
-
-#include "Entity.h"
-#include "ArchetypeWorld.h"
 
 using namespace Azul;
 
-struct Physics
-{
-	float force;
-	float x, y, z;
-};
-
-struct Shader
-{
-	int vs, fs;
-};
-
-struct Transform
-{
-	float x, y, z;
-};
-
-using namespace zecs;
-
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine, int cmdShow)
 {
-	//File::SetBaseDir("");
+	File::SetBaseDir("");
 
-	//Azul::Application* app = Azul::Application::Create(hInstance, prevInstance, cmdLine, cmdShow);
-	//
-	//WindowProps props("Azul Engine", 1920, 1080);
+	Azul::Application* app = Azul::Application::Create(hInstance, prevInstance, cmdLine, cmdShow);
+	
+	WindowProps props("Azul Engine", 1920, 1080);
 
-	//app->SetWindow(new WindowsWindow(hInstance, props));
-	//app->CreateLayers();
-	//app->Run();
+	app->SetWindow(new WindowsWindow(hInstance, props));
+	app->CreateLayers();
+	app->Run();
 
 	/*
 	AnimTimer timer;
@@ -100,6 +77,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 	Trace::out("STL Map is %f\n", actualTime);
 	*/
 
+	/*archetype world example
+	* 
 	ArchetypeWorld world;
 
 	for (int i = 0; i < 100; i++)
@@ -124,6 +103,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 		world.GetComponent<Shader>(e).vs++;
 		world.GetComponent<Physics>(e).force++;
 	}
+	*/
 
 	Mem::Destroy();
 

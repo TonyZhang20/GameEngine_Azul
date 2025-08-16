@@ -144,7 +144,9 @@ namespace Azul
 			LayerManager::Update(deltaTime);
 
 			app->imGuiLayer->Begin();
+			
 			LayerManager::RenderImGui();
+
 			app->imGuiLayer->End();
 		
 			app->GetWindow()->Present();
