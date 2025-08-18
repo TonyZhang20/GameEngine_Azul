@@ -83,6 +83,21 @@ namespace Azul
 		this->ConstantBuff_Color.Transfer(pColor);
 	}
 
+	void ShaderObject_LightTexture::TransferProj(Mat4& project)
+	{
+		this->ConstantBuff_Projection.Transfer(&project);
+	}
+
+	void ShaderObject_LightTexture::TransferView(Mat4& view)
+	{
+		this->ConstantBuff_View.Transfer(&view);
+	}
+
+	void ShaderObject_LightTexture::TransferWorld(Mat4& pWorld)
+	{
+		this->ConstantBuff_World.Transfer(&pWorld);
+	}
+
 
 }
 

@@ -53,7 +53,7 @@ namespace Azul
 		// Get the matrices for rendering
 		Mat4& getViewMatrix();
 		Mat4& getProjMatrix();
-
+		Mat4& getViewMatrix(Quaternion q, Vec3 vPos);
 		// accessors
 		void getPos(Vec3& outPos) const;
 		void getDir(Vec3& outDir) const;
@@ -76,17 +76,22 @@ namespace Azul
 
 
 	private:  // data  (Keep it private)
-
-
 		// Projection Matrix
 		Mat4	projMatrix;
+		
+		//Transform
 		Mat4	viewMatrix;
 
 		// camera unit vectors (up, dir, right)
+		
+		//Transform
 		Vec3	vUp;
 		Vec3	vDir;
 		Vec3	vRight;  // derived by up and dir
+		
+		//Transform
 		Vec3	vPos;
+		
 		Vec3	vLookAt;
 
 		// Define the frustum inputs

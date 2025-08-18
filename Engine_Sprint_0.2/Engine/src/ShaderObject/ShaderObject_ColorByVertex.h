@@ -29,6 +29,10 @@ namespace Azul
 		virtual void ActivateCBV() override;
 		virtual void TransferWorldViewProj(Camera* pCam, Mat4* pWorld) override;
 
+		virtual void TransferProj(Mat4& project) override;
+		virtual void TransferView(Mat4& view) override;
+		virtual void TransferWorld(Mat4& pWorld) override;
+
 		// ---------------------------------------------
 		// 	   Data:
 		// ---------------------------------------------

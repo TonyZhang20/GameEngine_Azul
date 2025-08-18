@@ -147,7 +147,6 @@ namespace Azul
 		projMatrix = projMatrix * B * S;
 	};
 
-
 	void Camera::privUpdateViewMatrix(void)
 	{
 		// This functions assumes the your vUp, vRight, vDir are still unit
@@ -176,7 +175,6 @@ namespace Azul
 		this->viewMatrix[m15] = 1.0f;
 	};
 
-
 	// Update everything (make sure it's consistent)
 	void Camera::updateCamera(void)
 	{
@@ -184,7 +182,7 @@ namespace Azul
 		this->privUpdateProjectionMatrix();
 
 		// update the view matrix
-		this->privUpdateViewMatrix();
+		// this->privUpdateViewMatrix();
 	}
 
 	Mat4& Camera::getViewMatrix(void)
@@ -195,6 +193,36 @@ namespace Azul
 	Mat4& Camera::getProjMatrix(void)
 	{
 		return this->projMatrix;
+	}
+
+	Mat4& Camera::getViewMatrix(Quaternion q, Vec3 vPos)
+	{
+		auto right = q.Right();
+		auto up = q.Up();
+		auto fwd = q.Forward();
+
+		this->viewMatrix[m0] = right[x];
+		this->viewMatrix[m1] = up[x];
+		this->viewMatrix[m2] = fwd[x];
+		this->viewMatrix[m3] = 0.0f;
+
+		this->viewMatrix[m4] = right[y];
+		this->viewMatrix[m5] = up[y];
+		this->viewMatrix[m6] = fwd[y];
+		this->viewMatrix[m7] = 0.0f;
+
+		this->viewMatrix[m8] = right[z];
+		this->viewMatrix[m9] = up[z];
+		this->viewMatrix[m10] = fwd[z];
+		this->viewMatrix[m11] = 0.0f;
+
+		// Apply R^t( -Pos ). Use dot-product with the basis vectors
+		this->viewMatrix[m12] = -vPos.dot(right);
+		this->viewMatrix[m13] = -vPos.dot(up);
+		this->viewMatrix[m14] = -vPos.dot(fwd);
+		this->viewMatrix[m15] = 1.0f;
+
+		return this->viewMatrix;
 	}
 
 	void Camera::getPos(Vec3& outPos) const

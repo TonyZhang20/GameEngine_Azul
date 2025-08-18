@@ -8,7 +8,7 @@ namespace zecs
 #define ZECSASSERT(msg, expr) assert(((void)msg, expr))
 #define WORLD_PAGE_SIZE 4096
 
-	class EntityID;
+	struct EntityID;
 
 	using ArchetypeID = size_t;
 	using ComponentID = uint32_t;

@@ -26,6 +26,9 @@ namespace Azul
 		virtual bool Compare(DLink* pTargetNode) override;
 		virtual void Dump() override;
 
+		void ActivateMesh();
+		void RenderIndexBuffer();
+
 	private:
 		void privClear();
 

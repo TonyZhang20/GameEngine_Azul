@@ -24,7 +24,7 @@ namespace Azul
 
 		void Remove(GameObject* gameObj);
 		void Remove(GraphicsObject* pObj);
-		void Hello();
+
 		//Shader/Material Group
 		void RenderAll();
 

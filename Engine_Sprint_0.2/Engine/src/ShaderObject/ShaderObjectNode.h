@@ -26,6 +26,15 @@ namespace Azul
 		virtual bool Compare(DLink* pTargetNode) override;
 		virtual void Dump() override;
 
+		void ActivateShader();
+		void ActivateCBV();
+
+		void TransferProj(Mat4& project);
+		void TransferView(Mat4& view);
+		void TransferWorld(Mat4& pWorld);
+
+		void TransferLight(Vec3& pos, Vec3& color);
+
 	private:
 		void privClear();
 

@@ -12,10 +12,16 @@
 #include "ShaderObject.h"
 #include "TextureObject.h"
 
-#define ErrorParent 0xffffff
+#define ErrorParent 0xfffff
 
 namespace Azul
 {
+	enum class RasterizerStateID
+	{
+		D3D11_FILL_SOLID,
+		D3D11_CULL_WIREFRAME,
+	};
+
 	struct TagComponent
 	{
 		char tag[32];
@@ -99,6 +105,7 @@ namespace Azul
 	struct CameraComponent
 	{
 		Camera camera;
+		bool isPriority = false;
 	};
 
 	struct LightComponent
@@ -116,6 +123,10 @@ namespace Azul
 	struct MaterialComponent
 	{
 		Material::Name materialID;
+		ShaderObject::Name shaderID;
+		RasterizerStateID rasterizerID;
+
+		Material::Name  lightID;
 	};
 }
 

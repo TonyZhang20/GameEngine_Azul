@@ -59,6 +59,21 @@ namespace Azul
 		this->ConstantBuff_World.Transfer(pWorld);
 	}
 
+	void ShaderObject_ColorByVertex::TransferProj(Mat4& project)
+	{
+		this->ConstantBuff_Projection.Transfer(&project);
+	}
+
+	void ShaderObject_ColorByVertex::TransferView(Mat4& view)
+	{
+
+	}
+
+	void ShaderObject_ColorByVertex::TransferWorld(Mat4& pWorld)
+	{
+		this->ConstantBuff_World.Transfer(&pWorld);
+	}
+
 
 
 }

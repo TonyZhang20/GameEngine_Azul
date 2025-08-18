@@ -151,6 +151,7 @@ namespace Azul
 
 			app->editorLayer->End();
 		
+			//swap chain
 			app->GetWindow()->Present();
 
 			//Trace::out("%f\n", deltaTime);

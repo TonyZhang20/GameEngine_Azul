@@ -1,18 +1,21 @@
 #ifndef ENTITY_H_AZUL
 #define ENTITY_H_AZUL
 
-#include "Scene.h"
+
 #include "Entity.h"
+#include "Scene.h"
 
 namespace Azul
 {
 	class ZEntity
 	{
 	public:
+		ZEntity();
 		ZEntity(Scene* scene);
 		ZEntity(zecs::EntityID id, Scene* scene);
 		ZEntity(const ZEntity& otehr) = default;
-
+		ZEntity(ZEntity&&) = default;
+		ZEntity& operator=(const ZEntity& other);
 		template<typename T>
 		inline T& AddComponent(T&& components)
 		{

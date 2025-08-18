@@ -57,6 +57,21 @@ namespace Azul
 		this->ConstantBuff_Projection.Transfer(&pCam->getProjMatrix());
 	}
 
+	void ShaderObject_FlatTexture::TransferProj(Mat4& project)
+	{
+		this->ConstantBuff_Projection.Transfer(&project);
+	}
+
+	void ShaderObject_FlatTexture::TransferView(Mat4& view)
+	{
+		this->ConstantBuff_View.Transfer(&view);
+	}
+
+	void ShaderObject_FlatTexture::TransferWorld(Mat4& pWorld)
+	{
+		this->ConstantBuff_World.Transfer(&pWorld);
+	}
+
 
 }
 

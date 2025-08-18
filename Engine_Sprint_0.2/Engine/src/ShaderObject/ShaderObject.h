@@ -39,6 +39,11 @@ namespace Azul
 		virtual void ActivateCBV() = 0; //Constant Shdaer View -> Active Slot
 		virtual void TransferWorldViewProj(Camera* pCam, Mat4* pWorld) = 0; //Trans Value
 
+		virtual void TransferProj(Mat4& project) = 0;
+		virtual void TransferView(Mat4& view) = 0;
+		virtual void TransferWorld(Mat4& pWorld) = 0;
+
+
 		virtual void TransferLightPos(Vec3* pLightPos);
 		virtual void TransferColor(Vec3* pColor);
 

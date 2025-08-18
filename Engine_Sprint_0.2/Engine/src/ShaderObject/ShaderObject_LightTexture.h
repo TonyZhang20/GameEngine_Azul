@@ -29,6 +29,10 @@ namespace Azul
 		virtual void TransferLightPos(Vec3* pLightPos) override;
 		virtual void TransferColor(Vec3* pColor) override;
 
+		virtual void TransferProj(Mat4& project) override;
+		virtual void TransferView(Mat4& view)    override;
+		virtual void TransferWorld(Mat4& pWorld) override;
+
 		// ---------------------------------------------
 		// 	   Data:
 		// ---------------------------------------------

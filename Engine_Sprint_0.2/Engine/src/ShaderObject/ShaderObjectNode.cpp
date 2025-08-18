@@ -93,6 +93,36 @@ namespace Azul
 
 		DLink::Dump();
 	}
+
+	void ShaderObjectNode::ActivateShader()
+	{
+		this->poShaderObject->ActivateShader();
+	}
+
+	void ShaderObjectNode::ActivateCBV()
+	{
+		this->poShaderObject->ActivateCBV();
+	}
+
+	void ShaderObjectNode::TransferProj(Mat4& project)
+	{
+		this->poShaderObject->TransferProj(project);
+	}
+	
+	void ShaderObjectNode::TransferView(Mat4& view)
+	{
+		this->poShaderObject->TransferView(view);
+	}
+
+	void ShaderObjectNode::TransferWorld(Mat4& World)
+	{
+		this->poShaderObject->TransferWorld(World);
+	}
+	void ShaderObjectNode::TransferLight(Vec3& pos, Vec3& color)
+	{
+		this->poShaderObject->TransferLightPos(&pos);
+		this->poShaderObject->TransferColor(&color);
+	}
 }
 
 

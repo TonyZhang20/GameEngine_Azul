@@ -40,6 +40,22 @@ namespace Azul
 		AZUL_UNUSED_VAR(pWorld);
 	}
 
+	void ShaderObject_Null::TransferProj(Mat4& project)
+	{
+		AZUL_UNUSED_VAR(project);
+	}
+
+
+	void ShaderObject_Null::TransferView(Mat4& view)
+	{
+		AZUL_UNUSED_VAR(view);
+	}
+
+	void ShaderObject_Null::TransferWorld(Mat4& pWorld)
+	{
+		AZUL_UNUSED_VAR(pWorld);
+	}
+
 	ShaderObject_Null::ShaderObject_Null()
 		: ShaderObject(Name::NullShader),
 		VertexShader{ sizeof(g_Null_VxShader), (void*)g_Null_VxShader },

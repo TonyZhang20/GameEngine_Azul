@@ -63,7 +63,8 @@ namespace Azul
 
 			// Bind Shader
 			pShader->ActivateShader();
-			pShader->ActivateCBV(); //public const buffer，like Light、ViewProj
+			//public const buffer，like Light、ViewProj
+			pShader->ActivateCBV(); 
 
 			for (GraphicsObject* pObj : objList)
 			{

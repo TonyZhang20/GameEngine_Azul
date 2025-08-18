@@ -13,6 +13,11 @@ namespace zecs
 
 		EntityID() : index(0), version(0) {}
 		EntityID(uint32_t idx, uint32_t ver) : index(idx), version(ver) {}
+
+		EntityID(const EntityID& otehr) = default;
+		EntityID(EntityID&&) = default;
+		EntityID& operator=(const EntityID& other) = default;
+
 		inline bool operator == (const EntityID& other) const
 		{
 			return index == other.index && version == other.version;

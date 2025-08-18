@@ -94,6 +94,17 @@ namespace Azul
 
 		DLink::Dump();
 	}
+
+	void MeshNode::ActivateMesh()
+	{
+		assert(poMesh);
+		poMesh->ActivateMesh();
+	}
+	void MeshNode::RenderIndexBuffer()
+	{
+		assert(poMesh);
+		poMesh->RenderIndexBuffer();
+	}
 }
 
 

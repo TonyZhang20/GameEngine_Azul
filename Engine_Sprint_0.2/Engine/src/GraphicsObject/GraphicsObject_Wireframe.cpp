@@ -27,7 +27,6 @@ namespace Azul
 
 	}
 
-
 	void GraphicsObject_Wireframe::Draw()
 	{
 		pMesh->RenderIndexBuffer();

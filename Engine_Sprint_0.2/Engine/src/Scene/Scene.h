@@ -32,9 +32,11 @@ namespace Azul
 		}
 
 		ZEntity CreateEntity(const char* name = "");
+		zecs::EntityID& GetMainCamera();
 
 	private:
 		zecs::ArchetypeWorld world;
+		zecs::EntityID camera;
 	};
 }
 

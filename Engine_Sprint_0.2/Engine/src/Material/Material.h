@@ -17,7 +17,6 @@ namespace Azul
 			LightTextureA,
 			FlatTextureA,
 			WireFramNoTextureA,
-
 		};
 
 		Material();
