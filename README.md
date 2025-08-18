@@ -26,3 +26,9 @@ working on 重构 windows 部分， 我想对引擎的UI下手，发现当前的
 目前ZVector 与 ZHashMap 在大量数据的情况下表现优与 stl::vector stl::unorderedMap, 应该更适用于ECS的情况
 
 完成自己的STL vector 和 unorder_map, 准备开始 ECS 的 实现与重构
+
+2025/08/16
+创建了Sparse Set 和 Archetype 的 Ecs 框架，开始重构
+
+2025/08/17
+硬盘挂了一天白干
