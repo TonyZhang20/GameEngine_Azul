@@ -13,7 +13,7 @@ working on 重构 windows 部分， 我想对引擎的UI下手，发现当前的
 重构过程中尝试添加ImGUui, 之后在试图画Gizmos的时候发觉目前引擎耦合还是太严重，继续重构
 目前分出来了Application, Window, EngineLayer, ImGuiLayer 多个层级，同时也提供添加更多层级，用PCSTree做了一个Manager，支持按照order排序，目前还没做ReOrder
 
-重构完成，引擎的渲染，逻辑，ui三个层级都分离解耦，也恢复了之前的功能，可以开始正式进行UI的制作
+初步重构完成，引擎的渲染，逻辑，ui三个层级都分离解耦，也恢复了之前的功能
 
 2025/07/31
 
