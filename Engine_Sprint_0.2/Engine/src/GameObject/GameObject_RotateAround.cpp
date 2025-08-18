@@ -91,7 +91,6 @@ namespace Azul
 				this->targetC.set(temp);
 			}
 
-
 			go->poLightColor->set(this->orgin * (1.0f - this->colorLerpT) + this->targetC * this->colorLerpT);
 		}
 	}

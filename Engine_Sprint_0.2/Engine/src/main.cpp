@@ -33,7 +33,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 }
 
 // TODOLIST
-// TODO: ECS 重构
+// TODO: Light Object
+// TODO: Light Manager
+// TODO: ECS 重构 -- working
 // TODO: 学反射
 // TODO: GameWindow/EditorWindow
 // TODO: EditorLayer

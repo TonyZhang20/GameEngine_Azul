@@ -132,6 +132,7 @@
     <ClCompile Include="src\Mat3.cpp" />
     <ClCompile Include="src\Mat4.cpp" />
     <ClCompile Include="src\Mat4Proxy.cpp" />
+    <ClCompile Include="src\Quaternion.cpp" />
     <ClCompile Include="src\Rot.cpp" />
     <ClCompile Include="src\Scale.cpp" />
     <ClCompile Include="src\Trans.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="include\MathApp.h" />
     <ClInclude Include="include\MathEngine.h" />
     <ClInclude Include="include\MathExportAPI.h" />
+    <ClInclude Include="include\Quaternion.h" />
     <ClInclude Include="include\Rot.h" />
     <ClInclude Include="include\Scale.h" />
     <ClInclude Include="include\Trans.h" />

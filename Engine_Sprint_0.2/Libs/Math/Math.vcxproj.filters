@@ -52,6 +52,9 @@
     <ClCompile Include="src\Vec3f.cpp">
       <Filter>src\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Quaternion.cpp">
+      <Filter>src\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -132,6 +135,9 @@
       <Filter>src\include</Filter>
     </ClInclude>
     <ClInclude Include="include\Vec3f.h">
+      <Filter>src\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Quaternion.h">
       <Filter>src\include</Filter>
     </ClInclude>
   </ItemGroup>

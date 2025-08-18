@@ -25,6 +25,7 @@ namespace Azul
 	class Scale;
 	class Trans;
 	class Rot;
+	class Quaternion;
 
 	// -----------------------------------------------------------
 	// 
@@ -124,6 +125,7 @@ namespace Azul
 		friend Mat3;
 		friend Vec3;
 		friend Vec2;
+		friend Quaternion;
 
 		union
 		{

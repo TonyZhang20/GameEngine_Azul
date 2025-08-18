@@ -424,6 +424,9 @@
     <ClInclude Include="Scene\Ecs\ZEntity.h">
       <Filter>Source Files\src\Scene\Ecs</Filter>
     </ClInclude>
+    <ClInclude Include="Render\Renderer.h">
+      <Filter>Source Files\src\Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -695,6 +698,9 @@
     </ClCompile>
     <ClCompile Include="Scene\Ecs\ZEntity.cpp">
       <Filter>Source Files\src\Scene\Ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="Render\Renderer.cpp">
+      <Filter>Source Files\src\Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

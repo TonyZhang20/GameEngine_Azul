@@ -1,8 +1,16 @@
-#ifndef TRANSFORM_H
-#define TRANSFORM_H
+#ifndef COMPONENT_H
+#define COMPONENT_H
 
 #include "MathEngine.h"
 #include "Entity.h"
+#include <d3d11.h>
+#include "DirectXTex.h"
+
+#include "Camera.h"
+#include "Mesh.h"
+#include "Material.h"
+#include "ShaderObject.h"
+#include "TextureObject.h"
 
 #define ErrorParent 0xffffff
 
@@ -28,8 +36,8 @@ namespace Azul
 	struct TransformComponent
 	{
 		Vec3 scale = Vec3(1, 1, 1);
-		//Quat rotation;
 		Vec3 position;
+		Quaternion rotation;
 
 		zecs::EntityID parent;
 
@@ -47,10 +55,11 @@ namespace Azul
 
 		inline Mat4 GetLocalMatrix() const
 		{
-			Trans TransA(position.x(), position.y(), position.z());
-			Scale Scale(scale.x(), scale.y(), scale.z());
+			Trans T(position.x(), position.y(), position.z());
+			Scale S(scale.x(), scale.y(), scale.z());
+			Mat4 R = rotation.ToMatrix();
 
-			return Scale * TransA;
+			return S * R * T;
 		};
 		inline Mat4 GetWorldMatrix() const
 		{
@@ -67,6 +76,10 @@ namespace Azul
 				return Scale * TransA;
 			}
 		};
+
+		inline Vec3 Forward() { return rotation.Forward(); }
+		inline Vec3 Right() { return rotation.Right(); }
+		inline Vec3 Up() { return rotation.Up(); }
 	};
 
 	struct SpriteRendererComponent
@@ -76,6 +89,33 @@ namespace Azul
 		SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(const Vec4& color) : Color(color) {}
+	};
+
+	struct TextureComponent
+	{
+		TextureObject::Name textureID;
+	};
+
+	struct CameraComponent
+	{
+		Camera camera;
+	};
+
+	struct LightComponent
+	{
+		//Current Light is just some data
+		Vec3 LightColor;
+		Vec3 LightPos;
+	};
+
+	struct MeshComponent
+	{
+		Mesh::Name meshID;
+	};
+
+	struct MaterialComponent
+	{
+		Material::Name materialID;
 	};
 }
 

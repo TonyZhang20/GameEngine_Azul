@@ -31,7 +31,7 @@ namespace Azul
 			return components;
 		}
 
-		ZEntity CreateEntity(const std::string& name = "");
+		ZEntity CreateEntity(const char* name = "");
 
 	private:
 		zecs::ArchetypeWorld world;

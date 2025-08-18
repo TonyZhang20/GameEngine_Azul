@@ -26,6 +26,7 @@
 #include "Rot.h"
 #include "Mat3.h"
 #include "Trig.h"
+#include "Quaternion.h"
 
 #endif
 

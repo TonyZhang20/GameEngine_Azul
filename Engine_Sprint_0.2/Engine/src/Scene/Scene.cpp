@@ -18,12 +18,12 @@ namespace Azul
 
 	}
 
-	ZEntity Scene::CreateEntity(const std::string& name)
+	ZEntity Scene::CreateEntity(const char* name)
 	{
 		ZEntity entity = ZEntity{ this };
-		auto& tag = entity.AddComponent<TagComponent>();
+		TagComponent& tag = entity.AddComponent<TagComponent>();
 
-		if (name.empty())
+		if (name == "")
 		{
 			tag.SetName("Unnamed_GameObject");
 		}
