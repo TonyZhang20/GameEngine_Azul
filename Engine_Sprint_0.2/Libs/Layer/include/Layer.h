@@ -15,7 +15,11 @@ namespace Azul
 
 		virtual void OnAttach(){}
 		virtual void OnDetach(){}
+		virtual void Awake() {}
+		virtual void Start() {}
+		virtual void EndApp() {}
 		virtual void OnUpdate(float UpdateTime){}
+		virtual void OnRender(float deltaTime) {}
 		virtual void OnEvent(class Event& event) {}
 		virtual void OnImGuiRender() {}
 

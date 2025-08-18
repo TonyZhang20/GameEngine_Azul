@@ -35,7 +35,7 @@ namespace Azul
 		PCSTREE_LIBRARY_API PCSTree &operator = (const PCSTree &in) = delete;
 
 		// destructor
-		PCSTREE_LIBRARY_API ~PCSTree();
+		PCSTREE_LIBRARY_API virtual ~PCSTree();
 
 		// get Root
 		PCSTREE_LIBRARY_API PCSNode *GetRoot() const;

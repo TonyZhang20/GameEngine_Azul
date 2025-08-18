@@ -33,6 +33,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 }
 
 // TODOLIST
+// TODO: Render 与 逻辑 解耦
 // TODO: Light Object - 不着急
 // TODO: Light Manager
 // TODO: ECS 重构 -- working

@@ -162,6 +162,44 @@ namespace Azul
 		}
 	}
 
+	void LayerManager::Awake()
+	{
+		LayerManager* pGOM = LayerManager::privGetInstance();
+		assert(pGOM);
+
+		PCSNode* pRootNode = pGOM->poActive->GetRoot();
+		assert(pRootNode);
+
+		PCSTreeForwardIterator pIt(pRootNode);
+
+		Layer* pLayer = nullptr;
+
+		for (pIt.First(); !pIt.IsDone(); pIt.Next())
+		{
+			pLayer = (Layer*)pIt.Current();
+			pLayer->Awake();
+		}
+	}
+
+	void LayerManager::Start()
+	{
+		LayerManager* pGOM = LayerManager::privGetInstance();
+		assert(pGOM);
+
+		PCSNode* pRootNode = pGOM->poActive->GetRoot();
+		assert(pRootNode);
+
+		PCSTreeForwardIterator pIt(pRootNode);
+
+		Layer* pLayer = nullptr;
+
+		for (pIt.First(); !pIt.IsDone(); pIt.Next())
+		{
+			pLayer = (Layer*)pIt.Current();
+			pLayer->Start();
+		}
+	}
+
 	void LayerManager::Update(float deltaTime)
 	{
 		LayerManager* pGOM = LayerManager::privGetInstance();
@@ -178,6 +216,44 @@ namespace Azul
 		{
 			pLayer = (Layer*)pIt.Current();
 			pLayer->OnUpdate(deltaTime);
+		}
+	}
+
+	void LayerManager::Render(float deltaTime)
+	{
+		LayerManager* pGOM = LayerManager::privGetInstance();
+		assert(pGOM);
+
+		PCSNode* pRootNode = pGOM->poActive->GetRoot();
+		assert(pRootNode);
+
+		PCSTreeForwardIterator pIt(pRootNode);
+
+		Layer* pLayer = nullptr;
+
+		for (pIt.First(); !pIt.IsDone(); pIt.Next())
+		{
+			pLayer = (Layer*)pIt.Current();
+			pLayer->OnRender(deltaTime);
+		}
+	}
+
+	void LayerManager::EndApplication()
+	{
+		LayerManager* pGOM = LayerManager::privGetInstance();
+		assert(pGOM);
+
+		PCSNode* pRootNode = pGOM->poActive->GetRoot();
+		assert(pRootNode);
+
+		PCSTreeForwardIterator pIt(pRootNode);
+
+		Layer* pLayer = nullptr;
+
+		for (pIt.First(); !pIt.IsDone(); pIt.Next())
+		{
+			pLayer = (Layer*)pIt.Current();
+			pLayer->EndApp();
 		}
 	}
 
@@ -226,6 +302,8 @@ namespace Azul
 				return layer;
 			}
 		}
+
+		return nullptr;
 	}
 
 	PCSTree* LayerManager::GetActiveLayers()

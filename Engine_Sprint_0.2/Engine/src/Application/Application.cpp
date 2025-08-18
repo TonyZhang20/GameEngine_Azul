@@ -126,6 +126,7 @@ namespace Azul
 		Application* app = Application::privGetInstance();
 		Game* gameLayer = (Game*)LayerManager::Find("Engine Layer");
 
+		//TODO: EveryOne Can LoadContent -> as Awake
 		if (!gameLayer->LoadContent())
 		{
 			MessageBox(nullptr, TEXT("Failed to load content."), TEXT("Error"), MB_OK);
@@ -133,6 +134,8 @@ namespace Azul
 		}
 
 		AnimTimer t;
+		LayerManager::Awake();
+		LayerManager::Start();
 
 		while (!quit)
 		{
@@ -144,7 +147,11 @@ namespace Azul
 			app->GetDeltaTime();
 
 			LayerManager::Update(deltaTime);
+			
+			//TODO: Render 与 逻辑 解耦
+			LayerManager::Render(deltaTime);
 
+			//TODO: 先暴力的写
 			app->editorLayer->Begin();
 			
 			LayerManager::RenderImGui();
@@ -156,6 +163,8 @@ namespace Azul
 
 			//Trace::out("%f\n", deltaTime);
 		}
+
+		LayerManager::EndApplication();
 
 		pWindow->Destroy();
 		LayerManager::Destroy();

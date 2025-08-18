@@ -182,7 +182,7 @@ namespace Azul
 		this->privUpdateProjectionMatrix();
 
 		// update the view matrix
-		// this->privUpdateViewMatrix();
+		this->privUpdateViewMatrix();
 	}
 
 	Mat4& Camera::getViewMatrix(void)

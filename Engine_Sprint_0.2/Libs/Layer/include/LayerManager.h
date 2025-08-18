@@ -25,7 +25,12 @@ namespace Azul
 
 		static void Attach();
 		static void Detach() {};
+
+		static void Awake();
+		static void Start();
+		static void EndApplication();
 		static void Update(float deltaTime);
+		static void Render(float deltaTime);
 		static void RenderImGui();
 
 		static void Create(int _reserveNum = 1, int _reserveGrow = 1);
