@@ -113,6 +113,9 @@
     <Filter Include="Source Files\src\Scene\Ecs">
       <UniqueIdentifier>{aab497a1-2385-4c09-8fc6-ec9788ec230c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\Light">
+      <UniqueIdentifier>{b1074d23-095f-464c-87b8-2e64cbd8259e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject_Null.h">
@@ -427,6 +430,12 @@
     <ClInclude Include="Render\Renderer.h">
       <Filter>Source Files\src\Render</Filter>
     </ClInclude>
+    <ClInclude Include="State\StateHeaders.h">
+      <Filter>Source Files\src\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\LayerManager.h">
+      <Filter>Source Files\src\Manager\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -701,6 +710,9 @@
     </ClCompile>
     <ClCompile Include="Render\Renderer.cpp">
       <Filter>Source Files\src\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\LayerManager.cpp">
+      <Filter>Source Files\src\Manager\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

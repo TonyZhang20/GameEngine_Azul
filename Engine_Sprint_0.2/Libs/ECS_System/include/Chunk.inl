@@ -2,6 +2,10 @@
 
 namespace zecs
 {
+#ifdef new
+#undef new;
+#endif
+
     inline Chunk::Chunk(Archetype* archetype)
         : archetype(archetype), entityCount(0), capacity(archetype->chunkCapacity)
     {
@@ -61,13 +65,16 @@ namespace zecs
         // swap last and index entity's component
         for (auto type : archetype->componentTypes)
         {
-            uint8_t* compData = buffer + archetype->componentLayouts[type].offset;
-            size_t compSize = archetype->componentLayouts[type].size;
+            const auto& layout = archetype->componentLayouts[type];
+
+            uint8_t* compData = buffer + layout.offset;
+            size_t compSize = layout.size;
 
             void* src = compData + lastIndex * compSize;
             void* dest = compData + index * compSize;
 
-            memcpy(dest, src, compSize);
+            layout.copyFunc(dest, src);
+            //layout.destructorFunc(src);
         }
 
         // 告知更新索引
@@ -116,19 +123,18 @@ namespace zecs
         size_t compSize = archetype->componentLayouts[cid].size;
 
         Component* dest = reinterpret_cast<Component*>(compArray + index * compSize);
-        *dest = std::forward<Component>(component);
+        new (dest) Component(std::forward<Component>(component)); // placement new
     }
 
     template <typename T, typename... Remains>
     inline void Chunk::CopyComponentDataRecursive(size_t index, T&& component, Remains&&... remains)
     {
-        auto cid = IndexGetter::Get<T>();
-        uint8_t* compArray = buffer + archetype->componentLayouts[cid].offset;
-        size_t compSize = archetype->componentLayouts[cid].size;
+        CopyComponentData(index, std::forward<T>(component));
 
-        T* dest = reinterpret_cast<T*>(compArray + index * compSize);
-        *dest = std::forward<T>(component);
-  
-        this->CopyComponentDataRecursive(index, std::forward<Remains>(remains)...);
+        if constexpr (sizeof...(remains) > 0)
+        {
+            CopyComponentDataRecursive(index, std::forward<Remains>(remains)...);
+        }
     }
+
 }

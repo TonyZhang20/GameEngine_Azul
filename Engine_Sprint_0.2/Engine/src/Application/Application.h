@@ -33,6 +33,7 @@ namespace Azul
 
 		void CreateLayers();
 		void CreateDirectx();
+
 		static float GetDeltaTime();
 		static bool& GetQuit();
 	public:

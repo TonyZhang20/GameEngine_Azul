@@ -6,11 +6,10 @@
 #define RENDER_H
 namespace Azul
 {
-	class Camera;
 	class Render
 	{
 	public:
-		virtual void SetGpu(Camera* pCam) = 0;
+		virtual void SetGpu(class Camera* pCam) = 0;
 		virtual void Draw() = 0;
 		virtual void RestoreState() = 0;
 		virtual void SetState() {};

@@ -36,7 +36,6 @@ namespace Azul
 
 	Engine::~Engine()
 	{
-		SafeDelete(poBufferFrame);
 		StateDirectXMan::Destroy();
 	}
 
@@ -68,6 +67,9 @@ namespace Azul
 		//Trace::out("%d %d\n", clientWidth, clientHeight);
 		
 		StateDirectXMan::Create(hwnd, vSync);
+
+
+		//Down Part Move to Renderer
 
 		// The Direct3D device and swap chain were successfully created.
 		// Now we need to initialize the buffers of the swap chain.
@@ -232,11 +234,8 @@ namespace Azul
 
 		this->mStateRenderTargetView.UnBindAllRenderTarget();
 
-		//ImGui_ImplDX11_InvalidateDeviceObjects();
-
 		StateDirectXMan::ResizeSwapChain(width, height);
 
-		//ImGui_ImplDX11_CreateDeviceObjects();
 		//ReBind
 
 		this->mStateRenderTargetView.Initialize();
@@ -290,9 +289,9 @@ namespace Azul
 
 		Update(UpdateTime);
 		
-		ClearDepthStencilBuffer();
+		//ClearDepthStencilBuffer();
 
-		Render();
+		//Render();
 
 		//--------------------------------
 		// Fast monitor sync

@@ -154,8 +154,10 @@ namespace zecs
         currentOffset += sizeof(EntityID) * chunkCapacity;
 
         // 组件数组偏移
-        for (auto& [_, layout] : componentLayouts)
+        for (auto& pair : componentLayouts)
         {
+            auto& layout = pair.second;
+
             currentOffset = AlignUp(currentOffset, layout.alignment);
             layout.offset = currentOffset;
             currentOffset += layout.size * chunkCapacity;

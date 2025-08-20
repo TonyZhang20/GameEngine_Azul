@@ -66,7 +66,7 @@ namespace Azul
 
 	void ShaderObject_ColorByVertex::TransferView(Mat4& view)
 	{
-
+		this->ConstantBuff_View.Transfer(&view);
 	}
 
 	void ShaderObject_ColorByVertex::TransferWorld(Mat4& pWorld)

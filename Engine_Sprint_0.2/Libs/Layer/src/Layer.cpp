@@ -7,6 +7,10 @@ namespace Azul
 	{
 	}
 
+	Layer::Layer(int order, const char* name) : order(order), PCSNode(name)
+	{
+	}
+
 	Layer::~Layer()
 	{
 	}

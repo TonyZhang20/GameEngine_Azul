@@ -53,7 +53,7 @@ namespace Azul
 		swapChainDesc.BufferDesc.Height = clientHeight;
 		swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		// gets the refresh rate of the monitor (60Hz unless you have a crazy fast monitor)
-		swapChainDesc.BufferDesc.RefreshRate = Engine::QueryRefreshRate(clientWidth, clientHeight, vSync);
+		swapChainDesc.BufferDesc.RefreshRate = QueryRefreshRate(clientWidth, clientHeight, vSync);
 		// Use the surface or resource as an output render target.
 		swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 		// output window (in window mode its the front buffer)

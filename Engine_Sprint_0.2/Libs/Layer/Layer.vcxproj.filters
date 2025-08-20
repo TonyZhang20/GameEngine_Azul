@@ -21,15 +21,9 @@
     <ClInclude Include="include\Layer.h">
       <Filter>src\include</Filter>
     </ClInclude>
-    <ClInclude Include="include\LayerManager.h">
-      <Filter>src\include</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Layer.cpp">
-      <Filter>src\src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\LayerManager.cpp">
       <Filter>src\src</Filter>
     </ClCompile>
     <ClCompile Include="Layer_DLLMain.cpp">

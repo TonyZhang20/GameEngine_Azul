@@ -11,7 +11,12 @@ namespace Azul
 	public:
 		Layer() = delete;
 		Layer(const char* name);
+		Layer(int order, const char* name);
 		virtual ~Layer();
+
+		Layer(const Layer&) = delete;
+		Layer& operator = (const Layer & other) = delete;
+		Layer& operator = (Layer&& other) = delete;
 
 		virtual void OnAttach(){}
 		virtual void OnDetach(){}

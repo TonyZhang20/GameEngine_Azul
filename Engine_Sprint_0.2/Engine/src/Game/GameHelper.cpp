@@ -47,6 +47,33 @@ namespace Azul
 		this->mStateDepthStencil.Activate();
 	}
 
+	void Game::CollectRenderPackets()
+	{
+		outPacks.clear();
+
+		for (auto& entity : renderableEntity)
+		{
+			auto& tran = entity.GetComponent<TransformComponent>();
+			auto& mesh = entity.GetComponent<MeshComponent>();
+			auto& mat = entity.GetComponent<MaterialComponent>();
+
+			auto pack = RenderPacket
+			{
+				&tran,
+				&mesh,
+				&mat
+			};
+
+			outPacks.push_back(pack);
+
+		}
+	}
+
+	ZVector<RenderPacket>& Game::GetRenderPacket()
+	{
+		return outPacks;
+	}
+
 	float Game::GetAspectRatio() const
 	{
 		float ratio = Application::GetWindow()->GetAspectRatio();

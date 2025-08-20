@@ -70,6 +70,7 @@ namespace zecs
 			if (map.find(cid) == map.end())
 			{
 				map[cid] = ComponentLayout(sizeof(DecayedT), alignof(DecayedT));
+				map[cid].RegisterLayout<DecayedT>();
 			}
 
 			if constexpr (sizeof...(Rest) > 0)
@@ -145,7 +146,8 @@ namespace zecs
 				auto newComponentLayouts = archetype->componentLayouts;
 
 				//Create new layout
-				newComponentLayouts[cid] = ComponentLayout{ 0, alignof(DecayedT), sizeof(DecayedT) };
+				newComponentLayouts[cid] = ComponentLayout{ 0, sizeof(DecayedT), alignof(DecayedT) };
+				newComponentLayouts[cid].RegisterLayout<DecayedT>();
 
 				//创建对应的archetype
 				CreateArchetype(hash, newComponentLayouts);
@@ -196,7 +198,9 @@ namespace zecs
 			auto [destChunk, destIndex] = destArchetype->AllocateEntity(entity);
 
 			CopyComponents(archetype, chunk, index, destArchetype, destChunk, destIndex);
+
 			chunk->RemoveEntity(index);
+
 			entities[entity] = { destArchetype, destChunk, destIndex };
 		}
 
@@ -214,8 +218,9 @@ namespace zecs
 					uint8_t* srcData = srcChunk->GetComponentArray(type) + compSize * srcIndex;
 					// 获取目标数据指针
 					uint8_t* destData = destChunk->GetComponentArray(type) + compSize * destIndex;
+
 					// 复制数据
-					memcpy(destData, srcData, compSize);
+					src->componentLayouts[type].copyFunc(destData, srcData);
 				}
 			}
 		}

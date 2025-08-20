@@ -3,7 +3,6 @@
 
 #include "GlobalNew.h"
 
-
 template<typename T>
 class ZVector
 {

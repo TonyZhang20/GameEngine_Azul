@@ -19,7 +19,6 @@ namespace Azul
 			assert(false);
 		}
 
-
 		LayerManager* pMan = LayerManager::instance;
 
 		Layer* rootNode = (Layer*)pMan->GetEmptyNodeFromPool();
@@ -63,6 +62,8 @@ namespace Azul
 			parent = (Layer*)pGOM->poActive->GetRoot();
 
 			pGOM->poActive->Insert(pInNode, parent);
+
+			pInNode->OnAttach();
 		}
 		else
 		{
@@ -274,6 +275,28 @@ namespace Azul
 			pLayer = (Layer*)pIt.Current();
 			pLayer->OnImGuiRender();
 		}
+	}
+
+	ZVector<Layer*> LayerManager::GetLayers()
+	{
+		ZVector<Layer*> layers;
+		LayerManager* pGOM = LayerManager::privGetInstance();
+		assert(pGOM);
+
+		PCSNode* pRootNode = pGOM->poActive->GetRoot();
+		assert(pRootNode);
+
+		PCSTreeForwardIterator pIt(pRootNode);
+
+		Layer* pLayer = nullptr;
+
+		for (pIt.First(); !pIt.IsDone(); pIt.Next())
+		{
+			pLayer = (Layer*)pIt.Current();
+			layers.push_back(pLayer);
+		}
+
+		return layers;
 	}
 
 	PCSNode* LayerManager::derivedCreateNode()

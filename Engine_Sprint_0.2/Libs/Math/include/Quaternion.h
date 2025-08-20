@@ -75,7 +75,12 @@ namespace Azul
 		MATHLIBRARY_API Vec3 Right() const;
 		MATHLIBRARY_API Vec3 Forward() const;
 
+		MATHLIBRARY_API void SetUp(const Vec3& up, const Vec3* forward = nullptr);
+		MATHLIBRARY_API void SetRight(const Vec3& right, const Vec3* forward = nullptr);
+		MATHLIBRARY_API void SetForward(const Vec3& forward, const Vec3* up = nullptr);
+
 		MATHLIBRARY_API Mat4 ToMatrix() const;
+		MATHLIBRARY_API void SetFromRotationMatrix(const Mat3);
 
 		MATHLIBRARY_API static Vec3 GetUp(const Quaternion& q);
 		MATHLIBRARY_API static Vec3 GetRight(const Quaternion& q);

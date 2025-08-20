@@ -32,8 +32,9 @@ namespace Azul
 	public:
 		// Default constructor
 		Camera();
-		Camera(const Camera&) = delete;
-		Camera& operator = (const Camera&) = delete;
+		Camera(const Camera&) = default;
+		Camera& operator = (const Camera&) = default;
+
 		virtual ~Camera() = default;
 
 		void SetAspectRatio(float ratio);
@@ -52,8 +53,9 @@ namespace Azul
 
 		// Get the matrices for rendering
 		Mat4& getViewMatrix();
-		Mat4& getProjMatrix();
 		Mat4& getViewMatrix(Quaternion q, Vec3 vPos);
+		
+		Mat4& getProjMatrix();
 		// accessors
 		void getPos(Vec3& outPos) const;
 		void getDir(Vec3& outDir) const;
@@ -91,7 +93,6 @@ namespace Azul
 		
 		//Transform
 		Vec3	vPos;
-		
 		Vec3	vLookAt;
 
 		// Define the frustum inputs

@@ -2,10 +2,13 @@
 #define RENDERER_H
 
 #include <unordered_map>
+#include "Layer.h"
+#include "Components.h"
 #include "ShaderObject.h"
 #include "ZVector.hpp"
 #include "ZEntity.h"
-#include "StateRasterizer.h"
+
+#include "StateHeaders.h"
 
 namespace Azul
 {
@@ -17,16 +20,34 @@ namespace Azul
 	struct MeshComponent;
 	struct ShaderComponent;
 
-	class Renderer
+	/// <summary>
+	/// Renderer Layer
+	/// </summary>
+	class Renderer final : public Layer
 	{
 	public:
-		Renderer(Scene* scene);
+		Renderer();
+		Renderer(const char* name);
 
-		void Draw(zecs::ArchetypeWorld& world);
+		Renderer(int order);
+		Renderer(int order, const char* name);
+		
+
+		void Draw(ZVector<RenderPacket>& packets, ZEntity& cam);
+
+		void InitRenderer();
+		bool OnWindowResize(WindowResizeEvent&);
 	private:
-		void RenderAll();
+		void RenderAll(ZEntity& cam);
 		void ActiveRasterizer();
+		void SetDefaultTargetMode();
+		void ClearDepthStencilBuffer();
 
+		virtual void Awake() override;
+		virtual void Start() override;
+		virtual void OnRender(float deltaTime) override;
+		virtual void OnEvent(class Event& event) override;
+		
 		struct DrawData
 		{
 
@@ -36,6 +57,7 @@ namespace Azul
 				material = nullptr;
 				mesh = nullptr;
 			}
+
 			DrawData(TransformComponent* trans, MaterialComponent* mat, MeshComponent* mesh)
 				: transform(trans), material(mat), mesh(mesh) {};
 			DrawData(const DrawData& other) = default;
@@ -49,13 +71,25 @@ namespace Azul
 		};
 
 	private:
-		RasterizerStateID currentState;
+		RasterizerStateID currentState = RasterizerStateID::NOTINITIALIZE;
 
 		StateRasterizer mStateRasterizerSolid;
 		StateRasterizer mStateRasterizerWireframe;
 
-		Scene* scene;
+		StateBlend mBlendStateOff;
+		StateBlend mBlendStateAlpha;
+
+		StateViewport mViewport;
+
+		StateRenderTargetView mStateRenderTargetView; //Omset
+		StateDepthStencil mStateDepthStencil;		  //深度模板状态
+		StateDepthStencilView mDepthStencilView;	  //深度模板窗口
+		StateDepthStencilBuffer mDepthStencilBuffer;  //深度模板
+
 		std::unordered_map<ShaderObject::Name, ZVector<DrawData>> renderBuckets;
+
+		unsigned int height;
+		unsigned int width;
 	};
 }
 

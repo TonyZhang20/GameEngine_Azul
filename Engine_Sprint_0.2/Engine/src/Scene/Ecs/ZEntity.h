@@ -31,6 +31,13 @@ namespace Azul
 		}
 
 		template<typename T>
+		inline T& AddComponent(T& t)
+		{
+			assert(!HasComponent<T>());
+			return this->parentScene->world.AddComponent<T>(this->m_EntityHandle, t);
+		}
+
+		template<typename T>
 		inline T& GetComponent()
 		{
 			assert(HasComponent<T>());

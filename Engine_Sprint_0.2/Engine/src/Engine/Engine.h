@@ -47,6 +47,7 @@ namespace Azul
 		virtual void Cleanup();
 
 		int InitDirectX(HINSTANCE hInstance, HWND hwnd, BOOL vSync);
+
 		static DXGI_RATIONAL QueryRefreshRate(UINT screenWidth, UINT screenHeight, BOOL vsync);
 
 
@@ -71,7 +72,7 @@ namespace Azul
 		StateRasterizer mStateRasterizerWireframe;
 		StateViewport mViewport;
 
-		BufferFrame* poBufferFrame = nullptr;
+		//BufferFrame* poBufferFrame = nullptr;
 	};
 
 

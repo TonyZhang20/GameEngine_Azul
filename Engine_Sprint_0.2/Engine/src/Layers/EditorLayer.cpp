@@ -8,11 +8,12 @@
 #include "ImGuiBuild.h"
 #include "Components.h"
 #include "ZEntity.h"
+#include "Event.h"
 
 namespace Azul
 {
 	EditorLayer::EditorLayer() 
-		: Layer("EditorLayer")
+		: Layer("EditorLayer"), pbufferFrame(nullptr)
 	{
 		buildWindow = new ImGuiBuild();
 	}
@@ -20,12 +21,18 @@ namespace Azul
 	EditorLayer::~EditorLayer()
 	{
 		delete buildWindow;
-		delete activeScene;
+		delete pbufferFrame;
+		//delete activeScene;
 
 		ImGui_ImplDX11_Shutdown();
 		ImGui_ImplWin32_Shutdown();
 
 		ImGui::DestroyContext();
+	}
+
+	void EditorLayer::Awake()
+	{
+		pbufferFrame = new BufferFrame();
 	}
 
 	void EditorLayer::OnAttach()
@@ -72,7 +79,8 @@ namespace Azul
 		ImGui_ImplWin32_Init(Application::GetWindow()->GetNativeHandle());
 		ImGui_ImplDX11_Init(StateDirectXMan::GetDevice(), StateDirectXMan::GetContext());
 
-		activeScene = new Scene();
+		//activeScene = new Scene();
+
 	}
 
 	void EditorLayer::OnDetach()
@@ -80,18 +88,38 @@ namespace Azul
 
 	}
 
+	void EditorLayer::OnRender(float deltaTim)
+	{
+		//Begin Frame
+		Begin();
+
+		static bool showWindow = true;
+		//ImGui::ShowDemoWindow(&showWindow);
+
+		buildWindow->DrawWindow(showWindow);
+
+		//End Frame
+		End();
+	}
+
 	void EditorLayer::OnUpdate(float UpdateTime)
 	{
-		activeScene->Update(UpdateTime);
+
+
+		//activeScene->Update(UpdateTime);
 	}
 
 	void EditorLayer::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN_ONE(EditorLayer::OnWindowResize));
 	}
 
 	void EditorLayer::Begin()
 	{
+		//Copy Data
+		this->pbufferFrame->SetActive();
+
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
@@ -119,10 +147,14 @@ namespace Azul
 
 	void EditorLayer::OnImGuiRender()
 	{
-		static bool showWindow = true;
-		//ImGui::ShowDemoWindow(&showWindow);
-	
-		buildWindow->DrawWindow(showWindow);
+
+	}
+
+	bool EditorLayer::OnWindowResize(WindowResizeEvent& e)
+	{
+		this->pbufferFrame->OnResize();
+
+		return false;
 	}
 
 }

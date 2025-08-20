@@ -78,7 +78,9 @@ namespace Azul
 
 		GameObjectManager::Create();
 
-		this->poBufferFrame = new BufferFrame();
+		//this->poBufferFrame = new BufferFrame();
+		this->mainScene = new Scene();
+		this->camera = mainScene->CreateEntity("Camera_Main");
 
 #pragma region Demo1
 
@@ -87,7 +89,6 @@ namespace Azul
 		//  Camera - Setup
 		// ---------------------------------
 		{
-
 			assert(mainCamera);
 
 			CameraNodeManager::Add(Camera::Name::Default, mainCamera);
@@ -204,13 +205,33 @@ namespace Azul
 			cameraL->setPerspective(50.0f, GetAspectRatio(), 0.1f, 1000.0f);
 		}
 
+		CameraComponent& cam = camera.AddComponent<CameraComponent>();
+		cam.isPriority = true;
+
+		TransformComponent& camTrans = camera.GetComponent<TransformComponent>();
+
+		///
+		/// Entity Camera
+		///  
+		{
+		Vec3 camPos(1, 0, 4);
+		Vec3 tarVect(0, 0, 0);
+		Vec3 upVect(0, 1, 0);
+
+		cam.camera.setPerspective(50.0f, GetAspectRatio(), 0.1f, 1000.0f);
+		camTrans.position.set(camPos);
+		camTrans.SetForward(tarVect, &upVect);
+		}
+
+		//mainCamera->setOrientAndPosition(upVect, tarVect, camPos);
+		//mainCamera->setPerspective(50.0f, GetAspectRatio(), 0.1f, 1000.0f);
+
 #pragma region   Model + Shaders --> GraphicsObject
 
 #pragma region CreateMesh And ShdaerObj
 
-
 		// ---------------------------------
-		//  MESH
+		//  MESH -> Load Mesh
 		// ---------------------------------
 		Mesh* poModelA = new MeshCube();
 		Mesh* poModelB = new MeshPyramid();
@@ -227,10 +248,10 @@ namespace Azul
 		MeshNodeManager::Add(Mesh::Name::C, meshC);
 		MeshNodeManager::Add(Mesh::Name::D, meshD);
 		MeshNodeManager::Add(Mesh::Name::E, meshE);
-		// --------------------------------
-		//  ShaderObject  ColorByVertex
-		// --------------------------------
 
+		// --------------------------------
+		//  ShaderObject  ColorByVertex -> Load Shader
+		// --------------------------------
 		ShaderObject* poShaderA = new ShaderObject_ColorByVertex(ShaderObject::Name::ColorByVertex);
 		ShaderObjectNodeManager::Add(poShaderA);
 
@@ -269,7 +290,7 @@ namespace Azul
 
 		GameObjectManager::Add("OBJA_2", objA_2);
 		
-		mat = MaterialMan::Add(Material::WireFramNoTextureA, poShaderA);
+		mat = MaterialMan::Add(Material::WireFramNoTextureA, poShaderA, nullptr);
 		pGraphicsObject =
 			new GraphicsObject_Wireframe(mat, meshA);
 
@@ -281,6 +302,57 @@ namespace Azul
 		GameObjectManager::Add("OBJA_3", objA_3);
 
 #pragma endregion
+
+		ZEntity entityA = this->mainScene->CreateEntity("EntityA");
+
+		auto* zmat = &entityA.AddComponent<MaterialComponent>(MaterialComponent{
+			Material::LightTextureA ,
+			ShaderObject::Name::LightTexture,
+			RasterizerStateID::D3D11_FILL_SOLID,
+			Material::Name::LightTextureA } 
+			);
+
+		auto* zmesh = &entityA.AddComponent<MeshComponent>({ Mesh::Name::A });
+
+		TransformComponent* zTrans = &entityA.GetComponent<TransformComponent>();
+		zTrans->position.set(0, 0, 0);
+		zTrans->SetScale(10);
+
+		ZEntity entityB = this->mainScene->CreateEntity("EntityB");
+
+		zmat = &entityB.AddComponent<MaterialComponent>(MaterialComponent{
+												Material::FlatTextureA ,
+												ShaderObject::Name::FlatTexture,
+												RasterizerStateID::D3D11_FILL_SOLID,
+												Material::Name::None }
+												);
+
+		zmesh = &entityB.AddComponent<MeshComponent>({ Mesh::Name::A });
+
+		zTrans = &entityB.GetComponent<TransformComponent>();
+		zTrans->position.set(4, 0, -6);
+		zTrans->SetScale(10);
+
+
+
+		ZEntity entityC = this->mainScene->CreateEntity("EntityC");
+
+		zmat = &entityC.AddComponent<MaterialComponent>(MaterialComponent{
+												Material::WireFramNoTextureA ,
+												ShaderObject::Name::ColorByVertex,
+												RasterizerStateID::D3D11_CULL_WIREFRAME,
+												Material::Name::None }
+												);
+
+		zmesh = &entityC.AddComponent<MeshComponent>({ Mesh::Name::A });
+
+		zTrans = &entityC.GetComponent<TransformComponent>();
+		zTrans->position.set(5, 0, -2);
+		zTrans->SetScale(10);
+ 
+		this->renderableEntity.push_back(entityA);
+		this->renderableEntity.push_back(entityB);
+		this->renderableEntity.push_back(entityC);
 
 #pragma endregion
 		return true;
@@ -299,10 +371,15 @@ namespace Azul
 		// Update the camera once per frame
 		// ------------------------------------
 		
-		CameraUtility::OrbitCamera(CameraNodeManager::GetMainCam());
+		//Move Camera
+		//CameraUtility::OrbitCamera(CameraNodeManager::GetMainCam());
 
-		CameraNodeManager::UpdateCamera();
+		//CameraNodeManager::UpdateCamera();
+
+		//camera.privUpdateProjectionMatrix -> update projection
+	
 		GameObjectManager::Update(deltaTime);
+		CollectRenderPackets();
 
 		/*
 		if ((GetKeyState('B') & 0x8000) && !present)
@@ -349,11 +426,11 @@ namespace Azul
 	//-----------------------------------------------------------------------------
 	void Game::Render()
 	{
-		this->SetDefaultTargetMode();
+		//this->SetDefaultTargetMode();
 
-		GameObjectManager::Draw();
+		//GameObjectManager::Draw();
 		
-		this->poBufferFrame->SetActive();
+		//this->poBufferFrame->SetActive();
 	}
 
 	//-----------------------------------------------------------------------------
@@ -365,7 +442,8 @@ namespace Azul
 	{
 		//auto instance = GameObjectManager::instance;
 		//AZUL_UNUSED_VAR(instance);
-		delete poBufferFrame;
+		//delete poBufferFrame;
+		delete this->mainScene;
 
 		TextureManager::Destroy();
 		MaterialMan::Destroy();
@@ -405,6 +483,7 @@ namespace Azul
 	bool Game::OnWindowResizeEvent(WindowResizeEvent& e)
 	{
 		//Engine::OnWindowResizeEvent(e);
+		return false;
 
 		UINT width, height;
 		width = e.GetWidth();
@@ -432,6 +511,11 @@ namespace Azul
 		CameraNodeManager::UpdateAspectRatio(GetAspectRatio());
 
 		return false;
+	}
+
+	ZEntity& Game::GetMainCam()
+	{
+		return this->camera;
 	}
 
 }

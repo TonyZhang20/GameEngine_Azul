@@ -5,8 +5,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "ZEntity.h"
 #include "Engine.h"
 #include "MathEngine.h"
+#include "Components.h"
+#include "ArchetypeWorld.h"
 
 namespace Azul
 {
@@ -28,12 +31,26 @@ namespace Azul
 		float GetAspectRatio() const;
 		void SetDefaultTargetMode();
 
+		virtual void CollectRenderPackets();
+		virtual ZVector<RenderPacket>& GetRenderPacket();
+
+		ZEntity& GetMainCam();
+
 		//Event
 	protected:
 		bool OnWindowResizeEvent(WindowResizeEvent& e) override;
 
 	public:
 		BufferFrame* poBufferFrame;
+
+	private:
+		ZVector<RenderPacket> outPacks;
+		ZVector<ZEntity> renderableEntity;
+
+		zecs::ArchetypeWorld world;
+
+		Scene* mainScene;
+		ZEntity camera;
 	};
 }
 

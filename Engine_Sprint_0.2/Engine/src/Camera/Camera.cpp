@@ -8,7 +8,7 @@
 namespace Azul
 {
 	Camera::Camera()
-		: aspectRatio(0), farDist(0), fovy(0), nearDist(0)
+		: aspectRatio(0), farDist(0), fovy(0), nearDist(0), projMatrix(), viewMatrix(), vUp(), vDir(), vRight(), vPos(), vLookAt()
 	{
 	}
 

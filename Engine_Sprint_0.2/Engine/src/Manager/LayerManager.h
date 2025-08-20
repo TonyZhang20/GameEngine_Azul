@@ -1,13 +1,17 @@
+#ifndef LAYERMANAGER_H
+#define LAYERMANAGER_H
+
 #include "Layer.h"
 #include "PCSManBase.h"
 #include "LayerLabHeader.h"
+#include "ZVector.hpp"
 
 /// <summary>
 /// TODO: Ways to Reorder the layer
 /// </summary>
 namespace Azul
 {
-	class LAYERLIBRARY_API LayerManager : public PCSManBase
+	class LayerManager : public PCSManBase
 	{
 		enum LayerType
 		{
@@ -33,6 +37,8 @@ namespace Azul
 		static void Render(float deltaTime);
 		static void RenderImGui();
 
+		static ZVector<Layer*> GetLayers();
+
 		static void Create(int _reserveNum = 1, int _reserveGrow = 1);
 		static void Destroy();
 
@@ -41,7 +47,7 @@ namespace Azul
 
 		virtual PCSNode* derivedCreateNode();
 		static Layer* Find(const char* name);
-		
+
 		static PCSTree* GetActiveLayers();
 
 		~LayerManager();
@@ -57,3 +63,5 @@ namespace Azul
 		static LayerManager* instance;
 	};
 }
+
+#endif // !LAYERMANAGER_H

@@ -74,7 +74,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\Memory\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Memory\src;$(SolutionDir)Engine\src\GlobalNew;$(SolutionDir)Engine\src\Memory</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\Memory\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Memory\src;$(SolutionDir)Engine\src\Memory</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -113,7 +113,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\Memory\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Memory\src;$(SolutionDir)Engine\src\GlobalNew;$(SolutionDir)Engine\src\Memory</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Shared\Framework_items;$(SolutionDir)Libs\MySTL\include;$(SolutionDir)Libs\Memory\include;$(SolutionDir)Libs\Manager\include;$(SolutionDir)Libs\Memory\src;$(SolutionDir)Engine\src\Memory</AdditionalIncludeDirectories>
       <WarningVersion>
       </WarningVersion>
       <PrecompiledHeaderOutputFile>

@@ -134,12 +134,10 @@
   <ItemGroup>
     <ClInclude Include="include\Layer.h" />
     <ClInclude Include="include\LayerLabHeader.h" />
-    <ClInclude Include="include\LayerManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Layer_DLLMain.cpp" />
     <ClCompile Include="src\Layer.cpp" />
-    <ClCompile Include="src\LayerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PCSTree\PCSTree.vcxproj">

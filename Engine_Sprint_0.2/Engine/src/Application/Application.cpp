@@ -5,6 +5,8 @@
 #include "LayerManager.h"
 #include "Game.h"
 #include "Input.h"
+#include "StateDirectXMan.h"
+#include "Renderer.h"
 namespace Azul
 {
 	Application* Application::instance = nullptr;
@@ -33,7 +35,6 @@ namespace Azul
 	Application::Application()
 	{
 		LayerManager::Create();
-		editorLayer = new EditorLayer();
 	}
 
 	Application::~Application()
@@ -63,36 +64,37 @@ namespace Azul
 	//Add Layer
 	void Application::CreateLayers()
 	{
+		CreateDirectx();
+		
+		this->editorLayer = new EditorLayer();
 		editorLayer->SetOrder(100);
 
-		LayerManager::Add(editorLayer);
-
 		Game* gameLayer = new Game();
+		Renderer* renderLayer = new Renderer(50, "Render Layer");
+
 		gameLayer->SetOrder(0);
-
+		LayerManager::Add(editorLayer);
+		LayerManager::Add(renderLayer);
 		LayerManager::Add(gameLayer, nullptr);
-
-		CreateDirectx();
-		editorLayer->OnAttach();
 	}
 
 	//Init DirectX
 	void Application::CreateDirectx()
 	{
 		Application* instance = Application::privGetInstance();
-
-		Game* gameLayer = (Game*)LayerManager::Find("Engine Layer");
-		assert(gameLayer);
-
 		//will create statedirectXman
-		if (gameLayer->InitDirectX(
-			instance->windowInstance, 
-			(HWND)instance->pWindow->GetNativeHandle(), 
-			instance->pWindow->GetVsync()) != 0)
-		{
-			MessageBox(nullptr, TEXT("Failed to create DirectX device and swap chain."), TEXT("Error"), MB_OK);
-			assert(false);
-		}
+		//if (gameLayer->InitDirectX(
+		//	instance->windowInstance, 
+		//	(HWND)instance->pWindow->GetNativeHandle(), 
+		//	instance->pWindow->GetVsync()) != 0)
+		//{
+		//	MessageBox(nullptr, TEXT("Failed to create DirectX device and swap chain."), TEXT("Error"), MB_OK);
+		//	assert(false);
+		//}
+		HWND hwnd = (HWND)instance->pWindow->GetNativeHandle();
+
+		assert(IsWindow(hwnd));
+		StateDirectXMan::Create(hwnd, instance->pWindow->GetVsync());
 	}
 
 
@@ -134,6 +136,7 @@ namespace Azul
 		}
 
 		AnimTimer t;
+
 		LayerManager::Awake();
 		LayerManager::Start();
 
@@ -143,25 +146,15 @@ namespace Azul
 
 			//Window Application Event
 			app->GetWindow()->OnUpdate(quit);
-
 			app->GetDeltaTime();
 
-			LayerManager::Update(deltaTime);
+			LayerManager::Update(app->deltaTime);
 			
 			//TODO: Render 与 逻辑 解耦
-			LayerManager::Render(deltaTime);
+			LayerManager::Render(app->deltaTime);
 
-			//TODO: 先暴力的写
-			app->editorLayer->Begin();
-			
-			LayerManager::RenderImGui();
-
-			app->editorLayer->End();
-		
 			//swap chain
 			app->GetWindow()->Present();
-
-			//Trace::out("%f\n", deltaTime);
 		}
 
 		LayerManager::EndApplication();

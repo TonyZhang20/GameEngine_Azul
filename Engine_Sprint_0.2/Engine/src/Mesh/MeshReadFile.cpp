@@ -109,9 +109,11 @@ namespace Azul
 	void MeshReadFile::ActivateMesh()
 	{
 		this->VBVBuffer_pos.SetActive(VertexSlot::Position);
+		this->VBVBuffer_color.SetActive(VertexSlot::Color);
 		this->VBVBuffer_norm.SetActive(VertexSlot::Norm);
 		this->VBVBuffer_tex.SetActive(VertexSlot::TexCoord);
 	}
+
 	void MeshReadFile::RenderIndexBuffer()
 	{
 		// ---------------------------------------------

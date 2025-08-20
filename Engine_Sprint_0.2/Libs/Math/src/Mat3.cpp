@@ -41,6 +41,14 @@ namespace Azul
 	{
 	}
 
+	Mat3::Mat3(float m0, float m1, float m2, float m3, float m4, float m5, float m6, float m7, float m8)
+	{
+		this->_v0.set(m0, m1, m2, 0.0f);
+		this->_v1.set(m3, m4, m5, 0.0f);
+		this->_v2.set(m6, m7, m8, 0.0f);
+		this->_v3.set(0.0f, 0.0f, 0.0f, 1.0f);
+	}
+
 	Mat3::Mat3(const Vec3& tV0, const Vec3& tV1, const Vec3& tV2)
 	{
 		this->_v0.set(tV0, 0);
