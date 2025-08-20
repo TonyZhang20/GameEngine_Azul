@@ -75,6 +75,8 @@ namespace Azul
 	{
 		LayerManager* instance = LayerManager::privGetInstance();
 
+		pInNode->OnAttach();
+
 		PCSTree* poTree = instance->poActive;
 		PCSNode* tmpNode = poTree->GetRoot()->GetChild();
 
@@ -294,6 +296,7 @@ namespace Azul
 		{
 			pLayer = (Layer*)pIt.Current();
 			layers.push_back(pLayer);
+			pLayer->PrintNode();
 		}
 
 		return layers;

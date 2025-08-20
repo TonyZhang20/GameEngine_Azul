@@ -97,11 +97,26 @@ namespace Azul
 			return;
 		}
 
-		pParent->SetChild(pInNode);
+		pParent = pPrevSib->GetParent();
+
+		//pParent->SetChild(pInNode);
 		pInNode->SetParent(pParent);
+
+		PCSNode* next = pPrevSib->GetNextSibling();
+
+		if (next)
+		{
+			pInNode->SetNextSibling(next);
+			next->SetPrevSibling(pInNode);
+		
+			pInNode->SetForwardAuto(next);
+			next->SetReverseAuto(pInNode);
+		}
+
 
 		pPrevSib->SetNextSibling(pInNode);
 		pInNode->SetPrevSibling(pPrevSib);
+
 
 		//manage itr forward & Revserse
 		pInNode->SetReverseAuto(pPrevSib);
@@ -109,6 +124,11 @@ namespace Azul
 
 		this->mInfo.currNumNodes++;
 		DataCheck(pInNode);
+
+		if (this->pRoot->GetReverse() == pPrevSib)
+		{
+			this->pRoot->SetReverse(pInNode);
+		}
 	}
 
 	// Remove
@@ -301,7 +321,6 @@ namespace Azul
 
 	void PCSTree::ClearDLink(PCSNode* pInNode)
 	{
-
 		LateNodeCheck(pInNode);
 
 		PCSNode* forward = pInNode->GetForward();

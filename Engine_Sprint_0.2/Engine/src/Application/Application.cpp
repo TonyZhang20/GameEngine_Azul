@@ -73,9 +73,11 @@ namespace Azul
 		Renderer* renderLayer = new Renderer(50, "Render Layer");
 
 		gameLayer->SetOrder(0);
-		LayerManager::Add(editorLayer);
-		LayerManager::Add(renderLayer);
-		LayerManager::Add(gameLayer, nullptr);
+
+		LayerManager::AddByOrder(gameLayer);
+		LayerManager::AddByOrder(renderLayer);
+		LayerManager::AddByOrder(editorLayer);
+
 	}
 
 	//Init DirectX
