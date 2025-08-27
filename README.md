@@ -35,3 +35,8 @@ working on 重构 windows 部分， 我想对引擎的UI下手，发现当前的
 
 2025/08/20
 逻辑与渲染完全解耦，Ecs重构初步完成
+
+2025/08/27
+今天主要working on 编辑器
+现在可以添加/移除 Entity / Component -> 适配了 Transform/ Mesh/ Material Components
+
