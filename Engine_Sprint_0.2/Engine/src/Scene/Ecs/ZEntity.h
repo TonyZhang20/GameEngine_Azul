@@ -59,6 +59,8 @@ namespace Azul
 
 		~ZEntity();
 
+		operator zecs::EntityID() const { return this->m_EntityHandle; }
+
 	private:
 		zecs::EntityID m_EntityHandle;
 		Scene* parentScene;

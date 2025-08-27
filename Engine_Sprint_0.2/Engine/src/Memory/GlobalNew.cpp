@@ -1,7 +1,7 @@
 //---------------------------------------------------------------
 // Copyright 2025, Ed Keenan, all rights reserved.
 //---------------------------------------------------------------
-
+#include <crtdbg.h>
 #include "Mem.h"
 #include "Block.h"
 #include "GlobalNew.h"
@@ -120,7 +120,7 @@ void operator delete( void *p, Azul::HeapFixed *const pHeap, const char *inName,
 
 void *operator new( size_t inSize )
 {
-	void *p = malloc(inSize);
+	void* p = _malloc_dbg(inSize, _NORMAL_BLOCK, __FILE__, __LINE__);
 	return p;
 }
 
@@ -144,7 +144,7 @@ void operator delete( void *p )
 	}
 	else
 	{
-		free(p);
+		_free_dbg(p, _NORMAL_BLOCK);
 	}
 }
 

@@ -12,7 +12,7 @@ namespace Azul
 
 		enum Name
 		{
-			None,
+			None = 0,
 			DefaultMaterial,
 			LightTextureA,
 			FlatTextureA,

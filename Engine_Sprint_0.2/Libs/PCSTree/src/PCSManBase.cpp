@@ -31,19 +31,23 @@ namespace Azul
 		PCSNode* ActiveRoot = poActive->GetRoot();
 		PCSNode* ReverseRoot = poReserve->GetRoot();
 
-		if(this->poActive) delete this->poActive;
+		if (this->poActive) delete this->poActive;
+		this->poActive = nullptr;
+
 		if(this->poReserve) delete this->poReserve;
+		this->poReserve = nullptr;
 
 		if (ActiveRoot)
 		{
-			//ActiveRoot->PrintNode();
 			delete ActiveRoot;
 		}
 
-		if (ReverseRoot) delete ReverseRoot;
+		if (ReverseRoot)
+		{
+			delete ReverseRoot;
+		}
 
-		this->poActive = nullptr;
-		this->poReserve = nullptr;
+
 	}
 
 	void PCSManBase::baseSetReserve(int reserveNum, int reserveGrow)

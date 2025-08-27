@@ -54,7 +54,7 @@ namespace Azul
 		assert(pCam);
 		assert(pWorld);
 
-		this->ConstantBuff_View.Transfer(&pCam->getViewMatrix());
+		//this->ConstantBuff_View.Transfer(&pCam->getViewMatrix());
 		this->ConstantBuff_Projection.Transfer(&pCam->getProjMatrix());
 		this->ConstantBuff_World.Transfer(pWorld);
 	}

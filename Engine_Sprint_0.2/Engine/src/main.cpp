@@ -33,7 +33,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPWSTR cmdLine,
 }
 
 // TODOLIST
-// TODO: Render 与 逻辑 解耦
+// TODO: 给老爸买蛋糕
+// TODO: Rework on CameraMan -> Push Camera by EditorLayer
 // TODO: Light Object
 // TODO: Light Buffer
 // TODO: Light Manager

@@ -144,10 +144,15 @@ namespace Azul
 		{
 			TransformComponent* transform = data.transform;
 			MaterialComponent* material = data.material;
-			
-			if (material->shaderID == ShaderObject::Name::NullShader) continue;
+			MeshComponent* mesh = data.mesh;
 
-			if (renderBuckets.find(material->shaderID) == renderBuckets.end())
+			if (material->rasterizerID == RasterizerStateID::NOTINITIALIZE) continue;
+			if (material->materialID == Material::Name::DefaultMaterial || material->materialID == Material::Name::None) continue;
+			if (material->shaderID == ShaderObject::Name::NullShader) continue;
+			if (material->shaderID == ShaderObject::Name::Uninitialized) continue;
+			if (mesh->meshID == Mesh::Name::NOT_INITIALIZED) continue;
+			
+				if (renderBuckets.find(material->shaderID) == renderBuckets.end())
 			{
 				renderBuckets[material->shaderID] = ZVector<DrawData>();
 			}
@@ -180,9 +185,11 @@ namespace Azul
 			 
 			pShader->ActivateShader();
 			pShader->ActivateCBV();
+			
+			Mat4 viewMatrix = camComp.camera.getViewMatrix(camTrans.rotation, camTrans.position);
 
 			pShader->TransferProj(camComp.camera.getProjMatrix());
-			pShader->TransferView(camComp.camera.getViewMatrix(camTrans.rotation, camTrans.position));
+			pShader->TransferView(viewMatrix);
 
 			for (auto& components : bucket.second)
 			{

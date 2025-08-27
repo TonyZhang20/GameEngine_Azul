@@ -23,6 +23,8 @@ namespace Azul
 		MATHLIBRARY_API static void  cossin(float& cos, float& sin, const float angle_radians);
 		MATHLIBRARY_API static float sqrt(const float val);
 		MATHLIBRARY_API static float rsqrt(const float val);
+		MATHLIBRARY_API static float degreesToRadians(float degrees);
+		MATHLIBRARY_API static float radiansToDegrees(float radians);
 	};
 }
 

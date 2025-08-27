@@ -26,6 +26,11 @@ namespace Azul
     }
 
 
+    Quaternion::Quaternion(const float pitchX, const float yawY, const float rollZ)
+    {
+        this->SetEuler(pitchX, yawY, rollZ);
+    }
+
     Quaternion::Quaternion(const float x, const float y, const float z, const float w)
     {
         this->_mq = _mm_set_ps(w, z, y, x);
@@ -40,9 +45,54 @@ namespace Azul
         this->_mq = _mm_set_ps(c, axis.z() * s, axis.y() * s, axis.x() * s);
     }
 
+    Quaternion::Quaternion(const Vec3& euler)
+    {
+        this->SetEuler(euler);
+    }
+
     Quaternion::Quaternion(const Vec4& v)
     {
         this->_mq = v._mv; // assumes Vec4 has same layout
+    }
+
+    float& Quaternion::operator[](const x_enum)
+    {
+        return this->_qx;
+    }
+
+    float& Quaternion::operator[](const y_enum)
+    {
+        return this->_qy;
+    }
+
+    float& Quaternion::operator[](const z_enum)
+    {
+        return this->_qz;
+    }
+
+    float& Quaternion::operator[](const w_enum)
+    {
+        return this->_qw;
+    }
+
+    float Quaternion::operator[](const x_enum) const
+    {
+        return this->_qx;
+    }
+
+    float Quaternion::operator[](const y_enum) const
+    {
+        return this->_qy;
+    }
+
+    float Quaternion::operator[](const z_enum) const
+    {
+        return this->_qz;
+    }
+
+    float Quaternion::operator[](const w_enum) const
+    {
+        return this->_qw;
     }
 
     // Accessors
@@ -392,6 +442,81 @@ namespace Azul
     MATHLIBRARY_API Vec3 Quaternion::GetForward(const Quaternion& q)
     {
         return q.Forward();
+    }
+
+    MATHLIBRARY_API void Quaternion::SetEuler(const float pitchX, const float yawY, const float rollZ)
+    {
+        // X-Y-Z 顺序：先绕X轴(pitch)，再绕Y轴(yaw)，最后绕Z轴(roll)
+        // 注意：参数顺序应该是 pitch, yaw, roll
+
+        float cx = Trig::cos(pitchX * 0.5f);
+        float sx = Trig::sin(pitchX * 0.5f);
+        float cy = Trig::cos(yawY * 0.5f);
+        float sy = Trig::sin(yawY * 0.5f);
+        float cz = Trig::cos(rollZ * 0.5f);
+        float sz = Trig::sin(rollZ * 0.5f);
+
+        _qw = cx * cy * cz + sx * sy * sz;
+        _qx = sx * cy * cz - cx * sy * sz;
+        _qy = cx * sy * cz + sx * cy * sz;
+        _qz = cx * cy * sz - sx * sy * cz;
+
+        norm();
+    }
+
+
+    MATHLIBRARY_API void Quaternion::SetEuler(const Vec3& euler)
+    {
+        this->SetEuler(euler.x(), euler.y(), euler.z());
+    }
+
+    MATHLIBRARY_API void Quaternion::SetEulerDegrees(const Vec3& euler)
+    {
+        Vec3 radians(
+            euler.x() * MATH_PI_180,
+            euler.y() * MATH_PI_180,
+            euler.z() * MATH_PI_180
+        );
+
+        SetEuler(radians);
+    }
+
+    MATHLIBRARY_API Vec3 Quaternion::GetEuler() const
+    {
+        float sinr_cosp = 2.0f * (_qw * _qx + _qy * _qz);
+        float cosr_cosp = 1.0f - 2.0f * (_qx * _qx + _qy * _qy);
+        float pitchX = Trig::atan2(sinr_cosp, cosr_cosp);
+
+        // Yaw (Y)
+        float sinp = 2.0f * (_qw * _qy - _qz * _qx);
+        float yawY;
+        if (fabsf(sinp) >= 1)
+            yawY = copysignf(MATH_PI2, sinp);
+        else
+            yawY = Trig::asin(sinp);
+
+        // Roll (Z)
+        float siny_cosp = 2.0f * (_qw * _qz + _qx * _qy);
+        float cosy_cosp = 1.0f - 2.0f * (_qy * _qy + _qz * _qz);
+        float rollZ = Trig::atan2(siny_cosp, cosy_cosp);
+
+        return Vec3(pitchX, yawY, rollZ);
+    }
+
+    MATHLIBRARY_API Vec3 Quaternion::GetEulerDegree() const
+    {
+        Vec3 radians = this->GetEuler();
+
+        return Vec3(
+            Trig::radiansToDegrees(radians.x()),
+            Trig::radiansToDegrees(radians.y()),
+            Trig::radiansToDegrees(radians.z())
+        );
+    }
+
+    Quaternion Quaternion::FromAxisAngle(const Vec3& axis, float angleRad)
+    {
+        return Quaternion(axis, angleRad);
     }
 
 }

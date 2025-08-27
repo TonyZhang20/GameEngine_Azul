@@ -9,6 +9,7 @@
 #include "Entity.h"
 #include "ApplicationEvent.h"
 #include "BufferFrame.h"
+#include "SceneHierachyPanel.h"
 
 namespace Azul
 {
@@ -51,6 +52,8 @@ namespace Azul
 
 		class ImGuiBuild* buildWindow;
 		Scene* activeScene;
+
+		SceneHierachyPanel* hierachyPanel;
 
 	};
 }

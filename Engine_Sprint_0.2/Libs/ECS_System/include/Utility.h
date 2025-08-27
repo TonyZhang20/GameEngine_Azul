@@ -63,8 +63,8 @@ namespace zecs
 		size_t alignment; // 内存对齐           (已知) //尾部对齐
 		size_t size;      // Component 的大小  (已知) //sizeof(Component)
 
-		std::function<void(void* dest, const void* src)> copyFunc;
-		std::function<void(void* obj)> destructorFunc;
+		std::function<void(void* dest, const void* src)> copyFunc; //拷贝构造
+		std::function<void(void* obj)> destructorFunc;//~T()
 	};
 
 	struct IComponentData

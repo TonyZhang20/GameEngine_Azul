@@ -19,7 +19,7 @@ namespace Azul
 	public:
 		enum class Name
 		{
-			NullShader,
+			NullShader = 0,
 			ColorByVertex,
 			FlatTexture,
 			LightTexture,

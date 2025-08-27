@@ -186,6 +186,7 @@
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="Layers\EditorLayer.h" />
+    <ClInclude Include="Layers\SceneHierachyPanel.h" />
     <ClInclude Include="Manager\CameraNodeManager.h" />
     <ClInclude Include="Manager\LayerManager.h" />
     <ClInclude Include="Manager\MaterialMan.h" />
@@ -214,8 +215,10 @@
     <ClInclude Include="Render\Renderer.h" />
     <ClInclude Include="Render\RenderQueue.h" />
     <ClInclude Include="Scene\Components\Components.h" />
+    <ClInclude Include="Scene\Ecs\ScriptableEntity.h" />
     <ClInclude Include="Scene\Ecs\ZEntity.h" />
     <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="ShaderObject\ShaderMappings.h" />
     <ClInclude Include="ShaderObject\ShaderObject.h" />
     <ClInclude Include="ShaderObject\ShaderObjectHeaders.h" />
@@ -286,6 +289,7 @@
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Layers\EditorLayer.cpp" />
+    <ClCompile Include="Layers\SceneHierachyPanel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager\CameraNodeManager.cpp" />
     <ClCompile Include="Manager\LayerManager.cpp" />
@@ -311,8 +315,10 @@
     <ClCompile Include="Mesh\MeshReadFile.cpp" />
     <ClCompile Include="Render\Renderer.cpp" />
     <ClCompile Include="Render\RenderQueue.cpp" />
+    <ClCompile Include="Scene\Ecs\ScriptableEntity.cpp" />
     <ClCompile Include="Scene\Ecs\ZEntity.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="ShaderObject\ShaderObject.cpp" />
     <ClCompile Include="ShaderObject\ShaderObjectNode.cpp" />
     <ClCompile Include="ShaderObject\ShaderObject_ColorByVertex.cpp" />

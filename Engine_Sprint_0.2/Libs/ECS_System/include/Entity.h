@@ -16,11 +16,26 @@ namespace zecs
 
 		EntityID(const EntityID& otehr) = default;
 		EntityID(EntityID&&) = default;
-		EntityID& operator=(const EntityID& other) = default;
+		EntityID& operator=(const EntityID& other) {
+			this->index = other.index;
+			this->version = other.version;
+			return *this; 
+		};
 
 		inline bool operator == (const EntityID& other) const
 		{
 			return index == other.index && version == other.version;
+		}
+
+		inline operator bool() const
+		{
+			return index != 0xffffff && version != 0xfff;
+		}
+
+		inline void SetError()
+		{
+			index = 0xffffff;
+			version = 0xfff;
 		}
 	};
 

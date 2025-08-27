@@ -62,6 +62,16 @@ namespace Azul
 		return 1 / sqrt(val);
 	}
 
+	float Trig::degreesToRadians(float degrees)
+	{
+		return degrees * (3.14159265358979323846f / 180.0f);
+	}
+
+	float Trig::radiansToDegrees(float radians)
+	{
+		return radians * (180.0f / 3.14159265358979323846f);
+	}
+
 
 
 }

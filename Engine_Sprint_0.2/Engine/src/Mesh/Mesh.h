@@ -39,7 +39,7 @@ namespace Azul
 	public:
 		enum class Name
 		{
-			CUBE,
+			CUBE = 0,
 			PYRAMID,
 			A,
 			B,

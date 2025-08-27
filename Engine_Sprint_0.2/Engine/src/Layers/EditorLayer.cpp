@@ -2,13 +2,13 @@
 
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
-
 #include "StateDirectXMan.h"
 #include "Application.h"
 #include "ImGuiBuild.h"
 #include "Components.h"
 #include "ZEntity.h"
 #include "Event.h"
+#include "SceneManager.h"
 
 namespace Azul
 {
@@ -22,7 +22,8 @@ namespace Azul
 	{
 		delete buildWindow;
 		delete pbufferFrame;
-		//delete activeScene;
+		delete activeScene;
+		delete hierachyPanel;
 
 		ImGui_ImplDX11_Shutdown();
 		ImGui_ImplWin32_Shutdown();
@@ -33,6 +34,7 @@ namespace Azul
 	void EditorLayer::Awake()
 	{
 		pbufferFrame = new BufferFrame();
+		hierachyPanel = new SceneHierachyPanel(SceneManager::GetMainScene());
 	}
 
 	void EditorLayer::OnAttach()
@@ -78,9 +80,6 @@ namespace Azul
 
 		ImGui_ImplWin32_Init(Application::GetWindow()->GetNativeHandle());
 		ImGui_ImplDX11_Init(StateDirectXMan::GetDevice(), StateDirectXMan::GetContext());
-
-		//activeScene = new Scene();
-
 	}
 
 	void EditorLayer::OnDetach()
@@ -97,6 +96,7 @@ namespace Azul
 		//ImGui::ShowDemoWindow(&showWindow);
 
 		buildWindow->DrawWindow(showWindow);
+		OnImGuiRender();
 
 		//End Frame
 		End();
@@ -105,8 +105,6 @@ namespace Azul
 	void EditorLayer::OnUpdate(float UpdateTime)
 	{
 
-
-		//activeScene->Update(UpdateTime);
 	}
 
 	void EditorLayer::OnEvent(Event& e)
@@ -147,7 +145,7 @@ namespace Azul
 
 	void EditorLayer::OnImGuiRender()
 	{
-
+		this->hierachyPanel->OnImGuiRender();
 	}
 
 	bool EditorLayer::OnWindowResize(WindowResizeEvent& e)

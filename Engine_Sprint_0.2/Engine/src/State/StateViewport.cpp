@@ -38,10 +38,6 @@ namespace Azul
 
 		poD3DViewport->Width = static_cast<float>(_width);
 		poD3DViewport->Height = static_cast<float>(_height);
-		poD3DViewport->TopLeftX = 0.0f;
-		poD3DViewport->TopLeftY = 0.0f;
-		poD3DViewport->MinDepth = 0.0f;
-		poD3DViewport->MaxDepth = 1.0f;
 	}
 
 	StateViewport::~StateViewport()

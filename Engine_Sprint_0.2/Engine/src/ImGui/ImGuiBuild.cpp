@@ -13,9 +13,13 @@ namespace Azul
         ImGui::Begin("Viewport");
 
         ImVec2 viewPortSize = ImGui::GetContentRegionAvail();
-        
+        mViewPortSize = { viewPortSize.x, viewPortSize.y };
+
         TextureObject* renderTraget = TextureManager::RequireTexture(TextureObject::Name::SCENE_WINDOW);
-        if (renderTraget) ImGui::Image((void*)renderTraget->GetTextureID(), ImVec2{ viewPortSize.x, viewPortSize.y });
+        if (renderTraget)
+        {
+            ImGui::Image((void*)renderTraget->GetTextureID(), ImVec2{ mViewPortSize.u(), mViewPortSize.v() });
+        }
 
         ImGui::End();
     }
@@ -31,25 +35,6 @@ namespace Azul
         ShowExampleAppDockSpace(&Application::GetQuit());
 
         //ImGui::ShowDemoWindow(&dockOpen);
-
-        float position[3] = { 0.0f, 1.0f, 2.0f };
-        float color[3] = { 1.0f, 0.5f, 0.0f };
-        float scale[3] = { 1.0f, 1.0f, 1.0f };
-        float rotation[3] = { 0.0f, 0.0f, 0.0f };
-
-
-        ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_FirstUseEver);
-        ImGui::SetNextWindowSize(ImVec2(360, 300), ImGuiCond_FirstUseEver);
-        ImGui::Begin("3D Vector Editor", &open, ImGuiWindowFlags_None);
-
-        ImGui::Separator();
-        ImGui::Text("Current Vector Values:");
-        ImGui::Text("Position: (%.2f, %.2f, %.2f)", position[0], position[1], position[2]);
-        ImGui::Text("Color:    (%.2f, %.2f, %.2f)", color[0], color[1], color[2]);
-        ImGui::Text("Scale:    (%.2f, %.2f, %.2f)", scale[0], scale[1], scale[2]);
-        ImGui::Text("Rotation: (%.1f°, %.1f°, %.1f°)", rotation[0], rotation[1], rotation[2]);
-
-        ImGui::End();
 
         DrawSettingPort(open);
         DrawViewPort(open);

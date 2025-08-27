@@ -52,48 +52,31 @@ namespace Azul
 		virtual void updateCamera(void);
 
 		// Get the matrices for rendering
-		Mat4& getViewMatrix();
-		Mat4& getViewMatrix(Quaternion q, Vec3 vPos);
-		
+		Mat4 getViewMatrix(Quaternion& q, Vec3& vPos);
 		Mat4& getProjMatrix();
-		// accessors
-		void getPos(Vec3& outPos) const;
-		void getDir(Vec3& outDir) const;
-		void getUp(Vec3& outUp) const;
-		void getLookAt(Vec3& outLookAt) const;
-		void getRight(Vec3& outRight) const;
+
 
 		// Why no SETS for Pos, Dir, Up, LookAt and Right?
 		//   They have to be adjusted _together_ in setOrientAndPosition()
-
+		void SetFov(const float fov);
 		void SetName(Name _name);
 		char* GetName();
+
+		float& GetNear();
+		float& GetFar();
+		float& GetFov();
+
 
 	public:
 		Name name;
 
 	private:  // methods should never be public
 		void privUpdateProjectionMatrix(void);
-		void privUpdateViewMatrix(void);
 
 
 	private:  // data  (Keep it private)
 		// Projection Matrix
 		Mat4	projMatrix;
-		
-		//Transform
-		Mat4	viewMatrix;
-
-		// camera unit vectors (up, dir, right)
-		
-		//Transform
-		Vec3	vUp;
-		Vec3	vDir;
-		Vec3	vRight;  // derived by up and dir
-		
-		//Transform
-		Vec3	vPos;
-		Vec3	vLookAt;
 
 		// Define the frustum inputs
 		float	nearDist;

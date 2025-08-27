@@ -31,7 +31,6 @@ namespace Azul
 
 		Renderer(int order);
 		Renderer(int order, const char* name);
-		
 
 		void Draw(ZVector<RenderPacket>& packets, ZEntity& cam);
 

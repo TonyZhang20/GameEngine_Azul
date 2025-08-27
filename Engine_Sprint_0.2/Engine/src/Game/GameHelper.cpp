@@ -51,6 +51,8 @@ namespace Azul
 	{
 		outPacks.clear();
 
+		renderableEntity = this->mainScene->Query<MaterialComponent, MeshComponent, TransformComponent>();
+
 		for (auto& entity : renderableEntity)
 		{
 			auto& tran = entity.GetComponent<TransformComponent>();

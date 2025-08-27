@@ -26,10 +26,22 @@ namespace Azul
 		MATHLIBRARY_API Quaternion& operator=(Quaternion&& q) = default;
 
 		// Constructors
+		MATHLIBRARY_API Quaternion(const float pitchX, const float yawY, const float rollZ);
 		MATHLIBRARY_API Quaternion(const float x, const float y, const float z, const float w);
 		MATHLIBRARY_API Quaternion(const Vec3& axis, const float angleRad); // axis-angle
+		MATHLIBRARY_API Quaternion(const Vec3& euler); // axis-angle
 		MATHLIBRARY_API Quaternion(const Vec4& v); // construct from Vec4
 
+		// Bracket
+		MATHLIBRARY_API float& operator[] (const enum x_enum);
+		MATHLIBRARY_API float& operator[] (const enum y_enum);
+		MATHLIBRARY_API float& operator[] (const enum z_enum);
+		MATHLIBRARY_API float& operator[] (const enum w_enum);
+
+		MATHLIBRARY_API float operator[] (const enum x_enum) const;
+		MATHLIBRARY_API float operator[] (const enum y_enum) const;
+		MATHLIBRARY_API float operator[] (const enum z_enum) const;
+		MATHLIBRARY_API float operator[] (const enum w_enum) const;
 		// Accessors
 		MATHLIBRARY_API void x(const float v);
 		MATHLIBRARY_API void y(const float v);
@@ -85,6 +97,15 @@ namespace Azul
 		MATHLIBRARY_API static Vec3 GetUp(const Quaternion& q);
 		MATHLIBRARY_API static Vec3 GetRight(const Quaternion& q);
 		MATHLIBRARY_API static Vec3 GetForward(const Quaternion& q);
+
+		MATHLIBRARY_API void SetEuler(const float pitchX, const float yawY, const float rollZ);
+		MATHLIBRARY_API void SetEuler(const Vec3& euler);
+		MATHLIBRARY_API void SetEulerDegrees(const Vec3& euler);
+
+		MATHLIBRARY_API Vec3 GetEuler() const;
+		MATHLIBRARY_API Vec3 GetEulerDegree() const;
+		MATHLIBRARY_API static Quaternion FromAxisAngle(const Vec3& axis, float angleRad);
+
 
 	private:
 		friend Vec4;

@@ -87,12 +87,15 @@ namespace Azul
 		hr = StateDirectXMan::GetDevice()->CreateTexture2D(&srvDesc, nullptr, &mTexture2D);
 		assert(SUCCEEDED(hr));
 
+		//Copy -> TODO: Change into Render here first and back after
 		StateDirectXMan::GetContext()->CopyResource(this->mTexture2D, pBackBuffer);
 
+		//ReCreate Target View
 		ID3D11ShaderResourceView* pSRV = nullptr;
 		hr = StateDirectXMan::GetDevice()->CreateShaderResourceView(mTexture2D, nullptr, &pSRV);
 		assert(SUCCEEDED(hr));
 
+		//映射目标
 		mTextureObject = TextureManager::RequireTexture(TextureObject::Name::SCENE_WINDOW);
 		mTextureObject->SetResourceView(pSRV);
 	}
@@ -126,7 +129,7 @@ namespace Azul
 
 	void BufferFrame::Restore()
 	{
-		// StateDirectXMan::BindDefaultRenderTarget();
+
 	}
 
 	TextureObject* BufferFrame::GetTextureObject() const

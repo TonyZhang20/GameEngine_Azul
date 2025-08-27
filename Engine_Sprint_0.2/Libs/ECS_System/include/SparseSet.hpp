@@ -41,10 +41,10 @@ namespace zecs
 				components.emplace_back(std::forward<Component>(component));
 
 				//setup Index --> index = push_back == size - 1
-				Index(id) = entities.size() - 1;
+				Index(id) = entities.size() - 1; //存入Index
 
 				//setup version
-				Version(id) = id.version;
+				Version(id) = id.version; //存入ID
 
 				return components.back();
 			}
@@ -122,7 +122,7 @@ namespace zecs
 			this->sparsePages.clear();
 		}
 
-		//dense -> 用来检查重复
+		//dense entityID-> 用来检查重复
 		ZVector<EntityID> entities;
 		//dense either
 		ZVector<Component> components;
@@ -132,9 +132,10 @@ namespace zecs
 			std::array<uint8_t, PageSize> versions; // 存EntityID对应SparseSet中的版本
 			std::array<uint32_t, PageSize> indices; // 在密度数组的索引
 
-			Page() {}
+			Page() = default;
 		};
 
+		//存储EntityID 建立对应的稀疏集
 		ZVector<Page*> sparsePages;
 
 	private:

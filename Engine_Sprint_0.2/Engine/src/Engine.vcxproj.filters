@@ -116,6 +116,9 @@
     <Filter Include="Source Files\src\Light">
       <UniqueIdentifier>{b1074d23-095f-464c-87b8-2e64cbd8259e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\src\Layers\Panels">
+      <UniqueIdentifier>{1018b300-e0e2-487a-9dac-ad6773e1f196}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject_Null.h">
@@ -436,6 +439,15 @@
     <ClInclude Include="Manager\LayerManager.h">
       <Filter>Source Files\src\Manager\include</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\Ecs\ScriptableEntity.h">
+      <Filter>Source Files\src\Scene\Ecs</Filter>
+    </ClInclude>
+    <ClInclude Include="Layers\SceneHierachyPanel.h">
+      <Filter>Source Files\src\Layers\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>Source Files\src\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -713,6 +725,15 @@
     </ClCompile>
     <ClCompile Include="Manager\LayerManager.cpp">
       <Filter>Source Files\src\Manager\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Ecs\ScriptableEntity.cpp">
+      <Filter>Source Files\src\Scene\Ecs</Filter>
+    </ClCompile>
+    <ClCompile Include="Layers\SceneHierachyPanel.cpp">
+      <Filter>Source Files\src\Layers\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>Source Files\src\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

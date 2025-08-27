@@ -40,9 +40,6 @@ namespace Azul
 	protected:
 		bool OnWindowResizeEvent(WindowResizeEvent& e) override;
 
-	public:
-		BufferFrame* poBufferFrame;
-
 	private:
 		ZVector<RenderPacket> outPacks;
 		ZVector<ZEntity> renderableEntity;

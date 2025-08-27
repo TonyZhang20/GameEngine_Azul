@@ -11,6 +11,7 @@
 #include "Material.h"
 #include "ShaderObject.h"
 #include "TextureObject.h"
+#include "ScriptableEntity.h"
 
 #define ErrorID 0xfffff
 #define ErrorVersion 0xff
@@ -18,14 +19,14 @@ namespace Azul
 {
 	enum class RasterizerStateID
 	{
-		NOTINITIALIZE,
+		NOTINITIALIZE = 0,
 		D3D11_FILL_SOLID,
 		D3D11_CULL_WIREFRAME,
 	};
 
 	struct TagComponent
 	{
-		char tag[32];
+		char tag[256];
 
 		TagComponent() = default;
 		TagComponent(const TagComponent&) = default;
@@ -45,6 +46,7 @@ namespace Azul
 		Vec3 scale = Vec3(1, 1, 1);
 		Vec3 position;
 		Quaternion rotation;
+		Vec3 deltaRot;
 
 		zecs::EntityID parent;
 
@@ -64,7 +66,14 @@ namespace Azul
 		{
 			Trans T(position.x(), position.y(), position.z());
 			Scale S(scale.x(), scale.y(), scale.z());
-			Mat4 R = rotation.ToMatrix();
+
+			Quaternion qx = Quaternion::FromAxisAngle(Vec3(1, 0, 0), deltaRot[x] * MATH_PI_180);
+			Quaternion qy = Quaternion::FromAxisAngle(Vec3(0, 1, 0), deltaRot[y] * MATH_PI_180);
+			Quaternion qz = Quaternion::FromAxisAngle(Vec3(0, 0, 1), deltaRot[z] * MATH_PI_180);
+
+			Quaternion final = qx * qy * qz * rotation;
+
+			Mat4  R = final.ToMatrix();
 
 			return S * R * T;
 		};
@@ -93,6 +102,8 @@ namespace Azul
 		inline void SetUp(const Vec3& up, const Vec3* forward = nullptr) { rotation.SetUp(up, forward); }
 
 		inline void SetScale(float s) { this->scale = Vec3(s, s, s); };
+		inline void SetPosition(const Vec3& pos) { this->position.set(pos); };
+
 	};
 
 	struct SpriteRendererComponent
@@ -143,6 +154,7 @@ namespace Azul
 		ShaderObject::Name shaderID;
 		RasterizerStateID rasterizerID;
 
+		//TODO: Light ID
 		Material::Name  lightID;
 	};
 
@@ -153,6 +165,23 @@ namespace Azul
 		MaterialComponent* material;     // Shader¡¢ÎÆÀí¡¢ÑÕÉ«µÈ
 	};
 
+	struct NativeScriptComponent
+	{
+		ScriptableEntity* Instance = nullptr;
+		//function pointer
+		ScriptableEntity*(*InstantiateScript)();
+
+		void(*DestroyScript)(NativeScriptComponent*);
+
+		template<typename T>
+		void Bind()
+		{
+			InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); };
+			DestroyScript = [](NativeScriptComponent* nsc)
+				{	delete nsc->Instance;
+					nsc->Instance = nullptr; };
+		}
+	};
 }
 
 #endif // !TRANSFORM_H

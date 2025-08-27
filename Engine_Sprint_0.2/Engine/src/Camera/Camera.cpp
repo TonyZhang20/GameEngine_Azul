@@ -8,22 +8,14 @@
 namespace Azul
 {
 	Camera::Camera()
-		: aspectRatio(0), farDist(0), fovy(0), nearDist(0), projMatrix(), viewMatrix(), vUp(), vDir(), vRight(), vPos(), vLookAt()
+		: aspectRatio(0), farDist(0), fovy(0), nearDist(0), projMatrix()
 	{
 	}
 
 	void Camera::GetHelper(Vec3& up, Vec3& tar, Vec3& pos,
 		Vec3& upNorm, Vec3& forwardNorm, Vec3& pRightNorm)
 	{
-		this->getPos(pos);
-		this->getLookAt(tar);
-		this->getUp(upNorm);
-		up = pos + upNorm;
 
-		forwardNorm = tar - pos;
-		forwardNorm.norm();
-
-		this->getRight(pRightNorm);
 	}
 
 	void Camera::SetHelper(Vec3& up_pt, Vec3& tar_pt, Vec3& pos_pt)
@@ -82,23 +74,13 @@ namespace Azul
 
 	void Camera::setOrientAndPosition(const Vec3& inUp, const Vec3& inLookAt, const Vec3& inPos)
 	{
-		// Remember the up, dir and right are unit length, and are perpendicular.
-		// Treat lookAt as king, find Right vect, then correct Up to insure perpendiculare.
-		// Make sure that all vectors are unit vectors.
 
-		this->vLookAt = inLookAt;
-		this->vDir = -(inLookAt - inPos); // Right-Hand camera: vDir is flipped
-		this->vDir.norm();
-
-		// Clean up the vectors (Right hand rule)
-		this->vRight = inUp.cross(this->vDir);
-		this->vRight.norm();
-
-		this->vUp = this->vDir.cross(this->vRight);
-		this->vUp.norm();
-
-		this->vPos = inPos;
 	};
+
+	void Camera::SetFov(const float fov)
+	{
+		this->fovy = fov;
+	}
 
 
 	void Camera::SetName(Name _name)
@@ -112,6 +94,21 @@ namespace Azul
 		static char pTmp[128];
 		strcpy_s(pTmp, 128, StringMe(this->name));
 		return pTmp;
+	}
+
+	float& Camera::GetNear()
+	{
+		return this->nearDist;
+	}
+
+	float& Camera::GetFar()
+	{
+		return this->farDist;
+	}
+
+	float& Camera::GetFov()
+	{
+		return this->fovy;
 	}
 
 	// The projection matrix 
@@ -147,34 +144,6 @@ namespace Azul
 		projMatrix = projMatrix * B * S;
 	};
 
-	void Camera::privUpdateViewMatrix(void)
-	{
-		// This functions assumes the your vUp, vRight, vDir are still unit
-		// And perpendicular to each other
-
-		// Set for DX Right-handed space
-		this->viewMatrix[m0] = this->vRight[x];
-		this->viewMatrix[m1] = this->vUp[x];
-		this->viewMatrix[m2] = this->vDir[x];
-		this->viewMatrix[m3] = 0.0f;
-
-		this->viewMatrix[m4] = this->vRight[y];
-		this->viewMatrix[m5] = this->vUp[y];
-		this->viewMatrix[m6] = this->vDir[y];
-		this->viewMatrix[m7] = 0.0f;
-
-		this->viewMatrix[m8] = this->vRight[z];
-		this->viewMatrix[m9] = this->vUp[z];
-		this->viewMatrix[m10] = this->vDir[z];
-		this->viewMatrix[m11] = 0.0f;
-
-		// Apply R^t( -Pos ). Use dot-product with the basis vectors
-		this->viewMatrix[m12] = -vPos.dot(vRight);
-		this->viewMatrix[m13] = -vPos.dot(vUp);
-		this->viewMatrix[m14] = -vPos.dot(vDir);
-		this->viewMatrix[m15] = 1.0f;
-	};
-
 	// Update everything (make sure it's consistent)
 	void Camera::updateCamera(void)
 	{
@@ -182,12 +151,6 @@ namespace Azul
 		this->privUpdateProjectionMatrix();
 
 		// update the view matrix
-		this->privUpdateViewMatrix();
-	}
-
-	Mat4& Camera::getViewMatrix(void)
-	{
-		return this->viewMatrix;
 	}
 
 	Mat4& Camera::getProjMatrix(void)
@@ -195,60 +158,23 @@ namespace Azul
 		return this->projMatrix;
 	}
 
-	Mat4& Camera::getViewMatrix(Quaternion q, Vec3 vPos)
+	Mat4 Camera::getViewMatrix(Quaternion& q, Vec3& vPos)
 	{
 		auto right = q.Right();
 		auto up = q.Up();
 		auto fwd = q.Forward();
 
-		this->viewMatrix[m0] = right[x];
-		this->viewMatrix[m1] = up[x];
-		this->viewMatrix[m2] = fwd[x];
-		this->viewMatrix[m3] = 0.0f;
+		Mat4 viewMatrix{
+			Vec4{right[x],  up[x],  fwd[x],  0.0f},
+			Vec4{right[y],  up[y],  fwd[y],  0.0f},
+			Vec4{right[z],  up[z],  fwd[z],  0.0f},
+			Vec4{-vPos.dot(right), -vPos.dot(up), -vPos.dot(fwd), 1.0f}
+		};
 
-		this->viewMatrix[m4] = right[y];
-		this->viewMatrix[m5] = up[y];
-		this->viewMatrix[m6] = fwd[y];
-		this->viewMatrix[m7] = 0.0f;
 
-		this->viewMatrix[m8] = right[z];
-		this->viewMatrix[m9] = up[z];
-		this->viewMatrix[m10] = fwd[z];
-		this->viewMatrix[m11] = 0.0f;
-
-		// Apply R^t( -Pos ). Use dot-product with the basis vectors
-		this->viewMatrix[m12] = -vPos.dot(right);
-		this->viewMatrix[m13] = -vPos.dot(up);
-		this->viewMatrix[m14] = -vPos.dot(fwd);
-		this->viewMatrix[m15] = 1.0f;
-
-		return this->viewMatrix;
+		return viewMatrix;
 	}
 
-	void Camera::getPos(Vec3& outPos) const
-	{
-		outPos = this->vPos;
-	}
-
-	void  Camera::getDir(Vec3& outDir) const
-	{
-		outDir = this->vDir;
-	}
-
-	void  Camera::getUp(Vec3& outUp) const
-	{
-		outUp = this->vUp;
-	}
-
-	void Camera::getLookAt(Vec3& outLookAt) const
-	{
-		outLookAt = this->vLookAt;
-	}
-
-	void Camera::getRight(Vec3& outRight) const
-	{
-		outRight = this->vRight;
-	}
 }
 
 
