@@ -9,9 +9,7 @@ namespace Azul
 	// Do your magic here
 	Vec3::Vec3()
 	{
-		this->_vx = 0;
-		this->_vy = 0;
-		this->_vz = 0;
+		this->_mv = _mm_setzero_ps();
 	}
 
 	Vec3::Vec3(const Vec3& inV)
@@ -51,7 +49,7 @@ namespace Azul
 		this->_mv = _mm_set_ps(0.0f, v._vz, v._vy, v._vx);
 		return *this;
 	}
-	
+
 	float& Vec3::operator[](const x_enum)
 	{
 		return this->_vx;
@@ -120,7 +118,7 @@ namespace Azul
 	Vec3 Vec3::operator+(const Vec3& inV) const
 	{
 		Vec3 result;
-		result._mv =_mm_add_ps(this->_mv, inV._mv);
+		result._mv = _mm_add_ps(this->_mv, inV._mv);
 
 		return result;
 	}
@@ -183,6 +181,23 @@ namespace Azul
 		return *this;
 	}
 
+	Vec3 Vec3::operator* (const Quat& q) const
+	{
+		Vec3 out;
+		q.Lqcvq(*this, out);
+
+		return out;
+	}
+
+	Vec3& Vec3::operator*= (const Quat& q)
+	{
+		Vec3 out;
+		q.Lqcvq(*this, out);
+
+		*this = out;
+		return *this;
+	}
+
 	float Vec3::Distance(const Vec3& vIn)
 	{
 		float dx = _vx - vIn._vx;
@@ -218,8 +233,8 @@ namespace Azul
 	float Vec3::dot(const Vec3& vIn) const
 	{
 		return this->_vx * vIn._vx +
-			   this->_vy * vIn._vy +
-			   this->_vz * vIn._vz;
+			this->_vy * vIn._vy +
+			this->_vz * vIn._vz;
 	}
 
 	Vec3 Vec3::cross(const Vec3& vIn) const
@@ -272,22 +287,22 @@ namespace Azul
 
 	bool Vec3::isEqual(const Vec3& v, const float epsilon) const
 	{
-		return (std::fabs(this->_vx - v._vx) <= epsilon) &&
-			(std::fabs(this->_vy - v._vy) <= epsilon) &&
-			(std::fabs(this->_vz - v._vz) <= epsilon);
+		return Util::isEqual(this->_vx, v._vx, epsilon) &&
+			Util::isEqual(this->_vy, v._vy, epsilon) &&
+			Util::isEqual(this->_vz, v._vz, epsilon);
 	}
 
 	bool Vec3::isZero(const float epsilon) const
 	{
-		return (std::fabs(this->_vx) <= epsilon) &&
-			(std::fabs(this->_vy) <= epsilon) &&
-			(std::fabs(this->_vz) <= epsilon);
+		return Util::isEqual(this->_vx, 0.0f, epsilon) &&
+			Util::isEqual(this->_vy, 0.0f, epsilon) &&
+			Util::isEqual(this->_vz, 0.0f, epsilon);
 	}
 
 	void Vec3::Print(const char* pName) const
 	{
 		Trace::out("(Vec3 : %s)\n", pName);
-		Trace::out("(%f , %f, %f）\n", this->_vx,this->_vy,this->_vz);
+		Trace::out("(%f , %f, %f��\n", this->_vx, this->_vy, this->_vz);
 	}
 
 

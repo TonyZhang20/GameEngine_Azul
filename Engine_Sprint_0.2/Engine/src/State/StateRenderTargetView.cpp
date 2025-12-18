@@ -28,6 +28,20 @@ namespace Azul
 		this->privInitialize(backBuffer.GetID3D11Texture2D());
 	}
 
+	void StateRenderTargetView::Initialize(const unsigned int height, const unsigned int width)
+	{
+		IDXGISwapChain* pSwapChain = StateDirectXMan::GetSwapChain();
+		assert(pSwapChain);
+
+		ID3D11Texture2D* pTexBackBuffer = nullptr;
+		HRESULT hr = pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pTexBackBuffer);
+		assert(SUCCEEDED(hr));
+
+		BufferTexture2D backBuffer(pTexBackBuffer);
+		backBuffer.SetWidthHeightFormat(width, height);
+		this->privInitialize(backBuffer.GetID3D11Texture2D());
+	}
+
 	void StateRenderTargetView::Clear(const Vec4 &r)
 	{
 		StateDirectXMan::GetContext()->ClearRenderTargetView(this->poD3DRenderTargetView, 

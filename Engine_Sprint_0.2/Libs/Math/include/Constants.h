@@ -28,7 +28,7 @@ namespace Azul
 	constexpr const float MATH_5PI8 = 1.9634954085f;		// 5 * PI / 8 
 	constexpr const float MATH_6PI8 = 2.3561944901f;		// 6 * PI / 8 
 	constexpr const float MATH_7PI8 = 2.7488935718f;		// 7 * PI / 8 
-	//
+	
 	constexpr const float MATH_180_PI = 57.2957795147f;		// 180 / PI 
 	constexpr const float MATH_PI_180 = 0.0174532925f; 		// Pi / 180 
 

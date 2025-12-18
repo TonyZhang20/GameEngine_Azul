@@ -16,8 +16,15 @@ namespace Azul
 		static Scene* GetMainScene();
 
 		static void AddScene(Scene*);
+		static void RemoveScene(Scene*);
+
 		static void Create();
 		static void Destroy();
+		static void Init();
+		static void Update(float deltaTime);
+
+	private:
+		static SceneManager* GetInstance();
 
 	private:
 		ZVector<Scene*> sceneList;

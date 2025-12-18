@@ -18,7 +18,7 @@ namespace Azul
         TextureObject* renderTraget = TextureManager::RequireTexture(TextureObject::Name::SCENE_WINDOW);
         if (renderTraget)
         {
-            ImGui::Image((void*)renderTraget->GetTextureID(), ImVec2{ mViewPortSize.u(), mViewPortSize.v() });
+            ImGui::Image((void*)renderTraget->GetTextureID(), ImVec2{ mViewPortSize.u, mViewPortSize.v });
         }
 
         ImGui::End();

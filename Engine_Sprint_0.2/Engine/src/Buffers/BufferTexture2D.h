@@ -20,6 +20,11 @@ namespace Azul
 		BufferTexture2D(ID3D11Texture2D *p);
 
 		void Initialize(ID3D11Texture2D *p);
+		inline void SetWidthHeightFormat(unsigned int width, unsigned int height)
+		{
+			this->mWidth = width;
+			this->mHeight = height;
+		}
 		ID3D11Texture2D *GetID3D11Texture2D();
 
 	private:

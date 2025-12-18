@@ -158,7 +158,7 @@ namespace Azul
 		return this->projMatrix;
 	}
 
-	Mat4 Camera::getViewMatrix(Quaternion& q, Vec3& vPos)
+	Mat4 Camera::getViewMatrix(Quat& q, Vec3& vPos)
 	{
 		auto right = q.Right();
 		auto up = q.Up();

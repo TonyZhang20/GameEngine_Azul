@@ -28,231 +28,231 @@ namespace Azul
 	VertexPos g_CubeVertices_pos[] =
 	{
 		// Triangle 0
-		Vec3(-0.25f,  0.25f, -0.25f),
-		Vec3(-0.25f, -0.25f, -0.25f),
-		Vec3(0.25f, -0.25f,  -0.25f),
+		Vec3f{-0.25f,  0.25f, -0.25f},
+		Vec3f{-0.25f, -0.25f, -0.25f},
+		Vec3f{0.25f, -0.25f,  -0.25f},
 
 		// Triangle 1
-		Vec3(0.25f,  -0.25f, -0.25f),
-		Vec3(0.25f,   0.25f, -0.25f),
-		Vec3(-0.25f,  0.25f, -0.25f),
+		Vec3f(0.25f,  -0.25f, -0.25f),
+		Vec3f(0.25f,   0.25f, -0.25f),
+		Vec3f(-0.25f,  0.25f, -0.25f),
 
 		// Triangle 2
-		Vec3(0.25f, -0.25f, -0.25f),
-		Vec3(0.25f, -0.25f,  0.25f),
-		Vec3(0.25f,  0.25f, -0.25f),
+		Vec3f(0.25f, -0.25f, -0.25f),
+		Vec3f(0.25f, -0.25f,  0.25f),
+		Vec3f(0.25f,  0.25f, -0.25f),
 
 		// Triangle 3
-		Vec3(0.25f, -0.25f,  0.25f),
-		Vec3(0.25f,  0.25f,  0.25f),
-		Vec3(0.25f,  0.25f, -0.25f),
+		Vec3f(0.25f, -0.25f,  0.25f),
+		Vec3f(0.25f,  0.25f,  0.25f),
+		Vec3f(0.25f,  0.25f, -0.25f),
 
 		// Triangle 4
-		Vec3(0.25f,  -0.25f,  0.25f),
-		Vec3(-0.25f,  -0.25f,  0.25f),
-		Vec3(0.25f,   0.25f,  0.25f),
+		Vec3f(0.25f,  -0.25f,  0.25f),
+		Vec3f(-0.25f,  -0.25f,  0.25f),
+		Vec3f(0.25f,   0.25f,  0.25f),
 
 		// Triangle 5
-		Vec3(-0.25f, -0.25f,  0.25f),
-		Vec3(-0.25f,  0.25f,  0.25f),
-		Vec3(0.25f,   0.25f,  0.25f),
+		Vec3f(-0.25f, -0.25f,  0.25f),
+		Vec3f(-0.25f,  0.25f,  0.25f),
+		Vec3f(0.25f,   0.25f,  0.25f),
 
 		// Triangle 6
-		Vec3(-0.25f, -0.25f,  0.25f),
-		Vec3(-0.25f, -0.25f, -0.25f),
-		Vec3(-0.25f,  0.25f,  0.25f),
+		Vec3f(-0.25f, -0.25f,  0.25f),
+		Vec3f(-0.25f, -0.25f, -0.25f),
+		Vec3f(-0.25f,  0.25f,  0.25f),
 
 		// Triangle 7
-		Vec3(-0.25f, -0.25f, -0.25f),
-		Vec3(-0.25f,  0.25f, -0.25f),
-		Vec3(-0.25f,  0.25f,  0.25f),
+		Vec3f(-0.25f, -0.25f, -0.25f),
+		Vec3f(-0.25f,  0.25f, -0.25f),
+		Vec3f(-0.25f,  0.25f,  0.25f),
 
 		// Triangle 8
-		Vec3(-0.25f, -0.25f,  0.25f),
-		Vec3(0.25f, -0.25f,   0.25f),
-		Vec3(0.25f, -0.25f,  -0.25f),
+		Vec3f(-0.25f, -0.25f,  0.25f),
+		Vec3f(0.25f, -0.25f,   0.25f),
+		Vec3f(0.25f, -0.25f,  -0.25f),
 
 		// Triangle 9
-		Vec3(0.25f, -0.25f,  -0.25f),
-		Vec3(-0.25f, -0.25f, -0.25f),
-		Vec3(-0.25f, -0.25f,  0.25f),
+		Vec3f(0.25f, -0.25f,  -0.25f),
+		Vec3f(-0.25f, -0.25f, -0.25f),
+		Vec3f(-0.25f, -0.25f,  0.25f),
 
 		// Triangle 10
-		Vec3(-0.25f,  0.25f, -0.25f),
-		Vec3(0.25f,  0.25f,  -0.25f),
-		Vec3(0.25f,  0.25f,   0.25f),
+		Vec3f(-0.25f,  0.25f, -0.25f),
+		Vec3f(0.25f,  0.25f,  -0.25f),
+		Vec3f(0.25f,  0.25f,   0.25f),
 
 		// Triangle 11
-		Vec3(0.25f,  0.25f,   0.25f),
-		Vec3(-0.25f,  0.25f,  0.25f),
-		Vec3(-0.25f,  0.25f, -0.25f)
+		Vec3f(0.25f,  0.25f,   0.25f),
+		Vec3f(-0.25f,  0.25f,  0.25f),
+		Vec3f(-0.25f,  0.25f, -0.25f)
 
 	};
 
 	VertexTexCoord g_CubeVertices_texCoord[] =
 	{
 		// Triangle 0
-		Vec2(0.0f, 0.0f),
-		Vec2(0.0f, 1.0f),
-		Vec2(1.0f, 1.0f),
+		Vec2f(0.0f, 0.0f),
+		Vec2f(0.0f, 1.0f),
+		Vec2f(1.0f, 1.0f),
 
 		// Triangle 1
-		Vec2(1.0f, 1.0f),
-		Vec2(1.0f, 0.0f),
-		Vec2(0.0f, 0.0f),
+		Vec2f(1.0f, 1.0f),
+		Vec2f(1.0f, 0.0f),
+		Vec2f(0.0f, 0.0f),
 
 		// Triangle 2
-		Vec2(0.0f, 1.0f),
-		Vec2(1.0f, 1.0f),
-		Vec2(0.0f, 0.0f),
+		Vec2f(0.0f, 1.0f),
+		Vec2f(1.0f, 1.0f),
+		Vec2f(0.0f, 0.0f),
 
 		// Triangle 3
-		Vec2(1.0f, 1.0f),
-		Vec2(1.0f, 0.0f),
-		Vec2(0.0f, 0.0f),
+		Vec2f(1.0f, 1.0f),
+		Vec2f(1.0f, 0.0f),
+		Vec2f(0.0f, 0.0f),
 
 		// Triangle 4
-		Vec2(1.0f, 1.0f),
-		Vec2(0.0f, 1.0f),
-		Vec2(1.0f, 0.0f),
+		Vec2f(1.0f, 1.0f),
+		Vec2f(0.0f, 1.0f),
+		Vec2f(1.0f, 0.0f),
 
 		// Triangle 5
-		Vec2(0.0f, 1.0f),
-		Vec2(0.0f, 0.0f),
-		Vec2(1.0f, 0.0f),
+		Vec2f(0.0f, 1.0f),
+		Vec2f(0.0f, 0.0f),
+		Vec2f(1.0f, 0.0f),
 
 		// Triangle 6
-		Vec2(0.0f, 0.0f),
-		Vec2(0.0f, 1.0f),
-		Vec2(1.0f, 0.0f),
+		Vec2f(0.0f, 0.0f),
+		Vec2f(0.0f, 1.0f),
+		Vec2f(1.0f, 0.0f),
 
 		// Triangle 7
-		Vec2(0.0f, 1.0f),
-		Vec2(1.0f, 1.0f),
-		Vec2(1.0f, 0.0f),
+		Vec2f(0.0f, 1.0f),
+		Vec2f(1.0f, 1.0f),
+		Vec2f(1.0f, 0.0f),
 
 		// Triangle 8
-		Vec2(0.0f, 0.0f),
-		Vec2(1.0f, 0.0f),
-		Vec2(1.0f, 1.0f),
+		Vec2f(0.0f, 0.0f),
+		Vec2f(1.0f, 0.0f),
+		Vec2f(1.0f, 1.0f),
 
 		// Triangle 9
-		Vec2(1.0f, 1.0f),
-		Vec2(0.0f, 1.0f),
-		Vec2(0.0f, 0.0f),
+		Vec2f(1.0f, 1.0f),
+		Vec2f(0.0f, 1.0f),
+		Vec2f(0.0f, 0.0f),
 
 		// Triangle 10
-		Vec2(0.0f, 1.0f),
-		Vec2(1.0f, 1.0f),
-		Vec2(1.0f, 0.0f),
+		Vec2f(0.0f, 1.0f),
+		Vec2f(1.0f, 1.0f),
+		Vec2f(1.0f, 0.0f),
 
 		// Triangle 11
-		Vec2(1.0f, 0.0f),
-		Vec2(0.0f, 0.0f),
-		Vec2(0.0f, 1.0f)
+		Vec2f(1.0f, 0.0f),
+		Vec2f(0.0f, 0.0f),
+		Vec2f(0.0f, 1.0f)
 
 	};
 
 	VertexNorm g_CubeVertices_norm[] =
 	{
 		// Triangle 0
-		Vec3(-0.6f,  0.6f, -0.6f),
-		Vec3(-0.6f, -0.6f, -0.6f),
-		Vec3(0.6f,  -0.6f, -0.6f),
+		Vec3f(-0.6f,  0.6f, -0.6f),
+		Vec3f(-0.6f, -0.6f, -0.6f),
+		Vec3f(0.6f,  -0.6f, -0.6f),
 
 		// Triangle 1
-		Vec3(0.6f, -0.6f, -0.6f),
-		Vec3(0.6f,  0.6f, -0.6f),
-		Vec3(-0.6f,  0.6f, -0.6f),
+		Vec3f(0.6f, -0.6f, -0.6f),
+		Vec3f(0.6f,  0.6f, -0.6f),
+		Vec3f(-0.6f,  0.6f, -0.6f),
 
 		// Triangle 2
-		Vec3(0.6f, -0.6f, -0.6f),
-		Vec3(0.6f, -0.6f,  0.6f),
-		Vec3(0.6f,  0.6f, -0.6f),
+		Vec3f(0.6f, -0.6f, -0.6f),
+		Vec3f(0.6f, -0.6f,  0.6f),
+		Vec3f(0.6f,  0.6f, -0.6f),
 
 		// Triangle 3
-		Vec3(0.6f, -0.6f,  0.6f),
-		Vec3(0.6f,  0.6f,  0.6f),
-		Vec3(0.6f,  0.6f, -0.6f),
+		Vec3f(0.6f, -0.6f,  0.6f),
+		Vec3f(0.6f,  0.6f,  0.6f),
+		Vec3f(0.6f,  0.6f, -0.6f),
 
 		// Triangle 4
-		Vec3(0.6f, -0.6f, 0.6f),
-		Vec3(-0.6f, -0.6f, 0.6f),
-		Vec3(0.6f,  0.6f, 0.6f),
+		Vec3f(0.6f, -0.6f, 0.6f),
+		Vec3f(-0.6f, -0.6f, 0.6f),
+		Vec3f(0.6f,  0.6f, 0.6f),
 
 		// Triangle 5
-		Vec3(-0.6f, -0.6f, 0.6f),
-		Vec3(-0.6f,  0.6f, 0.6f),
-		Vec3(0.6f,  0.6f, 0.6f),
+		Vec3f(-0.6f, -0.6f, 0.6f),
+		Vec3f(-0.6f,  0.6f, 0.6f),
+		Vec3f(0.6f,  0.6f, 0.6f),
 
 		// Triangle 6
-		Vec3(-0.6f, -0.6f,  0.6f),
-		Vec3(-0.6f, -0.6f, -0.6f),
-		Vec3(-0.6f,  0.6f,  0.6f),
+		Vec3f(-0.6f, -0.6f,  0.6f),
+		Vec3f(-0.6f, -0.6f, -0.6f),
+		Vec3f(-0.6f,  0.6f,  0.6f),
 
 		// Triangle 7
-		Vec3(-0.6f, -0.6f, -0.6f),
-		Vec3(-0.6f,  0.6f, -0.6f),
-		Vec3(-0.6f,  0.6f,  0.6f),
+		Vec3f(-0.6f, -0.6f, -0.6f),
+		Vec3f(-0.6f,  0.6f, -0.6f),
+		Vec3f(-0.6f,  0.6f,  0.6f),
 
 		// Triangle 8
-		Vec3(-0.6f, -0.6f,  0.6f),
-		Vec3(0.6f, -0.6f,  0.6f),
-		Vec3(0.6f, -0.6f, -0.6f),
+		Vec3f(-0.6f, -0.6f,  0.6f),
+		Vec3f(0.6f, -0.6f,  0.6f),
+		Vec3f(0.6f, -0.6f, -0.6f),
 
 		// Triangle 9
-		Vec3(0.6f, -0.6f, -0.6f),
-		Vec3(-0.6f, -0.6f, -0.6f),
-		Vec3(-0.6f, -0.6f,  0.6f),
+		Vec3f(0.6f, -0.6f, -0.6f),
+		Vec3f(-0.6f, -0.6f, -0.6f),
+		Vec3f(-0.6f, -0.6f,  0.6f),
 
 		// Triangle 10
-		Vec3(-0.6f, 0.6f, -0.6f),
-		Vec3(0.6f, 0.6f, -0.6f),
-		Vec3(0.6f, 0.6f,  0.6f),
+		Vec3f(-0.6f, 0.6f, -0.6f),
+		Vec3f(0.6f, 0.6f, -0.6f),
+		Vec3f(0.6f, 0.6f,  0.6f),
 
 		// Triangle 11
-		Vec3(0.6f, 0.6f,  0.6f),
-		Vec3(-0.6f, 0.6f,  0.6f),
-		Vec3(-0.6f, 0.6f, -0.6f)
+		Vec3f(0.6f, 0.6f,  0.6f),
+		Vec3f(-0.6f, 0.6f,  0.6f),
+		Vec3f(-0.6f, 0.6f, -0.6f)
 
 	};
 
 	VertexColor g_CubeVertices_color[] =
 	{
-		 Vec3(0.0f, 0.0f, 0.0f) ,
-		 Vec3(1.0f, 0.0f, 0.0f) ,
-		 Vec3(0.0f, 1.0f, 0.0f) ,
-		 Vec3(1.0f, 0.0f, 1.0f) ,
-		 Vec3(1.0f, 1.0f, 0.0f) ,
-		 Vec3(0.0f, 1.0f, 1.0f) ,
-		 Vec3(1.0f, 0.0f, 1.0f) ,
-		 Vec3(1.0f, 1.0f, 1.0f) ,
-		 Vec3(0.0f, 0.0f, 0.0f) ,
-		 Vec3(1.0f, 0.0f, 0.0f) ,
-		 Vec3(0.0f, 1.0f, 0.0f) ,
-		 Vec3(1.0f, 0.0f, 1.0f) ,
-		 Vec3(1.0f, 1.0f, 0.0f) ,
-		 Vec3(0.0f, 1.0f, 1.0f) ,
-		 Vec3(1.0f, 0.0f, 1.0f) ,
-		 Vec3(1.0f, 1.0f, 1.0f) ,
-		 Vec3(0.0f, 0.0f, 0.0f) ,
-		 Vec3(1.0f, 0.0f, 0.0f) ,
-		 Vec3(0.0f, 1.0f, 0.0f) ,
-		 Vec3(1.0f, 0.0f, 1.0f) ,
-		 Vec3(1.0f, 1.0f, 0.0f) ,
-		 Vec3(0.0f, 1.0f, 1.0f) ,
-		 Vec3(1.0f, 0.0f, 1.0f) ,
-		 Vec3(1.0f, 1.0f, 1.0f) ,
-		 Vec3(0.0f, 0.0f, 0.0f) ,
-		 Vec3(1.0f, 0.0f, 0.0f) ,
-		 Vec3(0.0f, 1.0f, 0.0f) ,
-		 Vec3(1.0f, 0.0f, 1.0f) ,
-		 Vec3(1.0f, 1.0f, 0.0f) ,
-		 Vec3(0.0f, 1.0f, 1.0f) ,
-		 Vec3(1.0f, 0.0f, 1.0f) ,
-		 Vec3(1.0f, 1.0f, 1.0f) ,
-		 Vec3(0.0f, 1.0f, 0.0f) ,
-		 Vec3(1.0f, 0.0f, 1.0f)
+		 Vec3f(0.0f, 0.0f, 0.0f) ,
+		 Vec3f(1.0f, 0.0f, 0.0f) ,
+		 Vec3f(0.0f, 1.0f, 0.0f) ,
+		 Vec3f(1.0f, 0.0f, 1.0f) ,
+		 Vec3f(1.0f, 1.0f, 0.0f) ,
+		 Vec3f(0.0f, 1.0f, 1.0f) ,
+		 Vec3f(1.0f, 0.0f, 1.0f) ,
+		 Vec3f(1.0f, 1.0f, 1.0f) ,
+		 Vec3f(0.0f, 0.0f, 0.0f) ,
+		 Vec3f(1.0f, 0.0f, 0.0f) ,
+		 Vec3f(0.0f, 1.0f, 0.0f) ,
+		 Vec3f(1.0f, 0.0f, 1.0f) ,
+		 Vec3f(1.0f, 1.0f, 0.0f) ,
+		 Vec3f(0.0f, 1.0f, 1.0f) ,
+		 Vec3f(1.0f, 0.0f, 1.0f) ,
+		 Vec3f(1.0f, 1.0f, 1.0f) ,
+		 Vec3f(0.0f, 0.0f, 0.0f) ,
+		 Vec3f(1.0f, 0.0f, 0.0f) ,
+		 Vec3f(0.0f, 1.0f, 0.0f) ,
+		 Vec3f(1.0f, 0.0f, 1.0f) ,
+		 Vec3f(1.0f, 1.0f, 0.0f) ,
+		 Vec3f(0.0f, 1.0f, 1.0f) ,
+		 Vec3f(1.0f, 0.0f, 1.0f) ,
+		 Vec3f(1.0f, 1.0f, 1.0f) ,
+		 Vec3f(0.0f, 0.0f, 0.0f) ,
+		 Vec3f(1.0f, 0.0f, 0.0f) ,
+		 Vec3f(0.0f, 1.0f, 0.0f) ,
+		 Vec3f(1.0f, 0.0f, 1.0f) ,
+		 Vec3f(1.0f, 1.0f, 0.0f) ,
+		 Vec3f(0.0f, 1.0f, 1.0f) ,
+		 Vec3f(1.0f, 0.0f, 1.0f) ,
+		 Vec3f(1.0f, 1.0f, 1.0f) ,
+		 Vec3f(0.0f, 1.0f, 0.0f) ,
+		 Vec3f(1.0f, 0.0f, 1.0f)
 
 	};
 

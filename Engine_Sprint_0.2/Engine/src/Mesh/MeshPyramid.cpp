@@ -1,25 +1,26 @@
 #include "MeshPyramid.h"
 #include "MathEngine.h"
 #include "StateDirectXMan.h"
+#include "MathEngine.h"
 
 namespace Azul
 {
 	VertexPos g_PyramidVertices_pos[] =
 	{
-		Vec3(0,  0, 2),  //0
-		Vec3(-1, -1, 0), //1
-		Vec3(1, -1, 0),  //2
-		Vec3(1,  1, 0),  //3
-		Vec3(-1,  1, 0)  //4
+		Vec3f{0,  0, 2},  //0
+		Vec3f{-1, -1, 0}, //1
+		Vec3f{1, -1, 0},  //2
+		Vec3f{1,  1, 0},  //3
+		Vec3f{-1,  1, 0}  //4
 	};
 
 	VertexColor g_PyramidVertices_color[] =
 	{
-		 Vec3(0.0f, 0.0f, 1.0f) , // 0
-		 Vec3(0.0f, 1.0f, 0.0f) , // 1
-		 Vec3(1.0f, 1.0f, 0.0f) , // 2
-		 Vec3(1.0f, 0.0f, 0.0f) , // 3
-		 Vec3(1.0f, 0.0f, 1.0f)   // 4
+		 Vec3f{0.0f, 0.0f, 1.0f} , // 0
+		 Vec3f{0.0f, 1.0f, 0.0f} , // 1
+		 Vec3f{1.0f, 1.0f, 0.0f} , // 2
+		 Vec3f{1.0f, 0.0f, 0.0f} , // 3
+		 Vec3f{1.0f, 0.0f, 1.0f}   // 4
 	};
 
 
@@ -35,20 +36,20 @@ namespace Azul
 
 	VertexTexCoord g_PyramidVertices_texCoord[] =
 	{
-		Vec2(0.5f, 0.5f),
-		Vec2(0.0f, 1.0f),
-		Vec2(1.0f, 1.0f),
-		Vec2(1.0f, 0.0f),
-		Vec2(0.0f, 0.0f)
+		Vec2f{0.5f, 0.5f},
+		Vec2f{0.0f, 1.0f},
+		Vec2f{1.0f, 1.0f},
+		Vec2f{1.0f, 0.0f},
+		Vec2f{0.0f, 0.0f}
 	};
 
 	VertexNorm g_PyramidVertices_norm[] =
 	{
-		Vec3(0.0f,  0.0f,  1.0f),
-		Vec3(-0.4f, -0.4f, -0.8f),
-		Vec3(0.4f, -0.4f, -0.8f),
-		Vec3(0.4f,  0.4f, -0.8f),
-		Vec3(-0.4f,  0.4f, -0.8f)
+		Vec3f{0.0f,  0.0f,  1.0f },
+		Vec3f{-0.4f, -0.4f, -0.8f},
+		Vec3f{0.4f, -0.4f, -0.8f },
+		Vec3f{0.4f,  0.4f, -0.8f },
+		Vec3f{-0.4f,  0.4f, -0.8f}
 	};
 
 	unsigned int NumPyramidVerts = sizeof(g_PyramidVertices_pos) / sizeof(g_PyramidVertices_pos[0]);

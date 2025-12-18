@@ -217,6 +217,7 @@
     <ClInclude Include="Scene\Components\Components.h" />
     <ClInclude Include="Scene\Ecs\ScriptableEntity.h" />
     <ClInclude Include="Scene\Ecs\ZEntity.h" />
+    <ClInclude Include="Scene\MainScene.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="ShaderObject\ShaderMappings.h" />
@@ -317,6 +318,7 @@
     <ClCompile Include="Render\RenderQueue.cpp" />
     <ClCompile Include="Scene\Ecs\ScriptableEntity.cpp" />
     <ClCompile Include="Scene\Ecs\ZEntity.cpp" />
+    <ClCompile Include="Scene\MainScene.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="ShaderObject\ShaderObject.cpp" />

@@ -109,7 +109,7 @@ public:
 
     inline void erase(const T& value)
     {
-        for (auto it = begin(); it != end(); ++it)
+        for (T* it = begin(); it != end(); ++it)
         {
             if (*it == value)
             {

@@ -5,6 +5,7 @@
 #include "imGui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
+#include "Mesh.h"
 
 namespace Azul
 {
@@ -19,7 +20,7 @@ namespace Azul
 		void DrawWindow(bool & open);
 		void ShowExampleAppDockSpace(bool* p_open);
 
-		Vec2 mViewPortSize;
+		Vec2f mViewPortSize;
 	};
 }
 

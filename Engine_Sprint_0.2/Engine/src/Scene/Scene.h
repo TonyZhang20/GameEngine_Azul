@@ -13,12 +13,12 @@ namespace Azul
 	class Scene
 	{
 	public:
-
-
-
 		Scene();
-		~Scene();
+		virtual ~Scene();
+
+		virtual void OnInit();
 		virtual void Update(float deltaTime);
+		virtual void OnDestroy();
 
 		template<typename T>
 		ZVector<T> FindObjectsBy()
@@ -54,16 +54,16 @@ namespace Azul
 		ZEntity CreateEntity(const char* name = "");
 		void DestroyEntity(zecs::EntityID entity);
 
-		zecs::EntityID& GetMainCamera();
-	private:
+	protected:
 		void UpdateScript(float d);
 
-	private:
+	protected:
 		friend ZEntity;
 		friend SceneHierachyPanel;
 
 		zecs::ArchetypeWorld world;
-		zecs::EntityID camera;
+
+		std::string m_name;
 	};
 }
 

@@ -9,7 +9,7 @@ namespace Azul
 	// Do your magic here
 	Vec4::Vec4()
 	{
-		this->_mv = _mm_set_ps(0, 0, 0, 0);
+		this->_mv = _mm_setzero_ps();
 	}
 
 	Vec4::Vec4(const Vec4& inV)
@@ -199,7 +199,7 @@ namespace Azul
 	{
 		float len = this->len();
 		if (len == 0)
-			this->_mv = _mm_set_ps(0, 0, 0, 0);
+			this->_mv = _mm_set_ps(0.f, 0.f, 0.f, 0.f);
 		else
 			this->_mv = _mm_set_ps(_vw / len, _vz / len, _vy / len, _vx / len);
 
@@ -248,24 +248,24 @@ namespace Azul
 
 	bool Vec4::isEqual(const Vec4& v, const float epsilon) const
 	{
-		return (std::fabs(this->_vx - v._vx) <= epsilon) &&
-			(std::fabs(this->_vy - v._vy) <= epsilon) &&
-			(std::fabs(this->_vz - v._vz) <= epsilon) &&
-			(std::fabs(this->_vw - v._vw) <= epsilon);
+		return Util::isEqual(this->_vx, v._vx, epsilon) &&
+			Util::isEqual(this->_vy, v._vy, epsilon) &&
+			Util::isEqual(this->_vz, v._vz, epsilon) &&
+			Util::isEqual(this->_vw, v._vw, epsilon);
 	}
 
 	bool Vec4::isZero(const float epsilon) const
 	{
-		return (std::fabs(this->_vx) <= epsilon) &&
-			(std::fabs(this->_vy) <= epsilon) &&
-			(std::fabs(this->_vz) <= epsilon) &&
-			(std::fabs(this->_vw) <= epsilon);
+		return Util::isEqual(this->_vx, 0.0f, epsilon) &&
+			Util::isEqual(this->_vy, 0.0f, epsilon) &&
+			Util::isEqual(this->_vz, 0.0f, epsilon) &&
+			Util::isEqual(this->_vw, 0.0f, epsilon);
 	}
 
 	void Vec4::Print(const char* pName) const
 	{
-		printf("Vec3 : %s  \n", pName);
-		printf("(%f , %f, %f, %f）\n", this->_vx, this->_vy, this->_vz, this->_vw);
+		printf("Vec4 : %s  \n", pName);
+		printf("(%f , %f, %f, %f\n", this->_vx, this->_vy, this->_vz, this->_vw);
 	}
 
 	Vec4 operator*(const float scale, const Vec4& inV)

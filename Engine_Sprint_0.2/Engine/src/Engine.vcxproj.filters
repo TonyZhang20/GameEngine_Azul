@@ -448,6 +448,9 @@
     <ClInclude Include="Scene\SceneManager.h">
       <Filter>Source Files\src\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\MainScene.h">
+      <Filter>Source Files\src\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -733,6 +736,9 @@
       <Filter>Source Files\src\Layers\Panels</Filter>
     </ClCompile>
     <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>Source Files\src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\MainScene.cpp">
       <Filter>Source Files\src\Scene</Filter>
     </ClCompile>
   </ItemGroup>

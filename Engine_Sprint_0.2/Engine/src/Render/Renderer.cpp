@@ -74,8 +74,9 @@ namespace Azul
 		unsigned int clientWidth = Application::GetWidth();
 		unsigned int clientHeight = Application::GetHeight();
 
-		this->mStateRenderTargetView.Initialize();
+		StateDirectXMan::ResizeSwapChain(clientWidth, clientHeight);
 
+		this->mStateRenderTargetView.Initialize();
 		this->mDepthStencilBuffer.Initialize(clientWidth, clientHeight);
 		this->mDepthStencilView.Initialize(this->mDepthStencilBuffer);
 

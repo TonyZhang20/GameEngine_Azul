@@ -5,6 +5,8 @@
 #ifndef ENGINE_MATH_VEC4_PROXY_H
 #define ENGINE_MATH_VEC4_PROXY_H
 
+#include "Math_DLLInterface.h"
+
 namespace Azul
 {
 	// Vector related proxies here:
@@ -15,24 +17,24 @@ namespace Azul
 
 		// Suggested inteface:
 
-		MATHLIBRARY_API Vec4Proxy(float a, float b, float c, float d);
+		MATH_LIBRARY_API Vec4Proxy(float a, float b, float c, float d);
 
-		MATHLIBRARY_API Vec4Proxy() = delete;
-		MATHLIBRARY_API Vec4Proxy(const Vec4Proxy &) = default;
-		MATHLIBRARY_API Vec4Proxy &operator = (const Vec4Proxy &) = default;
-		MATHLIBRARY_API ~Vec4Proxy() = default;
+		MATH_LIBRARY_API Vec4Proxy() = delete;
+		MATH_LIBRARY_API Vec4Proxy(const Vec4Proxy&) = default;
+		MATH_LIBRARY_API Vec4Proxy& operator = (const Vec4Proxy&) = default;
+		MATH_LIBRARY_API ~Vec4Proxy() = default;
 
-		MATHLIBRARY_API operator float() const;
+		MATH_LIBRARY_API operator float() const;
 
-		MATHLIBRARY_API float operator * (const Vec4Proxy &r) const;
+		MATH_LIBRARY_API float operator * (const Vec4Proxy& r) const;
 
-		MATHLIBRARY_API bool operator > (const Vec4Proxy &r) const;
-		MATHLIBRARY_API bool operator < (const Vec4Proxy &r) const;
-		MATHLIBRARY_API bool operator == (const Vec4Proxy &r) const;
+		MATH_LIBRARY_API bool operator > (const Vec4Proxy& r) const;
+		MATH_LIBRARY_API bool operator < (const Vec4Proxy& r) const;
+		MATH_LIBRARY_API bool operator == (const Vec4Proxy& r) const;
 
-		MATHLIBRARY_API bool operator >= (const Vec4Proxy &r) const;
-		MATHLIBRARY_API bool operator <= (const Vec4Proxy &r) const;
-		MATHLIBRARY_API bool operator != (const Vec4Proxy &r) const;
+		MATH_LIBRARY_API bool operator >= (const Vec4Proxy& r) const;
+		MATH_LIBRARY_API bool operator <= (const Vec4Proxy& r) const;
+		MATH_LIBRARY_API bool operator != (const Vec4Proxy& r) const;
 
 	private:
 		float x;

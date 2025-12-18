@@ -38,6 +38,7 @@
 #include "CameraNodeManager.h"
 #include "StateDirectXMan.h"
 #include "SceneManager.h"
+#include "MainScene.h"
 
 //Event
 #include "ApplicationEvent.h"
@@ -75,28 +76,29 @@ namespace Azul
 		MeshNodeManager::Create();
 		MaterialMan::Create();
 
-		this->mainScene = new Scene();
-		this->camera = mainScene->CreateEntity("Camera_Main");
-		
+		this->mainScene = new MainScene();
+
 		SceneManager::AddScene(mainScene);
+		SceneManager::Init();
+
+		this->camera = mainScene->GetMainCamera();
 
 #pragma region Demo1
-		CameraComponent& cam = camera.AddComponent<CameraComponent>();
-		cam.isPriority = true;
 
+		CameraComponent& cam = camera.GetComponent<CameraComponent>();
 		TransformComponent& camTrans = camera.GetComponent<TransformComponent>();
 
 		///
 		/// Entity Camera
 		///  
 		{
-		Vec3 camPos(1, 0, 4);
-		Vec3 tarVect(0, 0, 0);
-		Vec3 upVect(0, 1, 0);
+			Vec3 camPos(1, 0, 4);
+			Vec3 tarVect(0, 0, 0);
+			Vec3 upVect(0, -1, 0);
 
-		cam.camera.setPerspective(50.0f, GetAspectRatio(), 0.1f, 1000.0f);
-		camTrans.position.set(camPos);
-		camTrans.SetForward(tarVect, &upVect);
+			cam.camera.setPerspective(50.0f, GetAspectRatio(), 0.1f, 1000.0f);
+			camTrans.position.set(camPos);
+			camTrans.SetForward(tarVect, &upVect);
 		}
 
 		//mainCamera->setOrientAndPosition(upVect, tarVect, camPos);
@@ -146,57 +148,6 @@ namespace Azul
 
 #pragma endregion
 
-		ZEntity entityA = this->mainScene->CreateEntity("EntityA");
-
-		MaterialComponent* zmat = &entityA.AddComponent<MaterialComponent>(MaterialComponent{
-			Material::LightTextureA ,
-			ShaderObject::Name::LightTexture,
-			RasterizerStateID::D3D11_FILL_SOLID,
-			Material::Name::LightTextureA } 
-			);
-
-		MeshComponent* zmesh = &entityA.AddComponent<MeshComponent>({ Mesh::Name::A });
-
-		TransformComponent* zTrans = &entityA.GetComponent<TransformComponent>();
-		zTrans->position.set(0, 0, 0);
-		zTrans->SetScale(10);
-
-		ZEntity entityB = this->mainScene->CreateEntity("EntityB");
-
-		zmat = &entityB.AddComponent<MaterialComponent>(MaterialComponent{
-												Material::FlatTextureA ,
-												ShaderObject::Name::FlatTexture,
-												RasterizerStateID::D3D11_FILL_SOLID,
-												Material::Name::None }
-												);
-
-		zmesh = &entityB.AddComponent<MeshComponent>({ Mesh::Name::A });
-
-		zTrans = &entityB.GetComponent<TransformComponent>();
-		zTrans->position.set(4, 0, -6);
-		zTrans->SetScale(10);
-
-
-
-		ZEntity entityC = this->mainScene->CreateEntity("EntityC");
-
-		zmat = &entityC.AddComponent<MaterialComponent>(MaterialComponent{
-												Material::WireFramNoTextureA ,
-												ShaderObject::Name::ColorByVertex,
-												RasterizerStateID::D3D11_CULL_WIREFRAME,
-												Material::Name::None }
-												);
-
-		zmesh = &entityC.AddComponent<MeshComponent>({ Mesh::Name::A });
-
-		zTrans = &entityC.GetComponent<TransformComponent>();
-		zTrans->position.set(5, 0, -2);
-		zTrans->SetScale(10);
- 
-		//this->renderableEntity.push_back(entityA);
-		//this->renderableEntity.push_back(entityB);
-		//this->renderableEntity.push_back(entityC);
-
 #pragma endregion
 		return true;
 	}
@@ -225,9 +176,8 @@ namespace Azul
 	//-----------------------------------------------------------------------------
 	void Game::Render()
 	{
-		//this->SetDefaultTargetMode();
-
-		//GameObjectManager::Draw();
+		//Render Layout will handle the Render part
+		//Render is in Applicaiton
 	}
 
 	//-----------------------------------------------------------------------------
@@ -239,7 +189,6 @@ namespace Azul
 	{
 		//auto instance = GameObjectManager::instance;
 		//AZUL_UNUSED_VAR(instance);
-		delete this->mainScene;
 
 		SceneManager::Destroy();
 		TextureManager::Destroy();

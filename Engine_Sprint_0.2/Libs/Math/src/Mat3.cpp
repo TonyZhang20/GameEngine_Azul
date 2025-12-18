@@ -10,10 +10,10 @@ namespace Azul
 
 	Mat3::Mat3()
 	{
-		this->_v0 = Vec4(0, 0, 0, 0);
-		this->_v1 = Vec4(0, 0, 0, 0);
-		this->_v2 = Vec4(0, 0, 0, 0);
-		this->_v3 = Vec4(0, 0, 0, 1);
+		this->_v0._mv = _mm_setzero_ps();
+		this->_v1._mv = _mm_setzero_ps();
+		this->_v2._mv = _mm_setzero_ps();
+		this->_v3._mv = _mm_set_ps(1, 0, 0, 0);
 	}
 
 	Mat3& Mat3::operator=(const Mat3& A)
@@ -49,11 +49,19 @@ namespace Azul
 		this->_v3.set(0.0f, 0.0f, 0.0f, 1.0f);
 	}
 
+	Mat3::Mat3(const enum Identity_enum)
+	{
+		this->_v0.set(1.f, 0.f, 0.f, 0.f);
+		this->_v1.set(0.f, 1.f, 0.f, 0.f);
+		this->_v2.set(0.f, 0.f, 1.f, 0.f);
+		this->_v3.set(0.f, 0.f, 0.f, 1.f);
+	}
+
 	Mat3::Mat3(const Vec3& tV0, const Vec3& tV1, const Vec3& tV2)
 	{
-		this->_v0.set(tV0, 0);
-		this->_v1.set(tV1, 0);
-		this->_v2.set(tV2, 0);
+		this->_v0.set(tV0, 0.f);
+		this->_v1.set(tV1, 0.f);
+		this->_v2.set(tV2, 0.f);
 	}
 
 	Vec3 Mat3::get(const Row3 type) const
@@ -88,13 +96,13 @@ namespace Azul
 		switch (type)
 		{
 		case Row3::i0:
-			return this->_v0.set(Vec4(V, 0));
+			return this->_v0.set(Vec4(V, 0.f));
 			break;
 		case Row3::i1:
-			return this->_v1.set(Vec4(V, 0));
+			return this->_v1.set(Vec4(V, 0.f));
 			break;
 		case Row3::i2:
-			return this->_v2.set(Vec4(V, 0));
+			return this->_v2.set(Vec4(V, 0.f));
 			break;
 		default:
 			break;
@@ -103,9 +111,9 @@ namespace Azul
 
 	void Mat3::set(const Vec3& V0, const Vec3& V1, const Vec3& V2)
 	{
-		this->_v0.set(V0, 0);
-		this->_v1.set(V1, 0);
-		this->_v2.set(V2, 0);
+		this->_v0.set(V0, 0.f);
+		this->_v1.set(V1, 0.f);
+		this->_v2.set(V2, 0.f);
 	}
 
 	float& Mat3::operator[] (const enum m0_enum)
@@ -155,26 +163,18 @@ namespace Azul
 
 	Mat3::Mat3(const Mat4& m)
 	{
-		this->_v0.set(m._m0, m._m1, m._m2, 0);
-		this->_v1.set(m._m4, m._m5, m._m6, 0);
-		this->_v2.set(m._m8, m._m9, m._m10, 0);
-		this->_v3.set(0, 0, 0, 1);
-	}
-
-	Mat3::Mat3(const Identity_enum)
-	{
-		this->_v0.set(1, 0, 0, 0);
-		this->_v1.set(0, 1, 0, 0);
-		this->_v2.set(0, 0, 1, 0);
-		this->_v3.set(0, 0, 0, 1);
+		this->_v0.set(m._m0, m._m1, m._m2, 0.f);
+		this->_v1.set(m._m4, m._m5, m._m6, 0.f);
+		this->_v2.set(m._m8, m._m9, m._m10, 0.f);
+		this->_v3.set(0.f, 0.f, 0.f, 1.f);
 	}
 
 	void Mat3::set(const enum Identity_enum)
 	{
-		this->_v0.set(1, 0, 0, 0);
-		this->_v1.set(0, 1, 0, 0);
-		this->_v2.set(0, 0, 1, 0);
-		this->_v3.set(0, 0, 0, 1);
+		this->_v0.set(1.f, 0.f, 0.f, 0.f);
+		this->_v1.set(0.f, 1.f, 0.f, 0.f);
+		this->_v2.set(0.f, 0.f, 1.f, 0.f);
+		this->_v3.set(0.f, 0.f, 0.f, 1.f);
 	}
 
 
@@ -372,17 +372,17 @@ namespace Azul
 	bool Mat3::isEqual(const Mat3& A, const float epsilon) const
 	{
 		return
-			std::fabs(this->_m0 - A._m0) <= epsilon &&
-			std::fabs(this->_m1 - A._m1) <= epsilon &&
-			std::fabs(this->_m2 - A._m2) <= epsilon &&
+			Util::isEqual(this->_m0, A._m0, epsilon) &&
+			Util::isEqual(this->_m1, A._m1, epsilon) &&
+			Util::isEqual(this->_m2, A._m2, epsilon) &&
 
-			std::fabs(this->_m4 - A._m4) <= epsilon &&
-			std::fabs(this->_m5 - A._m5) <= epsilon &&
-			std::fabs(this->_m6 - A._m6) <= epsilon &&
+			Util::isEqual(this->_m4, A._m4, epsilon) &&
+			Util::isEqual(this->_m5, A._m5, epsilon) &&
+			Util::isEqual(this->_m6, A._m6, epsilon) &&
 
-			std::fabs(this->_m8 - A._m8) <= epsilon &&
-			std::fabs(this->_m9 - A._m9) <= epsilon &&
-			std::fabs(this->_m10 - A._m10) <= epsilon;
+			Util::isEqual(this->_m8, A._m8, epsilon) &&
+			Util::isEqual(this->_m9, A._m9, epsilon) &&
+			Util::isEqual(this->_m10, A._m10, epsilon);
 	}
 
 	bool Mat3::isIdentity(const float epsilon) const

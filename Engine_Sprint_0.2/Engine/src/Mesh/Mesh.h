@@ -14,6 +14,30 @@
 namespace Azul
 {
 	// Vertex data for a colored cube.
+	struct Vec3f
+	{
+		Vec3f() : x(0), y(0), z(0) {}
+		Vec3f(float in_x, float in_y, float in_z)
+			: x(in_x), y(in_y), z(in_z)
+		{
+		}
+
+		float x;
+		float y;
+		float z;
+	};
+
+	struct Vec2f
+	{
+		Vec2f() : u(0), v(0) {}
+		Vec2f(float in_u, float in_v)
+			: u(in_u), v(in_v)
+		{
+		}
+		float u;
+		float v;
+	};
+
 	struct VertexColor
 	{
 		Vec3f Color;

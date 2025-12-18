@@ -3,6 +3,7 @@
 
 #include <Windows.h>
 #include "MathEngine.h"
+#include "Mesh.h"
 
 namespace Azul
 {
@@ -82,7 +83,7 @@ namespace Azul
             return idx >= 0 ? !Get().currMouse[idx] && Get().prevMouse[idx] : false;
         }
 
-        static Vec2 GetMousePos()
+        static Vec2f GetMousePos()
         {
             return Get().mousePos;
         }
@@ -107,7 +108,7 @@ namespace Azul
         bool currMouse[3]{};
         bool prevMouse[3]{};
 
-        Vec2 mousePos{ 0.0f, 0.0f };
+        Vec2f mousePos{ 0.0f, 0.0f };
     };
 }
 

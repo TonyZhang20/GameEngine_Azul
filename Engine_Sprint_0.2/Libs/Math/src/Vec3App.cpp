@@ -46,7 +46,6 @@ namespace Azul
 
     void Vec3App::LerpArray(Vec3* out, const Vec3* a, const Vec3* b, const float t, const int numVects)
     {
-
         for (int i = 0; i < numVects; ++i)
         {
             Lerp(out[i], a[i], b[i], t);

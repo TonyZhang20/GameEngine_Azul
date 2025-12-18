@@ -11,12 +11,22 @@ namespace Azul
 
 	Scene::~Scene()
 	{
-	
+		Trace::out("Scene Destroyed\n");
+	}
+
+	void Scene::OnInit()
+	{
+
 	}
 
 	void Scene::Update(float deltaTime)
 	{
 		UpdateScript(deltaTime);
+	}
+
+	void Scene::OnDestroy()
+	{
+
 	}
 
 	ZEntity Scene::CreateEntity(const char* name)
@@ -39,11 +49,6 @@ namespace Azul
 	void Scene::DestroyEntity(zecs::EntityID entity)
 	{
 		this->world.DestroyEntity(entity);
-	}
-
-	zecs::EntityID& Scene::GetMainCamera()
-	{
-		return this->camera;
 	}
 
 	void Scene::UpdateScript(float deltaTime)

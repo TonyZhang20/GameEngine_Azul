@@ -45,7 +45,7 @@ namespace Azul
 	{
 		Vec3 scale = Vec3(1, 1, 1);
 		Vec3 position;
-		Quaternion rotation;
+		Quat rotation;
 		Vec3 deltaRot;
 
 		zecs::EntityID parent;
@@ -67,16 +67,17 @@ namespace Azul
 			Trans T(position.x(), position.y(), position.z());
 			Scale S(scale.x(), scale.y(), scale.z());
 
-			Quaternion qx = Quaternion::FromAxisAngle(Vec3(1, 0, 0), deltaRot[x] * MATH_PI_180);
-			Quaternion qy = Quaternion::FromAxisAngle(Vec3(0, 1, 0), deltaRot[y] * MATH_PI_180);
-			Quaternion qz = Quaternion::FromAxisAngle(Vec3(0, 0, 1), deltaRot[z] * MATH_PI_180);
+			Quat qx = Quat::FromAxisAngle(Vec3(1, 0, 0), deltaRot[x] * MATH_PI_180);
+			Quat qy = Quat::FromAxisAngle(Vec3(0, 1, 0), deltaRot[y] * MATH_PI_180);
+			Quat qz = Quat::FromAxisAngle(Vec3(0, 0, 1), deltaRot[z] * MATH_PI_180);
 
-			Quaternion final = qx * qy * qz * rotation;
+			Quat final = qx * qy * qz * rotation;
 
-			Mat4  R = final.ToMatrix();
+			Mat4  R(final);
 
 			return S * R * T;
 		};
+
 		inline Mat4 GetWorldMatrix() const
 		{
 			if (parent.index == ErrorID)
@@ -98,8 +99,6 @@ namespace Azul
 		inline Vec3 Up() { return rotation.Up(); }
 
 		inline void SetForward(const Vec3& forward, const Vec3* up = nullptr) { rotation.SetForward(forward, up); }
-		inline void SetRight(const Vec3& right, const Vec3* forward = nullptr) { rotation.SetRight(right, forward); }
-		inline void SetUp(const Vec3& up, const Vec3* forward = nullptr) { rotation.SetUp(up, forward); }
 
 		inline void SetScale(float s) { this->scale = Vec3(s, s, s); };
 		inline void SetPosition(const Vec3& pos) { this->position.set(pos); };

@@ -44,7 +44,6 @@ namespace Azul
 		this->mHeight = Desc.Height;
 		this->pData = nullptr;
 		this->bCreate = true;
-
 	}
 
 	ID3D11Texture2D *BufferTexture2D::GetID3D11Texture2D()

@@ -24,7 +24,7 @@ namespace Azul
         POINT pt;
         GetCursorPos(&pt);
         ScreenToClient(GetForegroundWindow(), &pt);
-        Get().mousePos = Vec2((float)pt.x, (float)pt.y);
+        Get().mousePos = Vec2f((float)pt.x, (float)pt.y);
         
 	}
 }

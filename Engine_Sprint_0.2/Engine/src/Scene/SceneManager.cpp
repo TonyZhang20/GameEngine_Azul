@@ -9,13 +9,26 @@ namespace Azul
 		{
 			return instance->sceneList[0];
 		}
+
 		return nullptr;
 	}
 
 	void SceneManager::AddScene(Scene* s)
 	{
-		if (!instance) Create();
-		instance->sceneList.push_back(s);
+		GetInstance()->sceneList.push_back(s);
+	}
+
+	void SceneManager::RemoveScene(Scene* s)
+	{
+		GetInstance()->sceneList.erase(s);
+	}
+
+	void SceneManager::Init()
+	{
+		for (Scene* scene : GetInstance()->sceneList)
+		{
+			scene->OnInit();
+		}
 	}
 
 	void SceneManager::Create()
@@ -28,6 +41,12 @@ namespace Azul
 
 	void SceneManager::Destroy()
 	{
+		for (Scene* scene : GetInstance()->sceneList)
+		{
+			scene->OnDestroy();
+			delete scene;
+		}
+
 		if (instance)
 		{
 			delete instance;
@@ -35,4 +54,13 @@ namespace Azul
 		}
 	}
 
+	SceneManager* SceneManager::GetInstance()
+	{
+		if(instance == nullptr)
+		{
+			Create();
+		}
+
+		return SceneManager::instance;
+	}
 }

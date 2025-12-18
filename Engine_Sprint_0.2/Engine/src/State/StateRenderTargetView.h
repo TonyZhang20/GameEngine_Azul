@@ -23,6 +23,7 @@ namespace Azul
 		ID3D11RenderTargetView& const GetD3DRenderTargetView() const;
 
 		void Initialize();
+		void Initialize(const unsigned int height, const unsigned int width);
 		void Clear(const Vec4 &r);
 		void Activate(StateDepthStencilView &r);
 		void CleanupRenderTarget();

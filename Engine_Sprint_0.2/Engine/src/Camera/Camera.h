@@ -52,7 +52,7 @@ namespace Azul
 		virtual void updateCamera(void);
 
 		// Get the matrices for rendering
-		Mat4 getViewMatrix(Quaternion& q, Vec3& vPos);
+		Mat4 getViewMatrix(Quat& q, Vec3& vPos);
 		Mat4& getProjMatrix();
 
 

@@ -4,27 +4,29 @@
 
 #ifndef ENGINE_MATH_TRIG_H
 #define ENGINE_MATH_TRIG_H
-#include "MathExportAPI.h"
+
+#include "Math_DLLInterface.h"
+
 namespace Azul
 {
-	class Trig
+	class MATH_LIBRARY_API Trig
 	{
 	public:
 
 		// Do your magic here
 
-		MATHLIBRARY_API static float cos(const float  angle_radians);
-		MATHLIBRARY_API static float sin(const float  angle_radians);
-		MATHLIBRARY_API static float tan(const float  val);
-		MATHLIBRARY_API static float atan(const float val);
-		MATHLIBRARY_API static float atan2(const float x, const float y);
-		MATHLIBRARY_API static float acos(const float val );
-		MATHLIBRARY_API static float asin(const float val );
-		MATHLIBRARY_API static void  cossin(float& cos, float& sin, const float angle_radians);
-		MATHLIBRARY_API static float sqrt(const float val);
-		MATHLIBRARY_API static float rsqrt(const float val);
-		MATHLIBRARY_API static float degreesToRadians(float degrees);
-		MATHLIBRARY_API static float radiansToDegrees(float radians);
+		static float cos(const float  angle_radians);
+		static float sin(const float  angle_radians);
+		static float tan(const float  val);
+		static float atan(const float val);
+		static float atan2(const float x, const float y);
+		static float acos(const float val);
+		static float asin(const float val);
+		static void  cossin(float& cos, float& sin, const float angle_radians);
+		static float sqrt(const float val);
+		static float rsqrt(const float val);
+		static float degreesToRadians(float degrees);
+		static float radiansToDegrees(float radians);
 	};
 }
 

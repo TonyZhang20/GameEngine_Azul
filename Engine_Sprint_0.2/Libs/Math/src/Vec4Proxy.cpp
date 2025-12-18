@@ -7,7 +7,6 @@
 namespace Azul
 {
 	// Add Proxy here
-
 	Vec4Proxy::Vec4Proxy(float a, float b, float c, float d)
 	{
 		this->x = a;
@@ -18,7 +17,7 @@ namespace Azul
 
 	Vec4Proxy::operator float() const
 	{
-		return std::sqrt(x * x + y * y + z * z + w * w);
+		return Trig::sqrt(x * x + y * y + z * z + w * w);
 	}
 
 	float Vec4Proxy::operator*(const Vec4Proxy& r) const
@@ -69,7 +68,6 @@ namespace Azul
 		float b = r;
 		return a != b;
 	}
-
 }
 
 //--- End of File ---

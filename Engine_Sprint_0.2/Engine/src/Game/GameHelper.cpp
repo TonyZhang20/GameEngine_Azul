@@ -4,8 +4,10 @@
 
 #include "Game.h"
 #include "File.h"
+#include "MainScene.h"
 #include "Application.h"
 #include "StateDirectXMan.h"
+
 namespace Azul
 {
 	//Hack
@@ -59,15 +61,7 @@ namespace Azul
 			auto& mesh = entity.GetComponent<MeshComponent>();
 			auto& mat = entity.GetComponent<MaterialComponent>();
 
-			auto pack = RenderPacket
-			{
-				&tran,
-				&mesh,
-				&mat
-			};
-
-			outPacks.push_back(pack);
-
+			outPacks.push_back( { &tran, &mesh, &mat } );
 		}
 	}
 

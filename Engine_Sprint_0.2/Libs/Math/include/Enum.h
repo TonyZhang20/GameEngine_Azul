@@ -178,9 +178,9 @@ namespace Azul
 
 	enum class Row3
 	{
-		i0 = 0,
-		i1 = 1,
-		i2 = 2,
+		i0,
+		i1,
+		i2
 	};
 
 	enum Identity_enum

@@ -46,7 +46,7 @@ namespace Azul
 
 		zecs::ArchetypeWorld world;
 
-		Scene* mainScene;
+		class MainScene* mainScene;
 		ZEntity camera;
 	};
 }

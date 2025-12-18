@@ -1,4 +1,5 @@
 ﻿  Entity.h
-J:\Azul_Engine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ECS_System\include\Entity.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-J:\Azul_Engine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ECS_System\include\Entity.h(38,14): warning C4463: 信息溢出；分配4095到只包含值(从0到255)的位字段
-  zecs.vcxproj -> J:\Azul_Engine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ECS_System\x64\Debug\zecsDebugX64.lib
+  Forexport.cpp
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ECS_System\include\Entity.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ECS_System\include\Entity.h(38,14): warning C4463: 信息溢出；分配4095到只包含值(从0到255)的位字段
+  zecs.vcxproj -> D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ECS_System\x64\Debug\zecsDebugX64.lib

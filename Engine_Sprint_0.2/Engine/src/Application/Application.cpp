@@ -77,7 +77,6 @@ namespace Azul
 		LayerManager::AddByOrder(gameLayer);
 		LayerManager::AddByOrder(renderLayer);
 		LayerManager::AddByOrder(editorLayer);
-
 	}
 
 	//Init DirectX
