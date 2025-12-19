@@ -1,0 +1,41 @@
+//----------------------------------------------------------------------------
+// Copyright 2025, Ed Keenan, all rights reserved.
+//----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+import "vboData.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+message meshData_proto
+{
+	enum RENDER_MODE
+	{
+		MODE_POINTS         = 0;
+		MODE_LINE           = 1;
+		MODE_LINE_LOOP      = 2;
+		MODE_LINE_STRIP     = 3;
+		MODE_TRIANGLES      = 4;
+		MODE_TRIANGLE_STRIP = 5;
+		MODE_TRIANGLE_FAN   = 6;
+	};
+
+	// basic info
+	optional bytes             pVersion    = 1;
+	optional uint32            meshCount   = 2;  //new
+	
+	// change to repeated
+	repeated bytes             pMeshName   = 3;
+	repeated RENDER_MODE       mode        = 4;
+	repeated uint32            triCount    = 5;
+	repeated uint32            vertCount   = 6;
+	repeated vboData_proto     vbo_vert    = 7;
+	repeated vboData_proto     vbo_norm    = 8;
+	repeated vboData_proto     vbo_uv      = 9;
+	repeated vboData_proto     vbo_index   = 10;
+	repeated vboData_proto	   vbo_color   = 11;
+
+}
+
+// -- End of File ---

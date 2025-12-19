@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\code\ProtoBuf\31.1_May28_2025\abseil-cpp-master\abseil-cpp-master\absl\container\internal\raw_hash_set.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\code\ProtoBuf\31.1_May28_2025\abseil-cpp-master\abseil-cpp-master\absl\container\internal\raw_hash_set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\code\ProtoBuf\31.1_May28_2025\abseil-cpp-master\abseil-cpp-master\absl\container\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{0DC504D7-38E3-342C-BBA3-B3F0A86B8142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{98AC9E54-923A-3289-B47F-C0E07CA5494B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

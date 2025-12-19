@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MySTL", "Libs\MySTL\MySTL.v
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zecs", "Libs\ECS_System\zecs.vcxproj", "{D6C237CE-32B1-4D3B-856F-571EFE11C780}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProtoBuf", "Libs\ProtoBuf\ProtoBuf.vcxproj", "{E05CD5A7-56A9-4CFC-8D9C-FF1D5E3E207F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -75,6 +77,10 @@ Global
 		{D6C237CE-32B1-4D3B-856F-571EFE11C780}.Debug|x64.Build.0 = Debug|x64
 		{D6C237CE-32B1-4D3B-856F-571EFE11C780}.Release|x64.ActiveCfg = Release|x64
 		{D6C237CE-32B1-4D3B-856F-571EFE11C780}.Release|x64.Build.0 = Release|x64
+		{E05CD5A7-56A9-4CFC-8D9C-FF1D5E3E207F}.Debug|x64.ActiveCfg = Debug|x64
+		{E05CD5A7-56A9-4CFC-8D9C-FF1D5E3E207F}.Debug|x64.Build.0 = Debug|x64
+		{E05CD5A7-56A9-4CFC-8D9C-FF1D5E3E207F}.Release|x64.ActiveCfg = Release|x64
+		{E05CD5A7-56A9-4CFC-8D9C-FF1D5E3E207F}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 		{95D1C138-A1DC-4BF9-99FB-0678EF049A12} = {1E73620C-B943-4A56-B112-8789E09F432B}
 		{989C647B-5858-4D64-B2F3-72F993651FB7} = {1E73620C-B943-4A56-B112-8789E09F432B}
 		{D6C237CE-32B1-4D3B-856F-571EFE11C780} = {1E73620C-B943-4A56-B112-8789E09F432B}
+		{E05CD5A7-56A9-4CFC-8D9C-FF1D5E3E207F} = {1E73620C-B943-4A56-B112-8789E09F432B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {04CBD174-D768-46E3-886E-385899A64684}
@@ -97,6 +104,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Shared\Framework_items\Framework_items.vcxitems*{02ef1ab9-bcb9-44ed-85fa-15c9cf1b72d9}*SharedItemsImports = 9
 		Shared\Framework_items\Framework_items.vcxitems*{4eba0483-08b6-4055-9ee8-5dc71b6f8fc9}*SharedItemsImports = 4
+		Shared\Framework_items\Framework_items.vcxitems*{e05cd5a7-56a9-4cfc-8d9c-ff1d5e3e207f}*SharedItemsImports = 4
 		Shared\Framework_items\Framework_items.vcxitems*{ed602e5d-031c-4af8-b6a6-4b34e0073b27}*SharedItemsImports = 4
 		Shared\Framework_items\Framework_items.vcxitems*{fed97ad8-3dc2-4059-a969-9fca3983468e}*SharedItemsImports = 4
 	EndGlobalSection

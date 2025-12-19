@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{0aea2f72-a713-48ca-af27-704fec902c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{38ce3814-666d-47e6-aa6c-23e83e381247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dll">
+      <UniqueIdentifier>{a8ca31ee-cf3d-4bf7-bffe-1afb1df2c862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Proto">
+      <UniqueIdentifier>{67cc3d04-693b-4c68-aaad-481ec2aa45ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Proto\libs">
+      <UniqueIdentifier>{27e5370a-551b-4411-9a49-8c7297387440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Proto\include">
+      <UniqueIdentifier>{d7a03254-665a-4314-b2d2-21c913c93add}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Proto\libs\debug">
+      <UniqueIdentifier>{682fee82-1250-4152-a874-289db3ae87fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Proto\libs\release">
+      <UniqueIdentifier>{8cabbc2e-ecaa-4da6-adef-e979546833b8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="include\--- Add include files here ---.txt">
+      <Filter>include</Filter>
+    </Text>
+    <Text Include="src\--- Add Source files here ---.txt">
+      <Filter>src</Filter>
+    </Text>
+    <Text Include="Proto\ReadMe_Keenan.txt">
+      <Filter>_Proto\include</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\ProtoBufEngine_DLLMain.cpp">
+      <Filter>dll</Filter>
+    </ClCompile>
+    <ClCompile Include="src\meshData.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\meshData.pb.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\textureData.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\textureData.pb.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vboData.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\vboData.pb.cc">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\ProtoBufEngine_DLLInterface.h">
+      <Filter>dll</Filter>
+    </ClInclude>
+    <ClInclude Include="include\meshData.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\textureData.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vboData.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\meshData.pb.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\textureData.pb.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vboData.pb.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Proto\ProtoBuf.h">
+      <Filter>_Proto\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ProtoVersion.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\meshData.proto">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\textureData.proto">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\vboData.proto">
+      <Filter>src</Filter>
+    </None>
+    <None Include="Proto\libs\debug\abseil_dll.dll">
+      <Filter>_Proto\libs\debug</Filter>
+    </None>
+    <None Include="Proto\libs\debug\abseil_dll.exp">
+      <Filter>_Proto\libs\debug</Filter>
+    </None>
+    <None Include="Proto\libs\debug\libprotobuf-lited.dll">
+      <Filter>_Proto\libs\debug</Filter>
+    </None>
+    <None Include="Proto\libs\debug\libprotobuf-lited.exp">
+      <Filter>_Proto\libs\debug</Filter>
+    </None>
+    <None Include="Proto\libs\debug\libutf8_range.dll">
+      <Filter>_Proto\libs\debug</Filter>
+    </None>
+    <None Include="Proto\libs\debug\libutf8_range.exp">
+      <Filter>_Proto\libs\debug</Filter>
+    </None>
+    <None Include="Proto\libs\debug\libutf8_validity.dll">
+      <Filter>_Proto\libs\debug</Filter>
+    </None>
+    <None Include="Proto\libs\debug\libutf8_validity.exp">
+      <Filter>_Proto\libs\debug</Filter>
+    </None>
+    <None Include="Proto\libs\release\abseil_dll.dll">
+      <Filter>_Proto\libs\release</Filter>
+    </None>
+    <None Include="Proto\libs\release\abseil_dll.exp">
+      <Filter>_Proto\libs\release</Filter>
+    </None>
+    <None Include="Proto\libs\release\libprotobuf-lite.dll">
+      <Filter>_Proto\libs\release</Filter>
+    </None>
+    <None Include="Proto\libs\release\libprotobuf-lite.exp">
+      <Filter>_Proto\libs\release</Filter>
+    </None>
+    <None Include="Proto\libs\release\libutf8_range.dll">
+      <Filter>_Proto\libs\release</Filter>
+    </None>
+    <None Include="Proto\libs\release\libutf8_range.exp">
+      <Filter>_Proto\libs\release</Filter>
+    </None>
+    <None Include="Proto\libs\release\libutf8_validity.dll">
+      <Filter>_Proto\libs\release</Filter>
+    </None>
+    <None Include="Proto\libs\release\libutf8_validity.exp">
+      <Filter>_Proto\libs\release</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Proto\libs\debug\abseil_dll.lib">
+      <Filter>_Proto\libs\debug</Filter>
+    </Library>
+    <Library Include="Proto\libs\debug\libprotobuf-lited.lib">
+      <Filter>_Proto\libs\debug</Filter>
+    </Library>
+    <Library Include="Proto\libs\debug\libutf8_range.lib">
+      <Filter>_Proto\libs\debug</Filter>
+    </Library>
+    <Library Include="Proto\libs\debug\libutf8_validity.lib">
+      <Filter>_Proto\libs\debug</Filter>
+    </Library>
+    <Library Include="Proto\libs\release\abseil_dll.lib">
+      <Filter>_Proto\libs\release</Filter>
+    </Library>
+    <Library Include="Proto\libs\release\libprotobuf-lite.lib">
+      <Filter>_Proto\libs\release</Filter>
+    </Library>
+    <Library Include="Proto\libs\release\libutf8_range.lib">
+      <Filter>_Proto\libs\release</Filter>
+    </Library>
+    <Library Include="Proto\libs\release\libutf8_validity.lib">
+      <Filter>_Proto\libs\release</Filter>
+    </Library>
+  </ItemGroup>
+</Project>

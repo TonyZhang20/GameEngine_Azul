@@ -1,0 +1,92 @@
+//----------------------------------------------------------------------------
+// Copyright 2025, Ed Keenan, all rights reserved.
+//----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+message textureData_proto
+{
+
+	enum TEXTURE_EFORMAT
+	{
+		EFORMAT_BGR = 0;
+		EFORMAT_RGB = 1;
+		EFORMAT_RGBA = 2;
+	};
+
+	enum TEXTURE_NCOMPONENT
+	{
+		NCOMPONENT_BGR = 0;
+		NCOMPONENT_RGB = 1;
+		NCOMPONENT_RGBA = 2;
+	};
+
+	enum TEXTURE_TYPE
+	{
+		JPEG = 0;
+		PNG = 1;
+		BMP = 2;
+		GIF = 3;
+		TGA = 4;
+	};
+
+	enum TEXTURE_MAG_FILTER
+	{
+		MAG_NEAREST = 0;
+		MAG_LINEAR = 1;
+	};
+
+	enum TEXTURE_MIN_FILTER
+	{
+		MIN_NEAREST = 0;
+		MIN_LINEAR = 1;
+		MIN_NEAREST_MIPMAP_NEAREST = 2;
+		MIN_LINEAR_MIPMAP_NEAREST = 3;
+		MIN_NEAREST_MIPMAP_LINEAR = 4;
+		MIN_LINEAR_MIPMAP_LINEAR = 5;
+	};
+
+	enum TEXTURE_WRAP
+	{
+		WRAP_CLAMP_TO_EDGE = 0;
+		WRAP_MIRRORED_REPEAT = 1;
+		WRAP_REPEAT = 2;
+	};
+
+	enum TEXTURE_COMPONENT
+	{
+		BYTE = 0;
+		UNSIGNED_BYTE = 1;
+		SHORT = 2;
+		UNSIGNED_SHORT = 3;
+		INT = 4;
+		UNSIGNED_INT = 5;
+		FLOAT = 6;
+		DOUBLE = 7;
+	};
+
+	optional bytes               pVersion     = 1;
+	optional uint32              enabled      = 2;
+	optional TEXTURE_TYPE        textType     = 3;
+	optional TEXTURE_MAG_FILTER  magFilter    = 4;
+	optional TEXTURE_MIN_FILTER  minFilter    = 5;
+	optional TEXTURE_WRAP        wrapS        = 6;
+	optional TEXTURE_WRAP        wrapT        = 7;
+	optional TEXTURE_EFORMAT     eFormat      = 8;
+	optional TEXTURE_NCOMPONENT  nComponent   = 9;
+	optional uint32              width        = 10;
+	optional uint32              height       = 11;
+	optional uint32              component    = 12;
+	optional uint32              bits         = 13;
+	optional uint32              as_is        = 14;
+	optional TEXTURE_COMPONENT   pixel_type   = 15;
+	optional uint32              fileNameSize = 16;
+	optional bytes               fileNameData = 17;
+	optional uint32              dataSize     = 18;
+	optional bytes               poData       = 19;
+
+}
+
+// -- End of File ---
