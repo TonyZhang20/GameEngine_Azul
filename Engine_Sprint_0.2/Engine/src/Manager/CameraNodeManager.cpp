@@ -262,7 +262,7 @@ namespace Azul
 		}
 
 
-		pMan->poMainCam->Update();
+		pMan->poMainCam->Update(0);
 	}
 
 	void CameraNodeManager::UpdateAspectRatio(float ratio)

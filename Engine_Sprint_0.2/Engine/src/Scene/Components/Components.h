@@ -121,7 +121,6 @@ namespace Azul
 
 	struct CameraComponent
 	{
-
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent& other) : camera(other.camera), isPriority(other.isPriority) {}
 

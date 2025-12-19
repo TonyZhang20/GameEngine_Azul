@@ -10,6 +10,7 @@
 #include "MathEngine.h"
 #include "Components.h"
 #include "ArchetypeWorld.h"
+#include "MouseEvent.h"
 
 namespace Azul
 {
@@ -39,6 +40,7 @@ namespace Azul
 		//Event
 	protected:
 		bool OnWindowResizeEvent(WindowResizeEvent& e) override;
+		bool OnMouseMovedEvent(MouseMovedEvent& e) override;
 
 	private:
 		ZVector<RenderPacket> outPacks;

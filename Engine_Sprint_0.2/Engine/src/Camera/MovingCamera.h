@@ -14,7 +14,7 @@ namespace Azul
 		MovingCamera& operator = (const MovingCamera&) = delete;
 		virtual ~MovingCamera() = default;
 
-		virtual void updateCamera(void) override;
+		virtual void updateCamera(float) override;
 
 	public:
 		float speed = 0.02f;

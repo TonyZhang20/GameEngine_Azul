@@ -55,20 +55,26 @@ namespace Azul
 	{
 	public:
 		inline int GetMouseButton() const { return m_Button; }
+
+		inline float GetX() const { return m_MouseX; }
+		inline float GetY() const { return m_MouseY; }
+
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput);
 
 	protected:
-		MouseButtonEvent(int button) 
-			:	m_Button(button) {}
+		MouseButtonEvent(int button, float x, float y)
+			:	m_Button(button), m_MouseX(x), m_MouseY(y) {}
+
 
 		int m_Button;
+		float m_MouseX, m_MouseY;
 	};
 
 	class EVENTSLIBRARY_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(int button)
-			: MouseButtonEvent(button) {}
+		MouseButtonPressedEvent(int button, float x, float y)
+			: MouseButtonEvent(button, x, y) {}
 
 		std::string ToString() const override
 		{
@@ -83,8 +89,8 @@ namespace Azul
 	class EVENTSLIBRARY_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(int button)
-			: MouseButtonEvent(button) {}
+		MouseButtonReleasedEvent(int button, float x, float y)
+			: MouseButtonEvent(button, x, y) {}
 
 		std::string ToString() const override
 		{

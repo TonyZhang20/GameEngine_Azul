@@ -14,10 +14,10 @@ namespace Azul
 		this->privClear();
 	}
 
-	void CameraNode::Update()
+	void CameraNode::Update(float deltaTime)
 	{
 		assert(this->pCamera);
-		this->pCamera->updateCamera();
+		this->pCamera->updateCamera(deltaTime);
 
 		//Vec3 CameraPos;
 		//pCamera->getPos(CameraPos);

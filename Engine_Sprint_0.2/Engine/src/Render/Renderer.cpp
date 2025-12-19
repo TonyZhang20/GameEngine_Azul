@@ -171,8 +171,8 @@ namespace Azul
 		auto& camTrans = cam.GetComponent<Transform>();
 		auto& camComp = cam.GetComponent<CameraComponent>();
 
-		camComp.camera.SetAspectRatio((float)width / (float)height);
-		camComp.camera.updateCamera();
+		//camComp.camera.SetAspectRatio((float)width / (float)height);
+		//camComp.camera.updateCamera();
 
 		Mesh::Name lastMesh = Mesh::Name::NOT_INITIALIZED;
 

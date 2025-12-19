@@ -13,7 +13,7 @@ namespace Azul
 		CameraNULL& operator = (const CameraNULL&) = delete;
 		~CameraNULL() = default;
 
-		void updateCamera(void) override;
+		void updateCamera(float) override;
 	};
 }
 

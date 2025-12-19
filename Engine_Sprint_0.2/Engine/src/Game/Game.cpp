@@ -43,6 +43,7 @@
 //Event
 #include "ApplicationEvent.h"
 #include "Application.h"
+#include "CameraUtility.h"
 
 
 
@@ -76,12 +77,14 @@ namespace Azul
 		MeshNodeManager::Create();
 		MaterialMan::Create();
 
+
 		this->mainScene = new MainScene();
 
 		SceneManager::AddScene(mainScene);
 		SceneManager::Init();
 
 		this->camera = mainScene->GetMainCamera();
+
 
 #pragma region Demo1
 
@@ -93,8 +96,10 @@ namespace Azul
 		///  
 		{
 			Vec3 camPos(1, 0, 4);
-			Vec3 tarVect(0, 0, 0);
-			Vec3 upVect(0, -1, 0);
+			Vec3 tarVect(0, 0, 5);
+			Vec3 upVect(0, 1, 0);
+
+			cam.camera.SetCameraEntity(&camera);
 
 			cam.camera.setPerspective(50.0f, GetAspectRatio(), 0.1f, 1000.0f);
 			camTrans.position.set(camPos);
@@ -165,7 +170,7 @@ namespace Azul
 
 		CollectRenderPackets();
 
-		this->camera.GetComponent<CameraComponent>().camera.updateCamera();
+		this->camera.GetComponent<CameraComponent>().camera.updateCamera(deltaTime);
 	}
 
 	//-----------------------------------------------------------------------------
@@ -247,6 +252,12 @@ namespace Azul
 
 		CameraNodeManager::UpdateAspectRatio(GetAspectRatio());
 
+		return false;
+	}
+
+	bool Game::OnMouseMovedEvent(MouseMovedEvent& e)
+	{
+		Input::SetMouse(e.GetX(), e.GetY());
 		return false;
 	}
 

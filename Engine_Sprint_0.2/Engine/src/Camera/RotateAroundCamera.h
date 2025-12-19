@@ -15,7 +15,7 @@ namespace Azul
 		RotateAroundCamera& operator = (const RotateAroundCamera&) = delete;
 		virtual ~RotateAroundCamera() = default;
 
-		virtual void updateCamera(void) override;
+		virtual void updateCamera(float) override;
 
 	public:
 		float speed = 0.02f;

@@ -7,7 +7,7 @@ namespace Azul
 
 	}
 
-	void RoatingCamera::updateCamera(void)
+	void RoatingCamera::updateCamera(float deltaTime)
 	{
 		Vec3 pos;
 		Vec3 tar;
@@ -22,7 +22,7 @@ namespace Azul
 
 		SetHelper(up, tar, pos);
 
-		Camera::updateCamera();
+		Camera::updateCamera(deltaTime);
 	}
 
 

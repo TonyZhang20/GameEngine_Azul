@@ -17,6 +17,7 @@
 #include "Layer.h"
 #include "AnimTimer.h"
 #include "BufferFrame.h"
+#include "MouseEvent.h"
 
 namespace Azul
 {
@@ -54,6 +55,8 @@ namespace Azul
 	protected:
 		virtual bool OnWindowClose(WindowCloseEvent& e);
 		virtual bool OnWindowResizeEvent(WindowResizeEvent& e);
+		virtual bool OnMouseMovedEvent(MouseMovedEvent& e);
+		virtual bool OnMouseDownEvent(MouseButtonPressedEvent& e);
 
 	private:
 		bool quit = false;

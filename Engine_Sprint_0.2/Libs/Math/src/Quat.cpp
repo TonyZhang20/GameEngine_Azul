@@ -795,7 +795,7 @@ namespace Azul
 
 	Quat Quat::FromAxisAngle(const Vec3& axis, const float angle)
 	{
-		return Quat(axis, angle);
+		return Quat(Axis::AxisAngle, axis, angle);
 	}
 
 	void Quat::SetForward(const Vec3& forward, const Vec3* up)
@@ -815,55 +815,14 @@ namespace Azul
 		Vec3 orthoUp = f.cross(r);
 
 		// 构造行优先旋转矩阵
-		Mat3 mat = {
-			r.x(), r.y(), r.z(),
-			orthoUp.x(), orthoUp.y(), orthoUp.z(),
-			f.x(), f.y(), f.z()
-		};
+		Rot R;
+
+		R[m0] = r.x(); R[m1] = r.y(); R[m2] = r.z();
+		R[m4] = orthoUp.x(); R[m5] = orthoUp.y(); R[m6] = orthoUp.z();
+		R[m8] = f.x(); R[m9] = f.y(); R[m10] = f.z();
 
 		// 更新四元数
-		SetFromRotationMatrix(mat);
-	}
-
-	void Quat::SetFromRotationMatrix(const Mat3& mat)
-	{
-		float trace = mat[m0] + mat[m5] + mat[m10];
-		float qw, qx, qy, qz;
-
-		if (trace > 0.0f)
-		{
-			float s = Trig::sqrt(trace + 1.0f) * 2.0f;
-			qw = 0.25f * s;
-			qx = (mat[m9] - mat[m6]) / s;   // m[2][1] - m[1][2]
-			qy = (mat[m2] - mat[m8]) / s;   // m[0][2] - m[2][0]
-			qz = (mat[m4] - mat[m1]) / s;   // m[1][0] - m[0][1]
-		}
-		else if ((mat[m0] > mat[m5]) && (mat[m0] > mat[m10]))
-		{
-			float s = Trig::sqrt(1.0f + mat[m0] - mat[m5] - mat[m10]) * 2.0f;
-			qw = (mat[m9] - mat[m6]) / s;
-			qx = 0.25f * s;
-			qy = (mat[m1] + mat[m4]) / s;
-			qz = (mat[m2] + mat[m8]) / s;
-		}
-		else if (mat[m5] > mat[m10])
-		{
-			float s = Trig::sqrt(1.0f + mat[m5] - mat[m0] - mat[m10]) * 2.0f;
-			qw = (mat[m2] - mat[m8]) / s;
-			qx = (mat[m1] + mat[m4]) / s;
-			qy = 0.25f * s;
-			qz = (mat[m6] + mat[m9]) / s;
-		}
-		else
-		{
-			float s = Trig::sqrt(1.0f + mat[m10] - mat[m0] - mat[m5]) * 2.0f;
-			qw = (mat[m4] - mat[m1]) / s;
-			qx = (mat[m2] + mat[m8]) / s;
-			qy = (mat[m6] + mat[m9]) / s;
-			qz = 0.25f * s;
-		}
-
-		_mq = _mm_set_ps(qw, qz, qy, qx);
+		set(R);	
 	}
 }
 

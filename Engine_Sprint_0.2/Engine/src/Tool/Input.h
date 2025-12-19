@@ -71,6 +71,13 @@ namespace Azul
             return idx >= 0 ? Get().currMouse[idx] : false;
         }
 
+        static bool SetMouse(float x, float y)
+        {
+			Get().mousePos.x = x;
+			Get().mousePos.y = y;
+            return true;
+        }
+
         static bool GetMouseDown(KeyCode button)
         {
             int idx = MouseIndex(button);

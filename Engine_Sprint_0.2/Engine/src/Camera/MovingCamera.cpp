@@ -8,7 +8,7 @@ namespace Azul
 	{
 	}
 
-	void MovingCamera::updateCamera(void)
+	void MovingCamera::updateCamera(float deltaTime)
 	{
 	
 	}

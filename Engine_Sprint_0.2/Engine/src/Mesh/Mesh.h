@@ -34,8 +34,21 @@ namespace Azul
 			: u(in_u), v(in_v)
 		{
 		}
-		float u;
-		float v;
+		union
+		{
+			struct
+			{
+				float u;
+				float v;
+			};
+
+			struct
+			{
+				float x;
+				float y;
+			};
+		};
+
 	};
 
 	struct VertexColor

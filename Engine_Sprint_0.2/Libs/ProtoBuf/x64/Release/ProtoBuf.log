@@ -1,0 +1,35 @@
+﻿  meshData.cpp
+  meshData.pb.cc
+  ProtoBufEngine_DLLMain.cpp
+  textureData.cpp
+  textureData.pb.cc
+  vboData.cpp
+  vboData.pb.cc
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\absl\base\nullability.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“src/vboData.cpp”)
+  
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\absl\base\nullability.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“src/textureData.cpp”)
+  
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\absl\base\nullability.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“src/meshData.pb.cc”)
+  
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\absl\base\nullability.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“src/vboData.pb.cc”)
+  
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\absl\base\nullability.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“src/meshData.cpp”)
+  
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\absl\base\nullability.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  (编译源文件“../ProtoBuf/src/textureData.pb.cc”)
+  
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\src\meshData.pb.cc(472,38): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\src\meshData.cpp(111,20): warning C4018: “<”: 有符号/无符号不匹配
+D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\google\protobuf\repeated_ptr_field.h(336,1): warning C4702: 无法访问的代码
+    正在创建库 D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\x64\Release\ProtoBufReleaseX64.lib 和对象 D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\x64\Release\ProtoBufReleaseX64.exp
+  ProtoBuf.vcxproj -> D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\x64\Release\ProtoBufReleaseX64.dll
+  D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\libs\release\abseil_dll.dll
+  D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\libs\release\libprotobuf-lite.dll
+  D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\libs\release\libutf8_range.dll
+  D:\PersonalEngine\GameEngine_Azul\Engine_Sprint_0.2\Libs\ProtoBuf\Proto\libs\release\libutf8_validity.dll
+  已复制         4 个文件。

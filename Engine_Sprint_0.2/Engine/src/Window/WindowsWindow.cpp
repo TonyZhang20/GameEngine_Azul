@@ -402,37 +402,60 @@ namespace Azul
 		}
 		case WM_LBUTTONDOWN:
 		{
-			MouseButtonPressedEvent e(0);
+			POINT pt;
+			GetCursorPos(&pt);
+			ScreenToClient(hwnd, &pt);
+			MouseButtonPressedEvent e(0, pt.x, pt.y);
 			m_Data.EventCallback(e);
 			break;
 		}
 		case WM_LBUTTONUP:
 		{
-			MouseButtonReleasedEvent e(0);
+			POINT pt;
+			GetCursorPos(&pt);
+			ScreenToClient(hwnd, &pt);
+
+			MouseButtonReleasedEvent e(0, pt.x, pt.y);
 			m_Data.EventCallback(e);
 			break;
 		}
 		case WM_RBUTTONDOWN:
 		{
-			MouseButtonPressedEvent e(1);
+			POINT pt;
+			GetCursorPos(&pt);
+			ScreenToClient(hwnd, &pt);
+
+			MouseButtonPressedEvent e(1, pt.x, pt.y);
 			m_Data.EventCallback(e);
 			break;
 		}
 		case WM_RBUTTONUP:
 		{
-			MouseButtonReleasedEvent e(1);
+			POINT pt;
+			GetCursorPos(&pt);
+			ScreenToClient(hwnd, &pt);
+
+			MouseButtonReleasedEvent e(1, pt.x, pt.y);
 			m_Data.EventCallback(e);
 			break;
 		}
 		case WM_MBUTTONDOWN:
 		{
-			MouseButtonPressedEvent e(2);
+			POINT pt;
+			GetCursorPos(&pt);
+			ScreenToClient(hwnd, &pt);
+
+			MouseButtonPressedEvent e(2, pt.x, pt.y);
 			m_Data.EventCallback(e);
 			break;
 		}
 		case WM_MBUTTONUP:
 		{
-			MouseButtonReleasedEvent e(2);
+			POINT pt;
+			GetCursorPos(&pt);
+			ScreenToClient(hwnd, &pt);
+
+			MouseButtonReleasedEvent e(2, pt.x, pt.y);
 			m_Data.EventCallback(e);
 			break;
 		}

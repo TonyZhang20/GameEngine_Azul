@@ -302,7 +302,7 @@ namespace Azul
 	void Vec3::Print(const char* pName) const
 	{
 		Trace::out("(Vec3 : %s)\n", pName);
-		Trace::out("(%f , %f, %f��\n", this->_vx, this->_vy, this->_vz);
+		Trace::out("(%f , %f, %f)\n", this->_vx, this->_vy, this->_vz);
 	}
 
 

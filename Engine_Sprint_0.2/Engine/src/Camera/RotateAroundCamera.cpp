@@ -5,7 +5,7 @@ namespace Azul
 	RotateAroundCamera::RotateAroundCamera() : Camera()
 	{
 	}
-	void RotateAroundCamera::updateCamera(void)
+	void RotateAroundCamera::updateCamera(float deltaTime)
 	{
 		Vec3 pos;
 		Vec3 tar;
@@ -38,7 +38,7 @@ namespace Azul
 		this->setOrientAndPosition(up, targetPos, newPos);
 
 
-		Camera::updateCamera();
+		Camera::updateCamera(deltaTime);
 	}
 
 }

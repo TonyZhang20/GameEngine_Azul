@@ -12,8 +12,8 @@
 #include "LayerManager.h"
 #include "StateDirectXMan.h"
 #include "Application.h"
-
-
+#include "Input.h"
+#include "MouseEvent.h"
 
 
 namespace Azul
@@ -207,7 +207,10 @@ namespace Azul
 	void Engine::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
+
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN_ONE(Engine::OnWindowResizeEvent));
+		dispatcher.Dispatch<MouseMovedEvent>(BIND_EVENT_FN_ONE(Engine::OnMouseMovedEvent));
+		dispatcher.Dispatch<MouseButtonPressedEvent>(BIND_EVENT_FN_ONE(Engine::OnMouseDownEvent));
 	}
 
 	void Engine::OnImGuiRender()
@@ -249,6 +252,16 @@ namespace Azul
 		return false;
 	}
 
+	bool Engine::OnMouseMovedEvent(MouseMovedEvent& e)
+	{
+		return false;
+	}
+
+	bool Engine::OnMouseDownEvent(MouseButtonPressedEvent& e)
+	{
+		Input::SetMouse(e.GetX(), e.GetY());
+		return false;
+	}
 
 	void Engine::OnDestory()
 	{

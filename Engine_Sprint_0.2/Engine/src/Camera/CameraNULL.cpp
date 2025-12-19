@@ -7,7 +7,7 @@ namespace Azul
 
 	}
 
-	void CameraNULL::updateCamera(void)
+	void CameraNULL::updateCamera(float deltaTime)
 	{
 
 	}

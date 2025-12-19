@@ -6,6 +6,7 @@
 #define CAMERA_H
 
 #include "MathEngine.h"
+#include "ZEntity.h"
 
 namespace Azul
 {
@@ -32,12 +33,18 @@ namespace Azul
 	public:
 		// Default constructor
 		Camera();
+
 		Camera(const Camera&) = default;
 		Camera& operator = (const Camera&) = default;
 
 		virtual ~Camera() = default;
 
 		void SetAspectRatio(float ratio);
+
+		inline void SetCameraEntity(ZEntity* pEntity)
+		{
+			this->pCamEntity = pEntity;
+		}
 
 		// Setup on single camera
 		void setOrthographic(const float width, const float height, const float nearDist, const float farDist);
@@ -49,7 +56,8 @@ namespace Azul
 		void SetHelper(Vec3& up, Vec3& tar, Vec3& pos);
 
 		// update camera system
-		virtual void updateCamera(void);
+		virtual void updateCamera(float);
+	
 
 		// Get the matrices for rendering
 		Mat4 getViewMatrix(Quat& q, Vec3& vPos);
@@ -72,11 +80,16 @@ namespace Azul
 
 	private:  // methods should never be public
 		void privUpdateProjectionMatrix(void);
-
+		void privUpdateCameraMove(float);
+		void MoveForward(float);
+		void MoveRight(float);
+		void MouseInput(float deltaTime);
+		Quat RemoveRollAroundForward(const Quat& qIn);
 
 	private:  // data  (Keep it private)
 		// Projection Matrix
 		Mat4	projMatrix;
+		ZEntity* pCamEntity;
 
 		// Define the frustum inputs
 		float	nearDist;

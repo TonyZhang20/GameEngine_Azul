@@ -1,12 +1,16 @@
 //--------------------------------------------------------------
 // Copyright 2025, Ed Keenan, all rights reserved.
 //--------------------------------------------------------------
-
+#include "MathEngine.h"
 #include "Camera.h"
+#include "Input.h"
 #include "StringThis.h"
+#include "Components.h"
 
 namespace Azul
 {
+	const float moveSpeed = 15.f;
+	const float mouseSensitivity = 0.2f;//鼠标移动速度
 	Camera::Camera()
 		: aspectRatio(0), farDist(0), fovy(0), nearDist(0), projMatrix()
 	{
@@ -142,15 +146,48 @@ namespace Azul
 		Scale S(1.0f, 1.0f, 0.5f);
 
 		projMatrix = projMatrix * B * S;
-	};
+	}
+	
+	Vec2f prevMousePos;
+
+	void Camera::privUpdateCameraMove(float deltaTime)
+	{
+		auto& trans = this->pCamEntity->GetComponent<TransformComponent>();
+
+		if (Input::GetKey(KeyCode::D))
+		{
+			MoveRight(deltaTime);
+		}
+
+		if (Input::GetKey(KeyCode::A))
+		{
+			MoveRight(-deltaTime);
+		}
+
+		if (Input::GetKey(KeyCode::S))
+		{
+			MoveForward(deltaTime);
+		}
+
+		if(Input::GetKey(KeyCode::W))
+		{
+			MoveForward(-deltaTime);
+		}
+
+		MouseInput(deltaTime);
+
+		//...
+	}
+	
 
 	// Update everything (make sure it's consistent)
-	void Camera::updateCamera(void)
+	void Camera::updateCamera(float deltaTime)
 	{
 		// update the projection matrix
 		this->privUpdateProjectionMatrix();
 
 		// update the view matrix
+		this->privUpdateCameraMove(deltaTime);
 	}
 
 	Mat4& Camera::getProjMatrix(void)
@@ -174,6 +211,135 @@ namespace Azul
 
 		return viewMatrix;
 	}
+
+
+	void Camera::MoveForward(float amount)
+	{
+		if (!pCamEntity) return;
+
+		auto& trans = this->pCamEntity->GetComponent<TransformComponent>();
+		Vec3 forward = trans.Forward();
+		trans.position += forward * amount * moveSpeed;
+	}
+
+	void Camera::MoveRight(float amount)
+	{
+		if (!pCamEntity) return;
+
+		auto& trans = this->pCamEntity->GetComponent<TransformComponent>();
+		Vec3 right = trans.Right();
+		trans.position += right * amount * moveSpeed;
+	}
+
+	void Camera::MouseInput(float /*deltaTime*/)
+	{
+		if (!pCamEntity) return;
+		auto& trans = pCamEntity->GetComponent<TransformComponent>();
+
+		static float yaw = 0.0f;      // 弧度
+		static float pitch = 0.0f;    // 弧度
+		static Vec3  lastRight(1.0f, 0.0f, 0.0f);
+		static bool  ignoreNextDelta = false;
+
+		const Vec3 worldUp(0.0f, 1.0f, 0.0f);
+
+		if (!Input::GetKey(KeyCode::MouseLeft))
+			return;
+
+		if (Input::GetKeyDown(KeyCode::MouseLeft))
+		{
+			prevMousePos = Input::GetMousePos();
+			ignoreNextDelta = true;   // 应对锁鼠标/warp
+
+			// 只用 Forward 同步 yaw/pitch（你已确认 Identity forward = (0,0,1)）
+			Vec3 f = trans.rotation.Forward();
+			f.norm();
+
+			yaw = atan2f(f.x(), f.z());   // Forward = +Z 的情况
+			float fy = f.y();
+			if (fy > 1.0f) fy = 1.0f;
+			if (fy < -1.0f) fy = -1.0f;
+			pitch = asinf(fy);
+
+			// ★不要用 trans.rotation.Right()！用 worldUp×forward 得到稳定 right
+			Vec3 r = worldUp.cross(f);
+			if (r.len() > 0.0001f) { r.norm(); lastRight = r; }
+
+			return; // 按下这一帧不改旋转
+		}
+
+		// KeyDown 后第一帧，通常发生 warp，直接同步并丢掉
+		if (ignoreNextDelta)
+		{
+			prevMousePos = Input::GetMousePos();
+			ignoreNextDelta = false;
+			return;
+		}
+
+		Vec2f cur = Input::GetMousePos();
+		float dx = cur.x - prevMousePos.x;
+		float dy = cur.y - prevMousePos.y;
+		prevMousePos = cur;
+
+		// ★关键：如果你的系统在这一帧又 warp/锁定，dx/dy 会突然巨大 -> 丢掉这帧避免跳
+		// 这个阈值按你的窗口/坐标尺度可调（如果是像素坐标，200~800 都常见）
+		if (fabsf(dx) > 200.0f || fabsf(dy) > 200.0f)
+		{
+			// 认为是 warp，不更新角度
+			return;
+		}
+
+		if (fabsf(dx) < 0.01f && fabsf(dy) < 0.01f)
+			return;
+
+		const float k = 0.0025f; // 像素->弧度
+		yaw -= dx * mouseSensitivity * k;
+		pitch += dy * mouseSensitivity * k;
+		// 上下反就改成：pitch -= dy * mouseSensitivity * k;
+
+		const float pitchLimit = 89.0f * MATH_PI_180;
+		if (pitch > pitchLimit) pitch = pitchLimit;
+		if (pitch < -pitchLimit) pitch = -pitchLimit;
+
+		// 用 yaw/pitch 重建 forward（Forward = +Z）
+		float cp = cosf(pitch);
+		Vec3 fwd(
+			sinf(yaw) * cp,
+			sinf(pitch),
+			cosf(yaw) * cp
+		);
+		fwd.norm();
+
+		Vec3 right = worldUp.cross(fwd);
+		if (right.len() < 0.0001f)
+		{
+			right = lastRight; // 接近竖直时保持上一次
+		}
+		else
+		{
+			right.norm();
+		}
+
+		// 连续性修正：避免 right 突然取反导致左右颠倒
+		if (right.dot(lastRight) < 0.0f)
+			right = right * -1.0f;
+
+		Vec3 up = fwd.cross(right);
+		up.norm();
+
+		lastRight = right;
+
+		// 写入 Rot（按你 getViewMatrix 的行布局）
+		Rot R;
+		R[m0] = right.x(); R[m1] = right.y(); R[m2] = right.z(); 
+		R[m4] = up.x(); R[m5] = up.y(); R[m6] = up.z();
+		R[m8] = fwd.x(); R[m9] = fwd.y(); R[m10] = fwd.z(); 
+
+		Quat q(R);
+		q.norm();
+		trans.rotation = q;
+	}
+
 
 }
 

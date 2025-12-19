@@ -16,6 +16,7 @@ namespace Azul
 		ZEntity(const ZEntity& otehr) = default;
 		ZEntity(ZEntity&&) = default;
 		ZEntity& operator=(const ZEntity& other);
+
 		template<typename T>
 		inline T& AddComponent(T&& components)
 		{

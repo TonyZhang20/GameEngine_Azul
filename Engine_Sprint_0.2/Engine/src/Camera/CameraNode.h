@@ -14,7 +14,7 @@ namespace Azul
 		CameraNode& operator = (const Camera&) = delete;
 		virtual ~CameraNode();
 
-		void Update();
+		void Update(float deltaTime);
 		void Set(Camera::Name name, Camera* pCam);
 		void Set(Camera* pCam);
 		Camera* GetCamera();

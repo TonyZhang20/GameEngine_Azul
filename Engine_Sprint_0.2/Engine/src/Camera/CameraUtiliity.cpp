@@ -39,7 +39,7 @@ namespace Azul
 	{
 		CameraUtility* pUtil = CameraUtility::privGetInstance();
 
-		pCam->updateCamera();
+		pCam->updateCamera(0);
 		pCam->GetHelper(pUtil->Orig_up,
 			pUtil->Orig_tar,
 			pUtil->Orig_pos,
@@ -54,7 +54,7 @@ namespace Azul
 		assert(pUtil);
 		assert(pCam);
 
-		pCam->updateCamera();
+		pCam->updateCamera(0);
 		pCam->GetHelper(pUtil->Orig_up, 
 						pUtil->Orig_tar,
 						pUtil->Orig_pos,
