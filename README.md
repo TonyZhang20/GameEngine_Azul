@@ -44,3 +44,6 @@ working on 重构 windows 部分， 我想对引擎的UI下手，发现当前的
 把上课后学的优化版本的数学库加入了引擎
 把Scene部分集成到MainScene做一个代码隔离
 
+2025/12/19 
+把protobuf加入到了引擎里面
+
