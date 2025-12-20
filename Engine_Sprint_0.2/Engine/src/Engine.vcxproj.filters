@@ -119,6 +119,21 @@
     <Filter Include="Source Files\src\Layers\Panels">
       <UniqueIdentifier>{1018b300-e0e2-487a-9dac-ad6773e1f196}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_ProtoBuf">
+      <UniqueIdentifier>{678a2dd6-3c7a-4004-b048-a507ebb7d0c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_ProtoBuf\_Message">
+      <UniqueIdentifier>{c6a8eaef-1311-4c86-a147-6186851304e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_ProtoBuf\_Proto">
+      <UniqueIdentifier>{7aee22be-456d-4c8c-b025-39dadf35b13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_ProtoBuf\_Proto\release">
+      <UniqueIdentifier>{8f11a4af-a091-4170-be43-92efb3d92e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_ProtoBuf\_Proto\debug">
+      <UniqueIdentifier>{045cb5b7-fd64-490b-839d-32d3883653f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject\GameObject_Null.h">
@@ -451,6 +466,21 @@
     <ClInclude Include="Scene\MainScene.h">
       <Filter>Source Files\src\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh\MeshProto.h">
+      <Filter>Source Files\src\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libs\ProtoBuf\src\BoneData.pb.h">
+      <Filter>_ProtoBuf\_Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libs\ProtoBuf\src\meshData.pb.h">
+      <Filter>_ProtoBuf\_Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libs\ProtoBuf\src\textureData.pb.h">
+      <Filter>_ProtoBuf\_Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libs\ProtoBuf\src\vboData.pb.h">
+      <Filter>_ProtoBuf\_Message</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -741,6 +771,21 @@
     <ClCompile Include="Scene\MainScene.cpp">
       <Filter>Source Files\src\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Mesh\MeshProto.cpp">
+      <Filter>Source Files\src\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libs\ProtoBuf\src\BoneData.pb.cc">
+      <Filter>_ProtoBuf\_Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libs\ProtoBuf\src\meshData.pb.cc">
+      <Filter>_ProtoBuf\_Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libs\ProtoBuf\src\textureData.pb.cc">
+      <Filter>_ProtoBuf\_Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libs\ProtoBuf\src\vboData.pb.cc">
+      <Filter>_ProtoBuf\_Message</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\shaders\original\ColorByVertex.Px.hlsl">
@@ -799,6 +844,54 @@
     <None Include="..\DXTex\lib\DirectXTex_DebugX64.pdb">
       <Filter>DirectXTex\libs</Filter>
     </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\debug\abseil_dll.dll">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\debug\abseil_dll.exp">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\debug\libprotobuf-lited.dll">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\debug\libprotobuf-lited.exp">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\debug\libutf8_range.dll">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\debug\libutf8_range.exp">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\debug\libutf8_validity.dll">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\debug\libutf8_validity.exp">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\release\abseil_dll.dll">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\release\abseil_dll.exp">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\release\libprotobuf-lite.dll">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\release\libprotobuf-lite.exp">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\release\libutf8_range.dll">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\release\libutf8_range.exp">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\release\libutf8_validity.dll">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </None>
+    <None Include="..\..\Libs\ProtoBuf\Proto\libs\release\libutf8_validity.exp">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\DXTex\lib\DirectXTex_ReleaseX64.lib">
@@ -806,6 +899,30 @@
     </Library>
     <Library Include="..\DXTex\lib\DirectXTex_DebugX64.lib">
       <Filter>DirectXTex\libs</Filter>
+    </Library>
+    <Library Include="..\..\Libs\ProtoBuf\Proto\libs\debug\abseil_dll.lib">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </Library>
+    <Library Include="..\..\Libs\ProtoBuf\Proto\libs\debug\libprotobuf-lited.lib">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </Library>
+    <Library Include="..\..\Libs\ProtoBuf\Proto\libs\debug\libutf8_range.lib">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </Library>
+    <Library Include="..\..\Libs\ProtoBuf\Proto\libs\debug\libutf8_validity.lib">
+      <Filter>_ProtoBuf\_Proto\debug</Filter>
+    </Library>
+    <Library Include="..\..\Libs\ProtoBuf\Proto\libs\release\abseil_dll.lib">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </Library>
+    <Library Include="..\..\Libs\ProtoBuf\Proto\libs\release\libprotobuf-lite.lib">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </Library>
+    <Library Include="..\..\Libs\ProtoBuf\Proto\libs\release\libutf8_range.lib">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
+    </Library>
+    <Library Include="..\..\Libs\ProtoBuf\Proto\libs\release\libutf8_validity.lib">
+      <Filter>_ProtoBuf\_Proto\release</Filter>
     </Library>
   </ItemGroup>
 </Project>

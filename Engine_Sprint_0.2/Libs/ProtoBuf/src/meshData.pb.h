@@ -254,180 +254,17 @@ class meshData_proto final : public ::google::protobuf::MessageLite
 
   // accessors -------------------------------------------------------
   enum : int {
-    kPMeshNameFieldNumber = 3,
-    kModeFieldNumber = 4,
-    kTriCountFieldNumber = 5,
-    kVertCountFieldNumber = 6,
-    kVboVertFieldNumber = 7,
-    kVboNormFieldNumber = 8,
-    kVboUvFieldNumber = 9,
-    kVboIndexFieldNumber = 10,
-    kVboColorFieldNumber = 11,
     kPVersionFieldNumber = 1,
-    kMeshCountFieldNumber = 2,
+    kPMeshNameFieldNumber = 2,
+    kVboVertFieldNumber = 6,
+    kVboNormFieldNumber = 7,
+    kVboUvFieldNumber = 8,
+    kVboIndexFieldNumber = 9,
+    kVboColorFieldNumber = 10,
+    kModeFieldNumber = 3,
+    kTriCountFieldNumber = 4,
+    kVertCountFieldNumber = 5,
   };
-  // repeated bytes pMeshName = 3;
-  int pmeshname_size() const;
-  private:
-  int _internal_pmeshname_size() const;
-
-  public:
-  void clear_pmeshname() ;
-  const ::std::string& pmeshname(int index) const;
-  ::std::string* PROTOBUF_NONNULL mutable_pmeshname(int index);
-  template <typename Arg_ = const ::std::string&, typename... Args_>
-  void set_pmeshname(int index, Arg_&& value, Args_... args);
-  ::std::string* PROTOBUF_NONNULL add_pmeshname();
-  template <typename Arg_ = const ::std::string&, typename... Args_>
-  void add_pmeshname(Arg_&& value, Args_... args);
-  const ::google::protobuf::RepeatedPtrField<::std::string>& pmeshname() const;
-  ::google::protobuf::RepeatedPtrField<::std::string>* PROTOBUF_NONNULL mutable_pmeshname();
-
-  private:
-  const ::google::protobuf::RepeatedPtrField<::std::string>& _internal_pmeshname() const;
-  ::google::protobuf::RepeatedPtrField<::std::string>* PROTOBUF_NONNULL _internal_mutable_pmeshname();
-
-  public:
-  // repeated .meshData_proto.RENDER_MODE mode = 4;
-  int mode_size() const;
-  private:
-  int _internal_mode_size() const;
-
-  public:
-  void clear_mode() ;
-  public:
-  ::meshData_proto_RENDER_MODE mode(int index) const;
-  void set_mode(int index, ::meshData_proto_RENDER_MODE value);
-  void add_mode(::meshData_proto_RENDER_MODE value);
-  const ::google::protobuf::RepeatedField<int>& mode() const;
-  ::google::protobuf::RepeatedField<int>* PROTOBUF_NONNULL mutable_mode();
-
-  private:
-  const ::google::protobuf::RepeatedField<int>& _internal_mode() const;
-  ::google::protobuf::RepeatedField<int>* PROTOBUF_NONNULL _internal_mutable_mode();
-
-  public:
-  // repeated uint32 triCount = 5;
-  int tricount_size() const;
-  private:
-  int _internal_tricount_size() const;
-
-  public:
-  void clear_tricount() ;
-  ::uint32_t tricount(int index) const;
-  void set_tricount(int index, ::uint32_t value);
-  void add_tricount(::uint32_t value);
-  const ::google::protobuf::RepeatedField<::uint32_t>& tricount() const;
-  ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL mutable_tricount();
-
-  private:
-  const ::google::protobuf::RepeatedField<::uint32_t>& _internal_tricount() const;
-  ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL _internal_mutable_tricount();
-
-  public:
-  // repeated uint32 vertCount = 6;
-  int vertcount_size() const;
-  private:
-  int _internal_vertcount_size() const;
-
-  public:
-  void clear_vertcount() ;
-  ::uint32_t vertcount(int index) const;
-  void set_vertcount(int index, ::uint32_t value);
-  void add_vertcount(::uint32_t value);
-  const ::google::protobuf::RepeatedField<::uint32_t>& vertcount() const;
-  ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL mutable_vertcount();
-
-  private:
-  const ::google::protobuf::RepeatedField<::uint32_t>& _internal_vertcount() const;
-  ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL _internal_mutable_vertcount();
-
-  public:
-  // repeated .vboData_proto vbo_vert = 7;
-  int vbo_vert_size() const;
-  private:
-  int _internal_vbo_vert_size() const;
-
-  public:
-  void clear_vbo_vert() ;
-  ::vboData_proto* PROTOBUF_NONNULL mutable_vbo_vert(int index);
-  ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL mutable_vbo_vert();
-
-  private:
-  const ::google::protobuf::RepeatedPtrField<::vboData_proto>& _internal_vbo_vert() const;
-  ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL _internal_mutable_vbo_vert();
-  public:
-  const ::vboData_proto& vbo_vert(int index) const;
-  ::vboData_proto* PROTOBUF_NONNULL add_vbo_vert();
-  const ::google::protobuf::RepeatedPtrField<::vboData_proto>& vbo_vert() const;
-  // repeated .vboData_proto vbo_norm = 8;
-  int vbo_norm_size() const;
-  private:
-  int _internal_vbo_norm_size() const;
-
-  public:
-  void clear_vbo_norm() ;
-  ::vboData_proto* PROTOBUF_NONNULL mutable_vbo_norm(int index);
-  ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL mutable_vbo_norm();
-
-  private:
-  const ::google::protobuf::RepeatedPtrField<::vboData_proto>& _internal_vbo_norm() const;
-  ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL _internal_mutable_vbo_norm();
-  public:
-  const ::vboData_proto& vbo_norm(int index) const;
-  ::vboData_proto* PROTOBUF_NONNULL add_vbo_norm();
-  const ::google::protobuf::RepeatedPtrField<::vboData_proto>& vbo_norm() const;
-  // repeated .vboData_proto vbo_uv = 9;
-  int vbo_uv_size() const;
-  private:
-  int _internal_vbo_uv_size() const;
-
-  public:
-  void clear_vbo_uv() ;
-  ::vboData_proto* PROTOBUF_NONNULL mutable_vbo_uv(int index);
-  ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL mutable_vbo_uv();
-
-  private:
-  const ::google::protobuf::RepeatedPtrField<::vboData_proto>& _internal_vbo_uv() const;
-  ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL _internal_mutable_vbo_uv();
-  public:
-  const ::vboData_proto& vbo_uv(int index) const;
-  ::vboData_proto* PROTOBUF_NONNULL add_vbo_uv();
-  const ::google::protobuf::RepeatedPtrField<::vboData_proto>& vbo_uv() const;
-  // repeated .vboData_proto vbo_index = 10;
-  int vbo_index_size() const;
-  private:
-  int _internal_vbo_index_size() const;
-
-  public:
-  void clear_vbo_index() ;
-  ::vboData_proto* PROTOBUF_NONNULL mutable_vbo_index(int index);
-  ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL mutable_vbo_index();
-
-  private:
-  const ::google::protobuf::RepeatedPtrField<::vboData_proto>& _internal_vbo_index() const;
-  ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL _internal_mutable_vbo_index();
-  public:
-  const ::vboData_proto& vbo_index(int index) const;
-  ::vboData_proto* PROTOBUF_NONNULL add_vbo_index();
-  const ::google::protobuf::RepeatedPtrField<::vboData_proto>& vbo_index() const;
-  // repeated .vboData_proto vbo_color = 11;
-  int vbo_color_size() const;
-  private:
-  int _internal_vbo_color_size() const;
-
-  public:
-  void clear_vbo_color() ;
-  ::vboData_proto* PROTOBUF_NONNULL mutable_vbo_color(int index);
-  ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL mutable_vbo_color();
-
-  private:
-  const ::google::protobuf::RepeatedPtrField<::vboData_proto>& _internal_vbo_color() const;
-  ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL _internal_mutable_vbo_color();
-  public:
-  const ::vboData_proto& vbo_color(int index) const;
-  ::vboData_proto* PROTOBUF_NONNULL add_vbo_color();
-  const ::google::protobuf::RepeatedPtrField<::vboData_proto>& vbo_color() const;
   // optional bytes pVersion = 1;
   bool has_pversion() const;
   void clear_pversion() ;
@@ -444,22 +281,135 @@ class meshData_proto final : public ::google::protobuf::MessageLite
   ::std::string* PROTOBUF_NONNULL _internal_mutable_pversion();
 
   public:
-  // optional uint32 meshCount = 2;
-  bool has_meshcount() const;
-  void clear_meshcount() ;
-  ::uint32_t meshcount() const;
-  void set_meshcount(::uint32_t value);
+  // optional bytes pMeshName = 2;
+  bool has_pmeshname() const;
+  void clear_pmeshname() ;
+  const ::std::string& pmeshname() const;
+  template <typename Arg_ = const ::std::string&, typename... Args_>
+  void set_pmeshname(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_pmeshname();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_pmeshname();
+  void set_allocated_pmeshname(::std::string* PROTOBUF_NULLABLE value);
 
   private:
-  ::uint32_t _internal_meshcount() const;
-  void _internal_set_meshcount(::uint32_t value);
+  const ::std::string& _internal_pmeshname() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_pmeshname(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_pmeshname();
+
+  public:
+  // optional .vboData_proto vbo_vert = 6;
+  bool has_vbo_vert() const;
+  void clear_vbo_vert() ;
+  const ::vboData_proto& vbo_vert() const;
+  [[nodiscard]] ::vboData_proto* PROTOBUF_NULLABLE release_vbo_vert();
+  ::vboData_proto* PROTOBUF_NONNULL mutable_vbo_vert();
+  void set_allocated_vbo_vert(::vboData_proto* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_vbo_vert(::vboData_proto* PROTOBUF_NULLABLE value);
+  ::vboData_proto* PROTOBUF_NULLABLE unsafe_arena_release_vbo_vert();
+
+  private:
+  const ::vboData_proto& _internal_vbo_vert() const;
+  ::vboData_proto* PROTOBUF_NONNULL _internal_mutable_vbo_vert();
+
+  public:
+  // optional .vboData_proto vbo_norm = 7;
+  bool has_vbo_norm() const;
+  void clear_vbo_norm() ;
+  const ::vboData_proto& vbo_norm() const;
+  [[nodiscard]] ::vboData_proto* PROTOBUF_NULLABLE release_vbo_norm();
+  ::vboData_proto* PROTOBUF_NONNULL mutable_vbo_norm();
+  void set_allocated_vbo_norm(::vboData_proto* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_vbo_norm(::vboData_proto* PROTOBUF_NULLABLE value);
+  ::vboData_proto* PROTOBUF_NULLABLE unsafe_arena_release_vbo_norm();
+
+  private:
+  const ::vboData_proto& _internal_vbo_norm() const;
+  ::vboData_proto* PROTOBUF_NONNULL _internal_mutable_vbo_norm();
+
+  public:
+  // optional .vboData_proto vbo_uv = 8;
+  bool has_vbo_uv() const;
+  void clear_vbo_uv() ;
+  const ::vboData_proto& vbo_uv() const;
+  [[nodiscard]] ::vboData_proto* PROTOBUF_NULLABLE release_vbo_uv();
+  ::vboData_proto* PROTOBUF_NONNULL mutable_vbo_uv();
+  void set_allocated_vbo_uv(::vboData_proto* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_vbo_uv(::vboData_proto* PROTOBUF_NULLABLE value);
+  ::vboData_proto* PROTOBUF_NULLABLE unsafe_arena_release_vbo_uv();
+
+  private:
+  const ::vboData_proto& _internal_vbo_uv() const;
+  ::vboData_proto* PROTOBUF_NONNULL _internal_mutable_vbo_uv();
+
+  public:
+  // optional .vboData_proto vbo_index = 9;
+  bool has_vbo_index() const;
+  void clear_vbo_index() ;
+  const ::vboData_proto& vbo_index() const;
+  [[nodiscard]] ::vboData_proto* PROTOBUF_NULLABLE release_vbo_index();
+  ::vboData_proto* PROTOBUF_NONNULL mutable_vbo_index();
+  void set_allocated_vbo_index(::vboData_proto* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_vbo_index(::vboData_proto* PROTOBUF_NULLABLE value);
+  ::vboData_proto* PROTOBUF_NULLABLE unsafe_arena_release_vbo_index();
+
+  private:
+  const ::vboData_proto& _internal_vbo_index() const;
+  ::vboData_proto* PROTOBUF_NONNULL _internal_mutable_vbo_index();
+
+  public:
+  // optional .vboData_proto vbo_color = 10;
+  bool has_vbo_color() const;
+  void clear_vbo_color() ;
+  const ::vboData_proto& vbo_color() const;
+  [[nodiscard]] ::vboData_proto* PROTOBUF_NULLABLE release_vbo_color();
+  ::vboData_proto* PROTOBUF_NONNULL mutable_vbo_color();
+  void set_allocated_vbo_color(::vboData_proto* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_vbo_color(::vboData_proto* PROTOBUF_NULLABLE value);
+  ::vboData_proto* PROTOBUF_NULLABLE unsafe_arena_release_vbo_color();
+
+  private:
+  const ::vboData_proto& _internal_vbo_color() const;
+  ::vboData_proto* PROTOBUF_NONNULL _internal_mutable_vbo_color();
+
+  public:
+  // optional .meshData_proto.RENDER_MODE mode = 3;
+  bool has_mode() const;
+  void clear_mode() ;
+  ::meshData_proto_RENDER_MODE mode() const;
+  void set_mode(::meshData_proto_RENDER_MODE value);
+
+  private:
+  ::meshData_proto_RENDER_MODE _internal_mode() const;
+  void _internal_set_mode(::meshData_proto_RENDER_MODE value);
+
+  public:
+  // optional uint32 triCount = 4;
+  bool has_tricount() const;
+  void clear_tricount() ;
+  ::uint32_t tricount() const;
+  void set_tricount(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_tricount() const;
+  void _internal_set_tricount(::uint32_t value);
+
+  public:
+  // optional uint32 vertCount = 5;
+  bool has_vertcount() const;
+  void clear_vertcount() ;
+  ::uint32_t vertcount() const;
+  void set_vertcount(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_vertcount() const;
+  void _internal_set_vertcount(::uint32_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:meshData_proto)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<4, 11,
+  static const ::google::protobuf::internal::TcParseTable<4, 10,
                                    5, 0,
                                    2>
       _table_;
@@ -481,20 +431,16 @@ class meshData_proto final : public ::google::protobuf::MessageLite
         const meshData_proto& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::RepeatedPtrField<::std::string> pmeshname_;
-    ::google::protobuf::RepeatedField<int> mode_;
-    ::google::protobuf::internal::CachedSize _mode_cached_byte_size_;
-    ::google::protobuf::RepeatedField<::uint32_t> tricount_;
-    ::google::protobuf::internal::CachedSize _tricount_cached_byte_size_;
-    ::google::protobuf::RepeatedField<::uint32_t> vertcount_;
-    ::google::protobuf::internal::CachedSize _vertcount_cached_byte_size_;
-    ::google::protobuf::RepeatedPtrField< ::vboData_proto > vbo_vert_;
-    ::google::protobuf::RepeatedPtrField< ::vboData_proto > vbo_norm_;
-    ::google::protobuf::RepeatedPtrField< ::vboData_proto > vbo_uv_;
-    ::google::protobuf::RepeatedPtrField< ::vboData_proto > vbo_index_;
-    ::google::protobuf::RepeatedPtrField< ::vboData_proto > vbo_color_;
     ::google::protobuf::internal::ArenaStringPtr pversion_;
-    ::uint32_t meshcount_;
+    ::google::protobuf::internal::ArenaStringPtr pmeshname_;
+    ::vboData_proto* PROTOBUF_NULLABLE vbo_vert_;
+    ::vboData_proto* PROTOBUF_NULLABLE vbo_norm_;
+    ::vboData_proto* PROTOBUF_NULLABLE vbo_uv_;
+    ::vboData_proto* PROTOBUF_NULLABLE vbo_index_;
+    ::vboData_proto* PROTOBUF_NULLABLE vbo_color_;
+    int mode_;
+    ::uint32_t tricount_;
+    ::uint32_t vertcount_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -588,464 +534,622 @@ inline void meshData_proto::set_allocated_pversion(::std::string* PROTOBUF_NULLA
   // @@protoc_insertion_point(field_set_allocated:meshData_proto.pVersion)
 }
 
-// optional uint32 meshCount = 2;
-inline bool meshData_proto::has_meshcount() const {
+// optional bytes pMeshName = 2;
+inline bool meshData_proto::has_pmeshname() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002U) != 0;
   return value;
 }
-inline void meshData_proto::clear_meshcount() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.meshcount_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000002U;
-}
-inline ::uint32_t meshData_proto::meshcount() const {
-  // @@protoc_insertion_point(field_get:meshData_proto.meshCount)
-  return _internal_meshcount();
-}
-inline void meshData_proto::set_meshcount(::uint32_t value) {
-  _internal_set_meshcount(value);
-  _impl_._has_bits_[0] |= 0x00000002U;
-  // @@protoc_insertion_point(field_set:meshData_proto.meshCount)
-}
-inline ::uint32_t meshData_proto::_internal_meshcount() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.meshcount_;
-}
-inline void meshData_proto::_internal_set_meshcount(::uint32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.meshcount_ = value;
-}
-
-// repeated bytes pMeshName = 3;
-inline int meshData_proto::_internal_pmeshname_size() const {
-  return _internal_pmeshname().size();
-}
-inline int meshData_proto::pmeshname_size() const {
-  return _internal_pmeshname_size();
-}
 inline void meshData_proto::clear_pmeshname() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.pmeshname_.Clear();
+  _impl_.pmeshname_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000002U;
 }
-inline ::std::string* PROTOBUF_NONNULL meshData_proto::add_pmeshname()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::std::string* _s = _internal_mutable_pmeshname()->Add();
-  // @@protoc_insertion_point(field_add_mutable:meshData_proto.pMeshName)
-  return _s;
-}
-inline const ::std::string& meshData_proto::pmeshname(int index) const
+inline const ::std::string& meshData_proto::pmeshname() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:meshData_proto.pMeshName)
-  return _internal_pmeshname().Get(index);
-}
-inline ::std::string* PROTOBUF_NONNULL meshData_proto::mutable_pmeshname(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable:meshData_proto.pMeshName)
-  return _internal_mutable_pmeshname()->Mutable(index);
-}
-template <typename Arg_, typename... Args_>
-inline void meshData_proto::set_pmeshname(int index, Arg_&& value, Args_... args) {
-  ::google::protobuf::internal::AssignToString(*_internal_mutable_pmeshname()->Mutable(index), ::std::forward<Arg_>(value),
-                        args... , ::google::protobuf::internal::BytesTag{});
-  // @@protoc_insertion_point(field_set:meshData_proto.pMeshName)
-}
-template <typename Arg_, typename... Args_>
-inline void meshData_proto::add_pmeshname(Arg_&& value, Args_... args) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::google::protobuf::internal::AddToRepeatedPtrField(*_internal_mutable_pmeshname(),
-                               ::std::forward<Arg_>(value),
-                               args... , ::google::protobuf::internal::BytesTag{});
-  // @@protoc_insertion_point(field_add:meshData_proto.pMeshName)
-}
-inline const ::google::protobuf::RepeatedPtrField<::std::string>& meshData_proto::pmeshname()
-    const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:meshData_proto.pMeshName)
   return _internal_pmeshname();
 }
-inline ::google::protobuf::RepeatedPtrField<::std::string>* PROTOBUF_NONNULL
-meshData_proto::mutable_pmeshname() ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:meshData_proto.pMeshName)
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void meshData_proto::set_pmeshname(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_pmeshname();
+  _impl_._has_bits_[0] |= 0x00000002U;
+  _impl_.pmeshname_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:meshData_proto.pMeshName)
 }
-inline const ::google::protobuf::RepeatedPtrField<::std::string>&
-meshData_proto::_internal_pmeshname() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.pmeshname_;
+inline ::std::string* PROTOBUF_NONNULL meshData_proto::mutable_pmeshname()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::std::string* _s = _internal_mutable_pmeshname();
+  // @@protoc_insertion_point(field_mutable:meshData_proto.pMeshName)
+  return _s;
 }
-inline ::google::protobuf::RepeatedPtrField<::std::string>* PROTOBUF_NONNULL
-meshData_proto::_internal_mutable_pmeshname() {
+inline const ::std::string& meshData_proto::_internal_pmeshname() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.pmeshname_;
+  return _impl_.pmeshname_.Get();
+}
+inline void meshData_proto::_internal_set_pmeshname(const ::std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000002U;
+  _impl_.pmeshname_.Set(value, GetArena());
+}
+inline ::std::string* PROTOBUF_NONNULL meshData_proto::_internal_mutable_pmeshname() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000002U;
+  return _impl_.pmeshname_.Mutable( GetArena());
+}
+inline ::std::string* PROTOBUF_NULLABLE meshData_proto::release_pmeshname() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:meshData_proto.pMeshName)
+  if ((_impl_._has_bits_[0] & 0x00000002U) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000002U;
+  auto* released = _impl_.pmeshname_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.pmeshname_.Set("", GetArena());
+  }
+  return released;
+}
+inline void meshData_proto::set_allocated_pmeshname(::std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000002U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002U;
+  }
+  _impl_.pmeshname_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.pmeshname_.IsDefault()) {
+    _impl_.pmeshname_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:meshData_proto.pMeshName)
 }
 
-// repeated .meshData_proto.RENDER_MODE mode = 4;
-inline int meshData_proto::_internal_mode_size() const {
-  return _internal_mode().size();
-}
-inline int meshData_proto::mode_size() const {
-  return _internal_mode_size();
+// optional .meshData_proto.RENDER_MODE mode = 3;
+inline bool meshData_proto::has_mode() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000080U) != 0;
+  return value;
 }
 inline void meshData_proto::clear_mode() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.mode_.Clear();
+  _impl_.mode_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000080U;
 }
-inline ::meshData_proto_RENDER_MODE meshData_proto::mode(int index) const {
+inline ::meshData_proto_RENDER_MODE meshData_proto::mode() const {
   // @@protoc_insertion_point(field_get:meshData_proto.mode)
-  return static_cast<::meshData_proto_RENDER_MODE>(_internal_mode().Get(index));
-}
-inline void meshData_proto::set_mode(int index, ::meshData_proto_RENDER_MODE value) {
-  _internal_mutable_mode()->Set(index, value);
-  // @@protoc_insertion_point(field_set:meshData_proto.mode)
-}
-inline void meshData_proto::add_mode(::meshData_proto_RENDER_MODE value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _internal_mutable_mode()->Add(value);
-  // @@protoc_insertion_point(field_add:meshData_proto.mode)
-}
-inline const ::google::protobuf::RepeatedField<int>& meshData_proto::mode() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:meshData_proto.mode)
   return _internal_mode();
 }
-inline ::google::protobuf::RepeatedField<int>* PROTOBUF_NONNULL meshData_proto::mutable_mode()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:meshData_proto.mode)
+inline void meshData_proto::set_mode(::meshData_proto_RENDER_MODE value) {
+  _internal_set_mode(value);
+  _impl_._has_bits_[0] |= 0x00000080U;
+  // @@protoc_insertion_point(field_set:meshData_proto.mode)
+}
+inline ::meshData_proto_RENDER_MODE meshData_proto::_internal_mode() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::meshData_proto_RENDER_MODE>(_impl_.mode_);
+}
+inline void meshData_proto::_internal_set_mode(::meshData_proto_RENDER_MODE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_mode();
-}
-inline const ::google::protobuf::RepeatedField<int>& meshData_proto::_internal_mode()
-    const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.mode_;
-}
-inline ::google::protobuf::RepeatedField<int>* PROTOBUF_NONNULL
-meshData_proto::_internal_mutable_mode() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.mode_;
+  _impl_.mode_ = value;
 }
 
-// repeated uint32 triCount = 5;
-inline int meshData_proto::_internal_tricount_size() const {
-  return _internal_tricount().size();
-}
-inline int meshData_proto::tricount_size() const {
-  return _internal_tricount_size();
+// optional uint32 triCount = 4;
+inline bool meshData_proto::has_tricount() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000100U) != 0;
+  return value;
 }
 inline void meshData_proto::clear_tricount() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.tricount_.Clear();
+  _impl_.tricount_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000100U;
 }
-inline ::uint32_t meshData_proto::tricount(int index) const {
+inline ::uint32_t meshData_proto::tricount() const {
   // @@protoc_insertion_point(field_get:meshData_proto.triCount)
-  return _internal_tricount().Get(index);
-}
-inline void meshData_proto::set_tricount(int index, ::uint32_t value) {
-  _internal_mutable_tricount()->Set(index, value);
-  // @@protoc_insertion_point(field_set:meshData_proto.triCount)
-}
-inline void meshData_proto::add_tricount(::uint32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _internal_mutable_tricount()->Add(value);
-  // @@protoc_insertion_point(field_add:meshData_proto.triCount)
-}
-inline const ::google::protobuf::RepeatedField<::uint32_t>& meshData_proto::tricount() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:meshData_proto.triCount)
   return _internal_tricount();
 }
-inline ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL meshData_proto::mutable_tricount()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:meshData_proto.triCount)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_tricount();
+inline void meshData_proto::set_tricount(::uint32_t value) {
+  _internal_set_tricount(value);
+  _impl_._has_bits_[0] |= 0x00000100U;
+  // @@protoc_insertion_point(field_set:meshData_proto.triCount)
 }
-inline const ::google::protobuf::RepeatedField<::uint32_t>&
-meshData_proto::_internal_tricount() const {
+inline ::uint32_t meshData_proto::_internal_tricount() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.tricount_;
 }
-inline ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL
-meshData_proto::_internal_mutable_tricount() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.tricount_;
+inline void meshData_proto::_internal_set_tricount(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.tricount_ = value;
 }
 
-// repeated uint32 vertCount = 6;
-inline int meshData_proto::_internal_vertcount_size() const {
-  return _internal_vertcount().size();
-}
-inline int meshData_proto::vertcount_size() const {
-  return _internal_vertcount_size();
+// optional uint32 vertCount = 5;
+inline bool meshData_proto::has_vertcount() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000200U) != 0;
+  return value;
 }
 inline void meshData_proto::clear_vertcount() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.vertcount_.Clear();
+  _impl_.vertcount_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000200U;
 }
-inline ::uint32_t meshData_proto::vertcount(int index) const {
+inline ::uint32_t meshData_proto::vertcount() const {
   // @@protoc_insertion_point(field_get:meshData_proto.vertCount)
-  return _internal_vertcount().Get(index);
-}
-inline void meshData_proto::set_vertcount(int index, ::uint32_t value) {
-  _internal_mutable_vertcount()->Set(index, value);
-  // @@protoc_insertion_point(field_set:meshData_proto.vertCount)
-}
-inline void meshData_proto::add_vertcount(::uint32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _internal_mutable_vertcount()->Add(value);
-  // @@protoc_insertion_point(field_add:meshData_proto.vertCount)
-}
-inline const ::google::protobuf::RepeatedField<::uint32_t>& meshData_proto::vertcount() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:meshData_proto.vertCount)
   return _internal_vertcount();
 }
-inline ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL meshData_proto::mutable_vertcount()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:meshData_proto.vertCount)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_vertcount();
+inline void meshData_proto::set_vertcount(::uint32_t value) {
+  _internal_set_vertcount(value);
+  _impl_._has_bits_[0] |= 0x00000200U;
+  // @@protoc_insertion_point(field_set:meshData_proto.vertCount)
 }
-inline const ::google::protobuf::RepeatedField<::uint32_t>&
-meshData_proto::_internal_vertcount() const {
+inline ::uint32_t meshData_proto::_internal_vertcount() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.vertcount_;
 }
-inline ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL
-meshData_proto::_internal_mutable_vertcount() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.vertcount_;
+inline void meshData_proto::_internal_set_vertcount(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.vertcount_ = value;
 }
 
-// repeated .vboData_proto vbo_vert = 7;
-inline int meshData_proto::_internal_vbo_vert_size() const {
-  return _internal_vbo_vert().size();
+// optional .vboData_proto vbo_vert = 6;
+inline bool meshData_proto::has_vbo_vert() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004U) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.vbo_vert_ != nullptr);
+  return value;
 }
-inline int meshData_proto::vbo_vert_size() const {
-  return _internal_vbo_vert_size();
+inline const ::vboData_proto& meshData_proto::_internal_vbo_vert() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::vboData_proto* p = _impl_.vbo_vert_;
+  return p != nullptr ? *p : reinterpret_cast<const ::vboData_proto&>(::_vboData_proto_default_instance_);
 }
-inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::mutable_vbo_vert(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable:meshData_proto.vbo_vert)
-  return _internal_mutable_vbo_vert()->Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL meshData_proto::mutable_vbo_vert()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:meshData_proto.vbo_vert)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_vbo_vert();
-}
-inline const ::vboData_proto& meshData_proto::vbo_vert(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::vboData_proto& meshData_proto::vbo_vert() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:meshData_proto.vbo_vert)
-  return _internal_vbo_vert().Get(index);
-}
-inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::add_vbo_vert()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::vboData_proto* _add = _internal_mutable_vbo_vert()->Add();
-  // @@protoc_insertion_point(field_add:meshData_proto.vbo_vert)
-  return _add;
-}
-inline const ::google::protobuf::RepeatedPtrField<::vboData_proto>& meshData_proto::vbo_vert() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:meshData_proto.vbo_vert)
   return _internal_vbo_vert();
 }
-inline const ::google::protobuf::RepeatedPtrField<::vboData_proto>&
-meshData_proto::_internal_vbo_vert() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
+inline void meshData_proto::unsafe_arena_set_allocated_vbo_vert(
+    ::vboData_proto* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.vbo_vert_);
+  }
+  _impl_.vbo_vert_ = reinterpret_cast<::vboData_proto*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000004U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004U;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:meshData_proto.vbo_vert)
+}
+inline ::vboData_proto* PROTOBUF_NULLABLE meshData_proto::release_vbo_vert() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000004U;
+  ::vboData_proto* released = _impl_.vbo_vert_;
+  _impl_.vbo_vert_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::vboData_proto* PROTOBUF_NULLABLE meshData_proto::unsafe_arena_release_vbo_vert() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:meshData_proto.vbo_vert)
+
+  _impl_._has_bits_[0] &= ~0x00000004U;
+  ::vboData_proto* temp = _impl_.vbo_vert_;
+  _impl_.vbo_vert_ = nullptr;
+  return temp;
+}
+inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::_internal_mutable_vbo_vert() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.vbo_vert_ == nullptr) {
+    auto* p = ::google::protobuf::MessageLite::DefaultConstruct<::vboData_proto>(GetArena());
+    _impl_.vbo_vert_ = reinterpret_cast<::vboData_proto*>(p);
+  }
   return _impl_.vbo_vert_;
 }
-inline ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL
-meshData_proto::_internal_mutable_vbo_vert() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.vbo_vert_;
+inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::mutable_vbo_vert()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000004U;
+  ::vboData_proto* _msg = _internal_mutable_vbo_vert();
+  // @@protoc_insertion_point(field_mutable:meshData_proto.vbo_vert)
+  return _msg;
+}
+inline void meshData_proto::set_allocated_vbo_vert(::vboData_proto* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.vbo_vert_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000004U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004U;
+  }
+
+  _impl_.vbo_vert_ = reinterpret_cast<::vboData_proto*>(value);
+  // @@protoc_insertion_point(field_set_allocated:meshData_proto.vbo_vert)
 }
 
-// repeated .vboData_proto vbo_norm = 8;
-inline int meshData_proto::_internal_vbo_norm_size() const {
-  return _internal_vbo_norm().size();
+// optional .vboData_proto vbo_norm = 7;
+inline bool meshData_proto::has_vbo_norm() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008U) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.vbo_norm_ != nullptr);
+  return value;
 }
-inline int meshData_proto::vbo_norm_size() const {
-  return _internal_vbo_norm_size();
+inline const ::vboData_proto& meshData_proto::_internal_vbo_norm() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::vboData_proto* p = _impl_.vbo_norm_;
+  return p != nullptr ? *p : reinterpret_cast<const ::vboData_proto&>(::_vboData_proto_default_instance_);
 }
-inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::mutable_vbo_norm(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable:meshData_proto.vbo_norm)
-  return _internal_mutable_vbo_norm()->Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL meshData_proto::mutable_vbo_norm()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:meshData_proto.vbo_norm)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_vbo_norm();
-}
-inline const ::vboData_proto& meshData_proto::vbo_norm(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::vboData_proto& meshData_proto::vbo_norm() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:meshData_proto.vbo_norm)
-  return _internal_vbo_norm().Get(index);
-}
-inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::add_vbo_norm()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::vboData_proto* _add = _internal_mutable_vbo_norm()->Add();
-  // @@protoc_insertion_point(field_add:meshData_proto.vbo_norm)
-  return _add;
-}
-inline const ::google::protobuf::RepeatedPtrField<::vboData_proto>& meshData_proto::vbo_norm() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:meshData_proto.vbo_norm)
   return _internal_vbo_norm();
 }
-inline const ::google::protobuf::RepeatedPtrField<::vboData_proto>&
-meshData_proto::_internal_vbo_norm() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
+inline void meshData_proto::unsafe_arena_set_allocated_vbo_norm(
+    ::vboData_proto* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.vbo_norm_);
+  }
+  _impl_.vbo_norm_ = reinterpret_cast<::vboData_proto*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000008U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000008U;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:meshData_proto.vbo_norm)
+}
+inline ::vboData_proto* PROTOBUF_NULLABLE meshData_proto::release_vbo_norm() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000008U;
+  ::vboData_proto* released = _impl_.vbo_norm_;
+  _impl_.vbo_norm_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::vboData_proto* PROTOBUF_NULLABLE meshData_proto::unsafe_arena_release_vbo_norm() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:meshData_proto.vbo_norm)
+
+  _impl_._has_bits_[0] &= ~0x00000008U;
+  ::vboData_proto* temp = _impl_.vbo_norm_;
+  _impl_.vbo_norm_ = nullptr;
+  return temp;
+}
+inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::_internal_mutable_vbo_norm() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.vbo_norm_ == nullptr) {
+    auto* p = ::google::protobuf::MessageLite::DefaultConstruct<::vboData_proto>(GetArena());
+    _impl_.vbo_norm_ = reinterpret_cast<::vboData_proto*>(p);
+  }
   return _impl_.vbo_norm_;
 }
-inline ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL
-meshData_proto::_internal_mutable_vbo_norm() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.vbo_norm_;
+inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::mutable_vbo_norm()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000008U;
+  ::vboData_proto* _msg = _internal_mutable_vbo_norm();
+  // @@protoc_insertion_point(field_mutable:meshData_proto.vbo_norm)
+  return _msg;
+}
+inline void meshData_proto::set_allocated_vbo_norm(::vboData_proto* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.vbo_norm_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000008U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000008U;
+  }
+
+  _impl_.vbo_norm_ = reinterpret_cast<::vboData_proto*>(value);
+  // @@protoc_insertion_point(field_set_allocated:meshData_proto.vbo_norm)
 }
 
-// repeated .vboData_proto vbo_uv = 9;
-inline int meshData_proto::_internal_vbo_uv_size() const {
-  return _internal_vbo_uv().size();
+// optional .vboData_proto vbo_uv = 8;
+inline bool meshData_proto::has_vbo_uv() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010U) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.vbo_uv_ != nullptr);
+  return value;
 }
-inline int meshData_proto::vbo_uv_size() const {
-  return _internal_vbo_uv_size();
+inline const ::vboData_proto& meshData_proto::_internal_vbo_uv() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::vboData_proto* p = _impl_.vbo_uv_;
+  return p != nullptr ? *p : reinterpret_cast<const ::vboData_proto&>(::_vboData_proto_default_instance_);
 }
-inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::mutable_vbo_uv(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable:meshData_proto.vbo_uv)
-  return _internal_mutable_vbo_uv()->Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL meshData_proto::mutable_vbo_uv()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:meshData_proto.vbo_uv)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_vbo_uv();
-}
-inline const ::vboData_proto& meshData_proto::vbo_uv(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::vboData_proto& meshData_proto::vbo_uv() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:meshData_proto.vbo_uv)
-  return _internal_vbo_uv().Get(index);
-}
-inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::add_vbo_uv()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::vboData_proto* _add = _internal_mutable_vbo_uv()->Add();
-  // @@protoc_insertion_point(field_add:meshData_proto.vbo_uv)
-  return _add;
-}
-inline const ::google::protobuf::RepeatedPtrField<::vboData_proto>& meshData_proto::vbo_uv() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:meshData_proto.vbo_uv)
   return _internal_vbo_uv();
 }
-inline const ::google::protobuf::RepeatedPtrField<::vboData_proto>&
-meshData_proto::_internal_vbo_uv() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
+inline void meshData_proto::unsafe_arena_set_allocated_vbo_uv(
+    ::vboData_proto* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.vbo_uv_);
+  }
+  _impl_.vbo_uv_ = reinterpret_cast<::vboData_proto*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000010U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000010U;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:meshData_proto.vbo_uv)
+}
+inline ::vboData_proto* PROTOBUF_NULLABLE meshData_proto::release_vbo_uv() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000010U;
+  ::vboData_proto* released = _impl_.vbo_uv_;
+  _impl_.vbo_uv_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::vboData_proto* PROTOBUF_NULLABLE meshData_proto::unsafe_arena_release_vbo_uv() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:meshData_proto.vbo_uv)
+
+  _impl_._has_bits_[0] &= ~0x00000010U;
+  ::vboData_proto* temp = _impl_.vbo_uv_;
+  _impl_.vbo_uv_ = nullptr;
+  return temp;
+}
+inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::_internal_mutable_vbo_uv() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.vbo_uv_ == nullptr) {
+    auto* p = ::google::protobuf::MessageLite::DefaultConstruct<::vboData_proto>(GetArena());
+    _impl_.vbo_uv_ = reinterpret_cast<::vboData_proto*>(p);
+  }
   return _impl_.vbo_uv_;
 }
-inline ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL
-meshData_proto::_internal_mutable_vbo_uv() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.vbo_uv_;
+inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::mutable_vbo_uv()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000010U;
+  ::vboData_proto* _msg = _internal_mutable_vbo_uv();
+  // @@protoc_insertion_point(field_mutable:meshData_proto.vbo_uv)
+  return _msg;
+}
+inline void meshData_proto::set_allocated_vbo_uv(::vboData_proto* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.vbo_uv_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000010U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000010U;
+  }
+
+  _impl_.vbo_uv_ = reinterpret_cast<::vboData_proto*>(value);
+  // @@protoc_insertion_point(field_set_allocated:meshData_proto.vbo_uv)
 }
 
-// repeated .vboData_proto vbo_index = 10;
-inline int meshData_proto::_internal_vbo_index_size() const {
-  return _internal_vbo_index().size();
+// optional .vboData_proto vbo_index = 9;
+inline bool meshData_proto::has_vbo_index() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000020U) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.vbo_index_ != nullptr);
+  return value;
 }
-inline int meshData_proto::vbo_index_size() const {
-  return _internal_vbo_index_size();
+inline const ::vboData_proto& meshData_proto::_internal_vbo_index() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::vboData_proto* p = _impl_.vbo_index_;
+  return p != nullptr ? *p : reinterpret_cast<const ::vboData_proto&>(::_vboData_proto_default_instance_);
 }
-inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::mutable_vbo_index(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable:meshData_proto.vbo_index)
-  return _internal_mutable_vbo_index()->Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL meshData_proto::mutable_vbo_index()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:meshData_proto.vbo_index)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_vbo_index();
-}
-inline const ::vboData_proto& meshData_proto::vbo_index(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::vboData_proto& meshData_proto::vbo_index() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:meshData_proto.vbo_index)
-  return _internal_vbo_index().Get(index);
-}
-inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::add_vbo_index()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::vboData_proto* _add = _internal_mutable_vbo_index()->Add();
-  // @@protoc_insertion_point(field_add:meshData_proto.vbo_index)
-  return _add;
-}
-inline const ::google::protobuf::RepeatedPtrField<::vboData_proto>& meshData_proto::vbo_index() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:meshData_proto.vbo_index)
   return _internal_vbo_index();
 }
-inline const ::google::protobuf::RepeatedPtrField<::vboData_proto>&
-meshData_proto::_internal_vbo_index() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
+inline void meshData_proto::unsafe_arena_set_allocated_vbo_index(
+    ::vboData_proto* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.vbo_index_);
+  }
+  _impl_.vbo_index_ = reinterpret_cast<::vboData_proto*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000020U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000020U;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:meshData_proto.vbo_index)
+}
+inline ::vboData_proto* PROTOBUF_NULLABLE meshData_proto::release_vbo_index() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000020U;
+  ::vboData_proto* released = _impl_.vbo_index_;
+  _impl_.vbo_index_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::vboData_proto* PROTOBUF_NULLABLE meshData_proto::unsafe_arena_release_vbo_index() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:meshData_proto.vbo_index)
+
+  _impl_._has_bits_[0] &= ~0x00000020U;
+  ::vboData_proto* temp = _impl_.vbo_index_;
+  _impl_.vbo_index_ = nullptr;
+  return temp;
+}
+inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::_internal_mutable_vbo_index() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.vbo_index_ == nullptr) {
+    auto* p = ::google::protobuf::MessageLite::DefaultConstruct<::vboData_proto>(GetArena());
+    _impl_.vbo_index_ = reinterpret_cast<::vboData_proto*>(p);
+  }
   return _impl_.vbo_index_;
 }
-inline ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL
-meshData_proto::_internal_mutable_vbo_index() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.vbo_index_;
+inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::mutable_vbo_index()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000020U;
+  ::vboData_proto* _msg = _internal_mutable_vbo_index();
+  // @@protoc_insertion_point(field_mutable:meshData_proto.vbo_index)
+  return _msg;
+}
+inline void meshData_proto::set_allocated_vbo_index(::vboData_proto* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.vbo_index_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000020U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000020U;
+  }
+
+  _impl_.vbo_index_ = reinterpret_cast<::vboData_proto*>(value);
+  // @@protoc_insertion_point(field_set_allocated:meshData_proto.vbo_index)
 }
 
-// repeated .vboData_proto vbo_color = 11;
-inline int meshData_proto::_internal_vbo_color_size() const {
-  return _internal_vbo_color().size();
+// optional .vboData_proto vbo_color = 10;
+inline bool meshData_proto::has_vbo_color() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000040U) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.vbo_color_ != nullptr);
+  return value;
 }
-inline int meshData_proto::vbo_color_size() const {
-  return _internal_vbo_color_size();
+inline const ::vboData_proto& meshData_proto::_internal_vbo_color() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::vboData_proto* p = _impl_.vbo_color_;
+  return p != nullptr ? *p : reinterpret_cast<const ::vboData_proto&>(::_vboData_proto_default_instance_);
 }
-inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::mutable_vbo_color(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable:meshData_proto.vbo_color)
-  return _internal_mutable_vbo_color()->Mutable(index);
-}
-inline ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL meshData_proto::mutable_vbo_color()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable_list:meshData_proto.vbo_color)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_vbo_color();
-}
-inline const ::vboData_proto& meshData_proto::vbo_color(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::vboData_proto& meshData_proto::vbo_color() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:meshData_proto.vbo_color)
-  return _internal_vbo_color().Get(index);
-}
-inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::add_vbo_color()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::vboData_proto* _add = _internal_mutable_vbo_color()->Add();
-  // @@protoc_insertion_point(field_add:meshData_proto.vbo_color)
-  return _add;
-}
-inline const ::google::protobuf::RepeatedPtrField<::vboData_proto>& meshData_proto::vbo_color() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:meshData_proto.vbo_color)
   return _internal_vbo_color();
 }
-inline const ::google::protobuf::RepeatedPtrField<::vboData_proto>&
-meshData_proto::_internal_vbo_color() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
+inline void meshData_proto::unsafe_arena_set_allocated_vbo_color(
+    ::vboData_proto* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.vbo_color_);
+  }
+  _impl_.vbo_color_ = reinterpret_cast<::vboData_proto*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000040U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000040U;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:meshData_proto.vbo_color)
+}
+inline ::vboData_proto* PROTOBUF_NULLABLE meshData_proto::release_vbo_color() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000040U;
+  ::vboData_proto* released = _impl_.vbo_color_;
+  _impl_.vbo_color_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::vboData_proto* PROTOBUF_NULLABLE meshData_proto::unsafe_arena_release_vbo_color() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:meshData_proto.vbo_color)
+
+  _impl_._has_bits_[0] &= ~0x00000040U;
+  ::vboData_proto* temp = _impl_.vbo_color_;
+  _impl_.vbo_color_ = nullptr;
+  return temp;
+}
+inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::_internal_mutable_vbo_color() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.vbo_color_ == nullptr) {
+    auto* p = ::google::protobuf::MessageLite::DefaultConstruct<::vboData_proto>(GetArena());
+    _impl_.vbo_color_ = reinterpret_cast<::vboData_proto*>(p);
+  }
   return _impl_.vbo_color_;
 }
-inline ::google::protobuf::RepeatedPtrField<::vboData_proto>* PROTOBUF_NONNULL
-meshData_proto::_internal_mutable_vbo_color() {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.vbo_color_;
+inline ::vboData_proto* PROTOBUF_NONNULL meshData_proto::mutable_vbo_color()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000040U;
+  ::vboData_proto* _msg = _internal_mutable_vbo_color();
+  // @@protoc_insertion_point(field_mutable:meshData_proto.vbo_color)
+  return _msg;
+}
+inline void meshData_proto::set_allocated_vbo_color(::vboData_proto* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.vbo_color_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::MessageLite*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000040U;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000040U;
+  }
+
+  _impl_.vbo_color_ = reinterpret_cast<::vboData_proto*>(value);
+  // @@protoc_insertion_point(field_set_allocated:meshData_proto.vbo_color)
 }
 
 #ifdef __GNUC__

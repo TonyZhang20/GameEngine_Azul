@@ -10,7 +10,7 @@
 namespace Azul
 {
 	const float moveSpeed = 15.f;
-	const float mouseSensitivity = 0.2f;//鼠标移动速度
+	const float mouseSensitivity = 2.f;//鼠标移动速度
 	Camera::Camera()
 		: aspectRatio(0), farDist(0), fovy(0), nearDist(0), projMatrix()
 	{
@@ -243,10 +243,10 @@ namespace Azul
 
 		const Vec3 worldUp(0.0f, 1.0f, 0.0f);
 
-		if (!Input::GetKey(KeyCode::MouseLeft))
+		if (!Input::GetKey(KeyCode::MouseRight))
 			return;
 
-		if (Input::GetKeyDown(KeyCode::MouseLeft))
+		if (Input::GetKeyDown(KeyCode::MouseRight))
 		{
 			prevMousePos = Input::GetMousePos();
 			ignoreNextDelta = true;   // 应对锁鼠标/warp

@@ -59,6 +59,9 @@
     <ClCompile Include="src\vboData.pb.cc">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\BoneData.pb.cc">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ProtoBufEngine_DLLInterface.h">
@@ -87,6 +90,12 @@
     </ClInclude>
     <ClInclude Include="include\ProtoVersion.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MeshLayout.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BoneData.pb.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +155,9 @@
     </None>
     <None Include="Proto\libs\release\libutf8_validity.exp">
       <Filter>_Proto\libs\release</Filter>
+    </None>
+    <None Include="src\BoneData.proto">
+      <Filter>src</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

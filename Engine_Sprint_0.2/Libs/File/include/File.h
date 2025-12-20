@@ -82,6 +82,9 @@ namespace Azul
 		FILELIBRARY_API static File::Error Flush(File::Handle fh) noexcept;
 		FILELIBRARY_API static bool IsHandleValid(File::Handle fh) noexcept;
 
+		FILELIBRARY_API static File::Error GetFileAsBuffer(const char* const pFileName, unsigned char*& pBuff, unsigned int& numBytes) noexcept;
+
+
 		// add methods and data if you want
 	};
 

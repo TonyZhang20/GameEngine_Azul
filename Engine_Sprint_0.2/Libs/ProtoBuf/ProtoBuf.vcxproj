@@ -16,6 +16,7 @@
     <Text Include="src\--- Add Source files here ---.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BoneData.pb.cc" />
     <ClCompile Include="src\meshData.cpp" />
     <ClCompile Include="src\meshData.pb.cc" />
     <ClCompile Include="src\ProtoBufEngine_DLLMain.cpp" />
@@ -26,11 +27,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\meshData.h" />
+    <ClInclude Include="include\MeshLayout.h" />
     <ClInclude Include="include\ProtoBufEngine_DLLInterface.h" />
     <ClInclude Include="include\ProtoVersion.h" />
     <ClInclude Include="include\textureData.h" />
     <ClInclude Include="include\vboData.h" />
     <ClInclude Include="Proto\ProtoBuf.h" />
+    <ClInclude Include="src\BoneData.pb.h" />
     <ClInclude Include="src\meshData.pb.h" />
     <ClInclude Include="src\textureData.pb.h" />
     <ClInclude Include="src\vboData.pb.h" />
@@ -84,6 +87,7 @@
     <None Include="Proto\libs\release\libutf8_validity.exp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="src\BoneData.proto" />
     <None Include="src\meshData.proto" />
     <None Include="src\textureData.proto" />
     <None Include="src\vboData.proto" />
@@ -149,7 +153,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
     <TargetName>$(ProjectName)DebugX64</TargetName>
   </PropertyGroup>

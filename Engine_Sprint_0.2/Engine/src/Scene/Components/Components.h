@@ -73,7 +73,7 @@ namespace Azul
 
 			Quat final = qx * qy * qz * rotation;
 
-			Mat4  R(final);
+			Rot R(final);
 
 			return S * R * T;
 		};
@@ -102,6 +102,45 @@ namespace Azul
 
 		inline void SetScale(float s) { this->scale = Vec3(s, s, s); };
 		inline void SetPosition(const Vec3& pos) { this->position.set(pos); };
+		inline void LookAt(const Vec3& target, const Vec3& worldUp = Vec3(0, 1, 0))
+		{
+			Vec3 fwd = target - this->position;
+			if (fwd.len() < 0.00001f)
+				return; // target 太近，方向不确定
+			fwd.norm();
+
+			Vec3 up = worldUp;
+			if (up.len() < 0.00001f)
+				up = Vec3(0.0f, 1.0f, 0.0f);
+			up.norm();
+
+			// 若 fwd 和 up 近平行，换一个 up（避免 cross=0）
+			if (fabsf(fwd.dot(up)) > 0.9990f)
+			{
+				// 选一个不平行的备用 up
+				up = (fabsf(fwd.y()) < 0.9990f) ? Vec3(0.0f, 1.0f, 0.0f) : Vec3(1.0f, 0.0f, 0.0f);
+			}
+
+			// 右手系/左手系这里你当前是 Left-handed(Forward=+Z)，
+			Vec3 right = up.cross(fwd);
+			if (right.len() < 0.00001f)
+				return;
+
+			right.norm();
+
+			Vec3 realUp = fwd.cross(right);
+			realUp.norm();
+
+			Rot R;
+			// 你在 MouseInput 里就是这样写 Rot 的：right 在 m0/m1/m2，up 在 m4/m5/m6，fwd 在 m8/m9/m10
+			R[m0] = right.x();  R[m1] = right.y();  R[m2] = right.z();
+			R[m4] = realUp.x(); R[m5] = realUp.y(); R[m6] = realUp.z();
+			R[m8] = fwd.x();    R[m9] = fwd.y();    R[m10] = fwd.z();
+
+			Quat q(R);
+			q.norm();
+			this->rotation = q;
+		}
 
 	};
 

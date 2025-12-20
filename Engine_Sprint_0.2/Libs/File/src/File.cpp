@@ -256,6 +256,80 @@ namespace Azul
 		return Error::SUCCESS;
 	}
 
+	File::Error File::GetFileAsBuffer(const char* const pFileName, unsigned char*& pBuff, unsigned int& numBytes) noexcept
+	{
+		// 重置输出参数
+		pBuff = nullptr;
+		numBytes = 0;
+
+		// 检查文件名是否有效
+		if (!pFileName) {
+			return File::Error::OPEN_FILENAME_FAIL;
+		}
+
+		// 1. 打开文件
+		File::Handle fh;
+		File::Error error = Open(fh, pFileName, File::Mode::READ, true);
+		if (error != File::Error::SUCCESS) {
+			return error;
+		}
+
+		// 2. 获取文件大小
+		// 先移动到文件末尾
+		error = Seek(fh, File::Position::END, 0);
+		if (error != File::Error::SUCCESS) {
+			Close(fh);
+			return error;
+		}
+
+		// 获取当前位置（即文件大小）
+		DWORD fileSize = 0;
+		error = Tell(fh, fileSize);
+		if (error != File::Error::SUCCESS) {
+			Close(fh);
+			return error;
+		}
+
+		// 回到文件开头
+		error = Seek(fh, File::Position::BEGIN, 0);
+		if (error != File::Error::SUCCESS) {
+			Close(fh);
+			return error;
+		}
+
+		// 3. 如果文件大小为0，直接返回成功
+		if (fileSize == 0) {
+			Close(fh);
+			return File::Error::SUCCESS;  // 空文件是合法的
+		}
+
+		// 4. 分配内存缓冲区
+		unsigned char* buffer = new unsigned char[fileSize];
+		if (!buffer) {
+			Close(fh);
+			return File::Error::UNDEFINED; // 内存分配失败
+		}
+
+		// 5. 读取文件内容
+		error = Read(fh, buffer, fileSize);
+		if (error != File::Error::SUCCESS) {
+			delete[] buffer;
+			Close(fh);
+			return error;
+		}
+
+		// 6. 关闭文件
+		File::Error closeError = Close(fh);
+
+		// 7. 设置输出参数
+		pBuff = buffer;
+		numBytes = fileSize;
+
+		// 即使关闭失败，数据已经读取成功，所以返回关闭错误
+		return (closeError == File::Error::SUCCESS) ?
+			File::Error::SUCCESS : File::Error::CLOSE_FAIL;
+	}
+
 }
 
 // --- End of File ---

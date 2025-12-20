@@ -117,6 +117,7 @@ public:
 	char                pVersion[protoVersion::VERSION_NUM_BYTES];
 
 	bool                enabled;
+
 	TEXTURE_TYPE        textType;
 	TEXTURE_MAG_FILTER  magFilter;
 	TEXTURE_MIN_FILTER  minFilter;

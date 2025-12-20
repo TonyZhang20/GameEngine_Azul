@@ -61,7 +61,7 @@ namespace Azul
 			auto& mesh = entity.GetComponent<MeshComponent>();
 			auto& mat = entity.GetComponent<MaterialComponent>();
 
-			outPacks.push_back( { &tran, &mesh, &mat } );
+			outPacks.push_back(RenderPacket{ &tran, &mesh, &mat});
 		}
 	}
 

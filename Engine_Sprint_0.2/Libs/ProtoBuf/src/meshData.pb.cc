@@ -25,22 +25,20 @@ namespace _fl = ::google::protobuf::internal::field_layout;
 inline constexpr meshData_proto::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
-        pmeshname_{},
-        mode_{},
-        _mode_cached_byte_size_{0},
-        tricount_{},
-        _tricount_cached_byte_size_{0},
-        vertcount_{},
-        _vertcount_cached_byte_size_{0},
-        vbo_vert_{},
-        vbo_norm_{},
-        vbo_uv_{},
-        vbo_index_{},
-        vbo_color_{},
         pversion_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
-        meshcount_{0u} {}
+        pmeshname_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        vbo_vert_{nullptr},
+        vbo_norm_{nullptr},
+        vbo_uv_{nullptr},
+        vbo_index_{nullptr},
+        vbo_color_{nullptr},
+        mode_{static_cast< ::meshData_proto_RENDER_MODE >(0)},
+        tricount_{0u},
+        vertcount_{0u} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR meshData_proto::meshData_proto(::_pbi::ConstantInitialized)
@@ -129,23 +127,28 @@ class meshData_proto::_Internal {
 
 void meshData_proto::clear_vbo_vert() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.vbo_vert_.Clear();
+  if (_impl_.vbo_vert_ != nullptr) _impl_.vbo_vert_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000004U;
 }
 void meshData_proto::clear_vbo_norm() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.vbo_norm_.Clear();
+  if (_impl_.vbo_norm_ != nullptr) _impl_.vbo_norm_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000008U;
 }
 void meshData_proto::clear_vbo_uv() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.vbo_uv_.Clear();
+  if (_impl_.vbo_uv_ != nullptr) _impl_.vbo_uv_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000010U;
 }
 void meshData_proto::clear_vbo_index() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.vbo_index_.Clear();
+  if (_impl_.vbo_index_ != nullptr) _impl_.vbo_index_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000020U;
 }
 void meshData_proto::clear_vbo_color() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.vbo_color_.Clear();
+  if (_impl_.vbo_color_ != nullptr) _impl_.vbo_color_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000040U;
 }
 meshData_proto::meshData_proto(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
@@ -162,19 +165,8 @@ PROTOBUF_NDEBUG_INLINE meshData_proto::Impl_::Impl_(
     [[maybe_unused]] const ::meshData_proto& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
-        pmeshname_{visibility, arena, from.pmeshname_},
-        mode_{visibility, arena, from.mode_},
-        _mode_cached_byte_size_{0},
-        tricount_{visibility, arena, from.tricount_},
-        _tricount_cached_byte_size_{0},
-        vertcount_{visibility, arena, from.vertcount_},
-        _vertcount_cached_byte_size_{0},
-        vbo_vert_{visibility, arena, from.vbo_vert_},
-        vbo_norm_{visibility, arena, from.vbo_norm_},
-        vbo_uv_{visibility, arena, from.vbo_uv_},
-        vbo_index_{visibility, arena, from.vbo_index_},
-        vbo_color_{visibility, arena, from.vbo_color_},
-        pversion_(arena, from.pversion_) {}
+        pversion_(arena, from.pversion_),
+        pmeshname_(arena, from.pmeshname_) {}
 
 meshData_proto::meshData_proto(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
@@ -189,7 +181,29 @@ meshData_proto::meshData_proto(
   _internal_metadata_.MergeFrom<::std::string>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  _impl_.meshcount_ = from._impl_.meshcount_;
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.vbo_vert_ = ((cached_has_bits & 0x00000004U) != 0)
+                ? ::google::protobuf::MessageLite::CopyConstruct(arena, *from._impl_.vbo_vert_)
+                : nullptr;
+  _impl_.vbo_norm_ = ((cached_has_bits & 0x00000008U) != 0)
+                ? ::google::protobuf::MessageLite::CopyConstruct(arena, *from._impl_.vbo_norm_)
+                : nullptr;
+  _impl_.vbo_uv_ = ((cached_has_bits & 0x00000010U) != 0)
+                ? ::google::protobuf::MessageLite::CopyConstruct(arena, *from._impl_.vbo_uv_)
+                : nullptr;
+  _impl_.vbo_index_ = ((cached_has_bits & 0x00000020U) != 0)
+                ? ::google::protobuf::MessageLite::CopyConstruct(arena, *from._impl_.vbo_index_)
+                : nullptr;
+  _impl_.vbo_color_ = ((cached_has_bits & 0x00000040U) != 0)
+                ? ::google::protobuf::MessageLite::CopyConstruct(arena, *from._impl_.vbo_color_)
+                : nullptr;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, mode_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, mode_),
+           offsetof(Impl_, vertcount_) -
+               offsetof(Impl_, mode_) +
+               sizeof(Impl_::vertcount_));
 
   // @@protoc_insertion_point(copy_constructor:meshData_proto)
 }
@@ -197,23 +211,17 @@ PROTOBUF_NDEBUG_INLINE meshData_proto::Impl_::Impl_(
     [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
     [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
       : _cached_size_{0},
-        pmeshname_{visibility, arena},
-        mode_{visibility, arena},
-        _mode_cached_byte_size_{0},
-        tricount_{visibility, arena},
-        _tricount_cached_byte_size_{0},
-        vertcount_{visibility, arena},
-        _vertcount_cached_byte_size_{0},
-        vbo_vert_{visibility, arena},
-        vbo_norm_{visibility, arena},
-        vbo_uv_{visibility, arena},
-        vbo_index_{visibility, arena},
-        vbo_color_{visibility, arena},
-        pversion_(arena) {}
+        pversion_(arena),
+        pmeshname_(arena) {}
 
 inline void meshData_proto::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.meshcount_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, vbo_vert_),
+           0,
+           offsetof(Impl_, vertcount_) -
+               offsetof(Impl_, vbo_vert_) +
+               sizeof(Impl_::vertcount_));
 }
 meshData_proto::~meshData_proto() {
   // @@protoc_insertion_point(destructor:meshData_proto)
@@ -224,6 +232,12 @@ inline void meshData_proto::SharedDtor(MessageLite& self) {
   this_._internal_metadata_.Delete<::std::string>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.pversion_.Destroy();
+  this_._impl_.pmeshname_.Destroy();
+  delete this_._impl_.vbo_vert_;
+  delete this_._impl_.vbo_norm_;
+  delete this_._impl_.vbo_uv_;
+  delete this_._impl_.vbo_index_;
+  delete this_._impl_.vbo_color_;
   this_._impl_.~Impl_();
 }
 
@@ -233,52 +247,8 @@ inline void* PROTOBUF_NONNULL meshData_proto::PlacementNew_(
   return ::new (mem) meshData_proto(arena);
 }
 constexpr auto meshData_proto::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.pmeshname_) +
-          decltype(meshData_proto::_impl_.pmeshname_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::MessageLite::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.mode_) +
-          decltype(meshData_proto::_impl_.mode_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::MessageLite::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.tricount_) +
-          decltype(meshData_proto::_impl_.tricount_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::MessageLite::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vertcount_) +
-          decltype(meshData_proto::_impl_.vertcount_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::MessageLite::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_vert_) +
-          decltype(meshData_proto::_impl_.vbo_vert_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::MessageLite::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_norm_) +
-          decltype(meshData_proto::_impl_.vbo_norm_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::MessageLite::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_uv_) +
-          decltype(meshData_proto::_impl_.vbo_uv_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::MessageLite::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_index_) +
-          decltype(meshData_proto::_impl_.vbo_index_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::MessageLite::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_color_) +
-          decltype(meshData_proto::_impl_.vbo_color_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::MessageLite::internal_visibility()),
-  });
-  if (arena_bits.has_value()) {
-    return ::google::protobuf::internal::MessageCreator::CopyInit(
-        sizeof(meshData_proto), alignof(meshData_proto), *arena_bits);
-  } else {
-    return ::google::protobuf::internal::MessageCreator(&meshData_proto::PlacementNew_,
-                                 sizeof(meshData_proto),
-                                 alignof(meshData_proto));
-  }
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(meshData_proto),
+                                            alignof(meshData_proto));
 }
 constexpr auto meshData_proto::InternalGenerateClassData_() {
   return ::google::protobuf::internal::ClassDataLite<15>{
@@ -311,16 +281,16 @@ meshData_proto::GetClassData() const {
   return meshData_proto_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<4, 11, 5, 0, 2>
+const ::_pbi::TcParseTable<4, 10, 5, 0, 2>
 meshData_proto::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_._has_bits_),
     0, // no _extensions_
-    11, 120,  // max_field_number, fast_idx_mask
+    10, 120,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294965248,  // skipmap
+    4294966272,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    11,  // num_field_entries
+    10,  // num_field_entries
     5,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     meshData_proto_class_data_.base(),
@@ -334,36 +304,34 @@ meshData_proto::_table_ = {
     // optional bytes pVersion = 1;
     {::_pbi::TcParser::FastBS1,
      {10, 0, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.pversion_)}},
-    // optional uint32 meshCount = 2;
+    // optional bytes pMeshName = 2;
+    {::_pbi::TcParser::FastBS1,
+     {18, 1, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.pmeshname_)}},
+    // optional .meshData_proto.RENDER_MODE mode = 3;
     {::_pbi::TcParser::FastV32S1,
-     {16, 1, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.meshcount_)}},
-    // repeated bytes pMeshName = 3;
-    {::_pbi::TcParser::FastBR1,
-     {26, 63, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.pmeshname_)}},
-    // repeated .meshData_proto.RENDER_MODE mode = 4;
-    {::_pbi::TcParser::FastV32P1,
-     {34, 63, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.mode_)}},
-    // repeated uint32 triCount = 5;
-    {::_pbi::TcParser::FastV32P1,
-     {42, 63, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.tricount_)}},
-    // repeated uint32 vertCount = 6;
-    {::_pbi::TcParser::FastV32P1,
-     {50, 63, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vertcount_)}},
-    // repeated .vboData_proto vbo_vert = 7;
-    {::_pbi::TcParser::FastMtR1,
-     {58, 63, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_vert_)}},
-    // repeated .vboData_proto vbo_norm = 8;
-    {::_pbi::TcParser::FastMtR1,
-     {66, 63, 1, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_norm_)}},
-    // repeated .vboData_proto vbo_uv = 9;
-    {::_pbi::TcParser::FastMtR1,
-     {74, 63, 2, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_uv_)}},
-    // repeated .vboData_proto vbo_index = 10;
-    {::_pbi::TcParser::FastMtR1,
-     {82, 63, 3, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_index_)}},
-    // repeated .vboData_proto vbo_color = 11;
-    {::_pbi::TcParser::FastMtR1,
-     {90, 63, 4, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_color_)}},
+     {24, 7, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.mode_)}},
+    // optional uint32 triCount = 4;
+    {::_pbi::TcParser::FastV32S1,
+     {32, 8, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.tricount_)}},
+    // optional uint32 vertCount = 5;
+    {::_pbi::TcParser::FastV32S1,
+     {40, 9, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vertcount_)}},
+    // optional .vboData_proto vbo_vert = 6;
+    {::_pbi::TcParser::FastMtS1,
+     {50, 2, 0, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_vert_)}},
+    // optional .vboData_proto vbo_norm = 7;
+    {::_pbi::TcParser::FastMtS1,
+     {58, 3, 1, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_norm_)}},
+    // optional .vboData_proto vbo_uv = 8;
+    {::_pbi::TcParser::FastMtS1,
+     {66, 4, 2, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_uv_)}},
+    // optional .vboData_proto vbo_index = 9;
+    {::_pbi::TcParser::FastMtS1,
+     {74, 5, 3, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_index_)}},
+    // optional .vboData_proto vbo_color = 10;
+    {::_pbi::TcParser::FastMtS1,
+     {82, 6, 4, PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_color_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
@@ -373,26 +341,24 @@ meshData_proto::_table_ = {
   }}, {{
     // optional bytes pVersion = 1;
     {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.pversion_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
-    // optional uint32 meshCount = 2;
-    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.meshcount_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
-    // repeated bytes pMeshName = 3;
-    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.pmeshname_), -1, 0, (0 | ::_fl::kFcRepeated | ::_fl::kBytes | ::_fl::kRepSString)},
-    // repeated .meshData_proto.RENDER_MODE mode = 4;
-    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.mode_), -1, 0, (0 | ::_fl::kFcRepeated | ::_fl::kPackedOpenEnum)},
-    // repeated uint32 triCount = 5;
-    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.tricount_), -1, 0, (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt32)},
-    // repeated uint32 vertCount = 6;
-    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vertcount_), -1, 0, (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt32)},
-    // repeated .vboData_proto vbo_vert = 7;
-    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_vert_), -1, 0, (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-    // repeated .vboData_proto vbo_norm = 8;
-    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_norm_), -1, 1, (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-    // repeated .vboData_proto vbo_uv = 9;
-    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_uv_), -1, 2, (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-    // repeated .vboData_proto vbo_index = 10;
-    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_index_), -1, 3, (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-    // repeated .vboData_proto vbo_color = 11;
-    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_color_), -1, 4, (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // optional bytes pMeshName = 2;
+    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.pmeshname_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
+    // optional .meshData_proto.RENDER_MODE mode = 3;
+    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.mode_), _Internal::kHasBitsOffset + 7, 0, (0 | ::_fl::kFcOptional | ::_fl::kOpenEnum)},
+    // optional uint32 triCount = 4;
+    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.tricount_), _Internal::kHasBitsOffset + 8, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
+    // optional uint32 vertCount = 5;
+    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vertcount_), _Internal::kHasBitsOffset + 9, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
+    // optional .vboData_proto vbo_vert = 6;
+    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_vert_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // optional .vboData_proto vbo_norm = 7;
+    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_norm_), _Internal::kHasBitsOffset + 3, 1, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // optional .vboData_proto vbo_uv = 8;
+    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_uv_), _Internal::kHasBitsOffset + 4, 2, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // optional .vboData_proto vbo_index = 9;
+    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_index_), _Internal::kHasBitsOffset + 5, 3, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // optional .vboData_proto vbo_color = 10;
+    {PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_color_), _Internal::kHasBitsOffset + 6, 4, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }},
   {{
       {::_pbi::TcParser::GetTable<::vboData_proto>()},
@@ -411,20 +377,41 @@ PROTOBUF_NOINLINE void meshData_proto::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.pmeshname_.Clear();
-  _impl_.mode_.Clear();
-  _impl_.tricount_.Clear();
-  _impl_.vertcount_.Clear();
-  _impl_.vbo_vert_.Clear();
-  _impl_.vbo_norm_.Clear();
-  _impl_.vbo_uv_.Clear();
-  _impl_.vbo_index_.Clear();
-  _impl_.vbo_color_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000001U) != 0) {
-    _impl_.pversion_.ClearNonDefaultToEmpty();
+  if ((cached_has_bits & 0x0000007fU) != 0) {
+    if ((cached_has_bits & 0x00000001U) != 0) {
+      _impl_.pversion_.ClearNonDefaultToEmpty();
+    }
+    if ((cached_has_bits & 0x00000002U) != 0) {
+      _impl_.pmeshname_.ClearNonDefaultToEmpty();
+    }
+    if ((cached_has_bits & 0x00000004U) != 0) {
+      ABSL_DCHECK(_impl_.vbo_vert_ != nullptr);
+      _impl_.vbo_vert_->Clear();
+    }
+    if ((cached_has_bits & 0x00000008U) != 0) {
+      ABSL_DCHECK(_impl_.vbo_norm_ != nullptr);
+      _impl_.vbo_norm_->Clear();
+    }
+    if ((cached_has_bits & 0x00000010U) != 0) {
+      ABSL_DCHECK(_impl_.vbo_uv_ != nullptr);
+      _impl_.vbo_uv_->Clear();
+    }
+    if ((cached_has_bits & 0x00000020U) != 0) {
+      ABSL_DCHECK(_impl_.vbo_index_ != nullptr);
+      _impl_.vbo_index_->Clear();
+    }
+    if ((cached_has_bits & 0x00000040U) != 0) {
+      ABSL_DCHECK(_impl_.vbo_color_ != nullptr);
+      _impl_.vbo_color_->Clear();
+    }
   }
-  _impl_.meshcount_ = 0u;
+  _impl_.mode_ = 0;
+  if ((cached_has_bits & 0x00000300U) != 0) {
+    ::memset(&_impl_.tricount_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.vertcount_) -
+        reinterpret_cast<char*>(&_impl_.tricount_)) + sizeof(_impl_.vertcount_));
+  }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::std::string>();
 }
@@ -451,99 +438,66 @@ PROTOBUF_NOINLINE void meshData_proto::Clear() {
     target = stream->WriteBytesMaybeAliased(1, _s, target);
   }
 
-  // optional uint32 meshCount = 2;
+  // optional bytes pMeshName = 2;
   if ((cached_has_bits & 0x00000002U) != 0) {
+    const ::std::string& _s = this_._internal_pmeshname();
+    target = stream->WriteBytesMaybeAliased(2, _s, target);
+  }
+
+  // optional .meshData_proto.RENDER_MODE mode = 3;
+  if ((cached_has_bits & 0x00000080U) != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+        3, this_._internal_mode(), target);
+  }
+
+  // optional uint32 triCount = 4;
+  if ((cached_has_bits & 0x00000100U) != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
-        2, this_._internal_meshcount(), target);
+        4, this_._internal_tricount(), target);
   }
 
-  // repeated bytes pMeshName = 3;
-  for (int i = 0, n = this_._internal_pmeshname_size(); i < n; ++i) {
-    const auto& s = this_._internal_pmeshname().Get(i);
-    target = stream->WriteBytes(3, s, target);
+  // optional uint32 vertCount = 5;
+  if ((cached_has_bits & 0x00000200U) != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        5, this_._internal_vertcount(), target);
   }
 
-  // repeated .meshData_proto.RENDER_MODE mode = 4;
-  {
-    ::size_t byte_size = this_._impl_._mode_cached_byte_size_.Get();
-    if (byte_size > 0) {
-      target = stream->WriteEnumPacked(
-          4, this_._internal_mode(), byte_size, target);
-    }
+  // optional .vboData_proto vbo_vert = 6;
+  if ((cached_has_bits & 0x00000004U) != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        6, *this_._impl_.vbo_vert_, this_._impl_.vbo_vert_->GetCachedSize(), target,
+        stream);
   }
 
-  // repeated uint32 triCount = 5;
-  {
-    int byte_size = this_._impl_._tricount_cached_byte_size_.Get();
-    if (byte_size > 0) {
-      target = stream->WriteUInt32Packed(
-          5, this_._internal_tricount(), byte_size, target);
-    }
+  // optional .vboData_proto vbo_norm = 7;
+  if ((cached_has_bits & 0x00000008U) != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        7, *this_._impl_.vbo_norm_, this_._impl_.vbo_norm_->GetCachedSize(), target,
+        stream);
   }
 
-  // repeated uint32 vertCount = 6;
-  {
-    int byte_size = this_._impl_._vertcount_cached_byte_size_.Get();
-    if (byte_size > 0) {
-      target = stream->WriteUInt32Packed(
-          6, this_._internal_vertcount(), byte_size, target);
-    }
+  // optional .vboData_proto vbo_uv = 8;
+  if ((cached_has_bits & 0x00000010U) != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        8, *this_._impl_.vbo_uv_, this_._impl_.vbo_uv_->GetCachedSize(), target,
+        stream);
   }
 
-  // repeated .vboData_proto vbo_vert = 7;
-  for (unsigned i = 0, n = static_cast<unsigned>(
-                           this_._internal_vbo_vert_size());
-       i < n; i++) {
-    const auto& repfield = this_._internal_vbo_vert().Get(i);
-    target =
-        ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-            7, repfield, repfield.GetCachedSize(),
-            target, stream);
+  // optional .vboData_proto vbo_index = 9;
+  if ((cached_has_bits & 0x00000020U) != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        9, *this_._impl_.vbo_index_, this_._impl_.vbo_index_->GetCachedSize(), target,
+        stream);
   }
 
-  // repeated .vboData_proto vbo_norm = 8;
-  for (unsigned i = 0, n = static_cast<unsigned>(
-                           this_._internal_vbo_norm_size());
-       i < n; i++) {
-    const auto& repfield = this_._internal_vbo_norm().Get(i);
-    target =
-        ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-            8, repfield, repfield.GetCachedSize(),
-            target, stream);
-  }
-
-  // repeated .vboData_proto vbo_uv = 9;
-  for (unsigned i = 0, n = static_cast<unsigned>(
-                           this_._internal_vbo_uv_size());
-       i < n; i++) {
-    const auto& repfield = this_._internal_vbo_uv().Get(i);
-    target =
-        ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-            9, repfield, repfield.GetCachedSize(),
-            target, stream);
-  }
-
-  // repeated .vboData_proto vbo_index = 10;
-  for (unsigned i = 0, n = static_cast<unsigned>(
-                           this_._internal_vbo_index_size());
-       i < n; i++) {
-    const auto& repfield = this_._internal_vbo_index().Get(i);
-    target =
-        ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-            10, repfield, repfield.GetCachedSize(),
-            target, stream);
-  }
-
-  // repeated .vboData_proto vbo_color = 11;
-  for (unsigned i = 0, n = static_cast<unsigned>(
-                           this_._internal_vbo_color_size());
-       i < n; i++) {
-    const auto& repfield = this_._internal_vbo_color().Get(i);
-    target =
-        ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-            11, repfield, repfield.GetCachedSize(),
-            target, stream);
+  // optional .vboData_proto vbo_color = 10;
+  if ((cached_has_bits & 0x00000040U) != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        10, *this_._impl_.vbo_color_, this_._impl_.vbo_color_->GetCachedSize(), target,
+        stream);
   }
 
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -570,82 +524,59 @@ PROTOBUF_NOINLINE void meshData_proto::Clear() {
   (void)cached_has_bits;
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-   {
-    // repeated bytes pMeshName = 3;
-    {
-      total_size +=
-          1 * ::google::protobuf::internal::FromIntSize(this_._internal_pmeshname().size());
-      for (int i = 0, n = this_._internal_pmeshname().size(); i < n; ++i) {
-        total_size += ::google::protobuf::internal::WireFormatLite::BytesSize(
-            this_._internal_pmeshname().Get(i));
-      }
-    }
-    // repeated .meshData_proto.RENDER_MODE mode = 4;
-    {
-      total_size += ::_pbi::WireFormatLite::EnumSizeWithPackedTagSize(
-          this_._internal_mode(), 1, this_._impl_._mode_cached_byte_size_);
-    }
-    // repeated uint32 triCount = 5;
-    {
-      total_size +=
-          ::_pbi::WireFormatLite::UInt32SizeWithPackedTagSize(
-              this_._internal_tricount(), 1,
-              this_._impl_._tricount_cached_byte_size_);
-    }
-    // repeated uint32 vertCount = 6;
-    {
-      total_size +=
-          ::_pbi::WireFormatLite::UInt32SizeWithPackedTagSize(
-              this_._internal_vertcount(), 1,
-              this_._impl_._vertcount_cached_byte_size_);
-    }
-    // repeated .vboData_proto vbo_vert = 7;
-    {
-      total_size += 1UL * this_._internal_vbo_vert_size();
-      for (const auto& msg : this_._internal_vbo_vert()) {
-        total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
-      }
-    }
-    // repeated .vboData_proto vbo_norm = 8;
-    {
-      total_size += 1UL * this_._internal_vbo_norm_size();
-      for (const auto& msg : this_._internal_vbo_norm()) {
-        total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
-      }
-    }
-    // repeated .vboData_proto vbo_uv = 9;
-    {
-      total_size += 1UL * this_._internal_vbo_uv_size();
-      for (const auto& msg : this_._internal_vbo_uv()) {
-        total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
-      }
-    }
-    // repeated .vboData_proto vbo_index = 10;
-    {
-      total_size += 1UL * this_._internal_vbo_index_size();
-      for (const auto& msg : this_._internal_vbo_index()) {
-        total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
-      }
-    }
-    // repeated .vboData_proto vbo_color = 11;
-    {
-      total_size += 1UL * this_._internal_vbo_color_size();
-      for (const auto& msg : this_._internal_vbo_color()) {
-        total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
-      }
-    }
-  }
   cached_has_bits = this_._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
+  if ((cached_has_bits & 0x000000ffU) != 0) {
     // optional bytes pVersion = 1;
     if ((cached_has_bits & 0x00000001U) != 0) {
       total_size += 1 + ::google::protobuf::internal::WireFormatLite::BytesSize(
                                       this_._internal_pversion());
     }
-    // optional uint32 meshCount = 2;
+    // optional bytes pMeshName = 2;
     if ((cached_has_bits & 0x00000002U) != 0) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::BytesSize(
+                                      this_._internal_pmeshname());
+    }
+    // optional .vboData_proto vbo_vert = 6;
+    if ((cached_has_bits & 0x00000004U) != 0) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.vbo_vert_);
+    }
+    // optional .vboData_proto vbo_norm = 7;
+    if ((cached_has_bits & 0x00000008U) != 0) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.vbo_norm_);
+    }
+    // optional .vboData_proto vbo_uv = 8;
+    if ((cached_has_bits & 0x00000010U) != 0) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.vbo_uv_);
+    }
+    // optional .vboData_proto vbo_index = 9;
+    if ((cached_has_bits & 0x00000020U) != 0) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.vbo_index_);
+    }
+    // optional .vboData_proto vbo_color = 10;
+    if ((cached_has_bits & 0x00000040U) != 0) {
+      total_size += 1 +
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.vbo_color_);
+    }
+    // optional .meshData_proto.RENDER_MODE mode = 3;
+    if ((cached_has_bits & 0x00000080U) != 0) {
+      total_size += 1 +
+                    ::_pbi::WireFormatLite::EnumSize(this_._internal_mode());
+    }
+  }
+  if ((cached_has_bits & 0x00000300U) != 0) {
+    // optional uint32 triCount = 4;
+    if ((cached_has_bits & 0x00000100U) != 0) {
       total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
-          this_._internal_meshcount());
+          this_._internal_tricount());
+    }
+    // optional uint32 vertCount = 5;
+    if ((cached_has_bits & 0x00000200U) != 0) {
+      total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+          this_._internal_vertcount());
     }
   }
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -658,32 +589,70 @@ PROTOBUF_NOINLINE void meshData_proto::Clear() {
 void meshData_proto::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<meshData_proto*>(&to_msg);
   auto& from = static_cast<const meshData_proto&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:meshData_proto)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_internal_mutable_pmeshname()->MergeFrom(from._internal_pmeshname());
-  _this->_internal_mutable_mode()->MergeFrom(from._internal_mode());
-  _this->_internal_mutable_tricount()->MergeFrom(from._internal_tricount());
-  _this->_internal_mutable_vertcount()->MergeFrom(from._internal_vertcount());
-  _this->_internal_mutable_vbo_vert()->MergeFrom(
-      from._internal_vbo_vert());
-  _this->_internal_mutable_vbo_norm()->MergeFrom(
-      from._internal_vbo_norm());
-  _this->_internal_mutable_vbo_uv()->MergeFrom(
-      from._internal_vbo_uv());
-  _this->_internal_mutable_vbo_index()->MergeFrom(
-      from._internal_vbo_index());
-  _this->_internal_mutable_vbo_color()->MergeFrom(
-      from._internal_vbo_color());
   cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000003U) != 0) {
+  if ((cached_has_bits & 0x000000ffU) != 0) {
     if ((cached_has_bits & 0x00000001U) != 0) {
       _this->_internal_set_pversion(from._internal_pversion());
     }
     if ((cached_has_bits & 0x00000002U) != 0) {
-      _this->_impl_.meshcount_ = from._impl_.meshcount_;
+      _this->_internal_set_pmeshname(from._internal_pmeshname());
+    }
+    if ((cached_has_bits & 0x00000004U) != 0) {
+      ABSL_DCHECK(from._impl_.vbo_vert_ != nullptr);
+      if (_this->_impl_.vbo_vert_ == nullptr) {
+        _this->_impl_.vbo_vert_ = ::google::protobuf::MessageLite::CopyConstruct(arena, *from._impl_.vbo_vert_);
+      } else {
+        _this->_impl_.vbo_vert_->MergeFrom(*from._impl_.vbo_vert_);
+      }
+    }
+    if ((cached_has_bits & 0x00000008U) != 0) {
+      ABSL_DCHECK(from._impl_.vbo_norm_ != nullptr);
+      if (_this->_impl_.vbo_norm_ == nullptr) {
+        _this->_impl_.vbo_norm_ = ::google::protobuf::MessageLite::CopyConstruct(arena, *from._impl_.vbo_norm_);
+      } else {
+        _this->_impl_.vbo_norm_->MergeFrom(*from._impl_.vbo_norm_);
+      }
+    }
+    if ((cached_has_bits & 0x00000010U) != 0) {
+      ABSL_DCHECK(from._impl_.vbo_uv_ != nullptr);
+      if (_this->_impl_.vbo_uv_ == nullptr) {
+        _this->_impl_.vbo_uv_ = ::google::protobuf::MessageLite::CopyConstruct(arena, *from._impl_.vbo_uv_);
+      } else {
+        _this->_impl_.vbo_uv_->MergeFrom(*from._impl_.vbo_uv_);
+      }
+    }
+    if ((cached_has_bits & 0x00000020U) != 0) {
+      ABSL_DCHECK(from._impl_.vbo_index_ != nullptr);
+      if (_this->_impl_.vbo_index_ == nullptr) {
+        _this->_impl_.vbo_index_ = ::google::protobuf::MessageLite::CopyConstruct(arena, *from._impl_.vbo_index_);
+      } else {
+        _this->_impl_.vbo_index_->MergeFrom(*from._impl_.vbo_index_);
+      }
+    }
+    if ((cached_has_bits & 0x00000040U) != 0) {
+      ABSL_DCHECK(from._impl_.vbo_color_ != nullptr);
+      if (_this->_impl_.vbo_color_ == nullptr) {
+        _this->_impl_.vbo_color_ = ::google::protobuf::MessageLite::CopyConstruct(arena, *from._impl_.vbo_color_);
+      } else {
+        _this->_impl_.vbo_color_->MergeFrom(*from._impl_.vbo_color_);
+      }
+    }
+    if ((cached_has_bits & 0x00000080U) != 0) {
+      _this->_impl_.mode_ = from._impl_.mode_;
+    }
+  }
+  if ((cached_has_bits & 0x00000300U) != 0) {
+    if ((cached_has_bits & 0x00000100U) != 0) {
+      _this->_impl_.tricount_ = from._impl_.tricount_;
+    }
+    if ((cached_has_bits & 0x00000200U) != 0) {
+      _this->_impl_.vertcount_ = from._impl_.vertcount_;
     }
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
@@ -704,17 +673,14 @@ void meshData_proto::InternalSwap(meshData_proto* PROTOBUF_RESTRICT PROTOBUF_NON
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  _impl_.pmeshname_.InternalSwap(&other->_impl_.pmeshname_);
-  _impl_.mode_.InternalSwap(&other->_impl_.mode_);
-  _impl_.tricount_.InternalSwap(&other->_impl_.tricount_);
-  _impl_.vertcount_.InternalSwap(&other->_impl_.vertcount_);
-  _impl_.vbo_vert_.InternalSwap(&other->_impl_.vbo_vert_);
-  _impl_.vbo_norm_.InternalSwap(&other->_impl_.vbo_norm_);
-  _impl_.vbo_uv_.InternalSwap(&other->_impl_.vbo_uv_);
-  _impl_.vbo_index_.InternalSwap(&other->_impl_.vbo_index_);
-  _impl_.vbo_color_.InternalSwap(&other->_impl_.vbo_color_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.pversion_, &other->_impl_.pversion_, arena);
-  swap(_impl_.meshcount_, other->_impl_.meshcount_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.pmeshname_, &other->_impl_.pmeshname_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vertcount_)
+      + sizeof(meshData_proto::_impl_.vertcount_)
+      - PROTOBUF_FIELD_OFFSET(meshData_proto, _impl_.vbo_vert_)>(
+          reinterpret_cast<char*>(&_impl_.vbo_vert_),
+          reinterpret_cast<char*>(&other->_impl_.vbo_vert_));
 }
 
 // @@protoc_insertion_point(namespace_scope)

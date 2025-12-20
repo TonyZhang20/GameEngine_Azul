@@ -36,7 +36,6 @@ public:
 	PROTOBUF_ENGINE_LIBRARY_API ~meshData();
 
 	// Serialization 
-	PROTOBUF_ENGINE_LIBRARY_API void SetMeshCount(size_t count);
 	PROTOBUF_ENGINE_LIBRARY_API void Serialize(meshData_proto &out) const;
 	PROTOBUF_ENGINE_LIBRARY_API void Deserialize(const meshData_proto &in);
 
@@ -44,18 +43,17 @@ public:
 
 public:
 	char             pVersion[protoVersion::VERSION_NUM_BYTES];
-	size_t     meshCount; 
 
-	std::vector<std::array<char, FILE_NAME_SIZE>> meshNames;
-	std::vector<RENDER_MODE>          renderModes;
-	std::vector<unsigned int>         triCounts;
-	std::vector<unsigned int>         vertCounts;
+	char             pMeshName[FILE_NAME_SIZE];
+	RENDER_MODE		 mode;
+	unsigned int     triCount;
+	unsigned int     vertCount;
 
-	std::vector<vboData>              vbo_vert;
-	std::vector<vboData>              vbo_norm;
-	std::vector<vboData>              vbo_uv;
-	std::vector<vboData>              vbo_index;
-	std::vector<vboData>              vbo_color;
+	vboData          vbo_vert;
+	vboData          vbo_norm;
+	vboData          vbo_uv;
+	vboData          vbo_index;
+	vboData          vbo_color;
 };
 
 #endif
